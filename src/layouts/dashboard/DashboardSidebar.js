@@ -88,7 +88,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
           <Box
             component="img"
-            src="/static/illustrations/illustration_avatar.png"
+            src="/static/illustrations/kims.png"
             sx={{ width: 100, position: 'absolute', top: -50 }}
           />
 
