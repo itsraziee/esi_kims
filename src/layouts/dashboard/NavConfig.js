@@ -12,19 +12,49 @@ const navConfig = [
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {
-    title: 'user',
-    path: '/dashboard/user',
-    icon: getIcon('eva:people-fill'),
-  },
-  {
-    title: 'product',
-    path: '/dashboard/products',
-    icon: getIcon('eva:shopping-bag-fill'),
-  },
-  {
-    title: 'blog',
+    title: 'about',
     path: '/dashboard/blog',
-    icon: getIcon('eva:file-text-fill'),
+    icon: getIcon('emojione-monotone:information'),
+  },
+  {
+    title: 'legislative',
+    path: '/dashboard/products',
+    icon: getIcon('fa6-solid:building-columns'),
+  },
+  {
+    title: 'document services',
+    path: '/dashboard/products',
+    icon: getIcon('ion:documents'),
+  },
+  {
+    title: 'blotter',
+    path: '/dashboard/products',
+    icon: getIcon('icon-park-solid:image-files'),
+  },
+  {
+    title: 'summon',
+    path: '/dashboard/products',
+    icon: getIcon('fa6-solid:file-pen'),
+  },
+  {
+    title: 'demographics',
+    path: '/dashboard/app',
+    icon: getIcon('foundation:results-demographics'),
+  },
+  {
+    title: 'officials',
+    path: '/dashboard/blog',
+    icon: getIcon('fluent:people-community-28-filled'),
+  },
+  {
+    title: 'lists of purok',
+    path: '/dashboard/products',
+    icon: getIcon('ri:building-2-fill'),
+  },
+  {
+    title: 'residents',
+    path: '/dashboard/user',
+    icon: getIcon('fluent:people-audience-24-filled'),
   },
   {
     title: 'login',
