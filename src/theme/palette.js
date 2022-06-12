@@ -99,19 +99,19 @@ const CHART_COLORS = {
 };
 
 const WATER = {
-  water: '#D9EFF7',
+  0: '#D9EFF7',
 };
 
 const BABY_BLUE = {
-  baby_blue: '#9BBBFC',
+  0: '#9BBBFC',
 };
 
 const OCEAN_BLUE = {
-  ocean_blue: '#4741A6',
+  0: '#4741A6',
 };
 
 const CRAYOLA = {
-  crayola: '#F9CE69',
+  0: '#F9CE69',
 };
 
 const palette = {
@@ -126,8 +126,8 @@ const palette = {
   gradients: GRADIENTS,
   chart: CHART_COLORS,
   water: WATER,
-  baby_blue: BABY_BLUE,
-  ocean_blue: OCEAN_BLUE,
+  babyblue: BABY_BLUE,
+  oceanblue: OCEAN_BLUE,
   crayola: CRAYOLA,
   divider: GREY[500_24],
   text: { primary: GREY[800], secondary: GREY[600], disabled: GREY[500] },
