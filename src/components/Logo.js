@@ -21,7 +21,7 @@ export default function Logo({ disabledLink = false, sx}) {
   // const PRIMARY_DARK = theme.palette.primary.dark;
 
   // OR
-  const logo = <Box component="img" src="/static/illustrations/kims.png" sx={{ width: 40, height: 40, ...sx }} />;
+  const logo = <Box component="img" src="/static/illustrations/Kimanait-Logo.svg" sx={{ width: 40, height: 40, ...sx }} />;
 
   // const logo = (
   //   <Box sx={{ width: 40, height: 40, ...sx }}>
