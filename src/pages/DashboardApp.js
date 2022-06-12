@@ -49,7 +49,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
-              title="Website Visits"
+              title="Population"
               subheader="(+43%) than last year"
               chartLabels={[
                 '01/01/2003',
@@ -89,7 +89,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={4}>
             <AppCurrentVisits
-              title="Current Visits"
+              title="Current Population"
               chartData={[
                 { label: 'America', value: 4344 },
                 { label: 'Asia', value: 5435 },
@@ -107,7 +107,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={8}>
             <AppConversionRates
-              title="Conversion Rates"
+              title="Revenue"
               subheader="(+43%) than last year"
               chartData={[
                 { label: 'Italy', value: 400 },
