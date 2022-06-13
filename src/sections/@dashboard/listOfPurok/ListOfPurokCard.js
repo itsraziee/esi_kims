@@ -21,7 +21,7 @@ PurokCard.propTypes = {
 };
 
 export default function PurokCard({ purok }) {
-  const { name, cover, purokname} = purok;
+  const { name, cover, purokname } = purok;
 
   return (
     <Card>
@@ -37,19 +37,7 @@ export default function PurokCard({ purok }) {
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle4">
-            <Typography
-              component="span"
-              variant="body1"
-              sx={{
-                color: 'text.disabled',
-                textDecoration: 'line-through',
-              }}
-            >
-              {/* {priceSale && fCurrency(priceSale)} */}
-            </Typography>
-            {(purokname)}
-          </Typography>
+          <Typography variant="subtitle4">{purokname}</Typography>
         </Stack>
       </Stack>
     </Card>
