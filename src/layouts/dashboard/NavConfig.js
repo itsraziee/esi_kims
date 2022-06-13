@@ -47,8 +47,8 @@ const navConfig = [
     icon: getIcon('fluent:people-community-28-filled'),
   },
   {
-    title: 'lists of purok',
-    path: '/dashboard/products',
+    title: 'list of purok',
+    path: '/dashboard/listOfPurok',
     icon: getIcon('ri:building-2-fill'),
   },
   {

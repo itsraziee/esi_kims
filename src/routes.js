@@ -10,7 +10,7 @@ import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
-
+import ListOfPurok from './pages/ListOfPurok';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -23,6 +23,7 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        { path: 'listOfPurok', element: <ListOfPurok /> },
       ],
     },
     {
