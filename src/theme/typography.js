@@ -74,12 +74,12 @@ const typography = {
   subtitle3: {
     fontWeight: 800,
     lineHeight: 22 / 14,
-    fontSize: pxToRem(20),
+    fontSize: pxToRem(19),
   },
   subtitle4: {
     fontWeight: 450,
     lineHeight: 22 / 14,
-    fontSize: pxToRem(18),
+    fontSize: pxToRem(16),
   },
   body1: {
     lineHeight: 1.5,
