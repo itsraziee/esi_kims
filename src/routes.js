@@ -24,6 +24,7 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'listOfPurok', element: <ListOfPurok /> },
+        
       ],
     },
     {

@@ -10,16 +10,6 @@ import LISTOFPUROK from '../_mock/listOfPurok';
 // ----------------------------------------------------------------------
 
 export default function PurokList() {
-//   const [openFilter, setOpenFilter] = useState(false);
-
-//   const handleOpenFilter = () => {
-//     setOpenFilter(true);
-//   };
-
-//   const handleCloseFilter = () => {
-//     setOpenFilter(false);
-//   };
-
   return (
     <Page title="List Of Purok">
       <Container>

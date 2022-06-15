@@ -13,7 +13,7 @@ const navConfig = [
   },
   {
     title: 'about',
-    path: '/dashboard/blog',
+    path: '/dashboard/about',
     icon: getIcon('emojione-monotone:information'),
   },
   {
