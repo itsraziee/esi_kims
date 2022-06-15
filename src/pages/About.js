@@ -11,10 +11,8 @@ import { AboutCard } from '../sections/@dashboard/about';
 export default function Blog() {
   return (
     <Page title="About">
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+      <Container sx={{mt: 5, mb: 5}}>
           <AboutCard />
-        </Stack>
       </Container>
     </Page>
   );
