@@ -12,6 +12,7 @@ import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import ListOfPurok from './pages/ListOfPurok';
 import About from './pages/About';
+import ResidentsProfile from './pages/ResidentsProfile';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -25,7 +26,8 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'listOfPurok', element: <ListOfPurok /> },
-        { path: 'about', element: <About />}
+        { path: 'about', element: <About /> },
+        { path: 'residentsProfile', element: <ResidentsProfile />}
       ],
     },
     {
