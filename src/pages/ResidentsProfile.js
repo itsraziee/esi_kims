@@ -8,7 +8,7 @@ import { ResidentsProfileCard } from '../sections/@dashboard/residentsProfile';
 // ----------------------------------------------------------------------
 // ----------------------------------------------------------------------
 
-export default function ResidentsProfiling() {
+export default function ResidentsProfile() {
   return (
     <Page title="Residents Profile">
       <Container sx={{ mt: 5, mb: 5 }}>
