@@ -8,7 +8,7 @@ export default function AboutCard() {
     <Card sx={{ minWidth: 275 }}>
 <CardContent>
   <Typography variant="h4" component="div" align='center' sx={{ mb: 4, mt: 4 }}>
-    About
+    History of Barangay Kimanait
   </Typography>
   <Typography sx={{ fontSize: 15, ml: 3, mr: 3, mb: 3 }} align="justify" >
     Sultan Salong Lumbatan -- real name called this place "KIMANAIT" in memory of the first inhabitants/dwellers
