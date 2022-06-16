@@ -1,1 +1,1 @@
-export { default as ResidentsProfileCard} from './ResidentsProfileCard';
+export { default as ResidentsProfileCard } from './ResidentsProfileCard';
