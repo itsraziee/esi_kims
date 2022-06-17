@@ -1,31 +1,107 @@
+import * as Yup from 'yup';
+import { useState } from 'react';
+import { useFormik, Form, FormikProvider } from 'formik';
+import { useNavigate } from 'react-router-dom';
+// material
+import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+// component
+import Iconify from '../../../components/Iconify';
 
-import { Card, Typography, CardContent } from '@mui/material';
-// utils
 // ----------------------------------------------------------------------
 
-
-
 export default function ResidentsProfileCard() {
+  const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const ResidentsProfileSchema = Yup.object().shape({
+    firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Middle name required'),
+    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
+    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: ResidentsProfileSchema,
+    onSubmit: () => {
+      navigate('/dashboard', { replace: true });
+    },
+  });
+
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography variant="h4" component="div" align="center" sx={{ mb: 4, mt: 4 }}>
-          History of Barangay Kimanait
-        </Typography>
-        <Typography sx={{ fontSize: 15, ml: 3, mr: 3, mb: 3 }} align="justify">
-          Sultan Salong Lumbatan -- real name called this place "KIMANAIT" in memory of the first inhabitants/dwellers
-          of this place. Due to the unfaithfulness to God, they were punished. The first inhabitants made a great
-          mistake of not having followed the law of God; "KIMANAIT" is derived from the Manobo word "NAIT" which means
-          punishment to God. Because of the great faith and sacrifices to God of "DATU MAMPANAMUCAN" (RUPERTO
-          TUMANGGONG) this place was saved. SULTAN SALONG LUMBATAN and DATU MAMPANAMUCAN (RUPERTO TUMANGGONG) was the
-          founder of Kimanait. Barangay Kimanait was created by virtue of Executive Order No. 306 by [former] Governor
-          Anotonio Reuben dated March 10, 1931. It is bounded by the nothern barangays: Malipayon and Langcataon, in the
-          south; Barangay Payad; the Municipality of Kadingilan in the east; and the province of North Cotabato in the
-          west. Barangay Kimanait has a total land area of 1,570 hectares or 15.70 square kilometers. It is 82
-          kilometers away from the central Barangay Poblacion of the municipality. the barangay has 89% of clay soil and
-          11% of loam soil.
-        </Typography>
-      </CardContent>
-    </Card>
+    <FormikProvider value={formik}>
+      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        <Stack spacing={3}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              label="First name"
+              {...getFieldProps('firstName')}
+              error={Boolean(touched.firstName && errors.firstName)}
+              helperText={touched.firstName && errors.firstName}
+            />
+
+            <TextField
+              fullWidth
+              label="Middle name"
+              {...getFieldProps('middleName')}
+              error={Boolean(touched.middleName && errors.middleName)}
+              helperText={touched.middleName && errors.middleName}
+            />
+
+            <TextField
+              fullWidth
+              label="Last name"
+              {...getFieldProps('lastName')}
+              error={Boolean(touched.lastName && errors.lastName)}
+              helperText={touched.lastName && errors.lastName}
+            />
+          </Stack>
+
+          <TextField
+            fullWidth
+            autoComplete="username"
+            type="email"
+            label="Email address"
+            {...getFieldProps('email')}
+            error={Boolean(touched.email && errors.email)}
+            helperText={touched.email && errors.email}
+          />
+
+          <TextField
+            fullWidth
+            autoComplete="current-password"
+            type={showPassword ? 'text' : 'password'}
+            label="Password"
+            {...getFieldProps('password')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
+                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={Boolean(touched.password && errors.password)}
+            helperText={touched.password && errors.password}
+          />
+
+          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+            Register
+          </LoadingButton>
+        </Stack>
+      </Form>
+    </FormikProvider>
   );
 }
