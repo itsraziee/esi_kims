@@ -13,6 +13,7 @@ import DashboardApp from './pages/DashboardApp';
 import ListOfPurok from './pages/ListOfPurok';
 import About from './pages/About';
 import ResidentsProfile from './pages/ResidentsProfile';
+import Legislative from './pages/Legislative';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -27,7 +28,8 @@ export default function Router() {
         { path: 'blog', element: <Blog /> },
         { path: 'listOfPurok', element: <ListOfPurok /> },
         { path: 'about', element: <About /> },
-        { path: 'residentsProfile', element: <ResidentsProfile />}
+        { path: 'residentsProfile', element: <ResidentsProfile /> },
+        { path: 'legislative', element: <Legislative />}
       ],
     },
     {

@@ -1,10 +1,8 @@
 // material
-import { Container, Stack } from '@mui/material';
+import { Container, Stack} from '@mui/material';
 // components
 import Page from '../components/Page';
 import { ResidentsProfileCard } from '../sections/@dashboard/residentsProfile';
-
-
 // ----------------------------------------------------------------------
 // ----------------------------------------------------------------------
 

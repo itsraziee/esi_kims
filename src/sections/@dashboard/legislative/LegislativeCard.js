@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-const ListOfPurokImgStyle = styled('img')({
+const LegislativeImgStyle = styled('img')({
   top: 0,
   width: '100%',
   height: '100%',
@@ -16,28 +16,28 @@ const ListOfPurokImgStyle = styled('img')({
 
 // ----------------------------------------------------------------------
 
-PurokCard.propTypes = {
-  purok: PropTypes.object,
+LegislativeCard.propTypes = {
+  legislative: PropTypes.object,
 };
 
-export default function PurokCard({ purok }) {
-  const { name, cover, purokname } = purok;
+export default function LegislativeCard({ legislative }) {
+  const { title, cover, year } = legislative;
 
   return (
     <Card>
       <Box sx={{ pt: '100%', position: 'relative' }}>
-        <ListOfPurokImgStyle alt={name} src={cover} />
+        <LegislativeImgStyle alt={title} src={cover} />
       </Box>
 
       <Stack spacing={-1} sx={{ p: 3 }}>
-        <Link to="/dashboard/user" color="inherit" underline="hover" component={RouterLink}>
+        <Link to="#" color="inherit" underline="hover" component={RouterLink}>
           <Typography variant="subtitle3" noWrap>
-            {name}
+            {title}
           </Typography>
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle4">{purokname}</Typography>
+          <Typography variant="subtitle4">{year}</Typography>
         </Stack>
       </Stack>
     </Card>

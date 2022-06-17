@@ -18,7 +18,7 @@ const navConfig = [
   },
   {
     title: 'legislative',
-    path: '/dashboard/products',
+    path: '/dashboard/legislative',
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
