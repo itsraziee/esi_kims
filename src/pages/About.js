@@ -1,5 +1,5 @@
 // material
-import { Container, Stack } from '@mui/material';
+import { Container } from '@mui/material';
 // components
 import Page from '../components/Page';
 import { AboutCard } from '../sections/@dashboard/about';

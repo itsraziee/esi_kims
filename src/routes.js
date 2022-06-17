@@ -12,11 +12,8 @@ import Products from './pages/Products';
 import DashboardApp from './pages/DashboardApp';
 import ListOfPurok from './pages/ListOfPurok';
 import About from './pages/About';
-<<<<<<< HEAD
 import ResidentsProfile from './pages/ResidentsProfile';
 import Legislative from './pages/Legislative';
-=======
->>>>>>> 5fced887a8edb92dd91de74b17d040d59bcea2a0
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -30,13 +27,9 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'listOfPurok', element: <ListOfPurok /> },
-<<<<<<< HEAD
         { path: 'about', element: <About /> },
         { path: 'residentsProfile', element: <ResidentsProfile /> },
         { path: 'legislative', element: <Legislative />}
-=======
-        { path: 'about', element: <About />}
->>>>>>> 5fced887a8edb92dd91de74b17d040d59bcea2a0
       ],
     },
     {
