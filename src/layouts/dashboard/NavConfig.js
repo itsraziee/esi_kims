@@ -23,17 +23,17 @@ const navConfig = [
   },
   {
     title: 'document services',
-    path: '/dashboard/products',
+    path: '/dashboard/documentServices',
     icon: getIcon('ion:documents'),
   },
   {
     title: 'blotter',
-    path: '/dashboard/products',
+    path: '/dashboard/blotter',
     icon: getIcon('icon-park-solid:image-files'),
   },
   {
     title: 'summon',
-    path: '/dashboard/products',
+    path: '/dashboard/summon',
     icon: getIcon('fa6-solid:file-pen'),
   },
   {

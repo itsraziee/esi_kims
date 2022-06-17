@@ -14,6 +14,9 @@ import ListOfPurok from './pages/ListOfPurok';
 import About from './pages/About';
 import ResidentsProfile from './pages/ResidentsProfile';
 import Legislative from './pages/Legislative';
+import DocumentServices from './pages/DocumentServices';
+import Summon from './pages/Summon';
+import Blotter from './pages/Blotter';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -29,7 +32,10 @@ export default function Router() {
         { path: 'listOfPurok', element: <ListOfPurok /> },
         { path: 'about', element: <About /> },
         { path: 'residentsProfile', element: <ResidentsProfile /> },
-        { path: 'legislative', element: <Legislative />}
+        { path: 'legislative', element: <Legislative /> },
+        { path: 'documentServices', element: <DocumentServices /> },
+        { path: 'summon', element: <Summon /> },
+        { path: 'blotter', element: <Blotter />}
       ],
     },
     {
