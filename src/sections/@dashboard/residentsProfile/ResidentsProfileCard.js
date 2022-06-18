@@ -76,7 +76,6 @@ export default function ResidentsProfileCard() {
             />
 
             <TextField
-              fullWidth
               label="Age"
               {...getFieldProps('age')}
               error={Boolean(touched.age && errors.age)}
@@ -85,7 +84,65 @@ export default function ResidentsProfileCard() {
           </Stack>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <TextField
+            <TextField
+              label="Sex"
+              {...getFieldProps('sex')}
+              error={Boolean(touched.sex && errors.sex)}
+              helperText={touched.sex && errors.sex}
+            />
+
+            <TextField
+              fullWidth
+              label="Date of Birth"
+              {...getFieldProps('dateOfBirth')}
+              error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
+              helperText={touched.dateOfBirth && errors.dateOfBirth}
+            />
+
+            <TextField
+              fullWidth
+              label="Civil Status"
+              {...getFieldProps('civilStatus')}
+              error={Boolean(touched.civilStatus && errors.civilStatus)}
+              helperText={touched.civilStatus && errors.civilStatus}
+            />
+
+            <TextField
+              fullWidth
+              label="Citizenship"
+              {...getFieldProps('citizenship')}
+              error={Boolean(touched.citizenship && errors.citizenship)}
+              helperText={touched.citizenship && errors.citizenship}
+            />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              label="Religion"
+              {...getFieldProps('religion')}
+              error={Boolean(touched.religion && errors.religion)}
+              helperText={touched.religion && errors.religion}
+            />
+
+            <TextField
+              fullWidth
+              label="Height"
+              {...getFieldProps('height')}
+              error={Boolean(touched.height && errors.height)}
+              helperText={touched.height && errors.height}
+            />
+
+            <TextField
+              fullWidth
+              label="Weight"
+              {...getFieldProps('weight')}
+              error={Boolean(touched.weight && errors.weight)}
+              helperText={touched.weight && errors.weight}
+            />
+
+            <TextField
+              fullWidth
               label="Phone number"
               id="outlined-start-adornment"
               {...getFieldProps('phone')}
@@ -95,17 +152,36 @@ export default function ResidentsProfileCard() {
                 startAdornment: <InputAdornment position="start">+63</InputAdornment>,
               }}
             />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              label="Occupation"
+              {...getFieldProps('occupation')}
+              error={Boolean(touched.occupation && errors.occupation)}
+              helperText={touched.occupation && errors.occupation}
+            />
 
             <TextField
               fullWidth
-              label="Gender"
-              {...getFieldProps('gender')}
-              error={Boolean(touched.gender && errors.gender)}
-              helperText={touched.gender && errors.gender}
+              label="Address"
+              {...getFieldProps('address')}
+              error={Boolean(touched.address && errors.address)}
+              helperText={touched.address && errors.address}
             />
           </Stack>
 
-          <TextField
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              label="Spouse"
+              {...getFieldProps('spouse')}
+              error={Boolean(touched.spouse && errors.spouse)}
+              helperText={touched.spouse && errors.spouse}
+            />
+
+            <TextField
               fullWidth
               label="Address"
               {...getFieldProps('address')}
@@ -113,37 +189,215 @@ export default function ResidentsProfileCard() {
               helperText={touched.address && errors.address}
             />
 
-          <TextField
-            fullWidth
-            autoComplete="username"
-            type="email"
-            label="Email address"
-            {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
-          />
+            <TextField
+              fullWidth
+              label="Number of Children"
+              {...getFieldProps('numberOfChildren')}
+              error={Boolean(touched.numberOfChildren && errors.numberOfChildren)}
+              helperText={touched.numberOfChildren && errors.numberOfChildren}
+            />
+          </Stack>
 
-          <TextField
-            fullWidth
-            autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
-            label="Password"
-            {...getFieldProps('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton edge="end" onClick={() => setShowPassword((prev) => !prev)}>
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            error={Boolean(touched.password && errors.password)}
-            helperText={touched.password && errors.password}
-          />
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              label="Father's Name"
+              {...getFieldProps('fathersname')}
+              error={Boolean(touched.fathersname && errors.fathersname)}
+              helperText={touched.fathersname && errors.fathersname}
+            />
+
+            <TextField
+              fullWidth
+              label="Occupation"
+              {...getFieldProps('occupation')}
+              error={Boolean(touched.occupation && errors.occupation)}
+              helperText={touched.occupation && errors.occupation}
+            />
+
+            <TextField
+              fullWidth
+              label="Address"
+              {...getFieldProps('address')}
+              error={Boolean(touched.address && errors.address)}
+              helperText={touched.address && errors.address}
+            />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              label="Mother's Name"
+              {...getFieldProps('mothersname')}
+              error={Boolean(touched.mothersname && errors.mothersname)}
+              helperText={touched.mothersname && errors.mothersname}
+            />
+
+            <TextField
+              fullWidth
+              label="Occupation"
+              {...getFieldProps('occupation')}
+              error={Boolean(touched.occupation && errors.occupation)}
+              helperText={touched.occupation && errors.occupation}
+            />
+
+            <TextField
+              fullWidth
+              label="Address"
+              {...getFieldProps('address')}
+              error={Boolean(touched.address && errors.address)}
+              helperText={touched.address && errors.address}
+            />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              disabled
+              label="Elementary"
+              {...getFieldProps('elementary')}
+              error={Boolean(touched.elementary && errors.elementary)}
+              helperText={touched.elementary && errors.elementary}
+              
+            />
+
+            <TextField
+              fullWidth
+              label="Name of School"
+              {...getFieldProps('nameOfSchool')}
+              error={Boolean(touched.nameOfSchool && errors.nameOfSchool)}
+              helperText={touched.nameOfSchool && errors.nameOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Address of School"
+              {...getFieldProps('addressOfSchool')}
+              error={Boolean(touched.addressOfSchool && errors.addressOfSchool)}
+              helperText={touched.addressOfSchool && errors.addressOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Year"
+              {...getFieldProps('year')}
+              error={Boolean(touched.year && errors.year)}
+              helperText={touched.year && errors.year}
+            />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              disabled
+              label="High school"
+              {...getFieldProps('highSchool')}
+              error={Boolean(touched.highSchool && errors.highSchool)}
+              helperText={touched.highSchool && errors.highSchool}
+              
+            />
+
+            <TextField
+              fullWidth
+              label="Name of School"
+              {...getFieldProps('nameOfSchool')}
+              error={Boolean(touched.nameOfSchool && errors.nameOfSchool)}
+              helperText={touched.nameOfSchool && errors.nameOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Address of School"
+              {...getFieldProps('addressOfSchool')}
+              error={Boolean(touched.addressOfSchool && errors.addressOfSchool)}
+              helperText={touched.addressOfSchool && errors.addressOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Year"
+              {...getFieldProps('year')}
+              error={Boolean(touched.year && errors.year)}
+              helperText={touched.year && errors.year}
+            />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              disabled
+              label="College"
+              {...getFieldProps('college')}
+              error={Boolean(touched.college && errors.college)}
+              helperText={touched.college && errors.college}
+              
+            />
+
+            <TextField
+              fullWidth
+              placeholder="Put N/A if not applicable"
+              label="Name of School"
+              {...getFieldProps('nameOfSchool')}
+              error={Boolean(touched.nameOfSchool && errors.nameOfSchool)}
+              helperText={touched.nameOfSchool && errors.nameOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Address of School"
+              {...getFieldProps('addressOfSchool')}
+              error={Boolean(touched.addressOfSchool && errors.addressOfSchool)}
+              helperText={touched.addressOfSchool && errors.addressOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Year Graduated"
+              {...getFieldProps('year')}
+              error={Boolean(touched.year && errors.year)}
+              helperText={touched.year && errors.year}
+            />
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              disabled
+              label="Vocational"
+              {...getFieldProps('vocational')}
+              error={Boolean(touched.vocational && errors.vocational)}
+              helperText={touched.vocational && errors.vocational}
+              
+            />
+
+            <TextField
+              fullWidth
+              placeholder="Put N/A if not applicable"
+              label="Name of School"
+              {...getFieldProps('nameOfSchool')}
+              error={Boolean(touched.nameOfSchool && errors.nameOfSchool)}
+              helperText={touched.nameOfSchool && errors.nameOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Address of School"
+              {...getFieldProps('addressOfSchool')}
+              error={Boolean(touched.addressOfSchool && errors.addressOfSchool)}
+              helperText={touched.addressOfSchool && errors.addressOfSchool}
+            />
+
+            <TextField
+              fullWidth
+              label="Year Graduated"
+              {...getFieldProps('year')}
+              error={Boolean(touched.year && errors.year)}
+              helperText={touched.year && errors.year}
+            />
+          </Stack>
 
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-            Register
+            Submit
           </LoadingButton>
         </Stack>
       </Form>
