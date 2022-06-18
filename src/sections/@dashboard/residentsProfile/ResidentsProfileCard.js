@@ -20,7 +20,9 @@ export default function ResidentsProfileCard() {
     middleName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Middle name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
     address: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Address required'),
-    age: Yup.string().max(3).required('Age required'),
+    age: Yup.number().typeError("Age must be a number").integer("Age must be an integer").required('Age required'),
+    // phone: Yup.string().typeError("Phone must be a number").integer("Age must be an integer").matches ((\+[0-9]{2})|0)[.\- ]?9[0-9]{2}[.\- ]?[0-9]{3}[.\- ]?[0-9]{4}.required('Age required'),
+    gender: Yup.number().typeError("Age must be a number").integer("Age must be an integer").required('Age required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
@@ -30,6 +32,8 @@ export default function ResidentsProfileCard() {
       firstName: '',
       lastName: '',
       address: '',
+      phone: '',
+      gender: '',
       age: '',
       email: '',
       password: '',
@@ -81,21 +85,23 @@ export default function ResidentsProfileCard() {
           </Stack>
 
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          {/* <TextField
+          <TextField
               label="Phone number"
               id="outlined-start-adornment"
-              sx={{ m: 1, width: '25ch' }}
+              {...getFieldProps('phone')}
+              error={Boolean(touched.phone && errors.phone)}
+              helperText={touched.phone && errors.phone}
               InputProps={{
-              startAdornment: <InputAdornment position="start">+63</InputAdornment>,
+                startAdornment: <InputAdornment position="start">+63</InputAdornment>,
               }}
-            /> */}
+            />
 
             <TextField
               fullWidth
-              label="Middle name"
-              {...getFieldProps('middleName')}
-              error={Boolean(touched.middleName && errors.middleName)}
-              helperText={touched.middleName && errors.middleName}
+              label="Gender"
+              {...getFieldProps('gender')}
+              error={Boolean(touched.gender && errors.gender)}
+              helperText={touched.gender && errors.gender}
             />
           </Stack>
 
