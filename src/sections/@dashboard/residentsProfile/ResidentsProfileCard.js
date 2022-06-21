@@ -15,16 +15,16 @@ export default function ResidentsProfileCard() {
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
-    sex: '',
+    sex: Yup.string().oneOf(['male', 'female']).required('Required'),
     dateOfBirth: '',
-    civilStatus: '',
+    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed']).required('Required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
     // phone:  Yup.string().typeError("Phone must be a number").integer("Age must be an integer").matches ((\+[0-9]{2})|0)[.\- ]?9[0-9]{2}[.\- ]?[0-9]{3}[.\- ]?[0-9]{4}.required('Age required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    status: '',
+    status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     numberOfChildren: Yup.number()
@@ -171,11 +171,17 @@ export default function ResidentsProfileCard() {
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
+                  fullWidth
                   label="Sex"
+                  select
                   {...getFieldProps('sex')}
                   error={Boolean(touched.sex && errors.sex)}
                   helperText={touched.sex && errors.sex}
-                />
+                >
+                  <option value="">Please select a sex</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </TextField>
 
                 <TextField
                   fullWidth
@@ -188,10 +194,16 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   label="Civil Status"
+                  select
                   {...getFieldProps('civilStatus')}
                   error={Boolean(touched.civilStatus && errors.civilStatus)}
                   helperText={touched.civilStatus && errors.civilStatus}
-                />
+                >
+                  <option value="">Please select a civil status</option>
+                  <option value="single">Single</option>
+                  <option value="married">Married</option>
+                  <option value="widowed">Widowed</option>
+                </TextField>
 
                 <TextField
                   fullWidth
@@ -257,13 +269,18 @@ export default function ResidentsProfileCard() {
                   helperText={touched.address && errors.address}
                 />
 
-                 <TextField
+                <TextField
                   fullWidth
                   label="Status"
+                  select
                   {...getFieldProps('status')}
                   error={Boolean(touched.status && errors.status)}
                   helperText={touched.status && errors.status}
-                />
+                >
+                  <option value="">Please select a status</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </TextField>
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

@@ -21,7 +21,7 @@ LegislativeCard.propTypes = {
 };
 
 export default function LegislativeCard({ legislative }) {
-  const { title, cover, year } = legislative;
+  const { title, cover } = legislative;
 
   return (
     <Card>
@@ -35,10 +35,6 @@ export default function LegislativeCard({ legislative }) {
             {title}
           </Typography>
         </Link>
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle4">{year}</Typography>
-        </Stack>
       </Stack>
     </Card>
   );
