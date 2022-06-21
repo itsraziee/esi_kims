@@ -20,8 +20,8 @@ export default function ResidentsProfileCard() {
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Required'),
-    dateOfBirth: '',
-    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed']).required('Required'),
+    dateOfBirth: Yup.string().required("Date of Birth is required"),
+    civilStatus: Yup.string().required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
@@ -194,6 +194,9 @@ export default function ResidentsProfileCard() {
                   label="Date of Birth"
                   type="date"
                   defaultValue="2022-05-24"
+                  {...getFieldProps('dateOfBirth')}
+                  error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
+                  helperText={touched.dateOfBirth && errors.dateOfBirth}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -201,9 +204,7 @@ export default function ResidentsProfileCard() {
                 {/* <TextField
                   fullWidth
                   label="Date of Birth"
-                  {...getFieldProps('dateOfBirth')}
-                  error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
-                  helperText={touched.dateOfBirth && errors.dateOfBirth}
+                  
                 /> */}
 
               <FormControl fullWidth>
@@ -214,6 +215,9 @@ export default function ResidentsProfileCard() {
                   value={civilStatus}
                   label="civilStatus" 
                   onChange={handleChange}
+                  {...getFieldProps('civilStatus')}
+                  error={Boolean(touched.civilStatus && errors.civilStatus)}
+                  helperText={touched.civilStatus && errors.civilStatus}
                 >
                   <MenuItem value={10}>Single</MenuItem>
                   <MenuItem value={20}>Married</MenuItem>
@@ -384,13 +388,9 @@ export default function ResidentsProfileCard() {
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField sx={{ minWidth: 175 }}
-                  disabled
-                  label="Elementary"
-                  {...getFieldProps('elementary')}
-                  error={Boolean(touched.elementary && errors.elementary)}
-                  helperText={touched.elementary && errors.elementary}
-                />
+              <Typography sx={{minWidth: 91, mt: 2}}>
+                  Elementary
+                </Typography>
 
                 <TextField
                   fullWidth
@@ -408,7 +408,8 @@ export default function ResidentsProfileCard() {
                   helperText={touched.elementaryAddressOfSchool && errors.elementaryAddressOfSchool}
                 />
 
-                <TextField sx={{ minWidth: 150 }}
+                <TextField 
+                  fullWidth
                   label="Year Graduated"
                   {...getFieldProps('elementaryYearGraduated')}
                   error={Boolean(touched.elementaryYearGraduated && errors.elementaryYearGraduated)}
@@ -417,13 +418,9 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField sx={{ minWidth: 175 }}
-                  disabled
-                  label="High school"
-                  {...getFieldProps('highSchool')}
-                  error={Boolean(touched.highSchool && errors.highSchool)}
-                  helperText={touched.highSchool && errors.highSchool}
-                />
+                <Typography sx={{minWidth: 91, mt: 2}}>
+                  High School
+                </Typography>
 
                 <TextField
                   fullWidth
@@ -441,7 +438,8 @@ export default function ResidentsProfileCard() {
                   helperText={touched.highSchoolAddressOfSchool && errors.highSchoolAddressOfSchool}
                 />
 
-                <TextField sx={{ minWidth: 150 }}
+                <TextField 
+                  fullWidth
                   label="Year Graduated"
                   {...getFieldProps('highSchoolYearGraduated')}
                   error={Boolean(touched.highSchoolYearGraduated && errors.highSchoolYearGraduated)}
@@ -450,13 +448,9 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField sx={{ minWidth: 175 }}
-                  disabled
-                  label="College"
-                  {...getFieldProps('college')}
-                  error={Boolean(touched.college && errors.college)}
-                  helperText={touched.college && errors.college}
-                />
+              <Typography sx={{minWidth: 91, mt: 2}}>
+                  College
+                </Typography>
 
                 <TextField
                   fullWidth
@@ -474,7 +468,8 @@ export default function ResidentsProfileCard() {
                   helperText={touched.collegeAddressOfSchool && errors.collegeAddressOfSchool}
                 />
 
-                <TextField sx={{ minWidth: 150 }}
+                <TextField
+                  fullWidth
                   label="Year Graduated"
                   {...getFieldProps('collegeYearGraduated')}
                   error={Boolean(touched.collegeYearGraduated && errors.collegeYearGraduated)}
@@ -483,13 +478,9 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField sx={{ minWidth: 175 }}
-                  disabled
-                  label="Vocational"
-                  {...getFieldProps('vocational')}
-                  error={Boolean(touched.vocational && errors.vocational)}
-                  helperText={touched.vocational && errors.vocational}
-                />
+                <Typography sx={{minWidth: 91, mt: 2}}>
+                  Vocational
+                </Typography>
 
                 <TextField
                   fullWidth
@@ -507,7 +498,8 @@ export default function ResidentsProfileCard() {
                   helperText={touched.vocationalAddressOfSchool && errors.vocationalAddressOfSchool}
                 />
 
-                <TextField sx={{ minWidth: 150 }}
+                <TextField 
+                  fullWidth
                   label="Year Graduated"
                   {...getFieldProps('vocationalYearGraduated')}
                   error={Boolean(touched.vocationalYearGraduated && errors.vocationalYearGraduated)}
