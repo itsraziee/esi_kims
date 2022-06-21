@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, InputAdornment, Card, CardContent, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import Button from '@mui/material/Button';
 
 // ----------------------------------------------------------------------
 
@@ -349,8 +350,7 @@ export default function ResidentsProfileCard() {
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 175 }}
                   disabled
                   label="Elementary"
                   {...getFieldProps('elementary')}
@@ -374,8 +374,7 @@ export default function ResidentsProfileCard() {
                   helperText={touched.elementaryAddressOfSchool && errors.elementaryAddressOfSchool}
                 />
 
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 150 }}
                   label="Year Graduated"
                   {...getFieldProps('elementaryYearGraduated')}
                   error={Boolean(touched.elementaryYearGraduated && errors.elementaryYearGraduated)}
@@ -384,8 +383,7 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 175 }}
                   disabled
                   label="High school"
                   {...getFieldProps('highSchool')}
@@ -409,8 +407,7 @@ export default function ResidentsProfileCard() {
                   helperText={touched.highSchoolAddressOfSchool && errors.highSchoolAddressOfSchool}
                 />
 
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 150 }}
                   label="Year Graduated"
                   {...getFieldProps('highSchoolYearGraduated')}
                   error={Boolean(touched.highSchoolYearGraduated && errors.highSchoolYearGraduated)}
@@ -419,8 +416,7 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 175 }}
                   disabled
                   label="College"
                   {...getFieldProps('college')}
@@ -444,8 +440,7 @@ export default function ResidentsProfileCard() {
                   helperText={touched.collegeAddressOfSchool && errors.collegeAddressOfSchool}
                 />
 
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 150 }}
                   label="Year Graduated"
                   {...getFieldProps('collegeYearGraduated')}
                   error={Boolean(touched.collegeYearGraduated && errors.collegeYearGraduated)}
@@ -454,8 +449,7 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 175 }}
                   disabled
                   label="Vocational"
                   {...getFieldProps('vocational')}
@@ -479,8 +473,7 @@ export default function ResidentsProfileCard() {
                   helperText={touched.vocationalAddressOfSchool && errors.vocationalAddressOfSchool}
                 />
 
-                <TextField
-                  fullWidth
+                <TextField sx={{ minWidth: 150 }}
                   label="Year Graduated"
                   {...getFieldProps('vocationalYearGraduated')}
                   error={Boolean(touched.vocationalYearGraduated && errors.vocationalYearGraduated)}
@@ -488,9 +481,23 @@ export default function ResidentsProfileCard() {
                 />
               </Stack>
 
-              <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+              <Button sx={{ minWidth: 275 }}
+                variant="outlined"
+                component="label"
+              >
+                Upload Image
+                <input
+                  type="file"
+                  hidden
+                />
+              </Button>
+                
+                <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                 Submit
-              </LoadingButton>
+                </LoadingButton>
+              </Stack>
+             
             </Stack>
           </Form>
         </FormikProvider>
