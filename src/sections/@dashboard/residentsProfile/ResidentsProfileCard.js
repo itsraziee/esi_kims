@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { Stack, TextField, InputAdornment, Card, CardContent, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import Button from '@mui/material/Button';
-
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 // ----------------------------------------------------------------------
 
 export default function ResidentsProfileCard() {
@@ -126,7 +129,7 @@ export default function ResidentsProfileCard() {
     },
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, sex, civilStatus, handleChange } = formik;
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -171,40 +174,54 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+              <FormControl fullWidth>
+              <InputLabel id="sex-select-label">Sex</InputLabel>
+                <Select
+                  labelId="sex-select-label"
+                  id="sex-select"
+                  value={sex}
+                  label="sex" 
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Male</MenuItem>
+                  <MenuItem value={20}>Female</MenuItem>
+                </Select>
+                </FormControl>
+                
                 <TextField
                   fullWidth
-                  label="Sex"
-                  select
-                  {...getFieldProps('sex')}
-                  error={Boolean(touched.sex && errors.sex)}
-                  helperText={touched.sex && errors.sex}
-                >
-                  <option value="">Please select a sex</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </TextField>
-
-                <TextField
+                  id="dateOfBirth"
+                  label="Date of Birth"
+                  type="date"
+                  defaultValue="2022-05-24"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                {/* <TextField
                   fullWidth
                   label="Date of Birth"
                   {...getFieldProps('dateOfBirth')}
                   error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
                   helperText={touched.dateOfBirth && errors.dateOfBirth}
-                />
+                /> */}
 
-                <TextField
-                  fullWidth
-                  label="Civil Status"
-                  select
-                  {...getFieldProps('civilStatus')}
-                  error={Boolean(touched.civilStatus && errors.civilStatus)}
-                  helperText={touched.civilStatus && errors.civilStatus}
+              <FormControl fullWidth>
+              <InputLabel id="status-select-label">Civil Status</InputLabel>
+                <Select
+                  labelId="status-select-label"
+                  id="status-select"
+                  value={civilStatus}
+                  label="civilStatus" 
+                  onChange={handleChange}
                 >
-                  <option value="">Please select a civil status</option>
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="widowed">Widowed</option>
-                </TextField>
+                  <MenuItem value={10}>Single</MenuItem>
+                  <MenuItem value={20}>Married</MenuItem>
+                  <MenuItem value={10}>Separated</MenuItem>
+                  <MenuItem value={10}>Widow</MenuItem>
+
+                </Select>
+              </FormControl>
 
                 <TextField
                   fullWidth
