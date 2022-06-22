@@ -21,7 +21,7 @@ BlotterCard.propTypes = {
 };
 
 export default function BlotterCard({ blotter }) {
-  const { title, cover, year } = blotter;
+  const { title, cover } = blotter;
 
   return (
     <Card>
@@ -35,10 +35,6 @@ export default function BlotterCard({ blotter }) {
             {title}
           </Typography>
         </Link>
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle4">{year}</Typography>
-        </Stack>
       </Stack>
     </Card>
   );

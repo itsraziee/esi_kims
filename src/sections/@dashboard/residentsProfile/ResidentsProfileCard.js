@@ -219,7 +219,6 @@ export default function ResidentsProfileCard() {
                   <MenuItem value={20}>Married</MenuItem>
                   <MenuItem value={10}>Separated</MenuItem>
                   <MenuItem value={10}>Widow</MenuItem>
-
                 </Select>
               </FormControl>
 

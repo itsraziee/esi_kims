@@ -13,7 +13,7 @@ export default function Blotter() {
     <Page title="Blotter">
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Summon
+          Blotter
         </Typography>
         <BlotterList blotters={BLOTTER} />
       </Container>

@@ -21,7 +21,7 @@ DocumentServicesCard.propTypes = {
 };
 
 export default function DocumentServicesCard({ documentService }) {
-  const { title, cover, year } = documentService;
+  const { title, cover  } = documentService;
 
   return (
     <Card>
@@ -31,14 +31,10 @@ export default function DocumentServicesCard({ documentService }) {
 
       <Stack spacing={-1} sx={{ p: 3 }}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
-          <Typography variant="subtitle3" noWrap>
+          <Typography variant="subtitle5" noWrap>
             {title}
           </Typography>
         </Link>
-
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle4">{year}</Typography>
-        </Stack>
       </Stack>
     </Card>
   );
