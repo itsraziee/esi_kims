@@ -43,7 +43,7 @@ const navConfig = [
   },
   {
     title: 'officials',
-    path: '/dashboard/blog',
+    path: '/dashboard/official',
     icon: getIcon('fluent:people-community-28-filled'),
   },
   {

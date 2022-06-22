@@ -17,6 +17,7 @@ import Legislative from './pages/Legislative';
 import DocumentServices from './pages/DocumentServices';
 import Summon from './pages/Summon';
 import Blotter from './pages/Blotter';
+import Officials from './pages/Officials';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -35,7 +36,8 @@ export default function Router() {
         { path: 'legislative', element: <Legislative /> },
         { path: 'documentServices', element: <DocumentServices /> },
         { path: 'summon', element: <Summon /> },
-        { path: 'blotter', element: <Blotter />}
+        { path: 'blotter', element: <Blotter /> },
+        { path: 'official', element: <Officials /> },
       ],
     },
     {
