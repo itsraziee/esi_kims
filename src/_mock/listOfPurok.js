@@ -42,7 +42,7 @@ const puroks = [...Array(14)].map((_, index) => {
 
   return {
     id: faker.datatype.uuid(),
-    cover: `/static/mock-images/puroks/purok_${setIndex}.jpg`,
+    cover: `/static/mock-images/puroks/purok_${setIndex}.png`,
     name: PUROK_NUMBER[index],
     purokname: PUROK_NAME[index],
   };

@@ -13,7 +13,7 @@ export default function PurokList() {
   return (
     <Page title="List Of Purok">
       <Container>
-        <Typography variant="h4" sx={{ mb: 5 }}>
+        <Typography variant="h4" sx={{ mb: 5 }} >
           List of Purok
         </Typography>
         <ListOfPurokList puroks={LISTOFPUROK} />
