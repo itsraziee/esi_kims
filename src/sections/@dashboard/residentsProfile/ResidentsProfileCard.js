@@ -201,14 +201,9 @@ export default function ResidentsProfileCard() {
                     shrink: true,
                   }}
                 />
-                {/* <TextField
-                  fullWidth
-                  label="Date of Birth"
-                  
-                /> */}
 
-              <FormControl fullWidth>
-              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
+              <InputLabel   id="status-select-label">Civil Status</InputLabel>
                 <Select
                   labelId="status-select-label"
                   id="status-select"
@@ -217,13 +212,14 @@ export default function ResidentsProfileCard() {
                   onChange={handleChange}
                   {...getFieldProps('civilStatus')}
                   error={Boolean(touched.civilStatus && errors.civilStatus)}
-                  helperText={touched.civilStatus && errors.civilStatus}
+                 
                 >
                   <MenuItem value={10}>Single</MenuItem>
                   <MenuItem value={20}>Married</MenuItem>
-                  <MenuItem value={10}>Separated</MenuItem>
-                  <MenuItem value={10}>Widow</MenuItem>
-                </Select>
+                  <MenuItem value={30}>Separated</MenuItem>
+                  <MenuItem value={40}>Widowed</MenuItem>
+                  </Select>
+                  
               </FormControl>
 
                 <TextField

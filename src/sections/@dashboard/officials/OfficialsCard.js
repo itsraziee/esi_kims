@@ -57,11 +57,11 @@ OfficialsCard.propTypes = {
 
 export default function OfficialsCard({ post, index }) {
   const { cover, title, author } = post;
-  const latestPostLarge = index === 0;
-  const latestPost = index === 1 || index === 2;
+  const latestPostLarge = index ;
+  const latestPost = index;
   
   return (
-    <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
+    <Grid item xs={12} sm={latestPostLarge ? 12 : 4} md={latestPostLarge ? 6 : 3}>
       <Card sx={{ position: 'relative' }}>
         <CardMediaStyle
           sx={{
@@ -79,7 +79,7 @@ export default function OfficialsCard({ post, index }) {
             ...(latestPostLarge && {
               pt: {
                 xs: 'calc(100% * 4 / 3)',
-                sm: 'calc(100% * 3 / 4.66)',
+                sm: 'calc(100% * 3 / 6)',
               },
             }),
           }}

@@ -26,8 +26,8 @@ export default function Officials() {
         </Stack>
 
         <Grid container spacing={3}>
-          {POSTS.map((post, index) => (
-            <OfficialsCard key={post.id} post={post} index={index} />
+          {POSTS.map((post) => (
+            <OfficialsCard key={post.id} post={post}  />
           ))}
         </Grid>
       </Container>
