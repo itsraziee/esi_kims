@@ -15,7 +15,7 @@ const summons = [...Array(2)].map((_, index) => {
 
   return {
     id: faker.datatype.uuid(),
-    cover: `/static/mock-images/summon/summon_${setIndex}.jpg`,
+    cover: `/static/mock-images/summon/summon_${setIndex}.png`,
     title: TITLE[index],
   };
 });

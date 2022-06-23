@@ -34,7 +34,7 @@ const legislatives = [...Array(10)].map((_, index) => {
 
   return {
     id: faker.datatype.uuid(),
-    cover: `/static/mock-images/legislative/legislative_${setIndex}.jpg`,
+    cover: `/static/mock-images/legislative/legislative_${setIndex}.png`,
     title: TITLE[index],
     year: YEAR[index],
   };

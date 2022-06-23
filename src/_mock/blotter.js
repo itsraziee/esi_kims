@@ -15,7 +15,7 @@ const blotters = [...Array(2)].map((_, index) => {
 
   return {
     id: faker.datatype.uuid(),
-    cover: `/static/mock-images/blotter/blotter_${setIndex}.jpg`,
+    cover: `/static/mock-images/blotter/blotter_${setIndex}.png`,
     title: TITLE[index],
   };
 });

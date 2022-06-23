@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent } from '@mui/material';
+import { Link, Card, Grid, Avatar, CardContent, Typography } from '@mui/material';
 
 //
 import SvgIconStyle from '../../../components/SvgIconStyle';
-
 
 // ----------------------------------------------------------------------
 
@@ -32,14 +31,6 @@ const AvatarStyle = styled(Avatar)(({ theme }) => ({
   bottom: theme.spacing(-2),
 }));
 
-// const InfoStyle = styled('div')(({ theme }) => ({
-//   display: 'flex',
-//   flexWrap: 'wrap',
-//   justifyContent: 'flex-end',
-//   marginTop: theme.spacing(3),
-//   color: theme.palette.text.disabled,
-// }));
-
 const CoverImgStyle = styled('img')({
   top: 0,
   width: '100%',
@@ -56,10 +47,10 @@ OfficialsCard.propTypes = {
 };
 
 export default function OfficialsCard({ post, index }) {
-  const { cover, title, author } = post;
-  const latestPostLarge = index ;
+  const { cover, name, position, author } = post;
+  const latestPostLarge = index;
   const latestPost = index;
-  
+
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 4} md={latestPostLarge ? 6 : 3}>
       <Card sx={{ position: 'relative' }}>
@@ -111,7 +102,7 @@ export default function OfficialsCard({ post, index }) {
             }}
           />
 
-          <CoverImgStyle alt={title} src={cover} />
+          <CoverImgStyle alt={name} src={cover} />
         </CardMediaStyle>
 
         <CardContent
@@ -124,10 +115,6 @@ export default function OfficialsCard({ post, index }) {
             }),
           }}
         >
-          {/* <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {fDate(createdAt)}
-          </Typography> */}
-
           <TitleStyle
             to="#"
             color="inherit"
@@ -141,27 +128,11 @@ export default function OfficialsCard({ post, index }) {
               }),
             }}
           >
-            {title}
+            {name}
           </TitleStyle>
-
-          {/* <InfoStyle>
-            {POST_INFO.map((info, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  ml: index === 0 ? 0 : 1.5,
-                  ...((latestPostLarge || latestPost) && {
-                    color: 'grey.500',
-                  }),
-                }}
-              >
-                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
-              </Box>
-            ))}
-          </InfoStyle> */}
+          <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
+            {position}
+          </Typography>
         </CardContent>
       </Card>
     </Grid>

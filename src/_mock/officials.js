@@ -2,8 +2,7 @@ import { faker } from '@faker-js/faker';
 
 // ----------------------------------------------------------------------
 
-const POST_TITLES = [
-  'HON. JERRY P. PARADILLO',
+const NAMES = [
   'HON. JERRY P. PARADILLO',
   'HON. ALEX P. COQUILLA',
   'HON. ANNABELLE F. CANTONAO',
@@ -19,17 +18,29 @@ const POST_TITLES = [
   'JESSA T. PARADILLO',
 ];
 
-const POST_SUBTITLES = [
-  'Barangay Captain',
-  'Barangay Captain',
-  'Barangay Captain',
-]
+const POSITIONS = [
+  'Punong Barangay',
+  'Barangay Kagawad',
+  'Barangay Kagawad',
+  'Barangay Kagawad',
+  'Barangay Kagawad',
+  'Barangay Kagawad',
+  'Barangay Kagawad',
+  'Barangay Kagawad',
+  'SK Chairman',
+  'IP Mandatory Representative',
+  'Barangay Secretary',
+  'Barangay Treasurer',
+  'Barangay Record Keeper',
+];
 
-const posts = [...Array(23)].map((_, index) => ({
+
+
+const posts = [...Array(13)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  cover: `/static/mock-images/covers/cover_${index + 1}.jpg`,
-  title: POST_TITLES[index + 1],
-  subtitle: POST_SUBTITLES[index],
+  cover: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
+  name: NAMES[index],
+  position: POSITIONS[index],
   author: {
     name: faker.name.findName(),
     avatarUrl: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,

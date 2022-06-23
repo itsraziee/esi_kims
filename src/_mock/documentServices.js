@@ -18,7 +18,7 @@ const documentServices = [...Array(6)].map((_, index) => {
 
   return {
     id: faker.datatype.uuid(),
-    cover: `/static/mock-images/document services/ds_${setIndex}.jpg`,
+    cover: `/static/mock-images/document services/ds_${setIndex}.png`,
     title: TITLE[index],
   };
 });
