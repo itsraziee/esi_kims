@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, Typography } from '@mui/material';
+import { Link, Card, Grid, Avatar, CardContent } from '@mui/material';
 
 //
 import SvgIconStyle from '../../../components/SvgIconStyle';
@@ -41,13 +41,13 @@ const CoverImgStyle = styled('img')({
 
 // ----------------------------------------------------------------------
 
-OfficialsCard.propTypes = {
+BspoCard.propTypes = {
   post: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function OfficialsCard({ post, index }) {
-  const { cover, name, position, author } = post;
+export default function BspoCard({ post, index }) {
+  const { cover, name, author } = post;
   const latestPostLarge = index;
   const latestPost = index;
 
@@ -130,9 +130,6 @@ export default function OfficialsCard({ post, index }) {
           >
             {name}
           </TitleStyle>
-          <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {position}
-          </Typography>
         </CardContent>
       </Card>
     </Grid>

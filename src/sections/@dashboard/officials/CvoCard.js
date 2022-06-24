@@ -41,12 +41,12 @@ const CoverImgStyle = styled('img')({
 
 // ----------------------------------------------------------------------
 
-OfficialsCard.propTypes = {
+CvoCard.propTypes = {
   post: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function OfficialsCard({ post, index }) {
+export default function CvoCard({ post, index }) {
   const { cover, name, position, author } = post;
   const latestPostLarge = index;
   const latestPost = index;
