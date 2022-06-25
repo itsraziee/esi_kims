@@ -38,7 +38,7 @@ const navConfig = [
   },
   {
     title: 'demographics',
-    path: '/dashboard/app',
+    path: '/dashboard/demographics',
     icon: getIcon('foundation:results-demographics'),
   },
   {

@@ -18,6 +18,7 @@ import DocumentServices from './pages/DocumentServices';
 import Summon from './pages/Summon';
 import Blotter from './pages/Blotter';
 import Officials from './pages/Officials';
+import Demographics from './pages/Demographics';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -38,6 +39,7 @@ export default function Router() {
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },
         { path: 'official', element: <Officials /> },
+        { path: 'demographics', element: <Demographics />}
       ],
     },
     {
