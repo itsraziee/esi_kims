@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
-// import Iconify from '../components/Iconify';
+import Iconify from '../components/Iconify';
 // sections
 import {
   // AppTasks,
@@ -12,7 +12,7 @@ import {
   // AppOrderTimeline,
   AppCurrentVisits,
   AppWebsiteVisits,
-  // AppTrafficBySite,
+ AppTrafficBySite,
   AppWidgetSummary,
   // AppCurrentSubject,
   // AppConversionRates,
@@ -32,19 +32,19 @@ export default function DashboardApp() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Weekly Sales" total={714000} icon={'ant-design:android-filled'} />
+            <AppWidgetSummary title="Document Services" total={714000} icon={'ion:documents'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Users" total={1352831} color="info" icon={'ant-design:apple-filled'} />
+            <AppWidgetSummary title="Blotter" total={1352831} color="info" icon={'icon-park-solid:image-files'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Item Orders" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
+            <AppWidgetSummary title="Summon" total={1723315} color="warning" icon={'fa6-solid:file-pen'} />
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Bug Reports" total={234} color="error" icon={'ant-design:bug-filled'} />
+            <AppWidgetSummary title="Legislative" total={234} color="error" icon={'fa6-solid:building-columns'} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
@@ -179,33 +179,33 @@ export default function DashboardApp() {
             />
           </Grid> */}
 
-          {/* <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={6} lg={4}>
             <AppTrafficBySite
-              title="Traffic by Site"
+              title="Others"
               list={[
                 {
-                  name: 'FaceBook',
-                  value: 323234,
-                  icon: <Iconify icon={'eva:facebook-fill'} color="#1877F2" width={32} height={32} />,
+                  name: 'About',
+                  // value: 323234,
+                  icon: <Iconify icon={'emojione-monotone:information'} color="#1877F2" width={32} height={32} />,
                 },
                 {
-                  name: 'Google',
-                  value: 341212,
-                  icon: <Iconify icon={'eva:google-fill'} color="#DF3E30" width={32} height={32} />,
+                  name: 'Legislative',
+                  // value: 341212,
+                  icon: <Iconify icon={'fa6-solid:building-columns'} color="#DF3E30" width={32} height={32} />,
                 },
                 {
-                  name: 'Linkedin',
-                  value: 411213,
-                  icon: <Iconify icon={'eva:linkedin-fill'} color="#006097" width={32} height={32} />,
+                  name: 'Officials',
+                  // value: 411213,
+                  icon: <Iconify icon={'fluent:people-community-28-filled'} color="#006097" width={32} height={32} />,
                 },
                 {
-                  name: 'Twitter',
-                  value: 443232,
-                  icon: <Iconify icon={'eva:twitter-fill'} color="#1C9CEA" width={32} height={32} />,
+                  name: 'Reference Number',
+                  // value: 443232,
+                  icon: <Iconify icon={'fluent:book-number-16-filled'} color="#1C9CEA" width={32} height={32} />,
                 },
               ]}
             />
-          </Grid> */}
+          </Grid>
 
           {/* <Grid item xs={12} md={6} lg={8}>
             <AppTasks
