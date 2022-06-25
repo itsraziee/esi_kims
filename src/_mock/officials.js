@@ -38,12 +38,12 @@ const POSITIONS = [
 
 const posts = [...Array(13)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  cover: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
+  cover: `/static/mock-images/officials/official_${index + 1}.jpg`,
   name: NAMES[index],
   position: POSITIONS[index],
   author: {
     name: faker.name.findName(),
-    avatarUrl: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
+    avatarUrl: `/static/mock-images/officials/official_${index + 1}.jpg`,
   },
 }));
 
