@@ -15,7 +15,7 @@ const CardMediaStyle = styled('div')({
 });
 
 const TitleStyle = styled(Link)({
-  height: 44,
+  height: 20,
   overflow: 'hidden',
   WebkitLineClamp: 2,
   display: '-webkit-box',

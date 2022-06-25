@@ -70,7 +70,7 @@ export default function OfficialsCard({ post, index }) {
             ...(latestPostLarge && {
               pt: {
                 xs: 'calc(100% * 4 / 3)',
-                sm: 'calc(100% * 3 / 6)',
+                sm: 'calc(100% * 3 / 4.66)',
               },
             }),
           }}
