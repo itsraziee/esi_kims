@@ -32,37 +32,41 @@ export default function DashboardApp() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Document Services" total={714000} icon={'ion:documents'} />
+            <AppWidgetSummary title="Document Services"  icon={'ion:documents'} />
           </Grid>
+          {/* total={714000} --in between title and icon */}
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Blotter" total={1352831} color="info" icon={'icon-park-solid:image-files'} />
+            <AppWidgetSummary title="Blotter"  color="info" icon={'icon-park-solid:image-files'} />
           </Grid>
+          {/* total={1352831} --in between title and icon */}
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Summon" total={1723315} color="warning" icon={'fa6-solid:file-pen'} />
+            <AppWidgetSummary title="Summon" color="warning" icon={'fa6-solid:file-pen'} />
           </Grid>
+          {/* total={1723315} --in between title and icon */}
 
           <Grid item xs={12} sm={6} md={3}>
             <AppWidgetSummary title="Legislative" total={234} color="error" icon={'fa6-solid:building-columns'} />
           </Grid>
+          {/* total={234} --in between title and icon */}
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
               title="Population"
               subheader="(+43%) than last year"
               chartLabels={[
-                '01/01/2003',
-                '02/01/2003',
-                '03/01/2003',
-                '04/01/2003',
-                '05/01/2003',
-                '06/01/2003',
-                '07/01/2003',
-                '08/01/2003',
-                '09/01/2003',
-                '10/01/2003',
-                '11/01/2003',
+                '2012',
+                '2013',
+                '2014',
+                '2015',
+                '2016',
+                '2017',
+                '2018',
+                '2019',
+                '2020',
+                '2021',
+                '2022',
               ]}
               chartData={[
                 {
@@ -91,20 +95,20 @@ export default function DashboardApp() {
             <AppCurrentVisits
               title="Current Population"
               chartData={[
-                { label: 'Purok 1', value: 5000 },
-                { label: 'Purok 2', value: 4999 },
-                { label: 'Purok 3A', value: 4859 },
-                { label: 'Purok 3B', value: 4525 },
-                { label: 'Purok 4', value: 4475 },
-                { label: 'Purok 5', value: 3987 },
-                { label: 'Purok 6', value: 3586 },
-                { label: 'Purok 7', value: 3412 },
-                { label: 'Purok 8', value: 3105 },
-                { label: 'Purok 9', value: 2997 },
-                { label: 'Purok 10A', value: 2865 },
-                { label: 'Purok 11B', value: 2410 },
-                { label: 'Purok 12', value: 2341 },
-                { label: 'Purok 13', value: 2301 },
+                { label: 'Purok 1', value: 200 },
+                { label: 'Purok 2', value: 100 },
+                { label: 'Purok 3A', value: 120 },
+                { label: 'Purok 3B', value: 89 },
+                { label: 'Purok 4', value: 50 },
+                { label: 'Purok 5', value: 107 },
+                { label: 'Purok 6', value: 34},
+                { label: 'Purok 7', value: 29 },
+                { label: 'Purok 8', value: 16 },
+                { label: 'Purok 9', value: 19 },
+                { label: 'Purok 10A', value: 33 },
+                { label: 'Purok 11B', value: 10},
+                { label: 'Purok 12', value: 21 },
+                { label: 'Purok 13', value: 17 },
               ]}
               chartColors={[
                 theme.palette.primary.main,
