@@ -20,20 +20,20 @@ const PUROK_NUMBER = [
 ];
 
 const PUROK_NAME = [
-    'BRGY. PROPER',
-    'BRGY. PROPER',
-    'BRGY. PROPER',
-    'BRGY. PROPER',
-    'BRGY. PROPER',
-    'SITIO MALAPINGGAN',
-    'SITIO BALANGCAO 2',
-    'SITIO BALANGCAO 2',
-    'SITIO BALANGCAO 1',
-    'SITIO BALANGCAO 1',
-    'SITIO PALO',
-    'SITIO PALO',
-    'SITIO SINILOAN',
-    'SITIO KIRAMONG',
+    'Brgy. Proper',
+    'Brgy. Proper',
+    'Brgy. Proper',
+    'Brgy. Proper',
+    'Brgy. Proper',
+    'Sitio Malapinggan',
+    'Sitio Balangcao 2',
+    'Sitio Balangcao 2',
+    'Sitio Balangcao 1',
+    'Sitio Balangcao 1',
+    'Sitio Palo',
+    'Sitio Palo',
+    'Sitio Siniloan',
+    'Sitio Kiramong',
 ];
 // ----------------------------------------------------------------------
 

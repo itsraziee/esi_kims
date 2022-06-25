@@ -31,7 +31,7 @@ export default function BlotterCard({ blotter }) {
 
       <Stack spacing={-1} sx={{ p: 3 }}>
         <Link to="#" color="inherit" underline="hover" component={RouterLink}>
-          <Typography variant="subtitle3" noWrap>
+          <Typography variant="subtitle4" noWrap>
             {title}
           </Typography>
         </Link>

@@ -31,13 +31,13 @@ export default function PurokCard({ purok }) {
 
       <Stack spacing={-1} sx={{ p: 3 }}>
         <Link to="/dashboard/user" color="inherit" underline="hover" component={RouterLink}>
-          <Typography variant="subtitle3" noWrap>
+          <Typography variant="subtitle4" noWrap>
             {name}
           </Typography>
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <Typography variant="subtitle4">{purokname}</Typography>
+          <Typography variant="subtitle7">{purokname}</Typography>
         </Stack>
       </Stack>
     </Card>
