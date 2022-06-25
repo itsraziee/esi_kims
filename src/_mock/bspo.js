@@ -16,11 +16,11 @@ const NAMES = [
 
 const bspoposts = [...Array(9)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  cover: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
+  cover: `/static/mock-images/bspo/bspo_${index + 1}.jpg`,
   name: NAMES[index],
   author: {
     name: faker.name.findName(),
-    avatarUrl: `/static/mock-images/avatars/avatar_${index + 1}.jpg`,
+    avatarUrl: `/static/mock-images/bspo/bspo_${index + 1}.jpg`,
   },
 }));
 
