@@ -1,4 +1,3 @@
-import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
@@ -8,15 +7,17 @@ import Iconify from '../components/Iconify';
 // sections
 import {
   // AppTasks,
-  AppNewsUpdate,
+  // AppNewsUpdate,
   // AppOrderTimeline,
   AppCurrentVisits,
   AppWebsiteVisits,
  AppTrafficBySite,
   AppWidgetSummary,
+  NewsUpdateCard,
   // AppCurrentSubject,
   // AppConversionRates,
 } from '../sections/@dashboard/app';
+import NEWSUPDATES from '../_mock/newsUpdate';
 
 // ----------------------------------------------------------------------
 
@@ -153,6 +154,12 @@ export default function DashboardApp() {
           </Grid> */}
 
           <Grid item xs={12} md={6} lg={8}>
+            <NewsUpdateCard
+              title="News Update"
+             list={NEWSUPDATES}
+            />
+          </Grid>
+          {/* <Grid item xs={12} md={6} lg={8}>
             <AppNewsUpdate
               title="News Update"
               list={[...Array(5)].map((_, index) => ({
@@ -163,7 +170,7 @@ export default function DashboardApp() {
                 postedAt: faker.date.recent(),
               }))}
             />
-          </Grid>
+          </Grid> */}
 
           {/* <Grid item xs={12} md={6} lg={4}>
             <AppOrderTimeline

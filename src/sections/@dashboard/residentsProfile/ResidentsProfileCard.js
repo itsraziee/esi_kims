@@ -20,25 +20,28 @@ export default function ResidentsProfileCard() {
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Required'),
+    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     dateOfBirth: Yup.string().required("Date of Birth is required"),
-    civilStatus: Yup.string().required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
+    address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
     // phone:  Yup.string().typeError("Phone must be a number").integer("Age must be an integer").matches ((\+[0-9]{2})|0)[.\- ]?9[0-9]{2}[.\- ]?[0-9]{3}[.\- ]?[0-9]{4}.required('Age required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
+    residentStatus: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
-    spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
+    spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse Address is required'),
     numberOfChildren: Yup.number()
       .typeError('Number of Children must be a number')
       .integer('Number of Children must be an integer')
       .required('Number of Children is required'),
     fathersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Name is required'),
     fathersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
+    fathersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Address is required'),
     mothersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Name is required'),
     mothersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
+    mothersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Address is required'),
     elementaryNameOfSchool: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
@@ -102,14 +105,16 @@ export default function ResidentsProfileCard() {
       phone: '',
       occupation: '',
       address: '',
-      status: '',
+      residentStatus: '',
       spouse: '',
       spouseAddress: '',
       numberOfChildren: '',
       fathersName: '',
       fathersOccupation: '',
+      fatherAddress: '',
       mothersName: '',
       mothersOccupation: '',
+      motherAddress: '',
       elementaryNameOfSchool: '',
       elementaryAddressOfSchool: '',
       elementaryYearGraduated: '',
@@ -129,7 +134,7 @@ export default function ResidentsProfileCard() {
     },
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, sex, civilStatus, handleChange } = formik;
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, sex, civilStatus, residentStatus, handleChange } = formik;
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -202,16 +207,17 @@ export default function ResidentsProfileCard() {
                   }}
                 />
 
-              <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
-              <InputLabel   id="status-select-label">Civil Status</InputLabel>
+              <FormControl fullWidth>
+              <InputLabel id="civilStatus-select-label">Civil Status</InputLabel>
                 <Select
-                  labelId="status-select-label"
-                  id="status-select"
+                  labelId="civilStatus-select-label"
+                  id="civilStatus-select"
                   value={civilStatus}
                   label="civilStatus" 
                   onChange={handleChange}
                   {...getFieldProps('civilStatus')}
-                  error={Boolean(touched.civilStatus && errors.civilStatus)}
+                    error={Boolean(touched.civilStatus && errors.civilStatus)}
+                  helperText={touched.civilStatus && errors.civilStatus}
                  
                 >
                   <MenuItem value={10}>Single</MenuItem>
@@ -286,18 +292,23 @@ export default function ResidentsProfileCard() {
                   helperText={touched.address && errors.address}
                 />
 
-                <TextField
-                  fullWidth
-                  label="Status"
-                  select
-                  {...getFieldProps('status')}
-                  error={Boolean(touched.status && errors.status)}
-                  helperText={touched.status && errors.status}
+              <FormControl fullWidth>
+              <InputLabel id="status-select-label">Resident Status</InputLabel>
+                <Select
+                  labelId="residentStatus-select-label"
+                  id="residentStatus-select"
+                  value={residentStatus}
+                  label="residentStatus" 
+                  onChange={handleChange}
+                  {...getFieldProps('residentStatus')}
+                  error={Boolean(touched.residentStatus && errors.residentStatus)}
+                  helperText={touched.residentStatus && errors.residentStatus}
                 >
-                  <option value="">Please select a status</option>
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </TextField>
+                  <MenuItem value={1}>Active</MenuItem>
+                  <MenuItem value={2}>Inactive</MenuItem>
+                  </Select>
+              </FormControl>
+
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
