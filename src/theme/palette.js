@@ -100,7 +100,17 @@ const CHART_COLORS = {
   babyBlue: '9BBBFC',
   oceanBlue: '#4741A6',
   crayola: '#F9CE69',
-
+  architectureblue: '#7195A6',
+  indianorange: '#FF7722',
+  americanred:'#B31942',
+  vividpurple: '#6A0F8E',
+  matte: '#3B4248',
+  camouflage: '#766D31',
+  navy: '#000080',
+  teal: '#3A7575',
+  pink: '#FF007F',
+  frenchlime: '#9EFD38',
+  emerald: '#1B7931',
 };
 
 const WATER = {
