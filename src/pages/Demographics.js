@@ -68,10 +68,10 @@ export default function Demographics() {
               ]}
               chartColors={[
                 theme.palette.primary.main,
-                theme.palette.chart.blue[0],
-                theme.palette.chart.violet[0],
-                theme.palette.chart.yellow[0],
-                theme.palette.chart.green[0],
+                theme.palette.chart.water,
+                theme.palette.chart.babyBlue,
+                theme.palette.chart.oceanBlue,
+                theme.palette.chart.crayola,
               ]}
             />
           </Grid>

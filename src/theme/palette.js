@@ -96,6 +96,11 @@ const CHART_COLORS = {
   green: ['#2CD9C5', '#60F1C8', '#A4F7CC', '#C0F2DC'],
   yellow: ['#FFE700', '#FFEF5A', '#FFF7AE', '#FFF3D6'],
   red: ['#FF6C40', '#FF8F6D', '#FFBD98', '#FFF2D4'],
+  water: '#D9EFF7',
+  babyBlue: '9BBBFC',
+  oceanBlue: '#4741A6',
+  crayola: '#F9CE69',
+
 };
 
 const WATER = {
