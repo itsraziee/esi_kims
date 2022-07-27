@@ -140,7 +140,7 @@ export default function User() {
             Residents
           </Typography>
           <Button variant="contained" component={RouterLink} to="/dashboard/residentsProfile" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New User
+            New Residents
           </Button>
         </Stack>
 

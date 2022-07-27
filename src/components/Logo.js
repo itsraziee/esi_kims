@@ -11,7 +11,8 @@ Logo.propTypes = {
 };
 
 export default function Logo({ disabledLink = false, sx}) {
-  const logo = <Box component="img" src="/static/illustrations/Kimanait-Logo.svg" sx={{ width: 40, height: 40, ...sx }} />;
+  const logo = <Box component="img" src="/static/illustrations/Kimanait Logo.png
+  " sx={{ width: 195, height: 55, ...sx }} />;
   if (disabledLink) {
     return <>{logo}</>;
   }

@@ -24,7 +24,7 @@ export default function Officials() {
           <Typography variant="h4" gutterBottom>
             Officials
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" component={RouterLink} to="/dashboard/officialsProfile" startIcon={<Iconify icon="eva:plus-fill" />}>
             Add Official
           </Button>
         </Stack>

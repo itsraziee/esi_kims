@@ -14,7 +14,7 @@ export default function Legislative() {
     <Page title="Legislative">
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Legislative
+          Barangay Ordinance
         </Typography>
         <LegislativeList legislatives={LEGISLATIVE} />
       </Container>
