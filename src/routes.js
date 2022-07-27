@@ -20,6 +20,8 @@ import OfficialsProfile from'./pages/OfficialsProfile';
 import Blotter from './pages/Blotter';
 import Officials from './pages/Officials';
 import Demographics from './pages/Demographics';
+import Profile from './pages/Profile';
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -41,8 +43,8 @@ export default function Router() {
         { path: 'blotter', element: <Blotter /> },
         { path: 'official', element: <Officials /> },
         { path: 'demographics', element: <Demographics />},
-        { path: 'officialsProfile', element: <OfficialsProfile />}
-
+        { path: 'officialsProfile', element: <OfficialsProfile />},
+        { path: 'profile', element: <Profile />}
       ],
     },
     {

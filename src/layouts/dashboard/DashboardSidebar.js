@@ -14,6 +14,8 @@ import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 //
 import navConfig from './NavConfig';
+import { useAuth } from '../../hooks/useAuth';
+import { useProfile } from '../../hooks/useProfile';
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +45,8 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const isDesktop = useResponsive('up', 'lg');
 
@@ -64,21 +68,23 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Logo />
       </Box>
 
-      <Box sx={{ mb: 5, mx: 2.5 }}>
-        <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
-              </Typography>
-            </Box>
-          </AccountStyle>
-        </Link>
-      </Box>
+      {user && (
+        <Box sx={{ mb: 5, mx: 2.5 }}>
+          <Link underline="none" component={RouterLink} to="#">
+            <AccountStyle>
+              <Avatar src={account.photoURL} alt="photoURL" />
+              <Box sx={{ ml: 2 }}>
+                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                  {`${profile?.firstName} ${profile?.lastName}`}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  {account.role}
+                </Typography>
+              </Box>
+            </AccountStyle>
+          </Link>
+        </Box>
+      )}
 
       <NavSection navConfig={navConfig} />
     </Scrollbar>

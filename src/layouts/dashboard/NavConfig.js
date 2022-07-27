@@ -22,16 +22,19 @@ const navConfig = [
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
+    auth_required: true,
     title: 'document services',
     path: '/dashboard/documentServices',
     icon: getIcon('ion:documents'),
   },
   {
+    auth_required: true,
     title: 'blotter',
     path: '/dashboard/blotter',
     icon: getIcon('icon-park-solid:image-files'),
   },
   {
+    auth_required: true,
     title: 'summon',
     path: '/dashboard/summon',
     icon: getIcon('fa6-solid:file-pen'),
@@ -52,6 +55,7 @@ const navConfig = [
     icon: getIcon('ri:building-2-fill'),
   },
   {
+    auth_required: true,
     title: 'residents',
     path: '/dashboard/user',
     icon: getIcon('fluent:people-audience-24-filled'),
@@ -62,6 +66,7 @@ const navConfig = [
     icon: getIcon('eva:lock-fill'),
   },
   {
+    auth_required: true,
     title: 'register',
     path: '/register',
     icon: getIcon('eva:person-add-fill'),

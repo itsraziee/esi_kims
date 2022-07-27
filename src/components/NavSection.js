@@ -6,6 +6,7 @@ import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
 //
 import Iconify from './Iconify';
+import { useAuth } from '../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
@@ -141,15 +142,18 @@ NavSection.propTypes = {
 
 export default function NavSection({ navConfig, ...other }) {
   const { pathname } = useLocation();
+  const user = useAuth();
 
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
-        {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
-        ))}
+        {navConfig.map((item) => {
+          if (item?.auth_required && !user) return;
+
+          return <NavItem key={item.title} item={item} active={match} />;
+        })}
       </List>
     </Box>
   );

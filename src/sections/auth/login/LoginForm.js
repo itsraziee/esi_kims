@@ -7,6 +7,7 @@ import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormContr
 import { LoadingButton } from '@mui/lab';
 // component
 import Iconify from '../../../components/Iconify';
+import { login } from '../../../service/auth';
 
 // ----------------------------------------------------------------------
 
@@ -27,8 +28,10 @@ export default function LoginForm() {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: async (values) => {
+      return login(values.email, values.password).then((res) => {
+        navigate('/dashboard/app', { replace: true });
+      });
     },
   });
 
@@ -47,6 +50,7 @@ export default function LoginForm() {
             autoComplete="username"
             type="email"
             label="Email address"
+            name="email"
             {...getFieldProps('email')}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
@@ -57,6 +61,7 @@ export default function LoginForm() {
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}
             label="Password"
+            name="password"
             {...getFieldProps('password')}
             InputProps={{
               endAdornment: (

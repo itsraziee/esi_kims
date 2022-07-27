@@ -3,9 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
+import { signOut } from 'firebase/auth';
 // components
 import MenuPopover from '../../components/MenuPopover';
 // mocks_
+import { auth } from '../../firebase-init';
 import account from '../../_mock/account';
 
 // ----------------------------------------------------------------------
@@ -19,7 +21,7 @@ const MENU_OPTIONS = [
   {
     label: 'Profile',
     icon: 'eva:person-fill',
-    linkTo: 'user',
+    linkTo: 'profile',
   },
   {
     label: 'Settings',
@@ -41,6 +43,11 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const logout = () => {
+    signOut(auth);
+    handleClose();
   };
 
   return (
@@ -101,7 +108,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={logout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </MenuPopover>

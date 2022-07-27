@@ -12,16 +12,18 @@ import {
   // AppOrderTimeline,
   AppCurrentVisits,
   AppWebsiteVisits,
- AppTrafficBySite,
+  AppTrafficBySite,
   AppWidgetSummary,
   // AppCurrentSubject,
   // AppConversionRates,
 } from '../sections/@dashboard/app';
+import { useAuth } from '../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
   const theme = useTheme();
+  const user = useAuth();
 
   return (
     <Page title="Dashboard">
@@ -31,23 +33,27 @@ export default function DashboardApp() {
         </Typography>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Document Services"  icon={'ion:documents'} />
-          </Grid>
-          {/* total={714000} --in between title and icon */}
+          {user && (
+            <>
+              <Grid item xs={12} sm={6} md={3}>
+                <AppWidgetSummary title="Document Services" total={0} icon={'ion:documents'} />
+              </Grid>
+              {/* total={714000} --in between title and icon */}
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Blotter"  color="info" icon={'icon-park-solid:image-files'} />
-          </Grid>
-          {/* total={1352831} --in between title and icon */}
+              <Grid item xs={12} sm={6} md={3}>
+                <AppWidgetSummary title="Blotter" total={0} color="info" icon={'icon-park-solid:image-files'} />
+              </Grid>
+              {/* total={1352831} --in between title and icon */}
 
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Summon" color="warning" icon={'fa6-solid:file-pen'} />
-          </Grid>
+              <Grid item xs={12} sm={6} md={3}>
+                <AppWidgetSummary title="Summon" total={0} color="warning" icon={'fa6-solid:file-pen'} />
+              </Grid>
+            </>
+          )}
           {/* total={1723315} --in between title and icon */}
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Legislative" total={234} color="error" icon={'fa6-solid:building-columns'} />
+            <AppWidgetSummary title="Legislative" total={0} color="error" icon={'fa6-solid:building-columns'} />
           </Grid>
           {/* total={234} --in between title and icon */}
 
@@ -55,19 +61,7 @@ export default function DashboardApp() {
             <AppWebsiteVisits
               title="Population"
               subheader="(+43%) than last year"
-              chartLabels={[
-                '2012',
-                '2013',
-                '2014',
-                '2015',
-                '2016',
-                '2017',
-                '2018',
-                '2019',
-                '2020',
-                '2021',
-                '2022',
-              ]}
+              chartLabels={['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022']}
               chartData={[
                 {
                   name: 'Residents',
@@ -101,12 +95,12 @@ export default function DashboardApp() {
                 { label: 'Purok 3B', value: 89 },
                 { label: 'Purok 4', value: 50 },
                 { label: 'Purok 5', value: 107 },
-                { label: 'Purok 6', value: 34},
+                { label: 'Purok 6', value: 34 },
                 { label: 'Purok 7', value: 29 },
                 { label: 'Purok 8', value: 16 },
                 { label: 'Purok 9', value: 19 },
                 { label: 'Purok 10A', value: 33 },
-                { label: 'Purok 11B', value: 10},
+                { label: 'Purok 11B', value: 10 },
                 { label: 'Purok 12', value: 21 },
                 { label: 'Purok 13', value: 17 },
               ]}
