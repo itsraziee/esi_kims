@@ -19,19 +19,18 @@ import { LoadingButton } from '@mui/lab';
 import { createOfficial } from '../../../service/official';
 // ----------------------------------------------------------------------
 
-export default function LegislativeFormCard() {
+export default function SummonUnresolvedFormCard() {
   const navigate = useNavigate();
 
-  const LegislativeFormSchema = Yup.object().shape({
+  const SummonUnresolvedFormSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-     });
+  });
 
   const formik = useFormik({
     initialValues: {
       title: '',
-      
     },
-    validationSchema: LegislativeFormSchema,
+    validationSchema: SummonUnresolvedFormSchema,
     onSubmit: (data) => {
       console.log({ data });
       createOfficial(data)
@@ -50,7 +49,7 @@ export default function LegislativeFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Upload Legislative
+                Upload Unresolved Summon
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
                 <TextField
@@ -62,8 +61,6 @@ export default function LegislativeFormCard() {
                   helperText={touched.firstName && errors.firstName}
                 />
               </Stack>
-
-              
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <Button sx={{ minWidth: 275 }} variant="outlined" component="label">

@@ -1,39 +1,37 @@
 import { Link as RouterLink } from 'react-router-dom';
-// material
+import React from 'react'
 import { Container, Typography, Button, Stack } from '@mui/material';
-// components
 import Page from '../components/Page';
-import { LegislativeList } from '../sections/@dashboard/legislative';
-
-// mock
-import LEGISLATIVE from '../_mock/legislative';
 import Iconify from '../components/Iconify';
-import { useAuth } from '../hooks/useAuth';
-// ----------------------------------------------------------------------
 
-export default function Legislative() {
-  const user = useAuth();
+
+
+
+export default function BlotterResolved() {
   return (
-    <Page title="Legislative">
+    <Page title="Blotter">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Barangay Ordinance
+            Solved Case
           </Typography>
-          {user && (
+          
             <Button
               variant="contained"
               component={RouterLink}
-              to="/dashboard/legislativeForm"
+              to="/dashboard/blotterResolvedForm"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Ordinance
+              Add solved 
             </Button>
-          )}
+          
         </Stack>
 
-        <LegislativeList legislatives={LEGISLATIVE} />
+        
       </Container>
     </Page>
-  );
-}
+
+  )
+  }
+  
+
