@@ -15,6 +15,8 @@ import {
   CardContent,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { useSnackbar } from 'notistack';
+import { signOut, updatePassword } from 'firebase/auth';
 // component
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
@@ -22,6 +24,7 @@ import { updateProfile } from '../service/profile';
 import { useAuth } from '../hooks/useAuth';
 import { useProfile } from '../hooks/useProfile';
 import AuthRequired from '../layouts/auth/AuthRequired';
+import { auth } from '../firebase-init';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -29,22 +32,37 @@ export default function Profile() {
   const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
   const user = useAuth();
   const profile = useProfile(user?.uid);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const ProfileSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    email: Yup.string().email('Email must be a valid email address'),
     password: Yup.string().min(8).matches(passwordRules, { message: 'Please create a stronger password' }),
   });
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
-      email: '',
       password: '',
     },
     validationSchema: ProfileSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      updatePassword(user, values.password)
+        .then(() => {
+          // Update successful.
+          console.log('password updated');
+          enqueueSnackbar('Password updated successfully', { variant: 'success' });
+          signOut(auth).then((res) => {
+            enqueueSnackbar('Logged out successfully', { variant: 'success' });
+          });
+        })
+        .catch((error) => {
+          // An error ocurred
+          console.log('password update failed:', error);
+          enqueueSnackbar('Password update failed', { variant: 'error' });
+          // ...
+        });
+
       return updateProfile(user?.uid, {
         firstName: values.firstName,
         lastName: values.lastName,
@@ -94,16 +112,6 @@ export default function Profile() {
                         helperText={touched.lastName && errors.lastName}
                       />
                     </Stack>
-
-                    <TextField
-                      fullWidth
-                      autoComplete="username"
-                      type="email"
-                      label="Email address"
-                      {...getFieldProps('email')}
-                      error={Boolean(touched.email && errors.email)}
-                      helperText={touched.email && errors.email}
-                    />
 
                     <TextField
                       fullWidth
