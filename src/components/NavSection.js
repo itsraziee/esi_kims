@@ -150,7 +150,7 @@ export default function NavSection({ navConfig, ...other }) {
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {navConfig.map((item) => {
-          if (item?.auth_required && !user) return;
+          if ((item?.auth_required && !user) || (item?.non_auth_required && user)) return;
 
           return <NavItem key={item.title} item={item} active={match} />;
         })}

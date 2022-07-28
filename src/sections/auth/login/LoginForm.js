@@ -9,6 +9,7 @@ import { useSnackbar } from 'notistack';
 // component
 import Iconify from '../../../components/Iconify';
 import { login } from '../../../service/auth';
+import EmailDialog from '../../@dashboard/dialog/EmailDialog';
 
 // ----------------------------------------------------------------------
 
@@ -16,6 +17,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -97,7 +99,7 @@ export default function LoginForm() {
             label="Remember me"
           />
 
-          <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
+          <Link component={RouterLink} variant="subtitle2" to="#" underline="hover" onClick={() => setOpen(true)}>
             Forgot password?
           </Link>
         </Stack>
@@ -105,6 +107,7 @@ export default function LoginForm() {
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           Login
         </LoadingButton>
+        <EmailDialog open={open} setOpen={setOpen} />
       </Form>
     </FormikProvider>
   );
