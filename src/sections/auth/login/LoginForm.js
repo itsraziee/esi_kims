@@ -5,6 +5,7 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { useSnackbar } from 'notistack';
 // component
 import Iconify from '../../../components/Iconify';
 import { login } from '../../../service/auth';
@@ -13,7 +14,7 @@ import { login } from '../../../service/auth';
 
 export default function LoginForm() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -29,9 +30,22 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
-      return login(values.email, values.password).then((res) => {
-        navigate('/dashboard/app', { replace: true });
-      });
+      return login(values.email, values.password)
+        .then((res) => {
+          console.log({ res });
+          if (res) {
+            enqueueSnackbar('Logged in successfully.', {
+              variant: 'success',
+            });
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log({ err });
+          enqueueSnackbar('Invalid credentials.', {
+            variant: 'error',
+          });
+        });
     },
   });
 
