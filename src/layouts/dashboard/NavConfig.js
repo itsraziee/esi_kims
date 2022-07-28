@@ -61,6 +61,7 @@ const navConfig = [
     icon: getIcon('fluent:people-audience-24-filled'),
   },
   {
+    non_auth_required: true,
     title: 'login',
     path: '/login',
     icon: getIcon('eva:lock-fill'),

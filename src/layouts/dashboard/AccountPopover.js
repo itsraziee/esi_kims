@@ -10,6 +10,8 @@ import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import { auth } from '../../firebase-init';
 import account from '../../_mock/account';
+import { useAuth } from '../../hooks/useAuth';
+import { useProfile } from '../../hooks/useProfile';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +26,6 @@ const MENU_OPTIONS = [
     icon: 'eva:person-fill',
     linkTo: 'profile',
   },
-
 ];
 
 // ----------------------------------------------------------------------
@@ -34,6 +35,9 @@ export default function AccountPopover() {
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [open, setOpen] = useState(null);
+
+  const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -70,7 +74,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src={user?.photoURL} alt="photoURL" />
       </IconButton>
 
       <MenuPopover
@@ -89,10 +93,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {`${profile?.firstName} ${profile?.lastName}`}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {user?.email}
           </Typography>
         </Box>
 
