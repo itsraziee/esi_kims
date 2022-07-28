@@ -16,12 +16,12 @@ import ResidentsProfile from './pages/ResidentsProfile';
 import Legislative from './pages/Legislative';
 import DocumentServices from './pages/DocumentServices';
 import Summon from './pages/Summon';
-import OfficialsProfile from'./pages/OfficialsProfile';
+import OfficialsProfile from './pages/OfficialsProfile';
 import Blotter from './pages/Blotter';
 import Officials from './pages/Officials';
 import Demographics from './pages/Demographics';
 import Profile from './pages/Profile';
-
+import LegislativeForm from './pages/LegislativeForm';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -42,9 +42,10 @@ export default function Router() {
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },
         { path: 'official', element: <Officials /> },
-        { path: 'demographics', element: <Demographics />},
-        { path: 'officialsProfile', element: <OfficialsProfile />},
-        { path: 'profile', element: <Profile />}
+        { path: 'demographics', element: <Demographics /> },
+        { path: 'officialsProfile', element: <OfficialsProfile /> },
+        { path: 'profile', element: <Profile /> },
+        { path: 'legislativeForm', element: <LegislativeForm /> },
       ],
     },
     {
