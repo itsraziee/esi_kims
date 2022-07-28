@@ -33,11 +33,8 @@ export default function Profile() {
   const ProfileSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string()
-      .min(8)
-      .matches(passwordRules, { message: 'Please create a stronger password' })
-      .required('Password is required'),
+    email: Yup.string().email('Email must be a valid email address'),
+    password: Yup.string().min(8).matches(passwordRules, { message: 'Please create a stronger password' }),
   });
   const formik = useFormik({
     initialValues: {

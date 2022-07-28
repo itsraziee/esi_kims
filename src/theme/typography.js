@@ -86,6 +86,11 @@ const typography = {
     lineHeight: 22 / 14,
     fontSize: pxToRem(16),
   },
+  subtitle6: {
+    fontWeight: 700,
+    lineHeight: 22 / 14,
+    fontSize: pxToRem(26),
+  },
   body1: {
     lineHeight: 1.5,
     fontSize: pxToRem(16),
