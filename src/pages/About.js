@@ -11,7 +11,7 @@ export default function About() {
   return (
     <Page title="About">
       <Container sx={{ mt: 5, mb: 5 }}>
-        <Typography variant="h4" sx={{ mb: 5, mt: 4}}>
+        <Typography variant="h4" sx={{ mb: 5, mt: 4 }}>
           About
         </Typography>
         <AboutCard />
