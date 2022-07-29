@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Grid, Container, Typography, useTheme } from '@mui/material';
 // components
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
@@ -53,7 +53,8 @@ export default function DashboardApp() {
           {/* total={1723315} --in between title and icon */}
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Legislative" total={0} color="error" icon={'fa6-solid:building-columns'} />
+            <AppWidgetSummary title="Request Document" component={RouterLink} to="/dashboard/RequestDocumentForm"total={0} color="error" icon={'fa6-solid:building-columns'} />
+          
           </Grid>
           {/* total={234} --in between title and icon */}
 
