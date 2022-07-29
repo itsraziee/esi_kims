@@ -36,6 +36,7 @@ import BlotterUnresolvedForm from './pages/BlotterUnresolvedForm';
 import BlotterResolvedForm from './pages/BlotterResolvedForm'; 
 import SummonResolvedForm from './pages/SummonResolvedForm';
 import SummonUnresolvedForm from './pages/SummonUnresolvedForm';
+import RequestDocumentForm from './pages/RequestDocumentForm';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -64,16 +65,19 @@ export default function Router() {
         { path: 'blotterResolved', element: <BlotterResolved /> },
         { path: 'summon-unresolved', element: <SummonUnresolved /> },
         { path: 'summon-resolved', element: <SummonResolved /> },
-        { path: 'documentServices-barangaybirthcertification', element: <BarangayBirthCertification /> },
-        { path: 'documentServices-barangaycertification', element: <BarangayCertification /> },
-        { path: 'documentServices-barangayclearance', element: <BarangayClearance /> },
-        { path: 'documentServices-barangaydeathcertification', element: <BarangayDeathCertification /> },
-        { path: 'documentServices-certificateofresidency', element: <CertificateOfResidency /> },
-        { path: 'documentServices-certificateofindigency', element: <CertificateOfIndigency /> },
         { path: 'blotterUnresolvedForm', element: <BlotterUnresolvedForm /> },
         { path: 'blotterResolvedForm', element: <BlotterResolvedForm /> },
         { path: 'SummonResolvedForm', element: <SummonResolvedForm /> },
         { path: 'SummonUnresolvedForm', element: <SummonUnresolvedForm /> },
+        { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },
+        
+        { path: 'barangaybirthcertification', element: <BarangayBirthCertification /> },
+        { path: 'barangaycertification', element: <BarangayCertification /> },
+        { path: 'barangayclearance', element: <BarangayClearance /> },
+        { path: 'barangaydeathcertification', element: <BarangayDeathCertification /> },
+        { path: 'certificateofresidency', element: <CertificateOfResidency /> },
+        { path: 'certificateofindigency', element: <CertificateOfIndigency /> },
+        
         
       ],
     },
