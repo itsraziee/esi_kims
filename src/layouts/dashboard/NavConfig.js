@@ -68,6 +68,12 @@ const navConfig = [
   },
   {
     auth_required: true,
+    title: 'billing transaction',
+    path: '/dashboard/billingTransaction',
+    icon: getIcon('ic:round-payments'),
+  },
+  {
+    auth_required: true,
     title: 'register',
     path: '/register',
     icon: getIcon('eva:person-add-fill'),

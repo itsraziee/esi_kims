@@ -47,21 +47,23 @@ export default function Profile() {
     },
     validationSchema: ProfileSchema,
     onSubmit: async (values) => {
-      updatePassword(user, values.password)
-        .then(() => {
-          // Update successful.
-          console.log('password updated');
-          enqueueSnackbar('Password updated successfully', { variant: 'success' });
-          signOut(auth).then((res) => {
-            enqueueSnackbar('Logged out successfully', { variant: 'success' });
+      if (values.password) {
+        updatePassword(user, values.password)
+          .then(() => {
+            // Update successful.
+            console.log('password updated');
+            enqueueSnackbar('Password updated successfully', { variant: 'success' });
+            signOut(auth).then((res) => {
+              enqueueSnackbar('Logged out successfully', { variant: 'success' });
+            });
+          })
+          .catch((error) => {
+            // An error ocurred
+            console.log('password update failed:', error);
+            enqueueSnackbar('Password update failed', { variant: 'error' });
+            // ...
           });
-        })
-        .catch((error) => {
-          // An error ocurred
-          console.log('password update failed:', error);
-          enqueueSnackbar('Password update failed', { variant: 'error' });
-          // ...
-        });
+      }
 
       return updateProfile(user?.uid, {
         firstName: values.firstName,

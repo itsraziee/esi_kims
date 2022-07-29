@@ -22,6 +22,7 @@ import Officials from './pages/Officials';
 import Demographics from './pages/Demographics';
 import Profile from './pages/Profile';
 import LegislativeForm from './pages/LegislativeForm';
+import BillingTransaction from './pages/BillingTransaction';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -46,6 +47,7 @@ export default function Router() {
         { path: 'officialsProfile', element: <OfficialsProfile /> },
         { path: 'profile', element: <Profile /> },
         { path: 'legislativeForm', element: <LegislativeForm /> },
+        { path: 'billingTransaction', element: <BillingTransaction /> },
       ],
     },
     {
