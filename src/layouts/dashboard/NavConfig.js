@@ -61,9 +61,16 @@ const navConfig = [
     icon: getIcon('fluent:people-audience-24-filled'),
   },
   {
+    non_auth_required: true,
     title: 'login',
     path: '/login',
     icon: getIcon('eva:lock-fill'),
+  },
+  {
+    auth_required: true,
+    title: 'billing transaction',
+    path: '/dashboard/billingTransaction',
+    icon: getIcon('ic:round-payments'),
   },
   {
     auth_required: true,

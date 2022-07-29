@@ -37,6 +37,7 @@ import BlotterResolvedForm from './pages/BlotterResolvedForm';
 import SummonResolvedForm from './pages/SummonResolvedForm';
 import SummonUnresolvedForm from './pages/SummonUnresolvedForm';
 import RequestDocumentForm from './pages/RequestDocumentForm';
+import BillingTransaction from './pages/BillingTransaction';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -77,8 +78,7 @@ export default function Router() {
         { path: 'barangaydeathcertification', element: <BarangayDeathCertification /> },
         { path: 'certificateofresidency', element: <CertificateOfResidency /> },
         { path: 'certificateofindigency', element: <CertificateOfIndigency /> },
-        
-        
+        { path: 'billingTransaction', element: <BillingTransaction /> },
       ],
     },
     

@@ -105,6 +105,7 @@ export default function RequestDocumentFormCard() {
                   <MenuItem value="certification">Barangay Certification</MenuItem>
                   <MenuItem value="certificate-of-indigency">Certificate of Indigency</MenuItem>
                   <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
+                  <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
                 </Select>
               </FormControl>
 
@@ -169,6 +170,17 @@ export default function RequestDocumentFormCard() {
                     Certificate of Residency Requirements
                   </Typography>
                   <Typography>1. Purok Cerification</Typography>
+                  <Typography>2. Valid ID</Typography>
+                  <Typography>3. Valid ID</Typography>
+                  <Typography>4. Purok Certification</Typography>
+                </Box>
+              )}
+              {formik.values.typeOfDocument === 'tree-planting-certificate' && (
+                <Box>
+                  <Typography sx={{ color: 'gray', mt: -2 }} variant="subtitle4">
+                    Tree Planting Certificate Requirements
+                  </Typography>
+                  <Typography>1. Purok Certification</Typography>
                   <Typography>2. Valid ID</Typography>
                   <Typography>3. Valid ID</Typography>
                   <Typography>4. Purok Certification</Typography>
