@@ -5,15 +5,19 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { useSnackbar } from 'notistack';
 // component
 import Iconify from '../../../components/Iconify';
+import { login } from '../../../service/auth';
+import EmailDialog from '../../@dashboard/dialog/EmailDialog';
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -27,8 +31,23 @@ export default function LoginForm() {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+    onSubmit: async (values) => {
+      return login(values.email, values.password)
+        .then((res) => {
+          console.log({ res });
+          if (res) {
+            enqueueSnackbar('Logged in successfully.', {
+              variant: 'success',
+            });
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log({ err });
+          enqueueSnackbar('Invalid credentials.', {
+            variant: 'error',
+          });
+        });
     },
   });
 
@@ -47,6 +66,7 @@ export default function LoginForm() {
             autoComplete="username"
             type="email"
             label="Email address"
+            name="email"
             {...getFieldProps('email')}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
@@ -57,6 +77,7 @@ export default function LoginForm() {
             autoComplete="current-password"
             type={showPassword ? 'text' : 'password'}
             label="Password"
+            name="password"
             {...getFieldProps('password')}
             InputProps={{
               endAdornment: (
@@ -78,7 +99,7 @@ export default function LoginForm() {
             label="Remember me"
           />
 
-          <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
+          <Link component={RouterLink} variant="subtitle2" to="#" underline="hover" onClick={() => setOpen(true)}>
             Forgot password?
           </Link>
         </Stack>
@@ -86,6 +107,7 @@ export default function LoginForm() {
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           Login
         </LoadingButton>
+        <EmailDialog open={open} setOpen={setOpen} />
       </Form>
     </FormikProvider>
   );

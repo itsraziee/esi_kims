@@ -8,6 +8,7 @@ import Iconify from '../../components/Iconify';
 import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import NotificationsPopover from './NotificationsPopover';
+import { useAuth } from '../../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +41,7 @@ DashboardNavbar.propTypes = {
 };
 
 export default function DashboardNavbar({ onOpenSidebar }) {
+  const user = useAuth();
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -50,8 +52,8 @@ export default function DashboardNavbar({ onOpenSidebar }) {
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
           <Searchbar />
-          <NotificationsPopover />
-          <AccountPopover />
+          {user && <NotificationsPopover />}
+          {user && <AccountPopover />}
         </Stack>
       </ToolbarStyle>
     </RootStyle>
