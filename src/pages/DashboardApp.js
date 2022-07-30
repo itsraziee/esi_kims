@@ -130,19 +130,23 @@ export default function DashboardApp() {
               list={[
                 {
                   name: 'About',
-                  icon: <Iconify icon={'emojione-monotone:information'} color="#1877F2" width={32} height={32} />,
+                  icon: <Iconify icon={'emojione-monotone:information'} color="#1877F2" 
+                  url="/dashboard/about" width={32} height={32} />,
                 },
                 {
                   name: 'Legislative',
-                  icon: <Iconify icon={'fa6-solid:building-columns'} color="#DF3E30" width={32} height={32} />,
+                  icon: <Iconify icon={'fa6-solid:building-columns'} color="#DF3E30" 
+                  url="/dashboard/legislative" width={32} height={32} />,
                 },
                 {
                   name: 'Officials',
-                  icon: <Iconify icon={'fluent:people-community-28-filled'} color="#006097" width={32} height={32} />,
+                  icon: <Iconify icon={'fluent:people-community-28-filled'} color="#006097" 
+                  url="/dashboard/officials" width={32} height={32} />,
                 },
                 {
                   name: 'Reference Number',
-                  icon: <Iconify icon={'fluent:book-number-16-filled'} color="#1C9CEA" width={32} height={32} />,
+                  icon: <Iconify icon={'fluent:book-number-16-filled'} color="#1C9CEA" 
+                  url="/dashboard/documentServices" width={32} height={32} />,
                 },
               ]}
             />

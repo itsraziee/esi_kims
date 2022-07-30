@@ -12,12 +12,13 @@ AppTrafficBySite.propTypes = {
   list: PropTypes.array.isRequired,
 };
 
-export default function AppTrafficBySite({ title, subheader, list, ...other }) {
+export default function AppTrafficBySite({ title, subheader, list, url = null, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
 
       <CardContent>
+      <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
         <Box
           sx={{
             display: 'grid',
@@ -36,7 +37,8 @@ export default function AppTrafficBySite({ title, subheader, list, ...other }) {
               </Typography>
             </Paper>
           ))}
-        </Box>
+          </Box>
+          </Link>
       </CardContent>
     </Card>
   );
