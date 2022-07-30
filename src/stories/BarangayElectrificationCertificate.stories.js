@@ -2,7 +2,7 @@ import React from 'react';
 import { default as BarangayElectrificationCertificateComponent } from '../sections/documents/BarangayElectrificationCertificate';
 
 export default {
-  title: 'Documents/Barangay Certification',
+  title: 'Documents/Barangay Electrification Certificate',
   component: BarangayElectrificationCertificateComponent,
 };
 
