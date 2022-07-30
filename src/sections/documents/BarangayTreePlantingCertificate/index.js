@@ -3,7 +3,19 @@ import { fontWeight, style } from '@mui/system';
 import React from 'react';
 import styles from './BarangayTreePlantingCertificate.module.css';
 
-export default function BarangayTreePlantingCertificate({ name, day, month, year, age, purok, ctc, date, bearer, secretary, captain}) {
+export default function BarangayTreePlantingCertificate({
+  name,
+  day,
+  month,
+  year,
+  age,
+  purok,
+  ctc,
+  date,
+  bearer,
+  secretary,
+  captain,
+}) {
   return (
     <Box className={styles.c7}>
       <p className={styles.c3}>
@@ -179,20 +191,16 @@ export default function BarangayTreePlantingCertificate({ name, day, month, year
       <p className={(styles.c1, styles.c4)}>
         <span className={styles.c0}></span>
       </p>
-      <p className={styles.c1}>
-        <span className={styles.c2}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
-        <strong>
+      <div style={{ float: 'right' }}>
+        <p className={styles.c1} style={{ textAlign: 'center' }}>
+          <strong>
             <span className={styles.underline}>{bearer}</span>
-          </strong>{' '}
-      </p>
-      <p className={styles.c1}>
-        <span className={styles.c0}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp; Bearer
-        </span>
-      </p>
+          </strong>
+        </p>
+        <p className={styles.c4} style={{ textAlign: 'center' }}>
+          <span className={styles.c0}>Bearer</span>
+        </p>
+      </div>
       <p className={(styles.c1, styles.c4)}>
         <span className={styles.c0}></span>
       </p>
@@ -206,18 +214,23 @@ export default function BarangayTreePlantingCertificate({ name, day, month, year
         <span className={styles.c0}></span>
       </p>
       <p className={styles.c1}>
-        <span className={styles.c5}>CTC NO: <strong>
+        <span className={styles.c5}>
+          CTC NO:{' '}
+          <strong>
             <span className={styles.underline}>{ctc}</span>
-          </strong>{' '}</span>
-      </p>
-      
-      <p className={styles.c1}>
-        <span className={styles.c5}>DATE: <strong>
-            <span className={styles.underline}>{date}</span>
-          </strong>{' '}</span>
+          </strong>{' '}
+        </span>
       </p>
 
-      
+      <p className={styles.c1}>
+        <span className={styles.c5}>
+          DATE:{' '}
+          <strong>
+            <span className={styles.underline}>{date}</span>
+          </strong>{' '}
+        </span>
+      </p>
+
       <p className={styles.c1}>
         <span className={styles.c5}>PLACE: KIMANAIT, PANGANTUCAN, BUKIDNON</span>
       </p>
@@ -244,12 +257,17 @@ export default function BarangayTreePlantingCertificate({ name, day, month, year
         </p>
 
         <tr>
-          <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>
-            <span className={styles.underline}>{secretary}</span>
-          </strong>{' '}</th>
-          <th style={{ paddingLeft: '250px' }}><strong>
-            <span className={styles.underline}>{captain}</span>
-          </strong>{' '}</th>
+          <th>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <strong>
+              <span className={styles.underline}>{secretary}</span>
+            </strong>{' '}
+          </th>
+          <th style={{ paddingLeft: '250px' }}>
+            <strong>
+              <span className={styles.underline}>{captain}</span>
+            </strong>{' '}
+          </th>
         </tr>
         <tr>
           <td style={{ textAlign: 'center' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barangay Secretay</td>
