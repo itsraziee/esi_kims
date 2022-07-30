@@ -6,16 +6,12 @@ import Page from '../components/Page';
 import Iconify from '../components/Iconify';
 // sections
 import {
-  // AppTasks,
-  // AppNewsUpdate,
-  // AppOrderTimeline,
+  AppNewsUpdate,
   AppCurrentVisits,
   AppWebsiteVisits,
   AppTrafficBySite,
   AppWidgetSummary,
   NewsUpdateCard,
-  // AppCurrentSubject,
-  // AppConversionRates,
 } from '../sections/@dashboard/app';
 import { useAuth } from '../hooks/useAuth';
 import NEWSUPDATES from '../_mock/newsUpdate';
@@ -37,27 +33,27 @@ export default function DashboardApp() {
           {user && (
             <>
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Document Services" total={0} icon={'ion:documents'} />
+                <AppWidgetSummary title="Billing Transaction" total={0} url="/dashboard/billingTransaction" icon={'ic:round-payments'} />
               </Grid>
-              {/* total={714000} --in between title and icon */}
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Blotter" total={0} color="info" icon={'icon-park-solid:image-files'} />
+                <AppWidgetSummary title="Blotter" total={0} color="info" url="/dashboard/blotter" icon={'icon-park-solid:image-files'} />
               </Grid>
-              {/* total={1352831} --in between title and icon */}
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Summon" total={0} color="warning" icon={'fa6-solid:file-pen'} />
+                <AppWidgetSummary title="Summon" total={0} color="warning" url="/dashboard/summon" icon={'fa6-solid:file-pen'} />
               </Grid>
             </>
           )}
-          {/* total={1723315} --in between title and icon */}
 
           <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Request Document" component={RouterLink} to="/dashboard/RequestDocumentForm"total={0} color="error" icon={'fa6-solid:building-columns'} />
-          
+            <AppWidgetSummary
+              title="Document Services"
+              url="/dashboard/documentServices"
+              total={0}
+              icon={'ion:documents'}
+            />
           </Grid>
-          {/* total={234} --in between title and icon */}
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
@@ -116,38 +112,6 @@ export default function DashboardApp() {
             />
           </Grid>
 
-          {/* <Grid item xs={12} md={6} lg={8}>
-            <AppConversionRates
-              title="Revenue"
-              subheader="(+43%) than last year"
-              chartData={[
-                { label: 'Italy', value: 400 },
-                { label: 'Japan', value: 430 },
-                { label: 'China', value: 448 },
-                { label: 'Canada', value: 470 },
-                { label: 'France', value: 540 },
-                { label: 'Germany', value: 580 },
-                { label: 'South Korea', value: 690 },
-                { label: 'Netherlands', value: 1100 },
-                { label: 'United States', value: 1200 },
-                { label: 'United Kingdom', value: 1380 },
-              ]}
-            />
-          </Grid> */}
-
-          {/* <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentSubject
-              title="Current Subject"
-              chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
-              chartData={[
-                { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-                { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-                { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
-              ]}
-              chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
-            />
-          </Grid> */}
-
           <Grid item xs={12} md={6} lg={8}>
             <NewsUpdateCard
               title="News Update"
@@ -167,64 +131,33 @@ export default function DashboardApp() {
             />
           </Grid> */}
 
-          {/* <Grid item xs={12} md={6} lg={4}>
-            <AppOrderTimeline
-              title="Order Timeline"
-              list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: [
-                  '1983, orders, $4220',
-                  '12 Invoices have been paid',
-                  'Order #37745 from September',
-                  'New order placed #XF-2356',
-                  'New order placed #XF-2346',
-                ][index],
-                type: `order${index + 1}`,
-                time: faker.date.past(),
-              }))}
-            />
-          </Grid> */}
-
           <Grid item xs={12} md={6} lg={4}>
             <AppTrafficBySite
               title="Others"
               list={[
                 {
                   name: 'About',
-                  // value: 323234,
-                  icon: <Iconify icon={'emojione-monotone:information'} color="#1877F2" width={32} height={32} />,
+                  icon: <Iconify icon={'emojione-monotone:information'} color="#1877F2" 
+                  url="/dashboard/about" width={32} height={32} />,
                 },
                 {
                   name: 'Legislative',
-                  // value: 341212,
-                  icon: <Iconify icon={'fa6-solid:building-columns'} color="#DF3E30" width={32} height={32} />,
+                  icon: <Iconify icon={'fa6-solid:building-columns'} color="#DF3E30" 
+                  url="/dashboard/legislative" width={32} height={32} />,
                 },
                 {
                   name: 'Officials',
-                  // value: 411213,
-                  icon: <Iconify icon={'fluent:people-community-28-filled'} color="#006097" width={32} height={32} />,
+                  icon: <Iconify icon={'fluent:people-community-28-filled'} color="#006097" 
+                  url="/dashboard/officials" width={32} height={32} />,
                 },
                 {
                   name: 'Reference Number',
-                  // value: 443232,
-                  icon: <Iconify icon={'fluent:book-number-16-filled'} color="#1C9CEA" width={32} height={32} />,
+                  icon: <Iconify icon={'fluent:book-number-16-filled'} color="#1C9CEA" 
+                  url="/dashboard/documentServices" width={32} height={32} />,
                 },
               ]}
             />
           </Grid>
-
-          {/* <Grid item xs={12} md={6} lg={8}>
-            <AppTasks
-              title="Tasks"
-              list={[
-                { id: '1', label: 'Create FireStone Logo' },
-                { id: '2', label: 'Add SCSS and JS files if required' },
-                { id: '3', label: 'Stakeholder Meeting' },
-                { id: '4', label: 'Scoping & Estimations' },
-                { id: '5', label: 'Sprint Showcase' },
-              ]}
-            />
-          </Grid> */}
         </Grid>
       </Container>
     </Page>

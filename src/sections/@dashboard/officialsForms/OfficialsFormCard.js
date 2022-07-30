@@ -34,10 +34,11 @@ export default function OfficialsFormCard() {
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
-    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Age required'),
+    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone Number required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     address: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
+    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW']).required('Position is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     numberOfChildren: Yup.number()
@@ -97,6 +98,7 @@ export default function OfficialsFormCard() {
       occupation: '',
       address: '',
       status: 'active',
+      position: '',
       spouse: '',
       spouseAddress: '',
       numberOfChildren: '',
@@ -267,7 +269,7 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="phone_number"
-                  label="phoneNumber number"
+                  label="Phone Number"
                   id="outlined-start-adornment"
                   {...getFieldProps('phoneNumber')}
                   error={Boolean(touched.phoneNumber && errors.phoneNumber)}
@@ -311,6 +313,26 @@ export default function OfficialsFormCard() {
                   >
                     <MenuItem value="active">Active</MenuItem>
                     <MenuItem value="inactive">Inactive</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <FormControl helperText={touched.position && errors.position} fullWidth>
+                  <InputLabel id="position-select-label">Position</InputLabel>
+                  <Select
+                    name="postion"
+                    labelId="position-select-label"
+                    id="position-select"
+                    value={formik.values.position}
+                    label="Position"
+                    onChange={handleChange}
+                    {...getFieldProps('position')}
+                    error={Boolean(touched.position && errors.position)}
+                  >
+                    <MenuItem value="official">Barangay Official</MenuItem>
+                    <MenuItem value="CVO">CVO</MenuItem>
+                    <MenuItem value="BSPO">BSPO</MenuItem>
+                    <MenuItem value="BNS">BNS</MenuItem>
+                    <MenuItem value="BHW">BHW</MenuItem>
                   </Select>
                 </FormControl>
               </Stack>

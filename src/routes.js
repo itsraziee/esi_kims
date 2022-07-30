@@ -38,6 +38,12 @@ import SummonResolvedForm from './pages/SummonResolvedForm';
 import SummonUnresolvedForm from './pages/SummonUnresolvedForm';
 import RequestDocumentForm from './pages/RequestDocumentForm';
 import BillingTransaction from './pages/BillingTransaction';
+import BHW from './pages/BHW';
+import BNS from './pages/BNS';
+import BO from './pages/BO';
+import BSPO from './pages/BSPO';
+import CVO from './pages/CVO';
+import PL from './pages/PL';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -79,6 +85,13 @@ export default function Router() {
         { path: 'certificateofresidency', element: <CertificateOfResidency /> },
         { path: 'certificateofindigency', element: <CertificateOfIndigency /> },
         { path: 'billingTransaction', element: <BillingTransaction /> },
+        { path: 'bhw', element: <BHW /> },
+        { path: 'bns', element: <BNS /> },
+        { path: 'bo', element: <BO /> },
+        { path: 'bspo', element: <BSPO /> },
+        { path: 'cvo', element: <CVO /> },
+        { path: 'pl', element: <PL />},
+        
       ],
     },
     
@@ -94,5 +107,6 @@ export default function Router() {
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
+
   ]);
 }

@@ -6,12 +6,13 @@ import Page from '../components/Page';
 import { DocumentServicesList } from '../sections/@dashboard/documentServices';
 // mock
 import DOCUMENTSERVICES from '../_mock/documentServices';
+import NonAuthRequired from '../layouts/auth/NonAuthRequired';
 
 // ----------------------------------------------------------------------
 
 export default function Legislative() {
   return (
-    <AuthRequired>
+    <NonAuthRequired>
       <Page title="Document Services">
         <Container>
           <Typography variant="h4" sx={{ mb: 5 }}>
@@ -20,6 +21,6 @@ export default function Legislative() {
           <DocumentServicesList documentServices={DOCUMENTSERVICES} />
         </Container>
       </Page>
-    </AuthRequired>
+    </NonAuthRequired>
   );
 }
