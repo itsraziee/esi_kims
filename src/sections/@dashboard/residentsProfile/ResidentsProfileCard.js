@@ -27,10 +27,11 @@ export default function ResidentsProfileCard() {
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
-    sex: Yup.string().oneOf(['male', 'female']).required(),
-    dateOfBirth: Yup.string().required('Date of Birth is required'),
-    civilStatus: Yup.string().required('Civil Status is required'),
+    sex: Yup.string().oneOf(['male', 'female']).required('Required'),
+    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
+    dateOfBirth: Yup.string().required("Date of Birth is required"),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
+    address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
@@ -39,19 +40,22 @@ export default function ResidentsProfileCard() {
     address: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
-    spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
+    spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse Address is required'),
     numberOfChildren: Yup.number()
       .typeError('Number of Children must be a number')
       .integer('Number of Children must be an integer')
       .required('Number of Children is required'),
     fathersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Name is required'),
     fathersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    fathersAddress: Yup.string().required('Address is required'),
+    fathersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Address is required'),
     mothersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Name is required'),
     mothersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    mothersAddress: Yup.string().required('Address is required'),
-    elementarySchool: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of School is required'),
-    elementaryAddress: Yup.string()
+    mothersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Address is required'),
+    elementaryNameOfSchool: Yup.string()
+      .min(2, 'Too Short!')
+      .max(100, 'Too Long!')
+      .required('Name of School is required'),
+    elementaryAddressOfSchool: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Address of School is required'),
