@@ -22,6 +22,7 @@ const navConfig = [
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
+    non_auth_required: true,
     title: 'document services',
     path: '/dashboard/documentServices',
     icon: getIcon('ion:documents'),

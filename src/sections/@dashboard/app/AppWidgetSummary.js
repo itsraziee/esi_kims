@@ -31,7 +31,7 @@ AppWidgetSummary.propTypes = {
 
 export default function AppWidgetSummary({ title, icon, color = 'primary', sx, url = null, ...other }) {
   return (
-    <Link sx={{ textDecoration: 'none' }} href={url} color="#7A0C2E">
+    <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
         sx={{
           py: 5,

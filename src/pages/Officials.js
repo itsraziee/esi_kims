@@ -1,89 +1,73 @@
-import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { Container, Typography, Grid } from '@mui/material';
 // components
 import Page from '../components/Page';
-import Iconify from '../components/Iconify';
-import { OfficialsCard, BnsCard, CvoCard, BspoCard } from '../sections/@dashboard/officials';
-
-// mock
-import POSTS from '../_mock/officials';
-import BNSPOSTS from '../_mock/bns';
-import CVOPOSTS from '../_mock/cvo';
-import BSPOPOSTS from '../_mock/bspo';
-import { useAuth } from '../hooks/useAuth';
-
-// ----------------------------------------------------------------------
+import { OfficialsWidget } from '../sections/@dashboard/officials';
 
 // ----------------------------------------------------------------------
 
 export default function Officials() {
-  const user = useAuth();
   return (
     <Page title="Officials">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Officials
-          </Typography>
-          {user && (
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/dashboard/officialsProfile"
-              startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              Add Official
-            </Button>
-          )}
-        </Stack>
-
+        <Typography variant="h4" sx={{ mb: 5 }}>
+          Officials
+        </Typography>
         <Grid container spacing={3}>
-          {POSTS.map((post) => (
-            <OfficialsCard key={post.id} post={post} />
-          ))}
-        </Grid>
-      </Container>
-
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mt: 5 }} gutterBottom>
-            Civilian Volunteer Officers (CVOs)
-          </Typography>
-        </Stack>
-
-        <Grid container spacing={3}>
-          {CVOPOSTS.map((post) => (
-            <CvoCard key={post.id} post={post} />
-          ))}
-        </Grid>
-      </Container>
-
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mt: 5 }} gutterBottom>
-            Barangay Service Point Officers (BSPOs)
-          </Typography>
-        </Stack>
-
-        <Grid container spacing={3}>
-          {BSPOPOSTS.map((post) => (
-            <BspoCard key={post.id} post={post} />
-          ))}
-        </Grid>
-      </Container>
-
-      <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mt: 5 }} gutterBottom>
-            Barangay Health Worker (BHW)
-          </Typography>
-        </Stack>
-
-        <Grid container spacing={3}>
-          {BNSPOSTS.map((post) => (
-            <BnsCard key={post.id} post={post} />
-          ))}
+          <Grid item xs={12} sm={6} md={4}>
+            <OfficialsWidget
+              title="Barangay Officials"
+              total={0}
+              color="warning"
+              url="/dashboard/bo"
+              icon={'icon-park-solid:building-two'}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <OfficialsWidget
+              title="Barangay Nutrition Scholar"
+              total={0}
+              color="warning"
+              url="/dashboard/bns"
+              icon={'icon-park-solid:building-two'}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <OfficialsWidget
+              title="Barangay Service Point Officer"
+              total={0}
+              color="warning"
+              url="/dashboard/bspo"
+              icon={'icon-park-solid:building-two'}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <OfficialsWidget
+              title="Civilian Volunteer Organization"
+              total={0}
+              color="warning"
+              url="/dashboard/cvo"
+              icon={'icon-park-solid:building-two'}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <OfficialsWidget
+              title="Barangay Health Worker"
+              total={0}
+              color="warning"
+              url="/dashboard/bhw"
+              icon={'icon-park-solid:building-two'}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <OfficialsWidget
+              title="Purok Leaders"
+              total={0}
+              color="warning"
+              url="/dashboard/pl"
+              icon={'icon-park-solid:building-two'}
+            />
+          </Grid>
         </Grid>
       </Container>
     </Page>

@@ -21,16 +21,15 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-ListOfPurokWidget.propTypes = {
+OfficialsWidget.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
   sx: PropTypes.object,
 };
 
-export default function ListOfPurokWidget({ title, description, icon, color, sx, url = null, ...other }) {
+export default function OfficialsWidget({ title, icon, color = 'primary', sx, url = null, ...other }) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
@@ -58,10 +57,6 @@ export default function ListOfPurokWidget({ title, description, icon, color, sx,
         </IconWrapperStyle>
         <Typography variant="subtitle4" sx={{ opacity: 0.72 }}>
           {title}
-        </Typography>
-        <br />
-        <Typography variant="subtitle7" sx={{ opacity: 0.72 }}>
-          {description}
         </Typography>
       </Card>
     </Link>
