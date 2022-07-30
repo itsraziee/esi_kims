@@ -26,7 +26,7 @@ export default function BarangayElectrificationCertificate({
             width: '102.5px',
             height: '100.23px',
             WebkitTransform: 'rotate(0rad) translateZ(0px)',
-            float: 'left',
+            float: 'right',
           }}
         >
           <img
@@ -53,7 +53,7 @@ export default function BarangayElectrificationCertificate({
             WebkitTransform: 'rotate(0rad) translateZ(0px)',
             width: '103px',
             height: '98.52px',
-            float: 'right',
+            float: 'left',
           }}
         >
           <img
