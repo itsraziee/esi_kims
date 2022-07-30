@@ -20,22 +20,22 @@ DocumentServicesCard.propTypes = {
   documentService: PropTypes.object,
 };
 
-export default function DocumentServicesCard({ documentService }) {
-  const { title, cover  } = documentService;
+export default function DocumentServicesCard({ url = null, documentService }) {
+  const { title, cover } = documentService;
 
   return (
-    <Card>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
-        <DocumentServicesImgStyle alt={title} src={cover} />
-      </Box>
+    <Link sx={{ textDecoration: 'none' }} href={url} color="#7A0C2E">
+      <Card>
+        <Box sx={{ pt: '100%', position: 'relative' }}>
+          <DocumentServicesImgStyle alt={title} src={cover} />
+        </Box>
 
-      <Stack spacing={-1} sx={{ p: 3 }}>
-        <Link to="#" color="inherit" underline="hover" component={RouterLink}>
-          <Typography variant="subtitle4" noWrap>
-            {title}
-          </Typography>
-        </Link>
-      </Stack>
-    </Card>
+        <Stack spacing={-1} sx={{ p: 3 }}>
+            <Typography variant="subtitle4" noWrap>
+              {title}
+            </Typography>
+        </Stack>
+      </Card>
+    </Link>
   );
 }

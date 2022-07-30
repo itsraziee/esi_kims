@@ -21,7 +21,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-AppWidgetSummary.propTypes = {
+OfficialsWidget.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
@@ -29,7 +29,7 @@ AppWidgetSummary.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AppWidgetSummary({ title, icon, color = 'primary', sx, url = null, ...other }) {
+export default function OfficialsWidget({ title, icon, color = 'primary', sx, url = null, ...other }) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
@@ -55,7 +55,7 @@ export default function AppWidgetSummary({ title, icon, color = 'primary', sx, u
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle>
-        <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+        <Typography variant="subtitle4" sx={{ opacity: 0.72 }}>
           {title}
         </Typography>
       </Card>
