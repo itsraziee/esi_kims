@@ -21,15 +21,16 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-AppWidgetSummary.propTypes = {
+ListOfPurokWidget.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   total: PropTypes.number.isRequired,
   sx: PropTypes.object,
 };
 
-export default function AppWidgetSummary({ title, icon, color = 'primary', sx, url = null, ...other }) {
+export default function ListOfPurokWidget({ title, description, icon, color = 'primary', sx, url = null, ...other }) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#7A0C2E">
       <Card
@@ -55,8 +56,12 @@ export default function AppWidgetSummary({ title, icon, color = 'primary', sx, u
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle>
-        <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+        <Typography variant="subtitle4" sx={{ opacity: 0.72 }}>
           {title}
+        </Typography>
+        <br />
+        <Typography variant="subtitle7" sx={{ opacity: 0.72 }}>
+          {description}
         </Typography>
       </Card>
     </Link>
