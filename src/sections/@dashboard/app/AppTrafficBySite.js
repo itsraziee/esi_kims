@@ -1,6 +1,6 @@
 // @mui
 import PropTypes from 'prop-types';
-import { Box, Card, Paper, Typography, CardHeader, CardContent } from '@mui/material';
+import { Box, Card, Paper, Link, Typography, CardHeader, CardContent } from '@mui/material';
 // utils
 // import { fShortenNumber } from '../../../utils/formatNumber';
 
@@ -16,9 +16,9 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
-
-      <CardContent>
       <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
+      <CardContent>
+      
         <Box
           sx={{
             display: 'grid',
@@ -38,8 +38,9 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
             </Paper>
           ))}
           </Box>
-          </Link>
-      </CardContent>
+         
+        </CardContent>
+        </Link>
     </Card>
   );
 }
