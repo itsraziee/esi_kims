@@ -29,7 +29,7 @@ export default function ResidentsProfileCard() {
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Required'),
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
-    dateOfBirth: Yup.string().required("Date of Birth is required"),
+    dateOfBirth: Yup.string().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
@@ -45,6 +45,24 @@ export default function ResidentsProfileCard() {
       .typeError('Number of Children must be a number')
       .integer('Number of Children must be an integer')
       .required('Number of Children is required'),
+    purok: Yup.string()
+      .oneOf([
+        'purok1',
+        'purok2',
+        'purok3a',
+        'purok3b',
+        'purok4',
+        'purok5',
+        'purok6',
+        'purok7',
+        'purok8',
+        'purok9',
+        'purok10a',
+        'purok11b',
+        'purok12',
+        'purok13',
+      ])
+      .required('Purok is required'),
     fathersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Name is required'),
     fathersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     fathersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Address is required'),
@@ -105,6 +123,7 @@ export default function ResidentsProfileCard() {
       tribe: '',
       spouseAddress: '',
       numberOfChildren: '',
+      purok: '',
       fathersName: '',
       fathersOccupation: '',
       fathersAddress: '',
@@ -272,7 +291,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="phone_number"
-                  label="phoneNumber number"
+                  label="Phone Number"
                   id="outlined-start-adornment"
                   {...getFieldProps('phoneNumber')}
                   error={Boolean(touched.phoneNumber && errors.phoneNumber)}
@@ -356,6 +375,34 @@ export default function ResidentsProfileCard() {
                   error={Boolean(touched.numberOfChildren && errors.numberOfChildren)}
                   helperText={touched.numberOfChildren && errors.numberOfChildren}
                 />
+
+                <FormControl helperText={touched.purok && errors.purok} fullWidth>
+                  <InputLabel id="purok-select-label">Purok</InputLabel>
+                  <Select
+                    name="purok"
+                    labelId="purok-select-label"
+                    id="purok-select"
+                    value={formik.values.purok}
+                    label="Purok"
+                    onChange={handleChange}
+                    {...getFieldProps('purok')}
+                    error={Boolean(touched.purok && errors.purok)}
+                  >
+                    <MenuItem value="purok1">Purok 1</MenuItem>
+                    <MenuItem value="purok2">Purok 2</MenuItem>
+                    <MenuItem value="purok3a">Purok 3A</MenuItem>
+                    <MenuItem value="purok4">Purok 4</MenuItem>
+                    <MenuItem value="purok5">Purok 5</MenuItem>
+                    <MenuItem value="purok6">Purok 6</MenuItem>
+                    <MenuItem value="purok7">Purok 7</MenuItem>
+                    <MenuItem value="purok8">Purok 8</MenuItem>
+                    <MenuItem value="purok9">Purok 9</MenuItem>
+                    <MenuItem value="purok10a">Purok 10A</MenuItem>
+                    <MenuItem value="purok11b">Purok 11B</MenuItem>
+                    <MenuItem value="purok12">Purok 12</MenuItem>
+                    <MenuItem value="purok13">Purok 13</MenuItem>
+                  </Select>
+                </FormControl>
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

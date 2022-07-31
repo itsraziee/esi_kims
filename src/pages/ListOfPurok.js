@@ -1,18 +1,33 @@
+import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Container, Typography, Grid } from '@mui/material';
+import { Container, Typography, Grid, Stack, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
+import Iconify from '../components/Iconify';
 import { ListOfPurokWidget } from '../sections/@dashboard/listOfPurok';
-
+import { useAuth } from '../hooks/useAuth';
 // ----------------------------------------------------------------------
 
 export default function PurokList() {
+  const user = useAuth();
   return (
     <Page title="List Of Purok">
       <Container>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4" sx={{ mb: 5 }}>
           List of Purok
-        </Typography>
+          </Typography>
+          {user && (
+        <Button
+              variant="contained"
+              component={RouterLink}
+              to="/dashboard/residentsProfile"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+            >
+              New Residents
+            </Button>
+            )}
+          </Stack>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
             <ListOfPurokWidget

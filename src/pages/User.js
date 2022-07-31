@@ -141,14 +141,7 @@ export default function User() {
             <Typography variant="h4" gutterBottom>
               Residents
             </Typography>
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/dashboard/residentsProfile"
-              startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              New Residents
-            </Button>
+           
           </Stack>
 
           <Card>
