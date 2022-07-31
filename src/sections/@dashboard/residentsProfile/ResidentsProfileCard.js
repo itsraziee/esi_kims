@@ -31,7 +31,6 @@ export default function ResidentsProfileCard() {
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     dateOfBirth: Yup.string().required("Date of Birth is required"),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
-    address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
@@ -40,6 +39,7 @@ export default function ResidentsProfileCard() {
     address: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
+    tribe: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Tribe is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse Address is required'),
     numberOfChildren: Yup.number()
       .typeError('Number of Children must be a number')
@@ -90,9 +90,9 @@ export default function ResidentsProfileCard() {
       lastName: '',
       officialAddress: '',
       age: '',
-      sex: 'male',
+      sex: '',
       dateOfBirth: '',
-      civilStatus: 'single',
+      civilStatus: '',
       citizenship: '',
       religion: '',
       height: '',
@@ -100,8 +100,9 @@ export default function ResidentsProfileCard() {
       phoneNumber: '',
       occupation: '',
       address: '',
-      status: 'active',
+      status: '',
       spouse: '',
+      tribe: '',
       spouseAddress: '',
       numberOfChildren: '',
       fathersName: '',
@@ -317,6 +318,15 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="inactive">Inactive</MenuItem>
                   </Select>
                 </FormControl>
+
+                <TextField
+                  fullWidth
+                  name="tribe"
+                  label="Tribe"
+                  {...getFieldProps('tribe')}
+                  error={Boolean(touched.tribe && errors.tribe)}
+                  helperText={touched.tribe && errors.tribe}
+                />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
