@@ -4,7 +4,7 @@ import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
-import { BspoCard } from '../sections/@dashboard/officials';
+import { BhwCard } from '../sections/@dashboard/officials';
 
 // mock
 import BHWPOSTS from '../_mock/bhw';
@@ -37,7 +37,7 @@ export default function BHW() {
 
         <Grid container spacing={3}>
           {BHWPOSTS.map((post) => (
-            <bhwCard key={post.id} post={post} />
+            <BhwCard key={post.id} post={post} />
           ))}
         </Grid>
         </Container>

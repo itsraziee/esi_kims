@@ -4,7 +4,7 @@ import { Grid, Button, Container, Stack, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
-import { BspoCard } from '../sections/@dashboard/officials';
+import { PurokLeadersCard } from '../sections/@dashboard/officials';
 
 // mock
 import PLPOSTS from '../_mock/pl';
@@ -37,7 +37,7 @@ export default function PL() {
 
         <Grid container spacing={3}>
           {PLPOSTS.map((post) => (
-            <plCard key={post.id} post={post} />
+            <PurokLeadersCard key={post.id} post={post} />
           ))}
         </Grid>
       </Container>

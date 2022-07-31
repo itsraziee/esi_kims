@@ -14,58 +14,52 @@ export default function Officials() {
           Officials
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={8} md={3}>
             <OfficialsWidget
               title="Barangay Officials"
               total={0}
-              color="warning"
               url="/dashboard/bo"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Nutrition Scholar"
               total={0}
-              color="warning"
               url="/dashboard/bns"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Service Point Officer"
               total={0}
-              color="warning"
               url="/dashboard/bspo"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Civilian Volunteer Organization"
               total={0}
-              color="warning"
               url="/dashboard/cvo"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Health Worker"
               total={0}
-              color="warning"
               url="/dashboard/bhw"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Purok Leaders"
               total={0}
-              color="warning"
               url="/dashboard/pl"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
         </Grid>
