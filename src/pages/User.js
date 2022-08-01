@@ -152,7 +152,7 @@ export default function User() {
                 <Table>
                   <UserListHead
                     order={order}
-                    orderBy={orderBy}
+                    ord erBy={orderBy}
                     headLabel={TABLE_HEAD}
                     rowCount={USERLIST.length}
                     numSelected={selected.length}
