@@ -33,27 +33,39 @@ export default function DashboardApp() {
           {user && (
             <>
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Billing Transaction" total={0} url="/dashboard/billingTransaction" icon={'ic:round-payments'} />
+                <AppWidgetSummary
+                  title="Billing Transaction"
+                  total={0}
+                  url="/dashboard/billingTransaction"
+                  icon={'ic:round-payments'}
+                />
               </Grid>
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Blotter" total={0} color="info" url="/dashboard/blotter" icon={'icon-park-solid:image-files'} />
+                <AppWidgetSummary
+                  title="Blotter"
+                  total={0}
+                  color="info"
+                  url="/dashboard/blotter"
+                  icon={'icon-park-solid:image-files'}
+                />
               </Grid>
 
               <Grid item xs={12} sm={6} md={3}>
-                <AppWidgetSummary title="Summon" total={0} color="warning" url="/dashboard/summon" icon={'fa6-solid:file-pen'} />
+                <AppWidgetSummary
+                  title="Summon"
+                  total={0}
+                  color="warning"
+                  url="/dashboard/summon"
+                  icon={'fa6-solid:file-pen'}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={3}>
+                <AppWidgetSummary title="List Of Purok" url="/dashboard/listOfPurok" total={0} icon={'ion:documents'} />
               </Grid>
             </>
           )}
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary
-              title="Document Services"
-              url="/dashboard/documentServices"
-              total={0}
-              icon={'ion:documents'}
-            />
-          </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
             <AppWebsiteVisits
@@ -113,52 +125,23 @@ export default function DashboardApp() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
-            <NewsUpdateCard
-              title="News Update"
-             list={NEWSUPDATES}
-            />
+            <NewsUpdateCard title="News Update" list={NEWSUPDATES} />
           </Grid>
-          {/* <Grid item xs={12} md={6} lg={8}>
-            <AppNewsUpdate
-              title="News Update"
-              list={[...Array(5)].map((_, index) => ({
-                id: faker.datatype.uuid(),
-                title: faker.name.jobTitle(),
-                description: faker.name.jobTitle(),
-                image: `/static/mock-images/covers/cover_${index + 1}.jpg`,
-                postedAt: faker.date.recent(),
-              }))}
-            />
-          </Grid> */}
 
           <Grid item xs={12} md={6} lg={4}>
-            <AppTrafficBySite
-              title="Others"
-              list={[
-                {
-                  name: 'About',
-                  icon: <Iconify icon={'emojione-monotone:information'} color="#1877F2" 
-                  url="/dashboard/about" width={32} height={32} />,
-                },
-                {
-                  name: 'Legislative',
-                  icon: <Iconify icon={'fa6-solid:building-columns'} color="#DF3E30" 
-                  url="/dashboard/legislative" width={32} height={32} />,
-                },
-                {
-                  name: 'Officials',
-                  icon: <Iconify icon={'fluent:people-community-28-filled'} color="#006097" 
-                  url="/dashboard/officials" width={32} height={32} />,
-                },
-                {
-                  name: 'Reference Number',
-                  icon: <Iconify icon={'fluent:book-number-16-filled'} color="#1C9CEA" 
-                  url="/dashboard/documentServices" width={32} height={32} />,
-                },
-              ]}
-            />
+            <AppTrafficBySite title="Reference Number" />
+            
+            <AppWidgetSummary
+              
+                  title="Document Services"
+                  total={0}
+                  color="info"
+                  url="/dashboard/documentServices"
+                  icon={'icon-park-solid:image-files'}
+                />
           </Grid>
         </Grid>
+      
       </Container>
     </Page>
   );

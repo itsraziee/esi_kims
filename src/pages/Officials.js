@@ -1,71 +1,82 @@
+import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Container, Typography, Grid } from '@mui/material';
+import { Container, Typography, Stack, Grid, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
+
+import Iconify from '../components/Iconify';
 import { OfficialsWidget } from '../sections/@dashboard/officials';
 
+import { useAuth } from '../hooks/useAuth';
 // ----------------------------------------------------------------------
 
 export default function Officials() {
+  const user = useAuth();
   return (
     <Page title="Officials">
       <Container>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Officials
         </Typography>
+        {user && (
+            <Button
+              variant="contained"
+              component={RouterLink}
+              to="/dashboard/officialsProfile"
+              startIcon={<Iconify icon="eva:plus-fill" />}
+            >
+              Add Official
+            </Button>
+          )}
+          </Stack>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={8} md={3}>
             <OfficialsWidget
               title="Barangay Officials"
               total={0}
-              color="warning"
               url="/dashboard/bo"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Nutrition Scholar"
               total={0}
-              color="warning"
               url="/dashboard/bns"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Service Point Officer"
               total={0}
-              color="warning"
               url="/dashboard/bspo"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Civilian Volunteer Organization"
               total={0}
-              color="warning"
               url="/dashboard/cvo"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Health Worker"
               total={0}
-              color="warning"
               url="/dashboard/bhw"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Purok Leaders"
               total={0}
-              color="warning"
               url="/dashboard/pl"
-              icon={'icon-park-solid:building-two'}
+              icon={'fluent:people-team-28-filled'}
             />
           </Grid>
         </Grid>

@@ -16,12 +16,14 @@ import {
   Typography,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+
+import { useSnackbar } from 'notistack';
 import { createOfficial } from '../../../service/official';
 // ----------------------------------------------------------------------
 
 export default function OfficialsFormCard() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const OfficialsFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
@@ -125,9 +127,19 @@ export default function OfficialsFormCard() {
     onSubmit: (data) => {
       console.log({ data });
       createOfficial(data)
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
-      navigate('/dashboard/app', { replace: true });
+        .then((res) => {
+          console.log({ res });
+          if (res) {
+            enqueueSnackbar('Added successfully.', {
+              variant: 'success',
+            });
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log({ err });
+          enqueueSnackbar('Invalid input', { variant: 'error' });
+        });
     },
   });
 

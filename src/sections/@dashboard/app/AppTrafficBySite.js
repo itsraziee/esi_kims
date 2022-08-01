@@ -1,46 +1,54 @@
+import * as Yup from 'yup';
 // @mui
 import PropTypes from 'prop-types';
-import { Box, Card, Paper, Link, Typography, CardHeader, CardContent } from '@mui/material';
+import { useFormik, Form, FormikProvider } from 'formik';
+import { Box, Card, Paper, Stack, Typography, TextField, CardHeader, CardContent, Grid } from '@mui/material';
+
+import { LoadingButton } from '@mui/lab';
 // utils
-// import { fShortenNumber } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
 AppTrafficBySite.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
-  list: PropTypes.array.isRequired,
 };
 
 export default function AppTrafficBySite({ title, subheader, list, url = null, ...other }) {
+  const ReferenceNumber = Yup.object().shape({
+    referenceNumber: Yup.string().min(2, 'Too Short!').required('Reference Number is required'),
+  });
+  const formik = useFormik({
+    initialValues: { referenceNumber: '' },
+    validationSchema: ReferenceNumber,
+    onSubmit: (data) => {
+      console.log({ data });
+    },
+  });
+
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
-      <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
-      <CardContent>
-      
-        <Box
-          sx={{
-            display: 'grid',
-            gap: 2,
-            gridTemplateColumns: 'repeat(2, 1fr)',
-          }}
-        >
-          {list.map((site) => (
-            <Paper key={site.name} variant="outlined" sx={{ py: 2.5, textAlign: 'center' }}>
-              <Box sx={{ mb: 0.5 }}>{site.icon}</Box>
-
-              {/* <Typography variant="h6">{fShortenNumber(site.value)}</Typography> */}
-
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {site.name}
-              </Typography>
-            </Paper>
-          ))}
+     
+        <CardContent>
+          <Box>
+            <Stack sx={{  mb: 1}} spacing={2}>
+              <TextField
+                fullWidth
+                name="referenceNumber"
+                label="Reference No."
+                {...getFieldProps('referenceNumber')}
+                error={Boolean(touched.referenceNumber && errors.referenceNumber)}
+                helperText={touched.referenceNumber && errors.referenceNumber}
+              />
+            </Stack>
+            <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+              Submit
+            </LoadingButton>
           </Box>
          
-        </CardContent>
-        </Link>
+      </CardContent>
     </Card>
   );
 }

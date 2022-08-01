@@ -1,21 +1,17 @@
-import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { Grid,  Container, Stack, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
-import Iconify from '../components/Iconify';
-import { BspoCard } from '../sections/@dashboard/officials';
+import { PurokLeadersCard } from '../sections/@dashboard/officials';
 
 // mock
 import PLPOSTS from '../_mock/pl';
-import { useAuth } from '../hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
 // ----------------------------------------------------------------------
 
 export default function PL() {
-  const user = useAuth();
   return (
     <Page title="Purok Leaders">
       <Container>
@@ -23,21 +19,12 @@ export default function PL() {
           <Typography variant="h4" gutterBottom>
             Purok Leaders
           </Typography>
-          {user && (
-            <Button
-              variant="contained"
-              component={RouterLink}
-              to="/dashboard/officialsProfile"
-              startIcon={<Iconify icon="eva:plus-fill" />}
-            >
-              Add Official
-            </Button>
-          )}
+        
         </Stack>
 
         <Grid container spacing={3}>
           {PLPOSTS.map((post) => (
-            <plCard key={post.id} post={post} />
+            <PurokLeadersCard key={post.id} post={post} />
           ))}
         </Grid>
       </Container>
