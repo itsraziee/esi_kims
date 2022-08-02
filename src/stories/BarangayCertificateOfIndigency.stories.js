@@ -11,6 +11,7 @@ const Template = (args) => <BarangayCertificateOfIndigencyComponent {...args} />
 export const BarangayCertificateOfIndigency = Template.bind({});
 BarangayCertificateOfIndigency.args = {
   name: 'Glenmark Pelarca',
+  civilstatus:'married',
   day: 5,
   month: 'June',
   year: 2022,
