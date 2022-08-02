@@ -132,7 +132,7 @@ export default function BarangayElectrificationCertificate({
       <p className={(styles.c4, styles.c9)}>
         <span className={styles.c5}></span>
       </p>
-      <table className={styles.electricTable}>
+      <table className={styles.electricTable} style={{color: '#595959'}}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Layout</td>
           <th style={{ paddingLeft: '10px' }}>16x18 Square Meters</th>
@@ -213,7 +213,7 @@ export default function BarangayElectrificationCertificate({
 
       <strong>
         {' '}
-        <table className={styles.secondTable}>
+        <table className={styles.secondTable} style={{color: '#595959'}}>
           <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O.R NO.:</td>
             <td style={{ paddingLeft: '250px' }}>CTC NO.:</td>
@@ -251,7 +251,7 @@ export default function BarangayElectrificationCertificate({
         <span className={styles.c8}></span>
       </p>
 
-      <table className={styles.thirdTable}>
+      <table className={styles.thirdTable} style={{color: '#595959'}}>
         <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepared by:</th>
           <th style={{ paddingLeft: '250px' }}>Approved by:</th>

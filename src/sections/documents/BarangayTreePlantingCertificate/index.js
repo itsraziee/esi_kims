@@ -240,7 +240,7 @@ export default function BarangayTreePlantingCertificate({
       <p className={(styles.c13, styles.c4)}>
         <span className={styles.c10}></span>
       </p>
-      <table className={styles.thirdTable}>
+      <table className={styles.thirdTable} style={{color: '#595959'}}>
         <p className={(styles.c4, styles.c9)}>
           <span className={styles.c1}></span>
         </p>

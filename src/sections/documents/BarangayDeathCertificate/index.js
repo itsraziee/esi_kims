@@ -7,7 +7,7 @@ export default function BarangayDeathCertificate({
   //naa pay ibutang dire
   name,
   relationship,
-  residence,
+  purok,
   day,
   month,
   year,
@@ -130,7 +130,7 @@ export default function BarangayDeathCertificate({
         <span className={styles.c3}>{name}</span>
         <span className={styles.c5}>
           {' '}
-          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{residence}</span>, Kimanait,
+          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{purok}</span>, Kimanait,
           Pangantucan, Bukidnon,
         </span>
         <span className={styles.c3}>{relationship}</span>
@@ -139,7 +139,7 @@ export default function BarangayDeathCertificate({
       <p className={(styles.c4, styles.c9)}>
         <span className={styles.c5}></span>
       </p>
-      <table className={styles.deathTable}>
+      <table className={styles.deathTable} style={{ color: '#595959 '}}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECEASED NAME</td>
           <td style={{ paddingLeft: '10px' }}>
