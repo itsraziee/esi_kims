@@ -35,8 +35,8 @@ export default function BarangayBirthCertificate({
 }) {
   return (
     <Box className={styles.c10}>
-      <p class={styles.c5}>
-        <span class={styles.c0}>Republic of the Philippines</span>
+      <p className={styles.c5}>
+        <span className={styles.c0}>Republic of the Philippines</span>
         <span
           style={{
             overflow: 'hidden',
@@ -102,47 +102,47 @@ export default function BarangayBirthCertificate({
         <span className={styles.c0}>BARANGAY KIMANAIT</span>
       </p>
       <p className={(styles.c5, styles.c3)}>
-        <span className={(styles.c8, styles.c16)}></span>
+        <span className={(styles.c8, styles.c16)} />
       </p>
       <p className={(styles.c3, styles.c5)}>
-        <span className={(styles.c4, styles.c8)}></span>
+        <span className={(styles.c4, styles.c8)} />
       </p>
       <p className={styles.c5}>
         <span className={styles.c0}>OFFICE OF THE SANGGUNIANG BARANGAY</span>
       </p>
       <hr />
       <p className={(styles.c5, styles.c3)}>
-        <span className={(styles.c8, styles.c16)}></span>
+        <span className={(styles.c8, styles.c16)} />
       </p>
       <p className={(styles.c3, styles.c5)}>
-        <span className={(styles.c4, styles.c8)}></span>
+        <span className={(styles.c4, styles.c8)} />
       </p>
       <p className={(styles.c5, styles.c3)}>
-        <span className={(styles.c8, styles.c16)}></span>
+        <span className={(styles.c8, styles.c16)} />
       </p>
       <p className={(styles.c3, styles.c5)}>
-        <span className={(styles.c4, styles.c8)}></span>
+        <span className={(styles.c4, styles.c8)} />
       </p>
       <p className={styles.c5}>
         <span className={styles.c0}>BARANGAY BIRTH CERTIFICATE</span>
       </p>
       <p className={(styles.c3, styles.c7)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c7, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c5, styles.c3)}>
-        <span className={(styles.c8, styles.c16)}></span>
+        <span className={(styles.c8, styles.c16)} />
       </p>
       <p className={(styles.c3, styles.c5)}>
-        <span className={(styles.c4, styles.c8)}></span>
+        <span className={(styles.c4, styles.c8)} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c12}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span clasSName={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that </span>
@@ -163,7 +163,7 @@ export default function BarangayBirthCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <table className={styles.birthTable}>
         <tr>
@@ -355,7 +355,7 @@ export default function BarangayBirthCertificate({
         </tr>
       </table>
       <p className={(styles.c1, styles.c3)}>
-        <span className={(styles.c4, styles.c2)}></span>
+        <span className={(styles.c4, styles.c2)} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c12}>
@@ -364,7 +364,7 @@ export default function BarangayBirthCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c2}>
@@ -375,14 +375,14 @@ export default function BarangayBirthCertificate({
             <span className={styles.underline}>{namerequest}</span>
           </strong>
         </span>
-        <span clasSName={styles.c12}>
+        <span className={styles.c12}>
           {' '}
           upon his/her request in connection with his/her desire to apply for delayed registration of birth at the civil
           registrars office of Pangantucan, Bukidnon, Philippines.
         </span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c12}>
@@ -393,13 +393,13 @@ export default function BarangayBirthCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c1}>
@@ -417,19 +417,19 @@ export default function BarangayBirthCertificate({
       </div>
 
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
-      <p clasSName={styles.c1}>
+      <p className={styles.c1}>
         <span className={styles.c0}>Verified by:</span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span clasSName={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={(styles.c4, styles.c8)}>
@@ -442,16 +442,16 @@ export default function BarangayBirthCertificate({
         <span className={styles.c12}>&nbsp; &nbsp;Barangay Secretary</span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span clasSName={styles.c0}></span>
-      </p>
-      <p clasSName={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
+      </p>
+      <p className={(styles.c1, styles.c3)}>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c6}>Amount Paid: P50.00</span>
@@ -481,10 +481,10 @@ export default function BarangayBirthCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span className={styles.c6}></span>
+        <span className={styles.c6} />
       </p>
       <p className={(styles.c1, styles.c3)}>
-        <span clasSName={styles.c6}></span>
+        <span className={styles.c6} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c6}>
