@@ -75,17 +75,17 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         <span className={styles.c1}>TIN NO: 004-358-651</span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c1}>OFFICE OF THE SANGGUNIANG BARANGAY</span>
       </p>
       <hr />
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c2}></span>
+        <span className={styles.c2} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c10} style={{ fontWeight: 700 }}>
@@ -93,28 +93,28 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         </span>
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c14}>
         <span className={styles.c1}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -124,11 +124,11 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
-      
+
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -137,7 +137,7 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -147,22 +147,22 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
@@ -173,25 +173,25 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         </p>
       </div>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <table className={(styles.thirdTable, styles.c1)}>
         <tr>
@@ -200,10 +200,10 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         </tr>
 
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <br />
 
