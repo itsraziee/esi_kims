@@ -123,7 +123,7 @@ export default function index({
       <p className={styles.c0}>
         <span className={styles.c0}></span>
       </p>
-      <p className={styles.c3}>
+      <p className={styles.c1}>
         <span className={styles.c1}>File No.{''}</span>
         <span className={(styles.c1, styles.underline)}>{fileNo}</span>
       </p>
@@ -203,7 +203,7 @@ export default function index({
           &nbsp;SUFFIX
         </span>
       </p>
-      <p className={styles.c1}>
+      <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={styles.c4}>Address: {''}</span>
         <span className={(styles.c2, styles.underline)}>{address}</span>
         <span className={styles.c4}>&nbsp; &nbsp;Citizenship: {''}</span>
@@ -212,7 +212,7 @@ export default function index({
       <p className={(styles.c1, styles.c6)}>
         <span className={(styles.c7, styles.c4)}></span>
       </p>
-      <p className={styles.c1}>
+      <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={styles.c4}>Sex: {''}</span>
         <span className={(styles.c2, styles.underline)}>{sex}</span>
         <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Age: {''}</span>
@@ -225,7 +225,7 @@ export default function index({
       <p className={(styles.c1, styles.c6)}>
         <span className={styles.c8}></span>
       </p>
-      <p className={styles.c1}>
+      <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={styles.c4}>Birthdate: {''}</span>
         <span className={(styles.c2, styles.underline)}>
           &nbsp;{birthday}-{birthmonth}-{birthyear}&nbsp;
@@ -269,7 +269,7 @@ export default function index({
       <p className={(styles.c1, styles.c6)}>
         <span className={(styles.c7, styles.c9)}></span>
       </p>
-      <p className={styles.c1}>
+      <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={(styles.c11, styles.c7)}>Purpose: </span>
         <span className={styles.c2}>{purpose}</span>
       </p>
