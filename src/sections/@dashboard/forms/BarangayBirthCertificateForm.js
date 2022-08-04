@@ -5,12 +5,18 @@ import { Button, Stack, TextField, Typography, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
+// TODO: Date of Birth error message is not working!
+// TODO: Time of Birth error message is not working!
+// TODO: Death error message is not working (mag red ra sya peru dili ga show ang error message)!
+// TODO: Fathers Occupation error message is not working (mag red ra sya peru dili ga show ang error message)!
+
 export default function BarangayBirthCertificateForm(onSubmitForm) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
+    nameofChild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
     purok: Yup.number().min(0).max(13).required(),
     sex: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Sex is required'),
-    dateofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Marriage is required'),
+    dateofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Birth is required'),
+    timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
     birthorder: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Birth Order is required'),
     death: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Death is required'),
@@ -40,15 +46,16 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Address of Attendant is required'),
-    since: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Since is required'),
+    yearofResidency: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Year of Residency is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      fullName: '',
+      nameofChild: '',
       purok: '',
       sex: '',
       dateofbirth: '',
+      timeofbirth: '',
       weight: '',
       birthorder: '',
       death: '',
@@ -63,7 +70,7 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
       placeofmarriage: '',
       nameofattendant: '',
       addressofattendant: '',
-      since: '',
+      yearofResidency: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -77,28 +84,18 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <Stack direction={{ xs: 'column' }} spacing={2}>
+        <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
+          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
-              name="fullName"
-              label="Full Name"
-              {...getFieldProps('fullName')}
-              error={Boolean(touched.fullName && errors.fullName)}
-              helperText={touched.fullName && errors.fullName}
+              name="nameofChild"
+              label="Name of Child"
+              {...getFieldProps('nameofChild')}
+              error={Boolean(touched.nameofChild && errors.nameofChild)}
+              helperText={touched.nameofChild && errors.nameofChild}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
-              fullWidth
-              name="purok"
-              label="Purok"
-              {...getFieldProps('purok')}
-              error={Boolean(touched.purok && errors.purok)}
-              helperText={touched.purok && errors.purok}
-            />
-
-            <TextField
-              sx={{ minWidth: 91, mt: 2 }}
+              // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="sex"
               label="Sex"
@@ -106,18 +103,28 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               error={Boolean(touched.sex && errors.sex)}
               helperText={touched.sex && errors.sex}
             />
+            <TextField
+              // sx={{ minWidth: 91, mt: 2 }}
+              fullWidth
+              name="dateofBirth"
+              label="Date of Birth"
+              {...getFieldProps('dateofBirth')}
+              error={Boolean(touched.dateofBirth && errors.dateofBirth)}
+              helperText={touched.dateofBirth && errors.dateofBirth}
+            />
 
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
+              // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
-              name="dateofbirth"
-              label="Date of Birth"
-              {...getFieldProps('nameofbirth')}
-              error={Boolean(touched.dateofbirth && errors.dateofbirth)}
-              helperText={touched.dateofbirth && errors.dateofbirth}
+              name="timeofBirth"
+              label="Time of Birth"
+              {...getFieldProps('timeofBirth')}
+              error={Boolean(touched.timeofBirth && errors.timeofBirth)}
+              helperText={touched.timeofBirth && errors.timeofBirth}
             />
           </Stack>
-          <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
+
+          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
               name="weight"
@@ -127,7 +134,7 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.weight && errors.weight}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
+              // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="birthorder"
               label="Birth Order"
@@ -136,7 +143,7 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.birthorder && errors.birthorder}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
+              // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="death"
               label="Death"
@@ -155,7 +162,8 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.placeofbirth && errors.placeofbirth}
             />
           </Stack>
-          <Stack direction={{ xs: 'row', sm: 'column' }}>
+
+          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
               name="nameofmother"
@@ -165,7 +173,6 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.nameofmother && errors.nameofmother}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="mothercitizenship"
               label="Mothers Citizenship"
@@ -174,7 +181,6 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.mothercitizenship && errors.mothercitizenship}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="motheroccupation"
               label="Mothers Occupation"
@@ -182,9 +188,10 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               error={Boolean(touched.motheroccupation && errors.motheroccupation)}
               helperText={touched.motheroccupation && errors.motheroccupation}
             />
+          </Stack>
 
+          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="nameoffather"
               label="Name of Father"
@@ -192,8 +199,6 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               error={Boolean(touched.nameoffather && errors.nameoffather)}
               helperText={touched.nameoffather && errors.nameoffather}
             />
-          </Stack>
-          <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
             <TextField
               fullWidth
               name="fathercitizenship"
@@ -211,8 +216,10 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               error={Boolean(touched.fatheroccupation && errors.fatheroccupation)}
               helperText={touched.phoneNumber && errors.phoneNumber}
             />
+          </Stack>
+
+          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="dateofmarriage"
               label="Date of Marriage"
@@ -221,7 +228,6 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.dateofmarriage && errors.dateofmarriage}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="placeofmarriage"
               label="Place of Marriage"
@@ -229,8 +235,6 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               error={Boolean(touched.placeofmarriage && errors.placeofmarriage)}
               helperText={touched.placeofmarriage && errors.placeofmarriage}
             />
-          </Stack>
-          <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
             <TextField
               fullWidth
               name="nameofattendant"
@@ -240,7 +244,6 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               helperText={touched.nameofattendant && errors.nameofattendant}
             />
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="addressofattendant"
               label="Address Of Attendant"
@@ -248,24 +251,23 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
               error={Boolean(touched.addressofattendant && errors.addressofattendant)}
               helperText={touched.addressofattendant && errors.addressofattendant}
             />
+          </Stack>
+
+          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
-              sx={{ minWidth: 91, mt: 2 }}
               fullWidth
-              name="since"
-              label="Since"
-              {...getFieldProps('since')}
-              error={Boolean(touched.since && errors.since)}
-              helperText={touched.since && errors.since}
+              name="yearofResidency"
+              label="In what year since you live in this barangay?"
+              {...getFieldProps('yearofResidency')}
+              error={Boolean(touched.yearofResidency && errors.yearofResidency)}
+              helperText={touched.yearofResidency && errors.yearofResidency}
             />
           </Stack>
         </Stack>
 
         <Box sx={{ color: 'gray', my: 2 }}>
-          <Typography variant="subtitle4">Barangay Birth Certificate Requirements</Typography>
+          <Typography variant="subtitle4">Barangay Birth Certificate Requirement</Typography>
           <Typography>1. Purok Cerification</Typography>
-          <Typography>2. Valid ID</Typography>
-          <Typography>3. Valid ID</Typography>
-          <Typography>4. Purok Certification</Typography>
         </Box>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

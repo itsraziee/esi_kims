@@ -4,23 +4,28 @@ import { useFormik, Form, FormikProvider } from 'formik';
 import { Button, Stack, TextField, Typography, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
+// TODO: Date of Birth error message is not working!
+
 export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     purok: Yup.number().min(0).max(13).required(),
     relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
-    deceasedname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
-    placeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
-    dateofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Birth is required'),
+    deceasedName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
+    placeofDeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
+    dateofDeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
     age: Yup.number().min(0, 'Must be positive!').required('Age is required'),
-    causeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
+    causeofDeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
     address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     civilStatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
-    placeburried: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place Burried is required'),
+    placeBurried: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place Burried is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     nameoffather: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Father is required'),
-    maiden: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Maiden is required'),
+    maidenNameofMother: Yup.string()
+      .min(2, 'Too Short!')
+      .max(100, 'Too Long!')
+      .required('Maiden Name of Mother is required'),
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Death is required'),
   });
 
@@ -29,19 +34,19 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
       fullName: '',
       purok: '',
       relationship: '',
-      deceasedname: '',
-      placeofbirth: '',
-      dateofbirth: '',
+      deceasedName: '',
+      placeofBirth: '',
+      dateofDeath: '',
       age: '',
-      causeofdeath: '',
+      causeofDeath: '',
       address: '',
       civilStatus: '',
-      placeburried: '',
+      placeBurried: '',
       religion: '',
       occupation: '',
       nameoffather: '',
-      maiden: '',
-      placeofdeath: '',
+      maidenNameofMother: '',
+      placeofDeath: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -55,171 +60,131 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-          <>
-            <Stack direction={{ xs: 'column' }}>
-              <TextField
-                fullWidth
-                name="fullName"
-                label="Full Name"
-                {...getFieldProps('fullName')}
-                error={Boolean(touched.fullName && errors.fullName)}
-                helperText={touched.fullName && errors.fullName}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="purok"
-                label="Purok"
-                {...getFieldProps('purok')}
-                error={Boolean(touched.purok && errors.purok)}
-                helperText={touched.purok && errors.purok}
-              />
+        <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
+          <Stack direction={{ xs: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              name="deceasedName"
+              label="Deceased Name"
+              {...getFieldProps('deceasedName')}
+              error={Boolean(touched.deceasedName && errors.deceasedName)}
+              helperText={touched.deceasedName && errors.deceasedName}
+            />
+            <TextField
+              fullWidth
+              name="placeofDeath"
+              label="Place of Death"
+              {...getFieldProps('placeofDeath')}
+              error={Boolean(touched.placeofDeath && errors.placeofDeath)}
+              helperText={touched.placeofDeath && errors.placeofDeath}
+            />
+            <TextField
+              fullWidth
+              name="dateofBirth"
+              label="Date of Birth"
+              {...getFieldProps('dateofBirth')}
+              error={Boolean(touched.dateofBirth && errors.dateofBirth)}
+              helperText={touched.dateofBirth && errors.dateofBirth}
+            />
+            <TextField
+              fullWidth
+              name="dateofDeath"
+              label="Date of Death"
+              {...getFieldProps('dateofDeath')}
+              error={Boolean(touched.dateofDeath && errors.dateofDeath)}
+              helperText={touched.dateofDeath && errors.dateofDeath}
+            />
+          </Stack>
 
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="relationship"
-                label="Relationship"
-                {...getFieldProps('relationship')}
-                error={Boolean(touched.relationship && errors.relationship)}
-                helperText={touched.relationship && errors.relationship}
-              />
+          <Stack direction={{ xs: 'row' }} spacing={2}>
+            <TextField
+              name="age"
+              label="Age"
+              {...getFieldProps('age')}
+              error={Boolean(touched.age && errors.age)}
+              helperText={touched.age && errors.age}
+            />
+            <TextField
+              fullWidth
+              name="causeofDeath"
+              label="Cause of Death"
+              {...getFieldProps('causeofDeath')}
+              error={Boolean(touched.causeofDeath && errors.causeofDeath)}
+              helperText={touched.causeofDeath && errors.causeofDeath}
+            />
+            <TextField
+              fullWidth
+              name="address"
+              label="Address"
+              {...getFieldProps('address')}
+              error={Boolean(touched.address && errors.address)}
+              helperText={touched.address && errors.address}
+            />
+          </Stack>
 
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="deceasedname"
-                label="Deceased Name"
-                {...getFieldProps('deceasedname')}
-                error={Boolean(touched.deceasedname && errors.deceasedname)}
-                helperText={touched.deceasedname && errors.deceasedname}
-              />
-            </Stack>
-            <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
-              <TextField
-                fullWidth
-                name="placeofbirth"
-                label="Place of Birth"
-                {...getFieldProps('placeofbirth')}
-                error={Boolean(touched.placeofbirth && errors.placeofbirth)}
-                helperText={touched.placeofbirth && errors.placeofbirth}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="dateofbirth"
-                label="Date of Birth"
-                {...getFieldProps('dateofbirth')}
-                error={Boolean(touched.dateofbirth && errors.dateofbirth)}
-                helperText={touched.dateofbirth && errors.dateofbirth}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="age"
-                label="Age"
-                {...getFieldProps('age')}
-                error={Boolean(touched.age && errors.age)}
-                helperText={touched.age && errors.age}
-              />
+          <Stack direction={{ xs: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              name="civilStatus"
+              label="Civil Status"
+              {...getFieldProps('civilStatus')}
+              error={Boolean(touched.civilStatus && errors.civilStatus)}
+              helperText={touched.civilStatus && errors.civilStatus}
+            />
+            <TextField
+              fullWidth
+              name="placeBurried"
+              label="Place Burried"
+              {...getFieldProps('placeBurried')}
+              error={Boolean(touched.placeBurried && errors.placeBurried)}
+              helperText={touched.placeBurried && errors.placeBurried}
+            />
+            <TextField
+              fullWidth
+              name="religion"
+              label="Religion"
+              {...getFieldProps('religion')}
+              error={Boolean(touched.religion && errors.religion)}
+              helperText={touched.religion && errors.religion}
+            />
+            <TextField
+              fullWidth
+              name="occupation"
+              label="Occupation"
+              {...getFieldProps('occupation')}
+              error={Boolean(touched.occupation && errors.occupation)}
+              helperText={touched.occupation && errors.occupation}
+            />
+          </Stack>
 
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="causeofdeath"
-                label="Cause of Death"
-                {...getFieldProps('causeofdeath')}
-                error={Boolean(touched.causeofdeath && errors.causeofdeath)}
-                helperText={touched.causeofdeath && errors.causeofdeath}
-              />
-            </Stack>
-            <Stack direction={{ xs: 'row', sm: 'column' }}>
-              <TextField
-                fullWidth
-                name="address"
-                label="Address"
-                {...getFieldProps('address')}
-                error={Boolean(touched.address && errors.address)}
-                helperText={touched.address && errors.address}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="civilstatus"
-                label="Civil Status"
-                {...getFieldProps('civilstatus')}
-                error={Boolean(touched.civilStatus && errors.civilStatus)}
-                helperText={touched.civilStatus && errors.civilStatus}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="placeburried"
-                label="Place Burried"
-                {...getFieldProps('placeburried')}
-                error={Boolean(touched.placeburried && errors.placeburried)}
-                helperText={touched.placeburried && errors.placeburried}
-              />
-
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="religion"
-                label="Religion"
-                {...getFieldProps('religion')}
-                error={Boolean(touched.religion && errors.religion)}
-                helperText={touched.religion && errors.religion}
-              />
-            </Stack>
-            <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
-              <TextField
-                fullWidth
-                name="Occupation"
-                label="Occupation"
-                {...getFieldProps('occupation')}
-                error={Boolean(touched.occupation && errors.occupation)}
-                helperText={touched.occupation && errors.occupation}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="nameoffather"
-                label="Name of Father"
-                {...getFieldProps('nameoffather')}
-                error={Boolean(touched.nameoffather && errors.nameoffather)}
-                helperText={touched.nameoffather && errors.nameoffather}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="maiden"
-                label="Maiden Name of Mother"
-                {...getFieldProps('maiden')}
-                error={Boolean(touched.maiden && errors.maiden)}
-                helperText={touched.maiden && errors.maiden}
-              />
-              <TextField
-                sx={{ minWidth: 91, mt: 2 }}
-                fullWidth
-                name="placeofdeath"
-                label="Place of Death"
-                {...getFieldProps('placeofdeath')}
-                error={Boolean(touched.placeofdeath && errors.placeofdeath)}
-                helperText={touched.placeofdeath && errors.placeofdeath}
-              />
-            </Stack>
-          </>
+          <Stack direction={{ xs: 'row' }} spacing={2}>
+            <TextField
+              fullWidth
+              name="nameoffather"
+              label="Name of Father"
+              {...getFieldProps('nameoffather')}
+              error={Boolean(touched.nameoffather && errors.nameoffather)}
+              helperText={touched.nameoffather && errors.nameoffather}
+            />
+            <TextField
+              fullWidth
+              name="maidenNameofMother"
+              label="Maiden Name of Mother"
+              {...getFieldProps('maidenNameofMother')}
+              error={Boolean(touched.maidenNameofMother && errors.maidenNameofMother)}
+              helperText={touched.maidenNameofMother && errors.maidenNameofMother}
+            />
+          </Stack>
         </Stack>
 
         <Box sx={{ color: 'gray', my: 2 }}>
           <Typography sx={{ color: 'gray' }} variant="subtitle4">
-            Barangay Death Certificate Requirements
+            Barangay Death Certificate Requirement
           </Typography>
           <Typography>1. Purok Cerification</Typography>
-          <Typography>2. Valid ID</Typography>
-          <Typography>3. Valid ID</Typography>
-          <Typography>4. Purok Certification</Typography>
+          <Typography>
+            2. Health Center Certification (Document cannot be process without this certification)
+          </Typography>
         </Box>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

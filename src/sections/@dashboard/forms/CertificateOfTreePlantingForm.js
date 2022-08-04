@@ -69,11 +69,8 @@ export default function CertificateOfTreePlantingForm(onSubmitForm) {
           </>
         </Stack>
         <Box sx={{ color: 'gray', mb: 1 }}>
-          <Typography variant="subtitle4">Barangay Certificate Of Tree Planting Requirements</Typography>
-          <Typography>1. Purok Cerification</Typography>
-          <Typography>2. Valid ID</Typography>
-          <Typography>3. Valid ID</Typography>
-          <Typography>4. Purok Certification</Typography>
+          <Typography variant="subtitle4">Certificate Of Tree Planting Requirements</Typography>
+          <Typography>1. Purok Cerification (that certify that he/she has already planted a tree)</Typography>
         </Box>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -94,4 +91,3 @@ CertificateOfTreePlantingForm.propTypes = {
   // Function to call on submit
   onSubmitForm: PropTypes.func.isRequired,
 };
-

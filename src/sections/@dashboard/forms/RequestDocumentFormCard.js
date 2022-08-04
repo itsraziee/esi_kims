@@ -114,7 +114,7 @@ export default function RequestDocumentFormCard() {
 
   return (
     <Card fullwidth>
-      <CardHeader title="Personal Information" subheader="Please provide your personal information" />
+      <CardHeader title="Request Document Form" subheader="Please provide all the information required below" />
       <CardContent>
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
