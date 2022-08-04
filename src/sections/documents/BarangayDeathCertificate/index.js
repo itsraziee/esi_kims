@@ -139,7 +139,7 @@ export default function BarangayDeathCertificate({
       <p className={(styles.c4, styles.c9)}>
         <span className={styles.c5} />
       </p>
-      <table className={styles.deathTable} style={{ color: '#595959 ' }}>
+      <table className={styles.deathTable} style={{ color: '#000000 ' }}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECEASED NAME</td>
           <td style={{ paddingLeft: '10px' }}>
