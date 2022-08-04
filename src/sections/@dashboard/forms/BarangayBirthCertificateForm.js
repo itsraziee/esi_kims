@@ -47,6 +47,8 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
       .max(100, 'Too Long!')
       .required('Address of Attendant is required'),
     yearofResidency: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Year of Residency is required'),
+    dateofBirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of birth is required'), // TODO to replace when inour field is replaced
+    timeofBirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of birth is required'),
   });
 
   const formik = useFormik({
@@ -71,6 +73,8 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
       nameofattendant: '',
       addressofattendant: '',
       yearofResidency: '',
+      dateofBirth: '',
+      timeofBirth: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -257,7 +261,7 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
             <TextField
               fullWidth
               name="yearofResidency"
-              label="In what year since you live in this barangay?"
+              label="Since when have you resided in this barangay?"
               {...getFieldProps('yearofResidency')}
               error={Boolean(touched.yearofResidency && errors.yearofResidency)}
               helperText={touched.yearofResidency && errors.yearofResidency}

@@ -27,6 +27,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
       .max(100, 'Too Long!')
       .required('Maiden Name of Mother is required'),
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Death is required'),
+    dateofBirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of birth is required'),
   });
 
   const formik = useFormik({
@@ -47,6 +48,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
       nameoffather: '',
       maidenNameofMother: '',
       placeofDeath: '',
+      dateofBirth: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {

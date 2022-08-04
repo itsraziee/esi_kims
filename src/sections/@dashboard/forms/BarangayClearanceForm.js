@@ -21,7 +21,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
