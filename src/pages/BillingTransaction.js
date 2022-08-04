@@ -70,7 +70,7 @@ export default function BillingTransaction() {
         updateStatus(params.row.id, params.value).then((res) => {
           console.log({ res });
         });
-        return { ...params.row, remarks: params.value };
+        return { ...params.row, status: params.value };
       },
     }, // pending, inprogress, completed, declined
     {
