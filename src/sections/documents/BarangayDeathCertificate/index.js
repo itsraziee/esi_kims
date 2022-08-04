@@ -233,7 +233,7 @@ export default function BarangayDeathCertificate({
       <p className={styles.c4}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <p className={styles.c5}>
-          <span class="c1">
+          <span className={styles.c1}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Done this <span className={styles.c3}>{day}</span> of{' '}
             <span className={styles.c3}>{month}</span>, <span className={styles.c3}>{year}</span> at the Office of the
             Punong Barangay of Kimanait, Pangantucan, Bukidnon.
@@ -244,7 +244,9 @@ export default function BarangayDeathCertificate({
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </p>
       <p className={styles.c5}>
-        <span class="c1">NOTE: Any erasure or alteration of any entry invalidates this Barangay Certification.</span>
+        <span className={styles.c1}>
+          NOTE: Any erasure or alteration of any entry invalidates this Barangay Certification.
+        </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
         <span className={styles.c3}></span>
