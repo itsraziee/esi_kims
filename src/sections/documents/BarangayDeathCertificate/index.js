@@ -4,10 +4,10 @@ import React from 'react';
 import styles from './BarangayDeathCertificate.module.css';
 
 export default function BarangayDeathCertificate({
-  //naa pay ibutang dire
+  // naa pay ibutang dire
   name,
   relationship,
-  residence,
+  purok,
   day,
   month,
   year,
@@ -31,8 +31,8 @@ export default function BarangayDeathCertificate({
 }) {
   return (
     <Box className={styles.c13}>
-      <p class={styles.c6}>
-        <span class={styles.c1}>Republic of the Philippines</span>
+      <p className={styles.c6}>
+        <span className={styles.c1}>Republic of the Philippines</span>
         <span
           style={{
             overflow: 'hidden',
@@ -91,7 +91,7 @@ export default function BarangayDeathCertificate({
       <p className={styles.c6}>
         <span className={styles.c1}>Province of Bukidnon</span>
       </p>
-      <p class={styles.c6}>
+      <p className={styles.c6}>
         <span className={styles.c1}>Municipality of Pangantucan</span>
       </p>
       <p className={styles.c6}>
@@ -105,41 +105,41 @@ export default function BarangayDeathCertificate({
       </p>
       <hr />
       <p className={styles.c0}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c1}>BARANGAY DEATH CERTIFICATE</span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c5}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={(styles.c12, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that </span>
         <span className={styles.c3}>{name}</span>
         <span className={styles.c5}>
           {' '}
-          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{residence}</span>, Kimanait,
+          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{purok}</span>, Kimanait,
           Pangantucan, Bukidnon,
         </span>
         <span className={styles.c3}>{relationship}</span>
         <span className={styles.c5}> of the deceased name below:</span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
-      <table className={styles.deathTable}>
+      <table className={styles.deathTable} style={{ color: '#595959 ' }}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECEASED NAME</td>
           <td style={{ paddingLeft: '10px' }}>
@@ -222,7 +222,7 @@ export default function BarangayDeathCertificate({
       </table>
 
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c4}>
         <span className={styles.c7}>
@@ -249,10 +249,10 @@ export default function BarangayDeathCertificate({
         </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
 
       <div style={{ float: 'right' }}>
@@ -265,16 +265,16 @@ export default function BarangayDeathCertificate({
       </div>
 
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
 
       <div style={{ float: 'left' }}>
@@ -282,7 +282,7 @@ export default function BarangayDeathCertificate({
           <span className={styles.c5}>Prepared by:</span>
         </p>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c3}></span>
+          <span className={styles.c3} />
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
           <span className={styles.c3}>{secretary}</span>
@@ -291,14 +291,14 @@ export default function BarangayDeathCertificate({
           <span className={styles.c5}>{sec}</span>
         </p>
       </div>
-      <p class="c0">
-        <span class="c1"></span>
+      <p className="c0">
+        <span className="c1" />
       </p>
-      <p class="c0">
-        <span class="c1"></span>
+      <p className="c0">
+        <span className="c1" />
       </p>
-      <p class="c13">
-        <span class="c14"></span>
+      <p className="c13">
+        <span className="c14" />
       </p>
     </Box>
   );

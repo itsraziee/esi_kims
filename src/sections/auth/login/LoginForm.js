@@ -15,7 +15,7 @@ import EmailDialog from '../../@dashboard/dialog/EmailDialog';
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
 

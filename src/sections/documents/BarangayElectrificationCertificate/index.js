@@ -88,31 +88,31 @@ export default function BarangayElectrificationCertificate({
       </p>
       <hr />
       <p className={styles.c0}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c10}>C E R T I F I C A T I O N</span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c10}></span>
+        <span className={styles.c10} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c5}>To Whom It May Concern:</span>
       </p>
       <p className={(styles.c12, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c7}>
@@ -130,9 +130,9 @@ export default function BarangayElectrificationCertificate({
         </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
-      <table className={styles.electricTable}>
+      <table className={styles.electricTable} style={{ color: '#595959' }}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Layout</td>
           <th style={{ paddingLeft: '10px' }}>16x18 Square Meters</th>
@@ -156,7 +156,7 @@ export default function BarangayElectrificationCertificate({
       </table>
 
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c4}>
         <span className={styles.c7}>
@@ -166,7 +166,7 @@ export default function BarangayElectrificationCertificate({
         <span className={styles.c1}>electrification installation purposes.</span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -179,13 +179,13 @@ export default function BarangayElectrificationCertificate({
         </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
@@ -196,24 +196,24 @@ export default function BarangayElectrificationCertificate({
         </p>
       </div>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
 
       <strong>
         {' '}
-        <table className={styles.secondTable}>
+        <table className={styles.secondTable} style={{ color: '#595959' }}>
           <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O.R NO.:</td>
             <td style={{ paddingLeft: '250px' }}>CTC NO.:</td>
@@ -230,38 +230,38 @@ export default function BarangayElectrificationCertificate({
       </strong>
 
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
 
-      <table className={styles.thirdTable}>
+      <table className={styles.thirdTable} style={{ color: '#595959' }}>
         <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepared by:</th>
           <th style={{ paddingLeft: '250px' }}>Approved by:</th>
         </tr>
 
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
 
         <tr>

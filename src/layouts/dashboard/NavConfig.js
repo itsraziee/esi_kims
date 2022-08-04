@@ -24,7 +24,7 @@ const navConfig = [
   {
     non_auth_required: true,
     title: 'document services',
-    path: '/dashboard/documentServices',
+    path: '/dashboard/RequestDocumentForm',
     icon: getIcon('ion:documents'),
   },
   {

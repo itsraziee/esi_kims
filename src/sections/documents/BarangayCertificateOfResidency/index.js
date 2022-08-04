@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import styles from './BarangayCertificateOfIndigency.module.css';
+import styles from './BarangayCertificateOfResidency.module.css';
 
-export default function index({ name, purok, day, month, year, bearer, secretary, captain, civilstatus }) {
+export default function BarangayCertificateOfResidency({ name, purok, day, month, year, bearer, secretary, captain }) {
   return (
     <Box className={styles.c13}>
       <p className={styles.c6}>
@@ -74,9 +74,9 @@ export default function index({ name, purok, day, month, year, bearer, secretary
       <p className={styles.c6}>
         <span className={styles.c1}>TIN NO: 004-358-651</span>
       </p>
-      {/* <p className={styles.c0}>
+      <p className={styles.c0}>
         <span className={styles.c3} />
-      </p> */}
+      </p>
       <p className={styles.c6}>
         <span className={styles.c1}>OFFICE OF THE SANGGUNIANG BARANGAY</span>
       </p>
@@ -89,7 +89,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
       </p>
       <p className={styles.c6}>
         <span className={styles.c10} style={{ fontWeight: 700 }}>
-          CERTIFICATE OF INDIGENCY
+          CERTIFICATE OF RESIDENCY
         </span>
       </p>
       <p className={styles.c4}>
@@ -119,27 +119,21 @@ export default function index({ name, purok, day, month, year, bearer, secretary
       <p className={styles.c7}>
         <span className={styles.c1}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify{' '}
-          <span className={styles.fillup}>{name}</span>, Filipino citizen{' '}
-          <span className={styles.fillup}>{civilstatus}</span> and resident of{' '}
+          <span className={styles.fillup}>{name}</span>, Filipino citizen is a bonified resident of{' '}
           <span className={styles.fillup}>{purok}</span>, Kimanait, Pangantucan, Bukidnon.
         </span>
       </p>
       <p className={styles.c5}>
         <span className={styles.c1} />
       </p>
-      <p className={styles.c7}>
-        <span className={styles.c1}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This certifies further that the above-named is belong to
-          indigent family.
-        </span>
-      </p>
+
       <p className={styles.c5}>
         <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This certification is issued upon request of the above name to
-          support any legal purposes it may serve.
+          support whatever legal purposes it may serve.
         </span>
       </p>
       <p className={styles.c5}>
@@ -175,7 +169,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
           <span className={styles.c2}>{bearer}</span>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
-          <span className={styles.c1}>Bearer</span>
+          <span className={styles.c1}>Owner</span>
         </p>
       </div>
       <p className={styles.c5}>
