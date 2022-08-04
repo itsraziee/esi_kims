@@ -130,10 +130,10 @@ export default function BarangayDeathCertificate({
         <span className={styles.c3}>{name}</span>
         <span className={styles.c5}>
           {' '}
-          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{purok}</span>, Kimanait,
+          &nbsp;Filipino citizen married and resident of Purok <span className={styles.c3}>{purok}</span>, Kimanait,
           Pangantucan, Bukidnon,
         </span>
-        <span className={styles.c3}>{relationship}</span>
+        <span className={styles.c3}> {relationship}</span>
         <span className={styles.c5}> of the deceased name below:</span>
       </p>
       <p className={(styles.c4, styles.c9)}>

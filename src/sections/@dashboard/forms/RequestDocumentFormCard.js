@@ -18,6 +18,11 @@ import {
   CardHeader,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import {
+  BARANGAY_BIRTH_CERTIFICATE_PRICE,
+  BARANGAY_CLEARANCE_PRICE,
+  BARANGAY_DEATH_CERTIFICATE_PRICE,
+} from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import { createOfficial } from '../../../service/official';
 import BarangayCertificateForm from './BarangayCertificateForm';
@@ -34,11 +39,13 @@ export default function RequestDocumentFormCard() {
 
   const RequestDocumentFormSchema = Yup.object().shape({
     typeOfDocument: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required(),
+    requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
   });
 
   const formik = useFormik({
     initialValues: {
       typeOfDocument: null,
+      requestorname: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -57,6 +64,14 @@ export default function RequestDocumentFormCard() {
       <CardHeader title="Request Document Form" subheader="Please provide all the information required below" />
       <CardContent>
         <Stack spacing={1}>
+          <TextField
+            label="Requestor Name"
+            name="requestorname"
+            fullWidth
+            {...getFieldProps('requestorname')}
+            error={Boolean(touched.requestorname && errors.requestorname)}
+            helperText={touched.requestorname && errors.requestorname}
+          />
           <FormControl
             helperText={touched.civilStatus && errors.civilStatus}
             fullWidth
@@ -84,12 +99,27 @@ export default function RequestDocumentFormCard() {
           </FormControl>
           {formik.values.typeOfDocument === 'certification' && <BarangayCertificateForm onSubmitForm={() => {}} />}
           {formik.values.typeOfDocument === 'death-certificate' && (
-            <BarangayDeathCertificateForm onSubmitForm={() => {}} />
+            <BarangayDeathCertificateForm
+              onSubmitForm={async (data) => {
+                return createRequest(
+                  'Death Certificate',
+                  data,
+                  formik.values.requestorname,
+                  BARANGAY_DEATH_CERTIFICATE_PRICE
+                )
+                  .then((res) => {
+                    console.log({ res });
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                  });
+              }}
+            />
           )}
           {formik.values.typeOfDocument === 'barangay-clearance' && (
             <BarangayClearanceForm
               onSubmitForm={async (data) => {
-                return createRequest('barangay-clearance', data)
+                return createRequest('Barangay Clearance', data, formik.values.requestorname, BARANGAY_CLEARANCE_PRICE)
                   .then((res) => {
                     console.log({ res });
                   })
@@ -111,7 +141,12 @@ export default function RequestDocumentFormCard() {
           {formik.values.typeOfDocument === 'birth-certificate' && (
             <BarangayBirthCertificateForm
               onSubmitForm={async (data) => {
-                return createRequest('birth-certificate', data)
+                return createRequest(
+                  'Barangay Birth Certificate',
+                  data,
+                  formik.values.requestorname,
+                  BARANGAY_BIRTH_CERTIFICATE_PRICE
+                )
                   .then((res) => {
                     console.log({ res });
                   })

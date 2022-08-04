@@ -35,4 +35,5 @@ BarangayDeathCertificate.args = {
   barangay: 'Punong Barangay',
   secretary: 'HAZEL JOY P. MANZAN',
   sec: 'Secretary',
+  purok: 5,
 };

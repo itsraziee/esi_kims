@@ -8,52 +8,46 @@ import { LoadingButton } from '@mui/lab';
 
 export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    purok: Yup.number().min(0).max(13).required(),
-    relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
-    deceasedName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
-    placeofDeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
-    dateofDeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
+    // relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
+    deceasedname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
+    placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
+    dateofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
     age: Yup.number().min(0, 'Must be positive!').required('Age is required'),
-    causeofDeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
+    causeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
     address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
-    civilStatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
-    placeBurried: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place Burried is required'),
+    civilstatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
+    placeburried: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place Burried is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     nameoffather: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Father is required'),
-    maidenNameofMother: Yup.string()
+    maidennameofmother: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Maiden Name of Mother is required'),
-    placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Death is required'),
-    dateofBirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of birth is required'),
+    dateofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of birth is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      fullName: '',
-      purok: '',
-      relationship: '',
-      deceasedName: '',
-      placeofBirth: '',
-      dateofDeath: '',
+      // relationship: '',
+      deceasedname: '',
+      dateofdeath: '',
       age: '',
-      causeofDeath: '',
+      causeofdeath: '',
       address: '',
-      civilStatus: '',
-      placeBurried: '',
+      civilstatus: '',
+      placeburried: '',
       religion: '',
       occupation: '',
       nameoffather: '',
-      maidenNameofMother: '',
-      placeofDeath: '',
-      dateofBirth: '',
+      maidennameofmother: '',
+      placeofdeath: '',
+      dateofbirth: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
@@ -66,35 +60,35 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
-              name="deceasedName"
+              name="deceasedname"
               label="Deceased Name"
-              {...getFieldProps('deceasedName')}
-              error={Boolean(touched.deceasedName && errors.deceasedName)}
-              helperText={touched.deceasedName && errors.deceasedName}
+              {...getFieldProps('deceasedname')}
+              error={Boolean(touched.deceasedname && errors.deceasedname)}
+              helperText={touched.deceasedname && errors.deceasedname}
             />
             <TextField
               fullWidth
-              name="placeofDeath"
+              name="placeofdeath"
               label="Place of Death"
-              {...getFieldProps('placeofDeath')}
-              error={Boolean(touched.placeofDeath && errors.placeofDeath)}
-              helperText={touched.placeofDeath && errors.placeofDeath}
+              {...getFieldProps('placeofdeath')}
+              error={Boolean(touched.placeofdeath && errors.placeofdeath)}
+              helperText={touched.placeofdeath && errors.placeofdeath}
             />
             <TextField
               fullWidth
-              name="dateofBirth"
+              name="dateofbirth"
               label="Date of Birth"
-              {...getFieldProps('dateofBirth')}
-              error={Boolean(touched.dateofBirth && errors.dateofBirth)}
-              helperText={touched.dateofBirth && errors.dateofBirth}
+              {...getFieldProps('dateofbirth')}
+              error={Boolean(touched.dateofbirth && errors.dateofbirth)}
+              helperText={touched.dateofbirth && errors.dateofbirth}
             />
             <TextField
               fullWidth
-              name="dateofDeath"
+              name="dateofdeath"
               label="Date of Death"
-              {...getFieldProps('dateofDeath')}
-              error={Boolean(touched.dateofDeath && errors.dateofDeath)}
-              helperText={touched.dateofDeath && errors.dateofDeath}
+              {...getFieldProps('dateofdeath')}
+              error={Boolean(touched.dateofdeath && errors.dateofdeath)}
+              helperText={touched.dateofdeath && errors.dateofdeath}
             />
           </Stack>
 
@@ -108,11 +102,11 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             />
             <TextField
               fullWidth
-              name="causeofDeath"
+              name="causeofdeath"
               label="Cause of Death"
-              {...getFieldProps('causeofDeath')}
-              error={Boolean(touched.causeofDeath && errors.causeofDeath)}
-              helperText={touched.causeofDeath && errors.causeofDeath}
+              {...getFieldProps('causeofdeath')}
+              error={Boolean(touched.causeofdeath && errors.causeofdeath)}
+              helperText={touched.causeofdeath && errors.causeofdeath}
             />
             <TextField
               fullWidth
@@ -127,19 +121,19 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
-              name="civilStatus"
+              name="civilstatus"
               label="Civil Status"
-              {...getFieldProps('civilStatus')}
-              error={Boolean(touched.civilStatus && errors.civilStatus)}
-              helperText={touched.civilStatus && errors.civilStatus}
+              {...getFieldProps('civilstatus')}
+              error={Boolean(touched.civilstatus && errors.civilstatus)}
+              helperText={touched.civilstatus && errors.civilstatus}
             />
             <TextField
               fullWidth
-              name="placeBurried"
+              name="placeburried"
               label="Place Burried"
-              {...getFieldProps('placeBurried')}
-              error={Boolean(touched.placeBurried && errors.placeBurried)}
-              helperText={touched.placeBurried && errors.placeBurried}
+              {...getFieldProps('placeburried')}
+              error={Boolean(touched.placeburried && errors.placeburried)}
+              helperText={touched.placeburried && errors.placeburried}
             />
             <TextField
               fullWidth
@@ -170,11 +164,11 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             />
             <TextField
               fullWidth
-              name="maidenNameofMother"
+              name="maidennameofmother"
               label="Maiden Name of Mother"
-              {...getFieldProps('maidenNameofMother')}
-              error={Boolean(touched.maidenNameofMother && errors.maidenNameofMother)}
-              helperText={touched.maidenNameofMother && errors.maidenNameofMother}
+              {...getFieldProps('maidennameofmother')}
+              error={Boolean(touched.maidennameofmother && errors.maidennameofmother)}
+              helperText={touched.maidennameofmother && errors.maidennameofmother}
             />
           </Stack>
         </Stack>

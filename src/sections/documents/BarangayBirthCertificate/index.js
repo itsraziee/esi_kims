@@ -2,6 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import styles from './BarangayBirthCertificate.module.css';
 
+// TODO fix name, date, punong barangay, secretary,
 export default function BarangayBirthCertificate({
   name,
   purok,
@@ -52,7 +53,7 @@ export default function BarangayBirthCertificate({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -79,7 +80,7 @@ export default function BarangayBirthCertificate({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
