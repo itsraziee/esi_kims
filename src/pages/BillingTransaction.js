@@ -20,7 +20,7 @@ import moment from 'moment';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import { updateRemarks, updateStatus } from '../service/documentRequest';
-import BarangayClearance from './BarangayClearance';
+import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 
 export default function BillingTransaction() {
@@ -130,7 +130,7 @@ export default function BillingTransaction() {
                   <CloseIcon />
                 </IconButton>
                 <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  Sound
+                  Form
                 </Typography>
                 <Button autoFocus color="inherit" onClick={handlePrintClose}>
                   save

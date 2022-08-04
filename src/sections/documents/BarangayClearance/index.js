@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import React from 'react';
 import styles from './BarangayClearance.module.css';
 
-export default function index({
+export default function BarangayClearance({
   fileNo,
   description,
   day,
@@ -52,7 +52,7 @@ export default function index({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -80,7 +80,7 @@ export default function index({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -103,7 +103,7 @@ export default function index({
         <span className={styles.c1}>BARANGAY KIMANAIT</span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c2}></span>
+        <span className={styles.c2} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c1}>OFFICE OF THE BARANGAY GOVERNMENT</span>
@@ -115,13 +115,13 @@ export default function index({
         </span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c7}></span>
+        <span className={styles.c7} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c7}></span>
+        <span className={styles.c7} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c1}>File No.{''}</span>
@@ -148,7 +148,7 @@ export default function index({
       >
         <img
           alt=""
-          src="images/image3.png"
+          src="/images/image3.png"
           style={{
             width: '103px',
             height: '98.52px',
@@ -161,13 +161,13 @@ export default function index({
         />
       </span>
       <p className={styles.c0}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c14}>
         <span className={styles.c1}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -178,10 +178,10 @@ export default function index({
         <span className={styles.c5}>.</span>
       </p>
       <p className={styles.c1}>
-        <span className={styles.c4}></span>
+        <span className={styles.c4} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c1}>Name: {''}</span>
@@ -210,7 +210,7 @@ export default function index({
         <span className={(styles.c8, styles.underline)}>{citizenship}</span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c7, styles.c4)}></span>
+        <span className={(styles.c7, styles.c4)} />
       </p>
       <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={styles.c4}>Sex: {''}</span>
@@ -223,7 +223,7 @@ export default function index({
         <span className={(styles.c2, styles.underline)}>{civilstatus}</span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={styles.c8}></span>
+        <span className={styles.c8} />
       </p>
       <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={styles.c4}>Birthdate: {''}</span>
@@ -267,14 +267,14 @@ export default function index({
         </span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c7, styles.c9)}></span>
+        <span className={(styles.c7, styles.c9)} />
       </p>
       <p className={styles.c1} style={{ marginTop: 5 }}>
         <span className={(styles.c11, styles.c7)}>Purpose: </span>
         <span className={styles.c2}>{purpose}</span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span
@@ -292,7 +292,7 @@ export default function index({
         >
           <img
             alt=""
-            src="images/image4.png"
+            src="/images/image4.png"
             style={{
               width: '249px',
               height: '79px',
@@ -306,10 +306,10 @@ export default function index({
         </span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c11, styles.c7)}></span>
+        <span className={(styles.c11, styles.c7)} />
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c11, styles.c7)}></span>
+        <span className={(styles.c11, styles.c7)} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>
@@ -319,7 +319,7 @@ export default function index({
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Left&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Right
         </span>
         <p className={styles.c4}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <span className={(styles.c1, styles.c8)}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thumb
@@ -327,10 +327,10 @@ export default function index({
         </span>
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c1}>
         <span
@@ -347,7 +347,7 @@ export default function index({
         >
           <img
             alt=""
-            src="images/image5.png"
+            src="/images/image5.png"
             style={{
               width: '245px',
               height: '68px',
@@ -367,7 +367,7 @@ export default function index({
         </span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c7, styles.c17)}></span>
+        <span className={(styles.c7, styles.c17)} />
       </p>
       <p className={styles.c1}>
         <span className={(styles.c11, styles.c7)}>&nbsp; &nbsp; &nbsp; &nbsp; Res. Cert No.: {''}</span>
@@ -385,10 +385,10 @@ export default function index({
         <span className={styles.c2}>{placeIssued}</span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c11, styles.c7)}></span>
+        <span className={(styles.c11, styles.c7)} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={(styles.c11, styles.c7)}>
@@ -416,10 +416,10 @@ export default function index({
         <span className={(styles.c7, styles.c4)}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c7, styles.c12)}></span>
+        <span className={(styles.c7, styles.c12)} />
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c7, styles.c16, styles.c20)}></span>
+        <span className={(styles.c7, styles.c16, styles.c20)} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>
@@ -429,11 +429,11 @@ export default function index({
         <span className={(styles.c11, styles.c8)}>By the Authority of the Punong Barangay</span>
       </p>
       <p className={(styles.c1, styles.c6)}>
-        <span className={(styles.c11, styles.c7)}></span>
+        <span className={(styles.c11, styles.c7)} />
       </p>
 
       <p className={styles.c0}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>
