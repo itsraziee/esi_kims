@@ -10,24 +10,22 @@ table th {
   text-decoration: underline;
 }
 .c8 {
-  background-color: #ffffff;
   -webkit-text-decoration-skip: none;
   color: #000000;
   font-weight: 700;
   vertical-align: baseline;
   text-decoration-skip-ink: none;
   font-size: 11pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
   font-style: normal;
 }
 .c5 {
-  background-color: #ffffff;
   color: #000000;
   font-weight: 400;
   text-decoration: none;
   vertical-align: baseline;
   font-size: 12pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
   font-style: normal;
 }
 .c2 {
@@ -36,7 +34,7 @@ table th {
   font-weight: 400;
   text-decoration-skip-ink: none;
   font-size: 11pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .c0 {
   padding-top: 0pt;
@@ -64,7 +62,6 @@ table th {
   text-align: center;
 }
 .c1 {
-  background-color: #ffffff;
   color: #000000;
   font-weight: 400;
   text-decoration: none;
@@ -77,10 +74,9 @@ table th {
   color: #000000;
   font-weight: 700;
   font-size: 11pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .c7 {
-  background-color: #ffffff;
   text-decoration: none;
   vertical-align: baseline;
   font-style: normal;
@@ -89,11 +85,11 @@ table th {
   color: #263186;
   font-weight: 700;
   font-size: 24pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .c14 {
   font-size: 24pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
   color: #263186;
   font-weight: 400;
 }
@@ -101,16 +97,15 @@ table th {
   color: #000000;
   font-weight: 400;
   font-size: 7pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .c13 {
-  
   max-width: 468pt;
   padding: 72pt 72pt 72pt 72pt;
 }
 .c4 {
   font-size: 11pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
   color: #000000;
   font-weight: 400;
 }
@@ -121,26 +116,24 @@ table th {
   color: #000000;
   font-weight: 400;
   font-size: 9pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .c17 {
   color: #000000;
   font-weight: 700;
   font-size: 5pt;
-  font-family: "Verdana";
+  font-family: 'Verdana';
 }
 .c15 {
-  background-color: #ffffff;
   max-width: 468pt;
   padding: 72pt 72pt 72pt 72pt;
 }
 .c18 {
-  background-color: #ffffff;
   vertical-align: baseline;
   font-style: normal;
 }
 .c16 {
-  font-family: "Verdana";
+  font-family: 'Verdana';
   color: #000000;
   font-weight: 400;
 }
@@ -156,13 +149,12 @@ table th {
   text-align: center;
 }
 .title {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #000000;
   font-weight: 700;
   font-size: 36pt;
   padding-bottom: 6pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;
@@ -178,10 +170,10 @@ table th {
   padding-left: 0pt;
   border-left-color: #000000;
   font-size: 24pt;
-  background-color: #ffffff;
+
   border-left-style: solid;
   border-top-color: #000000;
-  font-family: "Georgia";
+  font-family: 'Georgia';
   orphans: 2;
   text-align: left;
   padding-top: 0pt;
@@ -199,28 +191,25 @@ table th {
   padding-right: 0pt;
 }
 li {
-  background-color: #ffffff;
   color: #000000;
   font-weight: 700;
   font-size: 12pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
 }
 p {
-  background-color: #ffffff;
   margin: 0;
   color: #000000;
   font-weight: 700;
   font-size: 12pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
 }
 h1 {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #000000;
   font-weight: 700;
   font-size: 24pt;
   padding-bottom: 6pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;
@@ -228,13 +217,12 @@ h1 {
   text-align: center;
 }
 h2 {
-  background-color: #ffffff;
   padding-top: 18pt;
   color: #000000;
   font-weight: 700;
   font-size: 18pt;
   padding-bottom: 4pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;
@@ -242,13 +230,12 @@ h2 {
   text-align: center;
 }
 h3 {
-  background-color: #ffffff;
   padding-top: 14pt;
   color: #000000;
   font-weight: 700;
   font-size: 14pt;
   padding-bottom: 4pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;
@@ -256,13 +243,12 @@ h3 {
   text-align: center;
 }
 h4 {
-  background-color: #ffffff;
   padding-top: 12pt;
   color: #000000;
   font-weight: 700;
   font-size: 12pt;
   padding-bottom: 2pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;
@@ -270,13 +256,12 @@ h4 {
   text-align: center;
 }
 h5 {
-  background-color: #ffffff;
   padding-top: 11pt;
   color: #000000;
   font-weight: 700;
   font-size: 11pt;
   padding-bottom: 2pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;
@@ -284,13 +269,12 @@ h5 {
   text-align: center;
 }
 h6 {
-  background-color: #ffffff;
   padding-top: 10pt;
   color: #000000;
   font-weight: 700;
   font-size: 10pt;
   padding-bottom: 2pt;
-  font-family: "Times New Roman";
+  font-family: 'Times New Roman';
   line-height: 2;
   page-break-after: avoid;
   orphans: 2;

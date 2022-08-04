@@ -44,7 +44,7 @@ export default function RequestDocumentFormCard() {
 
   const formik = useFormik({
     initialValues: {
-      typeOfDocument: null,
+      typeOfDocument: 'barangay-clearance',
       requestorname: '',
     },
     validationSchema: RequestDocumentFormSchema,
@@ -86,6 +86,8 @@ export default function RequestDocumentFormCard() {
               label="Select Type of Documents"
               onChange={handleChange}
               {...getFieldProps('typeOfDocument')}
+              error={Boolean(touched.typeOfDocument && errors.typeOfDocument)}
+              helperText={touched.typeOfDocument && errors.typeOfDocument}
             >
               <MenuItem value="barangay-clearance">Barangay Clearance</MenuItem>
               <MenuItem value="birth-certificate">Barangay Birth Certificate</MenuItem>

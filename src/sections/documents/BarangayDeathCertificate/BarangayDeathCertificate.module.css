@@ -19,7 +19,6 @@ ol {
   padding-left: 100px;
 }
 .c10 {
-  background-color: #ffffff;
   -webkit-text-decoration-skip: none;
   color: #595959;
   font-weight: 700;
@@ -31,7 +30,6 @@ ol {
   font-style: normal;
 }
 .c3 {
-  background-color: #ffffff;
   -webkit-text-decoration-skip: none;
   color: #595959;
   font-weight: 700;
@@ -43,7 +41,6 @@ ol {
   font-style: normal;
 }
 .c5 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 400;
   text-decoration: none;
@@ -53,7 +50,6 @@ ol {
   font-style: normal;
 }
 .c8 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   text-decoration: none;
@@ -64,7 +60,6 @@ ol {
   text-align: center;
 }
 .c1 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   text-decoration: none;
@@ -127,8 +122,6 @@ ol {
   font-weight: 400;
 }
 .c13 {
-  background-color: #ffffff;
-  max-width: 468pt;
   padding: 72pt 72pt 72pt 72pt;
 }
 .c7 {
@@ -144,7 +137,6 @@ ol {
   height: 12pt;
 }
 .title {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #595959;
   font-weight: 700;
@@ -165,7 +157,7 @@ ol {
   padding-left: 0pt;
   border-left-color: #000000;
   font-size: 24pt;
-  background-color: #ffffff;
+
   border-left-style: solid;
   border-top-color: #000000;
   font-family: 'Georgia';
@@ -186,14 +178,12 @@ ol {
   padding-right: 0pt;
 }
 li {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   font-size: 12pt;
   font-family: 'Times New Roman';
 }
 p {
-  background-color: #ffffff;
   margin: 0;
   color: #595959;
   font-weight: 700;
@@ -201,7 +191,6 @@ p {
   font-family: 'Times New Roman';
 }
 h1 {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #595959;
   font-weight: 700;
@@ -215,7 +204,6 @@ h1 {
   text-align: center;
 }
 h2 {
-  background-color: #ffffff;
   padding-top: 18pt;
   color: #595959;
   font-weight: 700;
@@ -229,7 +217,6 @@ h2 {
   text-align: center;
 }
 h3 {
-  background-color: #ffffff;
   padding-top: 14pt;
   color: #595959;
   font-weight: 700;
@@ -243,7 +230,6 @@ h3 {
   text-align: center;
 }
 h4 {
-  background-color: #ffffff;
   padding-top: 12pt;
   color: #595959;
   font-weight: 700;
@@ -256,7 +242,6 @@ h4 {
   text-align: center;
 }
 h5 {
-  background-color: #ffffff;
   padding-top: 11pt;
   color: #595959;
   font-weight: 700;
@@ -269,7 +254,6 @@ h5 {
   text-align: center;
 }
 h6 {
-  background-color: #ffffff;
   padding-top: 10pt;
   color: #595959;
   font-weight: 700;
