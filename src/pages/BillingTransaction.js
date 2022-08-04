@@ -22,6 +22,7 @@ import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import { updateRemarks, updateStatus } from '../service/documentRequest';
 import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
+import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 
 export default function BillingTransaction() {
   const rows = useDocumentRequests() ?? [];
@@ -130,15 +131,22 @@ export default function BillingTransaction() {
                   <CloseIcon />
                 </IconButton>
                 <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  Form
+                  Preview
                 </Typography>
                 <Button autoFocus color="inherit" onClick={handlePrintClose}>
-                  save
+                  Print
                 </Button>
               </Toolbar>
             </AppBar>
             {documentType === 'Barangay Clearance' && <BarangayClearance />}
             {documentType === 'Barangay Birth Certificate' && <BarangayBirthCertificate {...currentRow.data} />}
+            {documentType === 'Death Certificate' && (
+              <BarangayDeathCertificate
+                {...currentRow.data}
+                secretary="HAZEL JOY P. MANZAN"
+                captain="JERRY P. PARADILLO"
+              />
+            )}
           </Dialog>
         )}
       </Container>

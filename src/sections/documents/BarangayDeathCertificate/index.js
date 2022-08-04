@@ -23,7 +23,7 @@ export default function BarangayDeathCertificate({
   religion,
   occupation,
   nameoffather,
-  maiden,
+  maidennameofmother,
   captain,
   barangay,
   secretary,
@@ -48,7 +48,7 @@ export default function BarangayDeathCertificate({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -75,7 +75,7 @@ export default function BarangayDeathCertificate({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -216,7 +216,7 @@ export default function BarangayDeathCertificate({
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAIDEN NAME OF MOTHER</td>
           <td style={{ paddingLeft: '10px' }}>
-            : <span className={styles.c3}>{maiden}</span>
+            : <span className={styles.c3}>{maidennameofmother}</span>
           </td>
         </tr>
       </table>
@@ -260,7 +260,7 @@ export default function BarangayDeathCertificate({
           <span className={styles.c3}>{captain}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-          <span className={styles.c5}>{barangay}</span>
+          <span className={styles.c5}>Punong Barangay</span>
         </p>
       </div>
 

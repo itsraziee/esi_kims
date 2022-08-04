@@ -7,7 +7,6 @@ table th {
   padding: 0;
 }
 .c6 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 400;
   text-decoration: none;
@@ -17,7 +16,6 @@ table th {
   font-style: normal;
 }
 .c0 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   text-decoration: none;
@@ -28,7 +26,6 @@ table th {
   text-align: center;
 }
 .c12 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 400;
   text-decoration: none;
@@ -47,7 +44,6 @@ table th {
   font-style: normal;
 }
 .c4 {
-  background-color: #ffffff;
   -webkit-text-decoration-skip: none;
   color: #595959;
   text-decoration: underline;
@@ -87,7 +83,6 @@ table th {
   font-weight: 700;
 }
 .c16 {
-  background-color: #ffffff;
   color: #595959;
   text-decoration: none;
   vertical-align: baseline;
@@ -110,7 +105,6 @@ table th {
   font-weight: 400;
 }
 .c10 {
-  background-color: #ffffff;
   max-width: 468pt;
   padding: 72pt 72pt 72pt 72pt;
 }
@@ -131,7 +125,6 @@ table th {
   height: 12pt;
 }
 .title {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #595959;
   font-weight: 700;
@@ -153,7 +146,7 @@ table th {
   padding-left: 0pt;
   border-left-color: #000000;
   font-size: 24pt;
-  background-color: #ffffff;
+
   border-left-style: solid;
   border-top-color: #000000;
   font-family: 'Georgia';
@@ -236,7 +229,7 @@ h4 {
   page-break-after: avoid;
   orphans: 2;
   widows: 2;
-  text-align: center;
+  text-align: left;
 }
 h5 {
   padding-top: 11pt;

@@ -10,7 +10,6 @@ ol {
   width: 100%;
 }
 .c6 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   text-decoration: none;
@@ -20,7 +19,6 @@ ol {
   font-style: normal;
 }
 .c10 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 400;
   text-decoration: none;
@@ -30,7 +28,6 @@ ol {
   font-style: normal;
 }
 .c11 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   text-decoration: none;
@@ -40,7 +37,6 @@ ol {
   font-style: normal;
 }
 .c0 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 400;
   text-decoration: none;
@@ -50,7 +46,6 @@ ol {
   font-style: normal;
 }
 .c5 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 400;
   text-decoration: none;
@@ -60,7 +55,6 @@ ol {
   font-style: italic;
 }
 .c14 {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   vertical-align: baseline;
@@ -106,7 +100,6 @@ ol {
   font-weight: 400;
 }
 .c7 {
-  background-color: #ffffff;
   max-width: 486pt;
   padding: 72pt 72pt 72pt 54pt;
 }
@@ -139,7 +132,6 @@ ol {
 }
 
 .title {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #595959;
   font-weight: 700;
@@ -161,7 +153,7 @@ ol {
   padding-left: 0pt;
   border-left-color: #000000;
   font-size: 24pt;
-  background-color: #ffffff;
+
   border-left-style: solid;
   border-top-color: #000000;
   font-family: 'Georgia';
@@ -182,14 +174,12 @@ ol {
   padding-right: 0pt;
 }
 li {
-  background-color: #ffffff;
   color: #595959;
   font-weight: 700;
   font-size: 12pt;
   font-family: 'Verdana';
 }
 p {
-  background-color: #ffffff;
   margin: 0;
   color: #595959;
   font-weight: 700;
@@ -197,7 +187,6 @@ p {
   font-family: 'Verdana';
 }
 h1 {
-  background-color: #ffffff;
   padding-top: 24pt;
   color: #595959;
   font-weight: 700;
@@ -211,7 +200,6 @@ h1 {
   text-align: center;
 }
 h2 {
-  background-color: #ffffff;
   padding-top: 18pt;
   color: #595959;
   font-weight: 700;
@@ -228,7 +216,6 @@ h2 {
   font-weight: 700;
 }
 h3 {
-  background-color: #ffffff;
   padding-top: 14pt;
   color: #595959;
   font-weight: 700;
@@ -242,7 +229,6 @@ h3 {
   text-align: center;
 }
 h4 {
-  background-color: #ffffff;
   padding-top: 12pt;
   color: #595959;
   font-weight: 700;
@@ -256,7 +242,6 @@ h4 {
   text-align: center;
 }
 h5 {
-  background-color: #ffffff;
   padding-top: 11pt;
   color: #595959;
   font-weight: 700;
@@ -270,7 +255,6 @@ h5 {
   text-align: center;
 }
 h6 {
-  background-color: #ffffff;
   padding-top: 10pt;
   color: #595959;
   font-weight: 700;

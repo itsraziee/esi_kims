@@ -16,7 +16,6 @@ BarangayDeathCertificate.args = {
   day: 29,
   month: 'August',
   year: 2022,
-  secretary: 'HAZEL JOY M. MANZAN',
   punongbarnagay: 'JERRY P. PARADILLO',
   deceasedname: 'Tampulano Tampulana',
   placeofdeath: '45 St. Fallen',
@@ -34,6 +33,5 @@ BarangayDeathCertificate.args = {
   captain: 'JERRY P. PARADILLO',
   barangay: 'Punong Barangay',
   secretary: 'HAZEL JOY P. MANZAN',
-  sec: 'Secretary',
   purok: 5,
 };
