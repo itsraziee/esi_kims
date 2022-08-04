@@ -38,7 +38,7 @@ export default function RequestDocumentFormCard() {
 
   const formik = useFormik({
     initialValues: {
-      typeOfDocument: undefined,
+      typeOfDocument: null,
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -109,7 +109,17 @@ export default function RequestDocumentFormCard() {
             <CertificateOfIndigencyForm onSubmitForm={() => {}} />
           )}
           {formik.values.typeOfDocument === 'birth-certificate' && (
-            <BarangayBirthCertificateForm onSubmitForm={() => {}} />
+            <BarangayBirthCertificateForm
+              onSubmitForm={async (data) => {
+                return createRequest('birth-certificate', data)
+                  .then((res) => {
+                    console.log({ res });
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                  });
+              }}
+            />
           )}
         </Stack>
       </CardContent>

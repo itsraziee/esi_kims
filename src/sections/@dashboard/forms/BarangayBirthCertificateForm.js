@@ -10,10 +10,9 @@ import { PropTypes } from 'prop-types';
 // TODO: Death error message is not working (mag red ra sya peru dili ga show ang error message)!
 // TODO: Fathers Occupation error message is not working (mag red ra sya peru dili ga show ang error message)!
 
-export default function BarangayBirthCertificateForm(onSubmitForm) {
+export default function BarangayBirthCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    nameofChild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
-    purok: Yup.number().min(0).max(13).required(),
+    nameofchild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
     sex: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Sex is required'),
     dateofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Birth is required'),
     timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
@@ -46,15 +45,14 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Address of Attendant is required'),
-    yearofResidency: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Year of Residency is required'),
-    dateofBirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of birth is required'), // TODO to replace when inour field is replaced
-    timeofBirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of birth is required'),
+    yearofresidency: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Year of Residency is required'),
   });
 
+  // TODO change sex field into a selector
+  // TODO add sample data to fields
   const formik = useFormik({
     initialValues: {
-      nameofChild: '',
-      purok: '',
+      nameofchild: '',
       sex: '',
       dateofbirth: '',
       timeofbirth: '',
@@ -72,14 +70,12 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
       placeofmarriage: '',
       nameofattendant: '',
       addressofattendant: '',
-      yearofResidency: '',
-      dateofBirth: '',
-      timeofBirth: '',
+      yearofresidency: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
@@ -92,11 +88,11 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
           <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
-              name="nameofChild"
+              name="nameofchild"
               label="Name of Child"
-              {...getFieldProps('nameofChild')}
-              error={Boolean(touched.nameofChild && errors.nameofChild)}
-              helperText={touched.nameofChild && errors.nameofChild}
+              {...getFieldProps('nameofchild')}
+              error={Boolean(touched.nameofchild && errors.nameofchild)}
+              helperText={touched.nameofchild && errors.nameofchild}
             />
             <TextField
               // sx={{ minWidth: 91, mt: 2 }}
@@ -110,21 +106,21 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
             <TextField
               // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
-              name="dateofBirth"
+              name="dateofbirth"
               label="Date of Birth"
-              {...getFieldProps('dateofBirth')}
-              error={Boolean(touched.dateofBirth && errors.dateofBirth)}
-              helperText={touched.dateofBirth && errors.dateofBirth}
+              {...getFieldProps('dateofbirth')}
+              error={Boolean(touched.dateofbirth && errors.dateofbirth)}
+              helperText={touched.dateofbirth && errors.dateofbirth}
             />
 
             <TextField
               // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
-              name="timeofBirth"
+              name="timeofbirth"
               label="Time of Birth"
-              {...getFieldProps('timeofBirth')}
-              error={Boolean(touched.timeofBirth && errors.timeofBirth)}
-              helperText={touched.timeofBirth && errors.timeofBirth}
+              {...getFieldProps('timeofbirth')}
+              error={Boolean(touched.timeofbirth && errors.timeofbirth)}
+              helperText={touched.timeofbirth && errors.timeofbirth}
             />
           </Stack>
 
@@ -260,11 +256,11 @@ export default function BarangayBirthCertificateForm(onSubmitForm) {
           <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               fullWidth
-              name="yearofResidency"
+              name="yearofresidency"
               label="Since when have you resided in this barangay?"
-              {...getFieldProps('yearofResidency')}
-              error={Boolean(touched.yearofResidency && errors.yearofResidency)}
-              helperText={touched.yearofResidency && errors.yearofResidency}
+              {...getFieldProps('yearofresidency')}
+              error={Boolean(touched.yearofresidency && errors.yearofresidency)}
+              helperText={touched.yearofresidency && errors.yearofresidency}
             />
           </Stack>
         </Stack>
