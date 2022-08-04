@@ -59,11 +59,8 @@ export default function CertificateOfResidencyForm(onSubmitForm) {
           </>
         </Stack>
         <Box sx={{ color: 'gray', mb: 1 }}>
-          <Typography variant="subtitle4">Barangay Certificate Of Residency Requirements</Typography>
+          <Typography variant="subtitle4">Certificate Of Residency Requirement</Typography>
           <Typography>1. Purok Cerification</Typography>
-          <Typography>2. Valid ID</Typography>
-          <Typography>3. Valid ID</Typography>
-          <Typography>4. Purok Certification</Typography>
         </Box>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -84,4 +81,3 @@ CertificateOfResidencyForm.propTypes = {
   // Function to call on submit
   onSubmitForm: PropTypes.func.isRequired,
 };
-

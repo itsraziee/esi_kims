@@ -1,0 +1,7 @@
+export const BARANGAY_CLEARANCE_PRICE = 150;
+export const BARANGAY_BIRTH_CERTIFICATE_PRICE = 150;
+export const BARANGAY_DEATH_CERTIFICATE_PRICE = 150;
+export const BARANGAY_CERTIFICATION_PRICE = 150; // TODO rename to barangay electrification certification
+export const CERTIFICATE_OF_INDIGENCY_PRICE = 150;
+export const CERTIFICATE_OF_RESIDENCY_PRICE = 150;
+export const TREE_PLANTING_CERTIFICATE_PRICE = 150;

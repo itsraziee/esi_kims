@@ -21,7 +21,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
@@ -59,11 +59,8 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
           </>
         </Stack>
         <Box sx={{ color: 'gray', mb: 1 }}>
-          <Typography variant="subtitle4">Barangay Clearance Requirements</Typography>
+          <Typography variant="subtitle4">Barangay Clearance Requirement</Typography>
           <Typography>1. Purok Cerification</Typography>
-          <Typography>2. Valid ID</Typography>
-          <Typography>3. Valid ID</Typography>
-          <Typography>4. Purok Certification</Typography>
         </Box>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

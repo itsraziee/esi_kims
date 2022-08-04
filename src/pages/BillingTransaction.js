@@ -1,61 +1,60 @@
 import * as React from 'react';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Container } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  AppBar,
+  Button,
+  ButtonBase,
+  Container,
+  Dialog,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Slide,
+  Toolbar,
+  Typography,
+} from '@mui/material';
+import moment from 'moment';
 import Page from '../components/Page';
+import { useDocumentRequests } from '../hooks/useDocumentRequests';
+import { updateRemarks, updateStatus } from '../service/documentRequest';
+import BarangayClearance from './BarangayClearance';
+import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 
 export default function BillingTransaction() {
-  const rows = [
-    {
-      id: 1,
-      name: 'Jessel',
-      datetime: '12/12/22',
-      type: 'Barangay Certification',
-      amount: '150',
-      status: 'completed',
-      remarks: 'Done',
-    },
-    {
-      id: 2,
-      name: 'Jessel',
-      datetime: '03/12/22',
-      type: 'Barangay Certification',
-      amount: '150',
-      status: 'completed',
-      remarks: 'Done',
-    },
-    {
-      id: 3,
-      name: 'Jessel',
-      datetime: '04/12/22',
-      type: 'Barangay Certification',
-      amount: '150',
-      status: 'completed',
-      remarks: 'Done',
-    },
-    {
-      id: 4,
-      name: 'Jessel Rachel Anne Gooo',
-      datetime: '10/12/22',
-      type: 'Barangay Certification',
-      amount: '150',
-      status: 'completed',
-      remarks: 'Done',
-    },
-    {
-      id: 5,
-      name: 'Jessel Pelarca Letragooooo',
-      datetime: '05/12/22',
-      type: 'Barangay Certification',
-      amount: '150',
-      status: 'completed',
-      remarks: 'Done',
-    },
-  ];
+  const rows = useDocumentRequests() ?? [];
+  const [printOpen, setPrintOpen] = React.useState(false);
+  const [documentType, setDocumentType] = React.useState();
+  const [currentRow, setCurrentRow] = React.useState();
+
+  const handlePrintOpen = () => {
+    setPrintOpen(true);
+  };
+
+  const handlePrintClose = () => {
+    setPrintOpen(false);
+  };
+
+  React.useEffect(() => {
+    console.log({ rows });
+  }, [rows]);
 
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1 },
-    { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'datetime', headerName: 'Datetime' },
+    { field: 'requestorName', headerName: 'Name', flex: 1 },
+    {
+      field: 'datetime',
+      headerName: 'Datetime',
+      valueFormatter: (params) => {
+        if (params.value == null) {
+          return 'N/A';
+        }
+
+        return moment(params.value).format('L');
+      },
+    },
     { field: 'type', headerName: 'Type', flex: 1 },
     { field: 'amount', headerName: 'Amount' },
     {
@@ -66,9 +65,52 @@ export default function BillingTransaction() {
       type: 'singleSelect',
       description: 'Double click to edit',
       flex: 1,
+      valueSetter: (params) => {
+        console.log({ params });
+        updateStatus(params.row.id, params.value).then((res) => {
+          console.log({ res });
+        });
+        return { ...params.row, remarks: params.value };
+      },
     }, // pending, inprogress, completed, declined
-    { field: 'remarks', headerName: 'Remarks', flex: 1, editable: true },
+    {
+      field: 'remarks',
+      headerName: 'Remarks',
+      flex: 1,
+      editable: true,
+      valueSetter: (params) => {
+        console.log({ params });
+        updateRemarks(params.row.id, params.value ?? '').then((res) => {
+          console.log({ res });
+        });
+        return { ...params.row, remarks: params.value ?? '' };
+      },
+    },
+    {
+      field: 'none',
+      headerName: 'Actions',
+      sortable: false,
+      disableColumnMenu: true,
+      renderCell: (params) => (
+        <Button
+          variant="text"
+          size="small"
+          onClick={() => {
+            console.log({ params });
+            setDocumentType(params.row.type);
+            setCurrentRow(params.row);
+            handlePrintOpen();
+          }}
+        >
+          Print
+        </Button>
+      ),
+    },
   ];
+
+  const Transition = React.forwardRef((props, ref) => {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
   return (
     <Page title="Billing Transaction">
@@ -80,6 +122,25 @@ export default function BillingTransaction() {
           columns={columns}
           autoHeight
         />
+        {printOpen && ( // Note: Important, button disables after closing dialog
+          <Dialog fullScreen open={printOpen} onClose={handlePrintClose} TransitionComponent={Transition}>
+            <AppBar sx={{ position: 'relative' }}>
+              <Toolbar>
+                <IconButton edge="start" color="inherit" onClick={handlePrintClose} aria-label="close">
+                  <CloseIcon />
+                </IconButton>
+                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  Sound
+                </Typography>
+                <Button autoFocus color="inherit" onClick={handlePrintClose}>
+                  save
+                </Button>
+              </Toolbar>
+            </AppBar>
+            {documentType === 'Barangay Clearance' && <BarangayClearance />}
+            {documentType === 'Barangay Birth Certificate' && <BarangayBirthCertificate {...currentRow.data} />}
+          </Dialog>
+        )}
       </Container>
     </Page>
   );
