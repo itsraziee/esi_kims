@@ -200,23 +200,6 @@ export default function RequestDocumentFormCard() {
             />
           )}
           {formik.values.typeOfDocument === 'tree-planting-certificate' && (
-            <BarangayTreePlantingCertificateForm 
-            onSubmitForm={async(data) => {
-              return createRequest(
-                'Tree Planting Certificate',
-                data,
-                formik.values.requestorname,
-                TREE_PLANTING_CERTIFICATE_PRICE
-              )
-                .then((res) => {
-                  console.log({ res });
-                })
-                .catch((err) => {
-                  console.log({ err });
-                });
-            }} />
-          )}
-          {formik.values.typeOfDocument === 'tree-planting-certificate' && (
             <CertificateOfTreePlantingForm
               onSubmitForm={async (data) => {
                 return createRequest(
