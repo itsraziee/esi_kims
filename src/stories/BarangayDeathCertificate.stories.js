@@ -31,6 +31,6 @@ BarangayDeathCertificate.args = {
   nameoffather: 'Shello',
   maidennameofmother: 'Indian',
   captain: 'JERRY P. PARADILLO',
-  secretary: 'HAZEL JOY P. MANZAN',
+  secretary: 'HAZEL JOY M. MANZAN',
   purok: 5,
 };

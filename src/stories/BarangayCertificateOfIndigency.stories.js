@@ -17,6 +17,6 @@ BarangayCertificateOfIndigency.args = {
   year: 2022,
   purok: 'Purok 5',
   bearer: 'Glen Lecaros',
-  secretary: 'HAZEL JOY P. MANZAN',
+  secretary: 'HAZEL JOY M. MANZAN',
   captain: 'JERRY P. PARADILLO',
 };
