@@ -22,6 +22,9 @@ import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
   BARANGAY_CLEARANCE_PRICE,
   BARANGAY_DEATH_CERTIFICATE_PRICE,
+  CERTIFICATE_OF_INDIGENCY_PRICE,
+  CERTIFICATE_OF_RESIDENCY_PRICE,
+  TREE_PLANTING_CERTIFICATE_PRICE,
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import { createOfficial } from '../../../service/official';
@@ -30,7 +33,7 @@ import BarangayBirthCertificateForm from './BarangayBirthCertificateForm';
 import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
 import CertificateOfIndigencyForm from './CertificateOfIndigencyForm';
 import CertificateOfResidencyForm from './CertificateOfResidencyForm';
-import CertificateOfTreePlantingForm from './CertificateOfTreePlantingForm';
+import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
 import BarangayClearanceForm from './BarangayClearanceForm';
 // ----------------------------------------------------------------------
 
@@ -93,7 +96,7 @@ export default function RequestDocumentFormCard() {
               <MenuItem value="birth-certificate">Barangay Birth Certificate</MenuItem>
               <MenuItem value="death-certificate">Barangay Death Certificate</MenuItem>
               <MenuItem value="certification">Barangay Certification</MenuItem>
-              <MenuItem value="certificate-of-indigency">Certificate of Indigency</MenuItem>
+              <MenuItem value="certificate-of-indigency">Certificate Of Indigency</MenuItem>
               <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
               <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
             </Select>
@@ -132,13 +135,58 @@ export default function RequestDocumentFormCard() {
             />
           )}
           {formik.values.typeOfDocument === 'certificate-of-residency' && (
-            <CertificateOfResidencyForm onSubmitForm={() => {}} />
+            <CertificateOfResidencyForm 
+            onSubmitForm={async(data) => {
+              return createRequest(
+                'Certificate Of Residency',
+                data,
+                formik.values.requestorname,
+                CERTIFICATE_OF_RESIDENCY_PRICE
+              )
+                .then((res) => {
+                  console.log({ res });
+                })
+                .catch((err) => {
+                  console.log({ err });
+                });
+            }} 
+            />
           )}
           {formik.values.typeOfDocument === 'tree-planting-certificate' && (
-            <CertificateOfTreePlantingForm onSubmitForm={() => {}} />
+            <BarangayTreePlantingCertificateForm 
+            onSubmitForm={async(data) => {
+              return createRequest(
+                'Tree Planting Certificate',
+                data,
+                formik.values.requestorname,
+                TREE_PLANTING_CERTIFICATE_PRICE
+              )
+                .then((res) => {
+                  console.log({ res });
+                })
+                .catch((err) => {
+                  console.log({ err });
+                });
+            }} />
           )}
           {formik.values.typeOfDocument === 'certificate-of-indigency' && (
-            <CertificateOfIndigencyForm onSubmitForm={() => {}} />
+            <CertificateOfIndigencyForm 
+            onSubmitForm={async (data) => {
+              return createRequest(
+                'Certificate Of Indigency',
+                data,
+                formik.values.requestorname,
+                CERTIFICATE_OF_INDIGENCY_PRICE
+              )
+                .then((res) => {
+                  console.log({ res });
+                })
+                .catch((err) => {
+                  console.log({ err });
+                });
+            }}
+            
+            />
           )}
           {formik.values.typeOfDocument === 'birth-certificate' && (
             <BarangayBirthCertificateForm

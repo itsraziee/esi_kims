@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import styles from './BarangayCertificateOfResidency.module.css';
 
-export default function BarangayCertificateOfResidency({ name, purok, day, month, year, bearer, secretary, captain }) {
+export default function CertificateOfResidency({ fullName, purok, day, month, year, bearer, secretary, captain }) {
   return (
     <Box className={styles.c13}>
       <p className={styles.c6}>
@@ -22,7 +22,7 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -49,7 +49,7 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -79,6 +79,9 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
       </p>
       <p className={styles.c6}>
         <span className={styles.c1}>OFFICE OF THE SANGGUNIANG BARANGAY</span>
+      </p>
+      <p className={styles.c0}>
+        <span className={styles.c3} />
       </p>
       <hr />
       <p className={styles.c0}>
@@ -119,7 +122,7 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
       <p className={styles.c7}>
         <span className={styles.c1}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify{' '}
-          <span className={styles.fillup}>{name}</span>, Filipino citizen is a bonified resident of{' '}
+          <span className={styles.fillup}>{fullName}</span>, Filipino citizen is a bonified resident of Purok{' '}
           <span className={styles.fillup}>{purok}</span>, Kimanait, Pangantucan, Bukidnon.
         </span>
       </p>
@@ -166,7 +169,7 @@ export default function BarangayCertificateOfResidency({ name, purok, day, month
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
-          <span className={styles.c2}>{bearer}</span>
+          <span className={styles.c2}>{fullName}</span>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
           <span className={styles.c1}>Owner</span>

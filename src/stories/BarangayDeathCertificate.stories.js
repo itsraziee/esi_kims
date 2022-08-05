@@ -16,7 +16,7 @@ BarangayDeathCertificate.args = {
   day: 29,
   month: 'August',
   year: 2022,
-  punongbarnagay: 'JERRY P. PARADILLO',
+  punongbarangay: 'JERRY P. PARADILLO',
   deceasedname: 'Tampulano Tampulana',
   placeofdeath: '45 St. Fallen',
   dateofbirth: 'July 05, 1320',
@@ -34,4 +34,5 @@ BarangayDeathCertificate.args = {
   barangay: 'Punong Barangay',
   secretary: 'HAZEL JOY P. MANZAN',
   purok: 5,
+  requestorName: 'Glenmark Lecaros',
 };

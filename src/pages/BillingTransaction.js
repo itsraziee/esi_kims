@@ -23,6 +23,9 @@ import { updateRemarks, updateStatus } from '../service/documentRequest';
 import BarangayClearance from './BarangayClearance';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
+import CertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
+import CertificateOfResidency from '../sections/documents/BarangayCertificateOfResidency';
+import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
 
 export default function BillingTransaction() {
   const rows = useDocumentRequests() ?? [];
@@ -139,9 +142,36 @@ export default function BillingTransaction() {
               </Toolbar>
             </AppBar>
             {documentType === 'Barangay Clearance' && <BarangayClearance />}
-            {documentType === 'Barangay Birth Certificate' && <BarangayBirthCertificate {...currentRow.data} />}
+            {documentType === 'Barangay Birth Certificate' && (
+              <BarangayBirthCertificate
+                {...currentRow.data}
+                secretary="HAZEL JOY P. MANZAN"
+                captain="JERRY P. PARADILLO"
+              />
+            )}
             {documentType === 'Death Certificate' && (
               <BarangayDeathCertificate
+                {...currentRow.data}
+                secretary="HAZEL JOY P. MANZAN"
+                captain="JERRY P. PARADILLO"
+              />
+            )}
+            {documentType === 'Certificate Of Indigency' && (
+              <CertificateOfIndigency
+                {...currentRow.data}
+                secretary="HAZEL JOY P. MANZAN"
+                captain="JERRY P. PARADILLO"
+              />
+            )}
+            {documentType === 'Certificate Of Residency' && (
+              <CertificateOfResidency
+                {...currentRow.data}
+                secretary="HAZEL JOY P. MANZAN"
+                captain="JERRY P. PARADILLO"
+              />
+            )}
+            {documentType === 'Tree Planting Certificate' && (
+              <BarangayTreePlantingCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"

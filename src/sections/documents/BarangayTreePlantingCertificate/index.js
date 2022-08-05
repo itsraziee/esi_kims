@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './BarangayTreePlantingCertificate.module.css';
 
 export default function BarangayTreePlantingCertificate({
-  name,
+  fullName,
   day,
   month,
   year,
@@ -35,7 +35,7 @@ export default function BarangayTreePlantingCertificate({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -62,7 +62,7 @@ export default function BarangayTreePlantingCertificate({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -126,7 +126,7 @@ export default function BarangayTreePlantingCertificate({
         <span className={styles.c2}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that MS./MR.{' '}
           <strong>
-            <span className={styles.underline}>{name}</span>
+            <span className={styles.underline}>{fullName}</span>
           </strong>
           ,{' '}
           <strong>
@@ -134,7 +134,7 @@ export default function BarangayTreePlantingCertificate({
           </strong>
         </span>
         <span className={styles.c0}>
-          , Filipino citizen, single and bonafide resident of{' '}
+          , Filipino citizen, single and bonafide resident of Purok{' '}
           <strong>
             <span className={styles.underline}>{purok}</span>
           </strong>
@@ -194,7 +194,7 @@ export default function BarangayTreePlantingCertificate({
       <div style={{ float: 'right' }}>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
           <strong>
-            <span className={styles.underline}>{bearer}</span>
+            <span className={styles.underline}>{fullName}</span>
           </strong>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>

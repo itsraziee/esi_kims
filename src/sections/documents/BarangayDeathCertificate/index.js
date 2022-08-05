@@ -28,6 +28,7 @@ export default function BarangayDeathCertificate({
   barangay,
   secretary,
   sec,
+  requestorName,
 }) {
   return (
     <Box className={styles.c13}>
@@ -127,7 +128,7 @@ export default function BarangayDeathCertificate({
       </p>
       <p className={styles.c12}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that </span>
-        <span className={styles.c3}>{name}</span>
+        <span className={styles.c3}>{requestorName}</span>
         <span className={styles.c5}>
           {' '}
           &nbsp;Filipino citizen married and resident of Purok <span className={styles.c3}>{purok}</span>, Kimanait,
@@ -143,8 +144,7 @@ export default function BarangayDeathCertificate({
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECEASED NAME</td>
           <td style={{ paddingLeft: '10px' }}>
-            :{''}
-            <span className={styles.c3}>{deceasedname}</span>
+            : <span className={styles.c3}>{deceasedname}</span>
           </td>
         </tr>
         <tr>
@@ -233,7 +233,7 @@ export default function BarangayDeathCertificate({
       <p className={styles.c4}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <p className={styles.c5}>
-          <span className={styles.c1}>
+          <span className={styles.c4}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Done this <span className={styles.c3}>{day}</span> of{' '}
             <span className={styles.c3}>{month}</span>, <span className={styles.c3}>{year}</span> at the Office of the
             Punong Barangay of Kimanait, Pangantucan, Bukidnon.
@@ -244,7 +244,7 @@ export default function BarangayDeathCertificate({
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}>
+        <span className={styles.c4}>
           NOTE: Any erasure or alteration of any entry invalidates this Barangay Certification.
         </span>
       </p>
@@ -288,7 +288,7 @@ export default function BarangayDeathCertificate({
           <span className={styles.c3}>{secretary}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-          <span className={styles.c5}>{sec}</span>
+          <span className={styles.c5}>Secretary</span>
         </p>
       </div>
       <p className="c0">

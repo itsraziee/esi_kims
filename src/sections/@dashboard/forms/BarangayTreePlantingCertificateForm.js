@@ -5,7 +5,7 @@ import { Button, Stack, TextField, Typography, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
-export default function CertificateOfTreePlantingForm(onSubmitForm) {
+export default function BarangayTreePlantingCertificateForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     phoneNumber: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Phone Number is required'),
@@ -23,7 +23,7 @@ export default function CertificateOfTreePlantingForm(onSubmitForm) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
@@ -87,7 +87,7 @@ export default function CertificateOfTreePlantingForm(onSubmitForm) {
   );
 }
 
-CertificateOfTreePlantingForm.propTypes = {
+BarangayTreePlantingCertificateForm.propTypes = {
   // Function to call on submit
   onSubmitForm: PropTypes.func.isRequired,
 };

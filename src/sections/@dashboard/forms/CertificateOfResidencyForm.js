@@ -5,23 +5,23 @@ import { Button, Stack, TextField, Typography, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
-export default function CertificateOfResidencyForm(onSubmitForm) {
+export default function CertificateOfResidencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
+    fullname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
     phoneNumber: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Phone Number is required'),
     purok: Yup.number().min(0).max(13).required(),
   });
 
   const formik = useFormik({
     initialValues: {
-      fullName: '',
+      fullname: '',
       phoneNumber: '',
       purok: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
@@ -34,11 +34,11 @@ export default function CertificateOfResidencyForm(onSubmitForm) {
           <>
             <TextField
               fullWidth
-              name="fullName"
-              label="Full name"
-              {...getFieldProps('fullName')}
-              error={Boolean(touched.fullName && errors.fullName)}
-              helperText={touched.fullName && errors.fullName}
+              name="fullname"
+              label="Full Name"
+              {...getFieldProps('name')}
+              error={Boolean(touched.fullname && errors.fullname)}
+              helperText={touched.fullname && errors.fullname}
             />
             <TextField
               fullWidth

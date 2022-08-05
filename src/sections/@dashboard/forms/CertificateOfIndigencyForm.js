@@ -5,23 +5,23 @@ import { Button, Stack, TextField, Typography, Box } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
-export default function CertificateOfIndigencyForm(onSubmitForm) {
+export default function CertificateOfIndigencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    phoneNumber: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Phone Number is required'),
+    civilstatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
     purok: Yup.number().min(0).max(13).required(),
   });
 
   const formik = useFormik({
     initialValues: {
       fullName: '',
-      phoneNumber: '',
+      civilstatus: '',
       purok: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 
@@ -35,7 +35,7 @@ export default function CertificateOfIndigencyForm(onSubmitForm) {
             <TextField
               fullWidth
               name="fullName"
-              label="Full name"
+              label="Full Name"
               {...getFieldProps('fullName')}
               error={Boolean(touched.fullName && errors.fullName)}
               helperText={touched.fullName && errors.fullName}
@@ -50,11 +50,11 @@ export default function CertificateOfIndigencyForm(onSubmitForm) {
             />
             <TextField
               fullWidth
-              name="phoneNumber"
-              label="Phone Number"
-              {...getFieldProps('phoneNumber')}
-              error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-              helperText={touched.phoneNumber && errors.phoneNumber}
+              name="civilstatus"
+              label="Civil Status"
+              {...getFieldProps('civilstatus')}
+              error={Boolean(touched.civilstatus && errors.civilstatus)}
+              helperText={touched.civilstatus && errors.civilstatus}
             />
           </>
         </Stack>
