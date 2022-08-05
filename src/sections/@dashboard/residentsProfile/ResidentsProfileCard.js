@@ -304,7 +304,7 @@ export default function ResidentsProfileCard() {
                 />
               </Stack>
 
-              <Stack c>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="occupation"
