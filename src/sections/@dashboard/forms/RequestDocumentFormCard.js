@@ -133,7 +133,7 @@ export default function RequestDocumentFormCard() {
             <BarangayDeathCertificateForm
               onSubmitForm={async (data) => {
                 return createRequest(
-                  ' Barangay Death Certificate',
+                  'Barangay Death Certificate',
                   data,
                   formik.values.requestorname,
                   BARANGAY_DEATH_CERTIFICATE_PRICE
