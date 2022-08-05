@@ -200,7 +200,7 @@ export default function RequestDocumentFormCard() {
             />
           )}
           {formik.values.typeOfDocument === 'tree-planting-certificate' && (
-            <CertificateOfTreePlantingForm
+            <BarangayTreePlantingCertificateForm
               onSubmitForm={async (data) => {
                 return createRequest(
                   'Certificate of Tree Planting',
