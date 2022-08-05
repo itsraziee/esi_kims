@@ -27,7 +27,7 @@ export default function ResidentsProfileCard() {
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
-    sex: Yup.string().oneOf(['male', 'female']).required('Required'),
+    sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     dateOfBirth: Yup.string().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
@@ -202,15 +202,17 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth>
+                <FormControl helperText={touched.sex && errors.sex} fullWidth>
                   <InputLabel id="sex-select-label">Sex</InputLabel>
                   <Select
+                    name="sex"
                     labelId="sex-select-label"
                     id="sex-select"
                     value={formik.values.sex}
-                    label="sex"
+                    label="Sex"
                     onChange={handleChange}
-                    name="sex"
+                    {...getFieldProps('sex')}
+                    error={Boolean(touched.sex && errors.sex)}
                   >
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
