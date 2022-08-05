@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
+import { PropTypes } from 'prop-types';
 
 export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
@@ -215,3 +215,8 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
     </FormikProvider>
   );
 }
+
+BarangayDeathCertificateForm.propTypes = {
+  // Function to call on submit
+  onSubmitForm: PropTypes.func.isRequired,
+};

@@ -43,13 +43,13 @@ export default function RequestDocumentFormCard() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const RequestDocumentFormSchema = Yup.object().shape({
-    typeOfDocument: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required(),
+    typeOfDocument: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Type of Document is required.'),
     requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
   });
 
   const formik = useFormik({
     initialValues: {
-      typeOfDocument: 'barangay-clearance',
+      typeOfDocument: '',
       requestorname: '',
     },
     validationSchema: RequestDocumentFormSchema,
@@ -78,7 +78,7 @@ export default function RequestDocumentFormCard() {
             helperText={touched.requestorname && errors.requestorname}
           />
           <FormControl
-            helperText={touched.civilStatus && errors.civilStatus}
+            helperText={touched.typeOfDocument && errors.typeOfDocument}
             fullWidth
             error={Boolean(errors.typeOfDocument)}
           >
@@ -133,7 +133,7 @@ export default function RequestDocumentFormCard() {
             <BarangayDeathCertificateForm
               onSubmitForm={async (data) => {
                 return createRequest(
-                  'Death Certificate',
+                  ' Barangay Death Certificate',
                   data,
                   formik.values.requestorname,
                   BARANGAY_DEATH_CERTIFICATE_PRICE
