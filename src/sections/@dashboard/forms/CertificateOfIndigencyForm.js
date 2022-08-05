@@ -7,16 +7,27 @@ import { PropTypes } from 'prop-types';
 
 export default function CertificateOfIndigencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
+<<<<<<< HEAD
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     civilstatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
     purok: Yup.number().min(0).max(13).required(),
+=======
+    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
+    address: Yup.string().required('Address is required'),
+    citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
+>>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
   });
 
   const formik = useFormik({
     initialValues: {
       fullName: '',
+<<<<<<< HEAD
       civilstatus: '',
       purok: '',
+=======
+      address: '',
+      citizenship: '',
+>>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -32,7 +43,7 @@ export default function CertificateOfIndigencyForm({onSubmitForm}) {
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <>
-            <TextField
+          <TextField
               fullWidth
               name="fullName"
               label="Full Name"
@@ -42,19 +53,27 @@ export default function CertificateOfIndigencyForm({onSubmitForm}) {
             />
             <TextField
               fullWidth
-              name="purok"
-              label="Purok"
-              {...getFieldProps('purok')}
-              error={Boolean(touched.purok && errors.purok)}
-              helperText={touched.purok && errors.purok}
+              name="address"
+              label="Address"
+              {...getFieldProps('address')}
+              error={Boolean(touched.address && errors.address)}
+              helperText={touched.address && errors.address}
             />
             <TextField
               fullWidth
+<<<<<<< HEAD
               name="civilstatus"
               label="Civil Status"
               {...getFieldProps('civilstatus')}
               error={Boolean(touched.civilstatus && errors.civilstatus)}
               helperText={touched.civilstatus && errors.civilstatus}
+=======
+              name="citizenship"
+              label="Citizenship"
+              {...getFieldProps('citizenship')}
+              error={Boolean(touched.citizenship && errors.citizenship)}
+              helperText={touched.citizenship && errors.citizenship}
+>>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
             />
           </>
         </Stack>

@@ -20,7 +20,7 @@ import moment from 'moment';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import { updateRemarks, updateStatus } from '../service/documentRequest';
-import BarangayClearance from './BarangayClearance';
+import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import CertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';

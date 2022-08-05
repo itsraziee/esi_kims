@@ -1,24 +1,26 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
 export default function BarangayTreePlantingCertificateForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    phoneNumber: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Phone Number is required'),
-    purok: Yup.number().min(0).max(13).required(),
-    age: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Age is required'),
+    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
+    address: Yup.string().required('Address is required'),
+    citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
+    age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
+    sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
   });
 
   const formik = useFormik({
     initialValues: {
       fullName: '',
-      phoneNumber: '',
-      purok: '',
+      address: '',
+      citizenship: '',
       age: '',
+      sex: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -44,27 +46,43 @@ export default function BarangayTreePlantingCertificateForm({onSubmitForm}) {
             />
             <TextField
               fullWidth
+              name="address"
+              label="Address"
+              {...getFieldProps('address')}
+              error={Boolean(touched.address && errors.address)}
+              helperText={touched.address && errors.address}
+            />
+            <TextField
+              fullWidth
+              name="citizenship"
+              label="Citizenship"
+              {...getFieldProps('citizenship')}
+              error={Boolean(touched.citizenship && errors.citizenship)}
+              helperText={touched.citizenship && errors.citizenship}
+            />
+            <FormControl helperText={touched.sex && errors.sex} fullWidth>
+              <InputLabel id="sex-select-label">Sex</InputLabel>
+              <Select
+                name="sex"
+                labelId="sex-select-label"
+                id="sex-select"
+                value={formik.values.sex}
+                label="Sex"
+                onChange={handleChange}
+                {...getFieldProps('sex')}
+                error={Boolean(touched.sex && errors.sex)}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+            </FormControl>
+            <TextField
+              fullWidth
               name="age"
               label="Age"
               {...getFieldProps('age')}
               error={Boolean(touched.age && errors.age)}
               helperText={touched.age && errors.age}
-            />
-            <TextField
-              fullWidth
-              name="purok"
-              label="Purok"
-              {...getFieldProps('purok')}
-              error={Boolean(touched.purok && errors.purok)}
-              helperText={touched.purok && errors.purok}
-            />
-            <TextField
-              fullWidth
-              name="phoneNumber"
-              label="Phone Number"
-              {...getFieldProps('phoneNumber')}
-              error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-              helperText={touched.phoneNumber && errors.phoneNumber}
             />
           </>
         </Stack>

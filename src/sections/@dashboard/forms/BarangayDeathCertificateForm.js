@@ -1,21 +1,20 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-
-// TODO: Date of Birth error message is not working!
+import { PropTypes } from 'prop-types';
 
 export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    // relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
+    relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
     deceasedname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     dateofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
     age: Yup.number().min(0, 'Must be positive!').required('Age is required'),
     causeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
     address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
-    civilstatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
+    civilstatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     placeburried: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place Burried is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
@@ -29,7 +28,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
 
   const formik = useFormik({
     initialValues: {
-      // relationship: '',
+      relationship: '',
       deceasedname: '',
       dateofdeath: '',
       age: '',
@@ -77,18 +76,28 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="dateofbirth"
+              id="dateofbirth"
               label="Date of Birth"
+              type="date"
               {...getFieldProps('dateofbirth')}
               error={Boolean(touched.dateofbirth && errors.dateofbirth)}
               helperText={touched.dateofbirth && errors.dateofbirth}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <TextField
               fullWidth
               name="dateofdeath"
+              id="dateofdeath"
               label="Date of Death"
+              type="date"
               {...getFieldProps('dateofdeath')}
               error={Boolean(touched.dateofdeath && errors.dateofdeath)}
               helperText={touched.dateofdeath && errors.dateofdeath}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
           </Stack>
 
@@ -119,14 +128,24 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           </Stack>
 
           <Stack direction={{ xs: 'row' }} spacing={2}>
-            <TextField
-              fullWidth
-              name="civilstatus"
-              label="Civil Status"
-              {...getFieldProps('civilstatus')}
-              error={Boolean(touched.civilstatus && errors.civilstatus)}
-              helperText={touched.civilstatus && errors.civilstatus}
-            />
+            <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
+              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <Select
+                name="civilstatus"
+                labelId="status-select-label"
+                id="status-select"
+                value={formik.values.civilstatus}
+                label="Civil Status"
+                onChange={handleChange}
+                {...getFieldProps('civilstatus')}
+                error={Boolean(touched.civilstatus && errors.civilstatus)}
+              >
+                <MenuItem value="single">Single</MenuItem>
+                <MenuItem value="married">Married</MenuItem>
+                <MenuItem value="separated">Separated</MenuItem>
+                <MenuItem value="widowed">Widowed</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               fullWidth
               name="placeburried"
@@ -170,6 +189,14 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               error={Boolean(touched.maidennameofmother && errors.maidennameofmother)}
               helperText={touched.maidennameofmother && errors.maidennameofmother}
             />
+            <TextField
+              fullWidth
+              name="relationship"
+              label="Relationship"
+              {...getFieldProps('relationship')}
+              error={Boolean(touched.relationship && errors.relationship)}
+              helperText={touched.relationship && errors.relationship}
+            />
           </Stack>
         </Stack>
 
@@ -196,3 +223,8 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
     </FormikProvider>
   );
 }
+
+BarangayDeathCertificateForm.propTypes = {
+  // Function to call on submit
+  onSubmitForm: PropTypes.func.isRequired,
+};

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // material
@@ -21,13 +22,13 @@ import { createResident } from '../../../service/residents';
 
 export default function ResidentsProfileCard() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar } = useSnackbar();
   const ResidentsProfileSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
-    sex: Yup.string().oneOf(['male', 'female']).required('Required'),
+    sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     dateOfBirth: Yup.string().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
@@ -69,11 +70,11 @@ export default function ResidentsProfileCard() {
     mothersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Name is required'),
     mothersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     mothersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Address is required'),
-    elementaryNameOfSchool: Yup.string()
+    elementarySchool: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Name of School is required'),
-    elementaryAddressOfSchool: Yup.string()
+    elementaryAddress: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Address of School is required'),
@@ -147,8 +148,19 @@ export default function ResidentsProfileCard() {
     onSubmit: (data) => {
       console.log({ data });
       createResident(data)
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
+        .then((res) => {
+          console.log({ res });
+          if (res) {
+            enqueueSnackbar('Resident Added successfully', { 
+              variant: 'success',
+            });
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+        .catch((err) => { 
+          console.log({ err });
+          enqueueSnackbar('Invalid input', { variant: 'error' });
+        });
       navigate('/dashboard/app', { replace: true });
     },
   });
@@ -202,15 +214,17 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth>
+                <FormControl helperText={touched.sex && errors.sex} fullWidth>
                   <InputLabel id="sex-select-label">Sex</InputLabel>
                   <Select
+                    name="sex"
                     labelId="sex-select-label"
                     id="sex-select"
                     value={formik.values.sex}
-                    label="sex"
+                    label="Sex"
                     onChange={handleChange}
-                    name="sex"
+                    {...getFieldProps('sex')}
+                    error={Boolean(touched.sex && errors.sex)}
                   >
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
@@ -302,7 +316,7 @@ export default function ResidentsProfileCard() {
                 />
               </Stack>
 
-              <Stack c>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="occupation"

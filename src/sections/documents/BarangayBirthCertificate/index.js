@@ -33,6 +33,7 @@ export default function BarangayBirthCertificate({
   placeissued,
   captain,
   secretary,
+  amountpaid,
 }) {
   return (
     <Box className={styles.c10}>
@@ -455,7 +456,10 @@ export default function BarangayBirthCertificate({
         <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
-        <span className={styles.c6}>Amount Paid: P50.00</span>
+        <span className={styles.c6}>
+          Amount Paid: {''}
+          <span className={styles.c6}>{amountpaid}</span>
+        </span>
       </p>
       <p className={styles.c1}>
         <span className={styles.c6}>
