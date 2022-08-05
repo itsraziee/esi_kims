@@ -34,7 +34,7 @@ export default function LoginForm() {
     onSubmit: async (values) => {
       return login(values.email, values.password)
         .then((res) => {
-          console.log({ res });
+          console.log({ res })
           if (res) {
             enqueueSnackbar('Logged in successfully.', {
               variant: 'success',

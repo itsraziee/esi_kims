@@ -10,7 +10,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
-    suffix: Yup.string().max(2, 'Too Long!').required('Suffix is required'),
+    suffix: Yup.string().max(3, 'Too Long!').required('Suffix is required'),
     address: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
