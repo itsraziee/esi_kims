@@ -39,4 +39,5 @@ BarangayBirthCertificate.args = {
   placeissued: 'Kimanait',
   captain: 'JERRY P. PARADILLO',
   secretary: 'HAZEL JOY P. MANZAN',
+  amountpaid: '50.00',
 };
