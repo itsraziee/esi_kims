@@ -26,11 +26,8 @@ export default function BarangayDeathCertificate({
   maidennameofmother,
   captain,
   secretary,
-<<<<<<< HEAD
-  sec,
   requestorName,
-=======
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
+
 }) {
   return (
     <Box className={styles.c13}>
@@ -290,11 +287,7 @@ export default function BarangayDeathCertificate({
           <span className={styles.c3}>{secretary}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-<<<<<<< HEAD
-          <span className={styles.c5}>Secretary</span>
-=======
           <span className={styles.c5}>Barangay Secretary</span>
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
         </p>
       </div>
       <p className="c0">

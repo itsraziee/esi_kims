@@ -23,16 +23,10 @@ import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
   BARANGAY_CLEARANCE_PRICE,
   BARANGAY_DEATH_CERTIFICATE_PRICE,
-<<<<<<< HEAD
   CERTIFICATE_OF_INDIGENCY_PRICE,
   CERTIFICATE_OF_RESIDENCY_PRICE,
-  TREE_PLANTING_CERTIFICATE_PRICE,
-=======
-  CERTIFICATE_OF_RESIDENCY_PRICE,
-  CERTIFICATE_OF_INDIGENCY_PRICE,
   TREE_PLANTING_CERTIFICATE_PRICE,
   BARANGAY_CERTIFICATION_PRICE,
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import { createOfficial } from '../../../service/official';
@@ -181,59 +175,6 @@ export default function RequestDocumentFormCard() {
             />
           )}
           {formik.values.typeOfDocument === 'certificate-of-residency' && (
-<<<<<<< HEAD
-            <CertificateOfResidencyForm 
-            onSubmitForm={async(data) => {
-              return createRequest(
-                'Certificate Of Residency',
-                data,
-                formik.values.requestorname,
-                CERTIFICATE_OF_RESIDENCY_PRICE
-              )
-                .then((res) => {
-                  console.log({ res });
-                })
-                .catch((err) => {
-                  console.log({ err });
-                });
-            }} 
-            />
-          )}
-          {formik.values.typeOfDocument === 'tree-planting-certificate' && (
-            <BarangayTreePlantingCertificateForm 
-            onSubmitForm={async(data) => {
-              return createRequest(
-                'Tree Planting Certificate',
-                data,
-                formik.values.requestorname,
-                TREE_PLANTING_CERTIFICATE_PRICE
-              )
-                .then((res) => {
-                  console.log({ res });
-                })
-                .catch((err) => {
-                  console.log({ err });
-                });
-            }} />
-          )}
-          {formik.values.typeOfDocument === 'certificate-of-indigency' && (
-            <CertificateOfIndigencyForm 
-            onSubmitForm={async (data) => {
-              return createRequest(
-                'Certificate Of Indigency',
-                data,
-                formik.values.requestorname,
-                CERTIFICATE_OF_INDIGENCY_PRICE
-              )
-                .then((res) => {
-                  console.log({ res });
-                })
-                .catch((err) => {
-                  console.log({ err });
-                });
-            }}
-            
-=======
             <CertificateOfResidencyForm
               onSubmitForm={async (data) => {
                 return createRequest(
@@ -257,6 +198,23 @@ export default function RequestDocumentFormCard() {
                   });
               }}
             />
+          )}
+          {formik.values.typeOfDocument === 'tree-planting-certificate' && (
+            <BarangayTreePlantingCertificateForm 
+            onSubmitForm={async(data) => {
+              return createRequest(
+                'Tree Planting Certificate',
+                data,
+                formik.values.requestorname,
+                TREE_PLANTING_CERTIFICATE_PRICE
+              )
+                .then((res) => {
+                  console.log({ res });
+                })
+                .catch((err) => {
+                  console.log({ err });
+                });
+            }} />
           )}
           {formik.values.typeOfDocument === 'tree-planting-certificate' && (
             <CertificateOfTreePlantingForm
@@ -306,7 +264,6 @@ export default function RequestDocumentFormCard() {
                     enqueueSnackbar('Request Failed.', { variant: 'error' });
                   });
               }}
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
             />
           )}
           {formik.values.typeOfDocument === 'birth-certificate' && (

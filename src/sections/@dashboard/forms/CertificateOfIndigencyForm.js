@@ -1,33 +1,24 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
 export default function CertificateOfIndigencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
-<<<<<<< HEAD
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    civilstatus: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Civil Status is required'),
-    purok: Yup.number().min(0).max(13).required(),
-=======
+    civilstatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
     address: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
   });
 
   const formik = useFormik({
     initialValues: {
       fullName: '',
-<<<<<<< HEAD
       civilstatus: '',
-      purok: '',
-=======
       address: '',
       citizenship: '',
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -59,22 +50,33 @@ export default function CertificateOfIndigencyForm({onSubmitForm}) {
               error={Boolean(touched.address && errors.address)}
               helperText={touched.address && errors.address}
             />
-            <TextField
-              fullWidth
-<<<<<<< HEAD
-              name="civilstatus"
-              label="Civil Status"
-              {...getFieldProps('civilstatus')}
-              error={Boolean(touched.civilstatus && errors.civilstatus)}
-              helperText={touched.civilstatus && errors.civilstatus}
-=======
-              name="citizenship"
-              label="Citizenship"
-              {...getFieldProps('citizenship')}
-              error={Boolean(touched.citizenship && errors.citizenship)}
-              helperText={touched.citizenship && errors.citizenship}
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
-            />
+            <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
+                  <InputLabel id="status-select-label">Civil Status</InputLabel>
+                  <Select
+                    name="civilstatus"
+                    labelId="status-select-label"
+                    id="status-select"
+                    value={formik.values.civilstatus}
+                    label="Civil Status"
+                    onChange={handleChange}
+                    {...getFieldProps('civilstatus')}
+                    error={Boolean(touched.civilstatus && errors.civilstatus)}
+                  >
+                    <MenuItem value="single">Single</MenuItem>
+                    <MenuItem value="married">Married</MenuItem>
+                    <MenuItem value="separated">Separated</MenuItem>
+                    <MenuItem value="widowed">Widowed</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <TextField
+                  fullWidth
+                  name="citizenship"
+                  label="Citizenship"
+                  {...getFieldProps('citizenship')}
+                  error={Boolean(touched.citizenship && errors.citizenship)}
+                  helperText={touched.citizenship && errors.citizenship}
+                />
           </>
         </Stack>
         <Box sx={{ color: 'gray', mb: 1 }}>

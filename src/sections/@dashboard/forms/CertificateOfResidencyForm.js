@@ -7,28 +7,16 @@ import { PropTypes } from 'prop-types';
 
 export default function CertificateOfResidencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
-<<<<<<< HEAD
-    fullname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
-    phoneNumber: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Phone Number is required'),
-    purok: Yup.number().min(0).max(13).required(),
-=======
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
     address: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
   });
 
   const formik = useFormik({
     initialValues: {
-<<<<<<< HEAD
-      fullname: '',
-      phoneNumber: '',
-      purok: '',
-=======
       fullName: '',
       address: '',
       citizenship: '',
->>>>>>> eeffc9ac7c074fd605b4f193c190cf664b8ecbde
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
