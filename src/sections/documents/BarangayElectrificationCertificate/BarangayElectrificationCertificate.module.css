@@ -22,7 +22,7 @@ ol {
 }
 .c10 {
   -webkit-text-decoration-skip: none;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: underline;
   vertical-align: baseline;
@@ -33,7 +33,7 @@ ol {
 }
 .c3 {
   -webkit-text-decoration-skip: none;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: underline;
   vertical-align: baseline;
@@ -43,7 +43,7 @@ ol {
   font-style: normal;
 }
 .c5 {
-  color: #595959;
+  color: #000000;
   font-weight: 400;
   text-decoration: none;
   vertical-align: baseline;
@@ -52,7 +52,7 @@ ol {
   font-style: normal;
 }
 .c8 {
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: none;
   vertical-align: baseline;
@@ -61,7 +61,7 @@ ol {
   font-style: normal;
 }
 .c1 {
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: none;
   vertical-align: baseline;
@@ -126,6 +126,7 @@ ol {
   padding: 72pt 72pt 72pt 72pt;
 }
 .c7 {
+  color: #000000;
   font-size: 11pt;
   font-family: 'Verdana';
   font-weight: 400;
@@ -139,7 +140,7 @@ ol {
 }
 .title {
   padding-top: 24pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 36pt;
   padding-bottom: 6pt;
@@ -151,7 +152,7 @@ ol {
 }
 .subtitle {
   border-right-style: solid;
-  color: #666666;
+  color: #000000;
   border-top-width: 0pt;
   border-bottom-color: #000000;
   font-weight: 700;
@@ -179,21 +180,21 @@ ol {
   padding-right: 0pt;
 }
 li {
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 12pt;
   font-family: 'Times New Roman';
 }
 p {
   margin: 0;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 12pt;
   font-family: 'Times New Roman';
 }
 h1 {
   padding-top: 24pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 24pt;
   padding-bottom: 6pt;
@@ -206,7 +207,7 @@ h1 {
 }
 h2 {
   padding-top: 18pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 18pt;
   padding-bottom: 4pt;
@@ -219,7 +220,7 @@ h2 {
 }
 h3 {
   padding-top: 14pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 14pt;
   padding-bottom: 4pt;
@@ -232,7 +233,7 @@ h3 {
 }
 h4 {
   padding-top: 12pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 12pt;
   padding-bottom: 2pt;
@@ -244,7 +245,7 @@ h4 {
 }
 h5 {
   padding-top: 11pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 11pt;
   padding-bottom: 2pt;
@@ -256,7 +257,7 @@ h5 {
 }
 h6 {
   padding-top: 10pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 10pt;
   padding-bottom: 2pt;
