@@ -21,6 +21,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
     placeOfBirth: Yup.string().required('Place of Birth is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
+    purpose: Yup.string().required('Purpose is required'),
   });
 
   const formik = useFormik({
@@ -39,6 +40,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
       placeOfBirth: '',
       height: '',
       weight: '',
+      purpose: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -200,6 +202,14 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               {...getFieldProps('weight')}
               error={Boolean(touched.weight && errors.weight)}
               helperText={touched.weight && errors.weight}
+            />
+            <TextField
+              fullWidth
+              name="purpose"
+              label="Purpose"
+              {...getFieldProps('purpose')}
+              error={Boolean(touched.purpose && errors.purpose)}
+              helperText={touched.purpose && errors.purpose}
             />
           </>
         </Stack>

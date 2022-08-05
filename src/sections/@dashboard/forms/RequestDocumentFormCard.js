@@ -61,7 +61,7 @@ export default function RequestDocumentFormCard() {
 
   return (
     <Card fullwidth>
-      <CardHeader title="Request Document Form" subheader="Please provide all the information required below" />
+      <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
       <CardContent>
         <Stack spacing={1}>
           <TextField
