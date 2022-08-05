@@ -149,7 +149,7 @@ export default function BillingTransaction() {
                 captain="JERRY P. PARADILLO"
               />
             )}
-            {documentType === 'Death Certificate' && (
+            {documentType === ' Barangay Death Certificate' && (
               <BarangayDeathCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
@@ -170,7 +170,7 @@ export default function BillingTransaction() {
                 captain="JERRY P. PARADILLO"
               />
             )}
-            {documentType === 'Tree Planting Certificate' && (
+            {documentType === 'Certificate of Tree Planting' && (
               <BarangayTreePlantingCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
