@@ -26,7 +26,6 @@ export default function BarangayDeathCertificate({
   maidennameofmother,
   captain,
   secretary,
-  sec,
 }) {
   return (
     <Box className={styles.c13}>

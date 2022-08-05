@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 
 export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    // relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
+    relationship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Relationship is required'),
     deceasedname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     dateofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
@@ -28,7 +28,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
 
   const formik = useFormik({
     initialValues: {
-      // relationship: '',
+      relationship: '',
       deceasedname: '',
       dateofdeath: '',
       age: '',
@@ -128,7 +128,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           </Stack>
 
           <Stack direction={{ xs: 'row' }} spacing={2}>
-          <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
+            <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
                 name="civilstatus"
@@ -188,6 +188,14 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               {...getFieldProps('maidennameofmother')}
               error={Boolean(touched.maidennameofmother && errors.maidennameofmother)}
               helperText={touched.maidennameofmother && errors.maidennameofmother}
+            />
+            <TextField
+              fullWidth
+              name="relationship"
+              label="Relationship"
+              {...getFieldProps('relationship')}
+              error={Boolean(touched.relationship && errors.relationship)}
+              helperText={touched.relationship && errors.relationship}
             />
           </Stack>
         </Stack>
