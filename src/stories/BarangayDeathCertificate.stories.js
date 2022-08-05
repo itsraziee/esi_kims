@@ -29,9 +29,8 @@ BarangayDeathCertificate.args = {
   religion: 'Catholic',
   occupation: 'Instructor',
   nameoffather: 'Shello',
-  maiden: 'Indian',
+  maidennameofmother: 'Indian',
   captain: 'JERRY P. PARADILLO',
-  barangay: 'Punong Barangay',
   secretary: 'HAZEL JOY P. MANZAN',
   purok: 5,
 };

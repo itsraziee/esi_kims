@@ -25,7 +25,6 @@ export default function BarangayDeathCertificate({
   nameoffather,
   maidennameofmother,
   captain,
-  barangay,
   secretary,
   sec,
 }) {
@@ -288,7 +287,7 @@ export default function BarangayDeathCertificate({
           <span className={styles.c3}>{secretary}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-          <span className={styles.c5}>{sec}</span>
+          <span className={styles.c5}>Barangay Secretary</span>
         </p>
       </div>
       <p className="c0">

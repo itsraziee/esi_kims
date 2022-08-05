@@ -9,6 +9,11 @@ export default function BarangayElectrificationCertificate({
   day,
   month,
   year,
+  or,
+  ordateissued,
+  placeissued,
+  ctc,
+  ctcdateissued,
   secretary,
   barangayCaptain,
 }) {
@@ -215,16 +220,25 @@ export default function BarangayElectrificationCertificate({
         {' '}
         <table className={styles.secondTable} style={{ color: '#000000' }}>
           <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O.R NO.:</td>
-            <td style={{ paddingLeft: '250px' }}>CTC NO.:</td>
+            <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O.R NO.: {''} {or}
+            </td>
+
+            <td style={{ paddingLeft: '200px' }}>
+              CTC NO.: {''} {ctc}
+            </td>
           </tr>
           <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Issued:</td>
-            <td style={{ paddingLeft: '250px' }}>Date Issued:</td>
+            <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Issued: {''} {ordateissued}
+            </td>
+            <td style={{ paddingLeft: '200px' }}>
+              Date Issued: {''} {ctcdateissued}
+            </td>
           </tr>
           <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Place Issued</td>
-            <td style={{ paddingLeft: '250px' }}>Place Issued</td>
+            <td style={{ paddingLeft: '200px' }}>Place Issued</td>
           </tr>
         </table>
       </strong>
