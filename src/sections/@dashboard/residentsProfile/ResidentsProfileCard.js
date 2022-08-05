@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // material
@@ -21,7 +22,7 @@ import { createResident } from '../../../service/residents';
 
 export default function ResidentsProfileCard() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar } = useSnackbar();
   const ResidentsProfileSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
@@ -69,11 +70,11 @@ export default function ResidentsProfileCard() {
     mothersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Name is required'),
     mothersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     mothersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Address is required'),
-    elementaryNameOfSchool: Yup.string()
+    elementarySchool: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Name of School is required'),
-    elementaryAddressOfSchool: Yup.string()
+    elementaryAddress: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Address of School is required'),
@@ -147,8 +148,19 @@ export default function ResidentsProfileCard() {
     onSubmit: (data) => {
       console.log({ data });
       createResident(data)
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
+        .then((res) => {
+          console.log({ res });
+          if (res) {
+            enqueueSnackbar('Resident Added successfully', { 
+              variant: 'success',
+            });
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+        .catch((err) => { 
+          console.log({ err });
+          enqueueSnackbar('Invalid input', { variant: 'error' });
+        });
       navigate('/dashboard/app', { replace: true });
     },
   });
