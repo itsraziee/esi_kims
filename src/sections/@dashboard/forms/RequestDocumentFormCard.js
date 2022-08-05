@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 // material
 import {
   Button,
@@ -22,6 +23,10 @@ import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
   BARANGAY_CLEARANCE_PRICE,
   BARANGAY_DEATH_CERTIFICATE_PRICE,
+  CERTIFICATE_OF_RESIDENCY_PRICE,
+  CERTIFICATE_OF_INDIGENCY_PRICE,
+  TREE_PLANTING_CERTIFICATE_PRICE,
+  BARANGAY_CERTIFICATION_PRICE,
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import { createOfficial } from '../../../service/official';
@@ -36,15 +41,15 @@ import BarangayClearanceForm from './BarangayClearanceForm';
 
 export default function RequestDocumentFormCard() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar } = useSnackbar();
   const RequestDocumentFormSchema = Yup.object().shape({
-    typeOfDocument: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required(),
+    typeOfDocument: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Type of Document is required.'),
     requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
   });
 
   const formik = useFormik({
     initialValues: {
-      typeOfDocument: 'barangay-clearance',
+      typeOfDocument: '',
       requestorname: '',
     },
     validationSchema: RequestDocumentFormSchema,
@@ -61,7 +66,7 @@ export default function RequestDocumentFormCard() {
 
   return (
     <Card fullwidth>
-      <CardHeader title="Request Document Form" subheader="Please provide all the information required below" />
+      <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
       <CardContent>
         <Stack spacing={1}>
           <TextField
@@ -73,7 +78,7 @@ export default function RequestDocumentFormCard() {
             helperText={touched.requestorname && errors.requestorname}
           />
           <FormControl
-            helperText={touched.civilStatus && errors.civilStatus}
+            helperText={touched.typeOfDocument && errors.typeOfDocument}
             fullWidth
             error={Boolean(errors.typeOfDocument)}
           >
@@ -99,21 +104,52 @@ export default function RequestDocumentFormCard() {
             </Select>
             {Boolean(errors.typeOfDocument) && <FormHelperText>Please select a type of document.</FormHelperText>}
           </FormControl>
-          {formik.values.typeOfDocument === 'certification' && <BarangayCertificateForm onSubmitForm={() => {}} />}
+          {formik.values.typeOfDocument === 'certification' && (
+            <BarangayCertificateForm
+              onSubmitForm={async (data) => {
+                return createRequest(
+                  'Barangay Certificate',
+                  data,
+                  formik.values.requestorname,
+                  BARANGAY_CERTIFICATION_PRICE
+                )
+                  .then((res) => {
+                    console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Barangay Certificate Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
+                  });
+              }}
+            />
+          )}
           {formik.values.typeOfDocument === 'death-certificate' && (
             <BarangayDeathCertificateForm
               onSubmitForm={async (data) => {
                 return createRequest(
-                  'Death Certificate',
+                  ' Barangay Death Certificate',
                   data,
                   formik.values.requestorname,
                   BARANGAY_DEATH_CERTIFICATE_PRICE
                 )
                   .then((res) => {
                     console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Barangay Death Certificate Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
                   })
                   .catch((err) => {
                     console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
                   });
               }}
             />
@@ -124,21 +160,94 @@ export default function RequestDocumentFormCard() {
                 return createRequest('Barangay Clearance', data, formik.values.requestorname, BARANGAY_CLEARANCE_PRICE)
                   .then((res) => {
                     console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
                   })
                   .catch((err) => {
                     console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
                   });
               }}
             />
           )}
           {formik.values.typeOfDocument === 'certificate-of-residency' && (
-            <CertificateOfResidencyForm onSubmitForm={() => {}} />
+            <CertificateOfResidencyForm
+              onSubmitForm={async (data) => {
+                return createRequest(
+                  'Certificate of Residency',
+                  data,
+                  formik.values.requestorname,
+                  CERTIFICATE_OF_RESIDENCY_PRICE
+                )
+                  .then((res) => {
+                    console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Certificate of Residency Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
+                  });
+              }}
+            />
           )}
           {formik.values.typeOfDocument === 'tree-planting-certificate' && (
-            <CertificateOfTreePlantingForm onSubmitForm={() => {}} />
+            <CertificateOfTreePlantingForm
+              onSubmitForm={async (data) => {
+                return createRequest(
+                  'Certificate of Tree Planting',
+                  data,
+                  formik.values.requestorname,
+                  TREE_PLANTING_CERTIFICATE_PRICE
+                )
+                  .then((res) => {
+                    console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Certificate of Tree Planting Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
+                  });
+              }}
+            />
           )}
           {formik.values.typeOfDocument === 'certificate-of-indigency' && (
-            <CertificateOfIndigencyForm onSubmitForm={() => {}} />
+            <CertificateOfIndigencyForm
+              onSubmitForm={async (data) => {
+                return createRequest(
+                  'Certificate of Indigency',
+                  data,
+                  formik.values.requestorname,
+                  CERTIFICATE_OF_INDIGENCY_PRICE
+                )
+                  .then((res) => {
+                    console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Certificate of Indigency Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
+                  });
+              }}
+            />
           )}
           {formik.values.typeOfDocument === 'birth-certificate' && (
             <BarangayBirthCertificateForm
@@ -151,9 +260,16 @@ export default function RequestDocumentFormCard() {
                 )
                   .then((res) => {
                     console.log({ res });
+                    if (res) {
+                      enqueueSnackbar('Barangay Birth Certificate Request Submitted Successfully.', {
+                        variant: 'success',
+                      });
+                      navigate('/dashboard/app', { replace: true });
+                    }
                   })
                   .catch((err) => {
                     console.log({ err });
+                    enqueueSnackbar('Request Failed.', { variant: 'error' });
                   });
               }}
             />

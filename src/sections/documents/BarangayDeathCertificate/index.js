@@ -25,7 +25,6 @@ export default function BarangayDeathCertificate({
   nameoffather,
   maidennameofmother,
   captain,
-  barangay,
   secretary,
   sec,
 }) {
@@ -139,7 +138,7 @@ export default function BarangayDeathCertificate({
       <p className={(styles.c4, styles.c9)}>
         <span className={styles.c5} />
       </p>
-      <table className={styles.deathTable} style={{ color: '#595959 ' }}>
+      <table className={styles.deathTable} style={{ color: '#000000 ' }}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECEASED NAME</td>
           <td style={{ paddingLeft: '10px' }}>
@@ -288,7 +287,7 @@ export default function BarangayDeathCertificate({
           <span className={styles.c3}>{secretary}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-          <span className={styles.c5}>{sec}</span>
+          <span className={styles.c5}>Barangay Secretary</span>
         </p>
       </div>
       <p className="c0">

@@ -77,6 +77,7 @@ table th {
   font-family: 'Verdana';
 }
 .c7 {
+  color: #000000;
   text-decoration: none;
   vertical-align: baseline;
   font-style: normal;
@@ -281,4 +282,3 @@ h6 {
   widows: 2;
   text-align: center;
 }
--

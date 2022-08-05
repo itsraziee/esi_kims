@@ -174,7 +174,9 @@ export default function BarangayClearance({
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that name register below whose thumbmark
           and signature, other information below, as of this date found <br />{' '}
         </span>
-        <span className={(styles.c5, styles.underline)}>{description}</span>
+        <strong>
+          <span className={styles.underline}>{description}</span>
+        </strong>
         <span className={styles.c5}>.</span>
       </p>
       <p className={styles.c1}>
@@ -185,12 +187,15 @@ export default function BarangayClearance({
       </p>
       <p className={styles.c1}>
         <span className={styles.c1}>Name: {''}</span>
-        <span className={(styles.c8, styles.underline)}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;{firstname}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; {lastname}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;{middlename}
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{suffix} &nbsp; &nbsp;
-        </span>
+        <strong>
+          <span className={styles.underline}>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{firstname} {''}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{middlename} {''}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {lastname} {''}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{suffix}
+          </span>
+        </strong>
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>
@@ -204,34 +209,58 @@ export default function BarangayClearance({
         </span>
       </p>
       <p className={styles.c1} style={{ marginTop: 5 }}>
-        <span className={styles.c4}>Address: {''}</span>
-        <span className={(styles.c2, styles.underline)}>{address}</span>
-        <span className={styles.c4}>&nbsp; &nbsp;Citizenship: {''}</span>
-        <span className={(styles.c8, styles.underline)}>{citizenship}</span>
+        <span className={styles.c4}>Address:</span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{address}</span>
+        </strong>
+        <span className={styles.c4}>&nbsp; &nbsp;Citizenship: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{citizenship}</span>
+        </strong>
       </p>
       <p className={(styles.c1, styles.c6)}>
         <span className={(styles.c7, styles.c4)} />
       </p>
       <p className={styles.c1} style={{ marginTop: 5 }}>
-        <span className={styles.c4}>Sex: {''}</span>
-        <span className={(styles.c2, styles.underline)}>{sex}</span>
-        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Age: {''}</span>
-        <span className={(styles.c2, styles.underline)}>{age}</span>
-        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Religion: {''}</span>
-        <span className={(styles.c2, styles.underline)}>{religion}</span>
-        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: {''}</span>
-        <span className={(styles.c2, styles.underline)}>{civilstatus}</span>
+        <span className={styles.c4}>Sex: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{sex}</span>
+        </strong>
+        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Age: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{age}</span>
+        </strong>
+        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Religion: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{religion}</span>
+        </strong>
+        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{civilstatus}</span>
+        </strong>
       </p>
       <p className={(styles.c1, styles.c6)}>
         <span className={styles.c8} />
       </p>
       <p className={styles.c1} style={{ marginTop: 5 }}>
-        <span className={styles.c4}>Birthdate: {''}</span>
-        <span className={(styles.c2, styles.underline)}>
-          &nbsp;{birthday}-{birthmonth}-{birthyear}&nbsp;
-        </span>
-        <span className={styles.c4}>&nbsp; &nbsp; &nbsp;Place of Birth: {''}</span>
-        <span className={(styles.c8, styles.underline)}>{placeofbirth}</span>
+        <span className={styles.c4}>Birthdate: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>
+            &nbsp;{birthday}-{birthmonth}-{birthyear}&nbsp;
+          </span>
+        </strong>
+        <span className={styles.c4}>&nbsp; &nbsp; &nbsp;Place of Birth: </span>
+        <strong>
+          {' '}
+          <span className={styles.underline}>{placeofbirth}</span>
+        </strong>
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>
@@ -244,18 +273,24 @@ export default function BarangayClearance({
         </span>
       </p>
       <p className={styles.c1}>
-        <span className={styles.c4}>Height: {''}</span>
-        <span className={(styles.c2, styles.underline)}>&nbsp;&nbsp;&nbsp;{height}&nbsp;&nbsp;&nbsp;</span>
-        <span className={styles.c4}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight: {''}
-        </span>
-        <span className={(styles.c2, styles.underline)}>&nbsp;&nbsp;&nbsp;{weight}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <span className={styles.c4}>Height: </span>
+        <strong>
+          {''}
+          <span className={styles.underline}>&nbsp;&nbsp;&nbsp;{height}&nbsp;&nbsp;&nbsp;</span>
+        </strong>
+        <span className={styles.c4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight:</span>
+        <strong>
+          {''}
+          <span className={styles.underline}>&nbsp;&nbsp;&nbsp;{weight}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </strong>
         <span className={(styles.c11, styles.c7)}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validity: {''}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validity:
         </span>
-        <span className={(styles.c2, styles.underline)}>
-          &nbsp;&nbsp;{valday}-{valmonth}-{valyear}&nbsp;&nbsp;&nbsp;
-        </span>
+        <strong>
+          <span className={styles.underline}>
+            &nbsp;&nbsp;{valday}-{valmonth}-{valyear}&nbsp;&nbsp;&nbsp;
+          </span>
+        </strong>
       </p>
       <p className={styles.c1}>
         <span className={(styles.c7, styles.c9)}>
@@ -402,9 +437,11 @@ export default function BarangayClearance({
       <p className={styles.c1}>
         <span className={styles.c4}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          {''}
         </span>
-        <span className={(styles.c8, styles.underline)}>{punongbarangay}</span>
+        <strong>
+          {''}
+          <span className={styles.underline}>{punongbarangay}</span>
+        </strong>
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>
@@ -440,7 +477,10 @@ export default function BarangayClearance({
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           {''}
         </span>
-        <span className={(styles.c8, styles.underline)}>{barangayKagawad}</span>
+        <strong>
+          {''}
+          <span className={styles.underline}>{barangayKagawad}</span>
+        </strong>
       </p>
       <p className={styles.c1}>
         <span className={styles.c4}>

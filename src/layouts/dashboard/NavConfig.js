@@ -22,8 +22,7 @@ const navConfig = [
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
-    non_auth_required: true,
-    title: 'document services',
+    title: 'Document Request Forms',
     path: '/dashboard/RequestDocumentForm',
     icon: getIcon('ion:documents'),
   },
@@ -77,11 +76,6 @@ const navConfig = [
     title: 'register',
     path: '/register',
     icon: getIcon('eva:person-add-fill'),
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon('eva:alert-triangle-fill'),
   },
 ];
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button, Stack, TextField, Typography, Box, FormControl, MenuItem, InputLabel, Select } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
@@ -13,8 +13,8 @@ import { PropTypes } from 'prop-types';
 export default function BarangayBirthCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
     nameofchild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
-    sex: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Sex is required'),
-    dateofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Birth is required'),
+    sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
+    dateofbirth: Yup.string().required('Date of Birth is required'),
     timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
     birthorder: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Birth Order is required'),
@@ -94,23 +94,34 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               error={Boolean(touched.nameofchild && errors.nameofchild)}
               helperText={touched.nameofchild && errors.nameofchild}
             />
+            <FormControl helperText={touched.sex && errors.sex} fullWidth>
+              <InputLabel id="sex-select-label">Sex</InputLabel>
+              <Select
+                name="sex"
+                labelId="sex-select-label"
+                id="sex-select"
+                value={formik.values.sex}
+                label="Sex"
+                onChange={handleChange}
+                {...getFieldProps('sex')}
+                error={Boolean(touched.sex && errors.sex)}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
-              // sx={{ minWidth: 91, mt: 2 }}
-              fullWidth
-              name="sex"
-              label="Sex"
-              {...getFieldProps('sex')}
-              error={Boolean(touched.sex && errors.sex)}
-              helperText={touched.sex && errors.sex}
-            />
-            <TextField
-              // sx={{ minWidth: 91, mt: 2 }}
               fullWidth
               name="dateofbirth"
+              id="dateofbirth"
               label="Date of Birth"
+              type="date"
               {...getFieldProps('dateofbirth')}
               error={Boolean(touched.dateofbirth && errors.dateofbirth)}
               helperText={touched.dateofbirth && errors.dateofbirth}
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
 
             <TextField
@@ -149,7 +160,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               label="Death"
               {...getFieldProps('death')}
               error={Boolean(touched.death && errors.death)}
-              helperText={touched.death && errors.date}
+              helperText={touched.death && errors.death}
             />
 
             <TextField
@@ -214,7 +225,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               label="Fathers Occupation"
               {...getFieldProps('fatheroccupation')}
               error={Boolean(touched.fatheroccupation && errors.fatheroccupation)}
-              helperText={touched.phoneNumber && errors.phoneNumber}
+              helperText={touched.fatheroccupation && errors.fatheroccupation}
             />
           </Stack>
 
