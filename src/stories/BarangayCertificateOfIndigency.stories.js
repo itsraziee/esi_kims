@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { default as BarangayCertificateOfIndigencyComponent } from '../sections/documents/BarangayCertificateOfIndigency';
 
 export default {

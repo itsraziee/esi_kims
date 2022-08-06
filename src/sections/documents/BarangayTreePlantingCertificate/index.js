@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './BarangayTreePlantingCertificate.module.css';
 
 export default function BarangayTreePlantingCertificate({
-  fullName,
+  name,
   day,
   month,
   year,
@@ -126,7 +126,7 @@ export default function BarangayTreePlantingCertificate({
         <span className={styles.c2}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that MS./MR.{' '}
           <strong>
-            <span className={styles.underline}>{fullName}</span>
+            <span className={styles.underline}>{name}</span>
           </strong>
           ,{' '}
           <strong>
@@ -194,7 +194,7 @@ export default function BarangayTreePlantingCertificate({
       <div style={{ float: 'right' }}>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
           <strong>
-            <span className={styles.underline}>{fullName}</span>
+            <span className={styles.underline}>{name}</span>
           </strong>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>

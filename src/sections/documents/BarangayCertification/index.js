@@ -3,8 +3,8 @@ import { fontWeight, style } from '@mui/system';
 import React from 'react';
 import styles from './BarangayElectrificationCertificate.module.css';
 
-export default function BarangayElectrificationCertificate({
-  name,
+export default function BarangayCertification({
+  applicant,
   address,
   day,
   month,
@@ -15,7 +15,7 @@ export default function BarangayElectrificationCertificate({
   ctc,
   ctcdateissued,
   secretary,
-  barangayCaptain,
+  captain,
 }) {
   return (
     <Box className={styles.c13}>
@@ -36,7 +36,7 @@ export default function BarangayElectrificationCertificate({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -63,7 +63,7 @@ export default function BarangayElectrificationCertificate({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -124,7 +124,7 @@ export default function BarangayElectrificationCertificate({
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that the following materials were used to
           the construction of{' '}
         </span>
-        <span className={styles.c3}>{name}</span>
+        <span className={styles.c3}>{applicant}</span>
         <span className={styles.c5}>
           {' '}
           house situated{' '}
@@ -194,7 +194,7 @@ export default function BarangayElectrificationCertificate({
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
-          <span className={styles.c3}>{name}</span>
+          <span className={styles.c3}>{applicant}</span>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
           <span className={styles.c1}>Applicant</span>
@@ -280,7 +280,7 @@ export default function BarangayElectrificationCertificate({
 
         <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{secretary}</th>
-          <th style={{ paddingLeft: '250px' }}>{barangayCaptain}</th>
+          <th style={{ paddingLeft: '250px' }}>{captain}</th>
         </tr>
         <tr>
           <td style={{ textAlign: 'center' }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barangay Secretay</td>

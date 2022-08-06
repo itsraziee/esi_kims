@@ -101,7 +101,7 @@ table th {
   font-family: 'Verdana';
 }
 .c13 {
-  max-width: 468pt;
+  max-width: 700pt;
   padding: 72pt 72pt 72pt 72pt;
 }
 .c4 {
@@ -254,7 +254,6 @@ h4 {
   page-break-after: avoid;
   orphans: 2;
   widows: 2;
-  text-align: center;
 }
 h5 {
   padding-top: 11pt;

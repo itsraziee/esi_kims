@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import styles from './BarangayCertificateOfIndigency.module.css';
 
-export default function CertificateOfIndigency({
+export default function BarangayCertificateOfIndigency({
   fullName,
   purok,
   day,

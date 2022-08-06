@@ -7,14 +7,14 @@ import { PropTypes } from 'prop-types';
 
 export default function CertificateOfResidencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
+    name: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
     address: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      fullName: '',
+      name: '',
       address: '',
       citizenship: '',
     },
@@ -34,11 +34,11 @@ export default function CertificateOfResidencyForm({onSubmitForm}) {
           <>
             <TextField
               fullWidth
-              name="fullname"
+              name="name"
               label="Full Name"
               {...getFieldProps('name')}
-              error={Boolean(touched.fullname && errors.fullname)}
-              helperText={touched.fullname && errors.fullname}
+              error={Boolean(touched.name && errors.name)}
+              helperText={touched.name && errors.name}
             />
             <TextField
               fullWidth
