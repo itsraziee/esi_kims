@@ -15,7 +15,7 @@ import EmailDialog from '../../@dashboard/dialog/EmailDialog';
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -34,7 +34,7 @@ export default function LoginForm() {
     onSubmit: async (values) => {
       return login(values.email, values.password)
         .then((res) => {
-          console.log({ res });
+          console.log({ res })
           if (res) {
             enqueueSnackbar('Logged in successfully.', {
               variant: 'success',

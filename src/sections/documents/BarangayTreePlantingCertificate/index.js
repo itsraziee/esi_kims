@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './BarangayTreePlantingCertificate.module.css';
 
 export default function BarangayTreePlantingCertificate({
-  name,
+  fullName,
   day,
   month,
   year,
@@ -35,7 +35,7 @@ export default function BarangayTreePlantingCertificate({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -62,7 +62,7 @@ export default function BarangayTreePlantingCertificate({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -85,7 +85,7 @@ export default function BarangayTreePlantingCertificate({
         <span className={styles.c0}>BARANGAY KIMANAIT</span>
       </p>
       <p className={(styles.c3, styles.c4, styles.c9)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c3}>
         <span className={styles.c0}>OFFICE OF THE SANGGUNIANG BARANGAY</span>
@@ -93,40 +93,40 @@ export default function BarangayTreePlantingCertificate({
       <br />
       <hr />
       <p className={(styles.c3, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c3, styles.c4)}>
-        <span className={(styles.c14, styles.c8)}></span>
+        <span className={(styles.c14, styles.c8)} />
       </p>
       <p className={styles.c3}>
         <span className={styles.c6}>TREE PLANTING CERTIFICATE</span>
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c0}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c2}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that MS./MR.{' '}
           <strong>
-            <span className={styles.underline}>{name}</span>
+            <span className={styles.underline}>{fullName}</span>
           </strong>
           ,{' '}
           <strong>
@@ -134,7 +134,7 @@ export default function BarangayTreePlantingCertificate({
           </strong>
         </span>
         <span className={styles.c0}>
-          , Filipino citizen, single and bonafide resident of{' '}
+          , Filipino citizen, single and bonafide resident of Purok{' '}
           <strong>
             <span className={styles.underline}>{purok}</span>
           </strong>
@@ -142,7 +142,7 @@ export default function BarangayTreePlantingCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c0}>
@@ -151,7 +151,7 @@ export default function BarangayTreePlantingCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c0}>
@@ -160,7 +160,7 @@ export default function BarangayTreePlantingCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c0}>
@@ -180,21 +180,21 @@ export default function BarangayTreePlantingCertificate({
         </span>
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
           <strong>
-            <span className={styles.underline}>{bearer}</span>
+            <span className={styles.underline}>{fullName}</span>
           </strong>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
@@ -202,16 +202,16 @@ export default function BarangayTreePlantingCertificate({
         </p>
       </div>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={(styles.c1, styles.c4)}>
-        <span className={styles.c0}></span>
+        <span className={styles.c0} />
       </p>
       <p className={styles.c1}>
         <span className={styles.c5}>
@@ -235,14 +235,14 @@ export default function BarangayTreePlantingCertificate({
         <span className={styles.c5}>PLACE: KIMANAIT, PANGANTUCAN, BUKIDNON</span>
       </p>
       <p className={(styles.c4, styles.c13)}>
-        <span className={styles.c10}></span>
+        <span className={styles.c10} />
       </p>
       <p className={(styles.c13, styles.c4)}>
-        <span className={styles.c10}></span>
+        <span className={styles.c10} />
       </p>
-      <table className={styles.thirdTable}>
+      <table className={styles.thirdTable} style={{ color: '#000000' }}>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <tr>
           <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Certified by:</th>
@@ -250,10 +250,10 @@ export default function BarangayTreePlantingCertificate({
         </tr>
 
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
 
         <tr>

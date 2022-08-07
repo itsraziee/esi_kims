@@ -22,9 +22,8 @@ const navConfig = [
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
-    non_auth_required: true,
-    title: 'document services',
-    path: '/dashboard/documentServices',
+    title: 'Document Request Forms',
+    path: '/dashboard/RequestDocumentForm',
     icon: getIcon('ion:documents'),
   },
   {
@@ -54,12 +53,12 @@ const navConfig = [
     path: '/dashboard/listOfPurok',
     icon: getIcon('ri:building-2-fill'),
   },
-  {
-    auth_required: true,
-    title: 'residents',
-    path: '/dashboard/user',
-    icon: getIcon('fluent:people-audience-24-filled'),
-  },
+  // {
+  //   auth_required: true,
+  //   title: 'residents',
+  //   path: '/dashboard/user',
+  //   icon: getIcon('fluent:people-audience-24-filled'),
+  // },
   {
     non_auth_required: true,
     title: 'login',
@@ -77,11 +76,6 @@ const navConfig = [
     title: 'register',
     path: '/register',
     icon: getIcon('eva:person-add-fill'),
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon('eva:alert-triangle-fill'),
   },
 ];
 

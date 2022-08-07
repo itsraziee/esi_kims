@@ -30,7 +30,7 @@ ListOfPurokWidget.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function ListOfPurokWidget({ title, description, icon, color, sx, url = null, ...other }) {
+export default function ListOfPurokWidget({ title, description, icon, color = 'primary', sx, url = null, ...other }) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
@@ -60,7 +60,7 @@ export default function ListOfPurokWidget({ title, description, icon, color, sx,
           {title}
         </Typography>
         <br />
-        <Typography variant="subtitle7" sx={{ opacity: 0.72 }}>
+        <Typography variant="subtitle8" sx={{ opacity: 0.72 }}>
           {description}
         </Typography>
       </Card>

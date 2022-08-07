@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { firestore } from '../firebase-init';
 
 export async function createResident({
@@ -13,12 +13,14 @@ export async function createResident({
   fathersName,
   mothersName,
   numberOfChildren,
+  purok,
   occupation,
   phoneNumber,
   religion,
   sex,
   spouse,
   status,
+  tribe,
   uploadImage = '',
   weight,
   height,
@@ -58,6 +60,8 @@ export async function createResident({
     sex,
     spouse,
     status,
+    tribe,
+    purok,
     uploadImage,
     weight,
     height,
@@ -97,6 +101,8 @@ export async function createResident({
     sex,
     spouse,
     status,
+    tribe,
+    purok,
     uploadImage,
     weight,
     height,

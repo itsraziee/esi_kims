@@ -2,7 +2,17 @@ import React from 'react';
 import { Box } from '@mui/material';
 import styles from './BarangayCertificateOfIndigency.module.css';
 
-export default function index({ name, purok, day, month, year, bearer, secretary, captain }) {
+export default function CertificateOfIndigency({
+  fullName,
+  purok,
+  day,
+  month,
+  year,
+
+  secretary,
+  captain,
+  civilstatus,
+}) {
   return (
     <Box className={styles.c13}>
       <p className={styles.c6}>
@@ -22,7 +32,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -49,7 +59,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -74,18 +84,25 @@ export default function index({ name, purok, day, month, year, bearer, secretary
       <p className={styles.c6}>
         <span className={styles.c1}>TIN NO: 004-358-651</span>
       </p>
-      <p className={styles.c0}>
-        <span className={styles.c3}></span>
-      </p>
+      {
+        <p className={styles.c0}>
+          <span className={styles.c3} />
+        </p>
+      }
       <p className={styles.c6}>
         <span className={styles.c1}>OFFICE OF THE SANGGUNIANG BARANGAY</span>
       </p>
+      {
+        <p className={styles.c0}>
+          <span className={styles.c3} />
+        </p>
+      }
       <hr />
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c2}></span>
+        <span className={styles.c2} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c10} style={{ fontWeight: 700 }}>
@@ -93,38 +110,39 @@ export default function index({ name, purok, day, month, year, bearer, secretary
         </span>
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c14}>
         <span className={styles.c1}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={styles.c4}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify{' '}
-          <span className={styles.fillup}>{name}</span>, Filipino citizen married and resident of{' '}
+          <span className={styles.fillup}>{fullName}</span>, Filipino citizen{' '}
+          <span className={styles.fillup}>{civilstatus}</span> and resident of{' '}
           <span className={styles.fillup}>{purok}</span>, Kimanait, Pangantucan, Bukidnon.
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -133,7 +151,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -142,7 +160,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c7}>
         <span className={styles.c1}>
@@ -152,63 +170,63 @@ export default function index({ name, purok, day, month, year, bearer, secretary
         </span>
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
-          <span className={styles.c2}>{bearer}</span>
+          <span className={styles.c2}>{fullName}</span>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
           <span className={styles.c1}>Bearer</span>
         </p>
       </div>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c5}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
-      <table className={styles.thirdTable}>
+      <table className={(styles.thirdTable, styles.c1)}>
         <tr>
           <th style={{ textAlign: 'left' }}>Prepared by:</th>
           <th style={{ paddingLeft: '250px' }}>Approved by:</th>
         </tr>
 
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c1}></span>
+          <span className={styles.c1} />
         </p>
         <br />
 
@@ -225,7 +243,7 @@ export default function index({ name, purok, day, month, year, bearer, secretary
           </th>
         </tr>
         <tr>
-          <td style={{ textAlign: 'center' }}>Barangay Secretay</td>
+          <td style={{ textAlign: 'center' }}>Barangay Secretary</td>
           <td style={{ paddingLeft: '250px', textAlign: 'center' }}>Barangay Captain</td>
         </tr>
       </table>

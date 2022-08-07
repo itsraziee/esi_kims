@@ -19,6 +19,6 @@ BarangayTreePlantingCertificate.args = {
   ctc: '89329273',
   date: '05/03/2021',
   bearer: 'Glen Lecaros',
-  secretary: 'HAZEL JOY P. MANZAN',
+  secretary: 'HAZEL JOY M. MANZAN',
   captain: 'JERRY P. PARADILLO',
 };

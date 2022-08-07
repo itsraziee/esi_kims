@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { useSnackbar } from 'notistack';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // material
@@ -21,17 +22,16 @@ import { createResident } from '../../../service/residents';
 
 export default function ResidentsProfileCard() {
   const navigate = useNavigate();
-
+  const { enqueueSnackbar } = useSnackbar();
   const ResidentsProfileSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
-    sex: Yup.string().oneOf(['male', 'female']).required('Required'),
+    sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
-    dateOfBirth: Yup.string().required("Date of Birth is required"),
+    dateOfBirth: Yup.string().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
-    address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
@@ -40,22 +40,41 @@ export default function ResidentsProfileCard() {
     address: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
+    tribe: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Tribe is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse Address is required'),
     numberOfChildren: Yup.number()
       .typeError('Number of Children must be a number')
       .integer('Number of Children must be an integer')
       .required('Number of Children is required'),
+    purok: Yup.string()
+      .oneOf([
+        'purok1',
+        'purok2',
+        'purok3a',
+        'purok3b',
+        'purok4',
+        'purok5',
+        'purok6',
+        'purok7',
+        'purok8',
+        'purok9',
+        'purok10a',
+        'purok11b',
+        'purok12',
+        'purok13',
+      ])
+      .required('Purok is required'),
     fathersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Name is required'),
     fathersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     fathersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Address is required'),
     mothersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Name is required'),
     mothersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     mothersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Address is required'),
-    elementaryNameOfSchool: Yup.string()
+    elementarySchool: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Name of School is required'),
-    elementaryAddressOfSchool: Yup.string()
+    elementaryAddress: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Address of School is required'),
@@ -90,9 +109,9 @@ export default function ResidentsProfileCard() {
       lastName: '',
       officialAddress: '',
       age: '',
-      sex: 'male',
+      sex: '',
       dateOfBirth: '',
-      civilStatus: 'single',
+      civilStatus: '',
       citizenship: '',
       religion: '',
       height: '',
@@ -100,10 +119,12 @@ export default function ResidentsProfileCard() {
       phoneNumber: '',
       occupation: '',
       address: '',
-      status: 'active',
+      status: '',
       spouse: '',
+      tribe: '',
       spouseAddress: '',
       numberOfChildren: '',
+      purok: '',
       fathersName: '',
       fathersOccupation: '',
       fathersAddress: '',
@@ -127,8 +148,19 @@ export default function ResidentsProfileCard() {
     onSubmit: (data) => {
       console.log({ data });
       createResident(data)
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
+        .then((res) => {
+          console.log({ res });
+          if (res) {
+            enqueueSnackbar('Resident Added successfully', { 
+              variant: 'success',
+            });
+            navigate('/dashboard/app', { replace: true });
+          }
+        })
+        .catch((err) => { 
+          console.log({ err });
+          enqueueSnackbar('Invalid input', { variant: 'error' });
+        });
       navigate('/dashboard/app', { replace: true });
     },
   });
@@ -182,15 +214,17 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth>
+                <FormControl helperText={touched.sex && errors.sex} fullWidth>
                   <InputLabel id="sex-select-label">Sex</InputLabel>
                   <Select
+                    name="sex"
                     labelId="sex-select-label"
                     id="sex-select"
                     value={formik.values.sex}
-                    label="sex"
+                    label="Sex"
                     onChange={handleChange}
-                    name="sex"
+                    {...getFieldProps('sex')}
+                    error={Boolean(touched.sex && errors.sex)}
                   >
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
@@ -271,7 +305,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="phone_number"
-                  label="phoneNumber number"
+                  label="Phone Number"
                   id="outlined-start-adornment"
                   {...getFieldProps('phoneNumber')}
                   error={Boolean(touched.phoneNumber && errors.phoneNumber)}
@@ -317,6 +351,15 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="inactive">Inactive</MenuItem>
                   </Select>
                 </FormControl>
+
+                <TextField
+                  fullWidth
+                  name="tribe"
+                  label="Tribe"
+                  {...getFieldProps('tribe')}
+                  error={Boolean(touched.tribe && errors.tribe)}
+                  helperText={touched.tribe && errors.tribe}
+                />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -346,6 +389,34 @@ export default function ResidentsProfileCard() {
                   error={Boolean(touched.numberOfChildren && errors.numberOfChildren)}
                   helperText={touched.numberOfChildren && errors.numberOfChildren}
                 />
+
+                <FormControl helperText={touched.purok && errors.purok} fullWidth>
+                  <InputLabel id="purok-select-label">Purok</InputLabel>
+                  <Select
+                    name="purok"
+                    labelId="purok-select-label"
+                    id="purok-select"
+                    value={formik.values.purok}
+                    label="Purok"
+                    onChange={handleChange}
+                    {...getFieldProps('purok')}
+                    error={Boolean(touched.purok && errors.purok)}
+                  >
+                    <MenuItem value="purok1">Purok 1</MenuItem>
+                    <MenuItem value="purok2">Purok 2</MenuItem>
+                    <MenuItem value="purok3a">Purok 3A</MenuItem>
+                    <MenuItem value="purok4">Purok 4</MenuItem>
+                    <MenuItem value="purok5">Purok 5</MenuItem>
+                    <MenuItem value="purok6">Purok 6</MenuItem>
+                    <MenuItem value="purok7">Purok 7</MenuItem>
+                    <MenuItem value="purok8">Purok 8</MenuItem>
+                    <MenuItem value="purok9">Purok 9</MenuItem>
+                    <MenuItem value="purok10a">Purok 10A</MenuItem>
+                    <MenuItem value="purok11b">Purok 11B</MenuItem>
+                    <MenuItem value="purok12">Purok 12</MenuItem>
+                    <MenuItem value="purok13">Purok 13</MenuItem>
+                  </Select>
+                </FormControl>
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

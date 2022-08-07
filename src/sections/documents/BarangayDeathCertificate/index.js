@@ -4,10 +4,10 @@ import React from 'react';
 import styles from './BarangayDeathCertificate.module.css';
 
 export default function BarangayDeathCertificate({
-  //naa pay ibutang dire
+  // naa pay ibutang dire
   name,
   relationship,
-  residence,
+  purok,
   day,
   month,
   year,
@@ -23,16 +23,16 @@ export default function BarangayDeathCertificate({
   religion,
   occupation,
   nameoffather,
-  maiden,
+  maidennameofmother,
   captain,
-  barangay,
   secretary,
-  sec,
+  requestorName,
+
 }) {
   return (
     <Box className={styles.c13}>
-      <p class={styles.c6}>
-        <span class={styles.c1}>Republic of the Philippines</span>
+      <p className={styles.c6}>
+        <span className={styles.c1}>Republic of the Philippines</span>
         <span
           style={{
             overflow: 'hidden',
@@ -48,7 +48,7 @@ export default function BarangayDeathCertificate({
         >
           <img
             alt=""
-            src="images/image1.png"
+            src="/images/image1.png"
             style={{
               width: '102.5px',
               height: '100.23px',
@@ -75,7 +75,7 @@ export default function BarangayDeathCertificate({
         >
           <img
             alt=""
-            src="images/image2.png"
+            src="/images/image2.png"
             style={{
               width: '103px',
               height: '98.52px',
@@ -91,7 +91,7 @@ export default function BarangayDeathCertificate({
       <p className={styles.c6}>
         <span className={styles.c1}>Province of Bukidnon</span>
       </p>
-      <p class={styles.c6}>
+      <p className={styles.c6}>
         <span className={styles.c1}>Municipality of Pangantucan</span>
       </p>
       <p className={styles.c6}>
@@ -105,46 +105,45 @@ export default function BarangayDeathCertificate({
       </p>
       <hr />
       <p className={styles.c0}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c6}>
         <span className={styles.c1}>BARANGAY DEATH CERTIFICATE</span>
       </p>
       <p className={styles.c0}>
-        <span className={styles.c1}></span>
+        <span className={styles.c1} />
       </p>
       <p className={styles.c0}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c5}>TO WHOM IT MAY CONCERN:</span>
       </p>
       <p className={(styles.c12, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
       <p className={styles.c12}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that </span>
-        <span className={styles.c3}>{name}</span>
+        <span className={styles.c3}>{requestorName}</span>
         <span className={styles.c5}>
           {' '}
-          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{residence}</span>, Kimanait,
+          &nbsp;Filipino citizen married and resident of Purok <span className={styles.c3}>{purok}</span>, Kimanait,
           Pangantucan, Bukidnon,
         </span>
-        <span className={styles.c3}>{relationship}</span>
+        <span className={styles.c3}> {relationship}</span>
         <span className={styles.c5}> of the deceased name below:</span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c5}></span>
+        <span className={styles.c5} />
       </p>
-      <table className={styles.deathTable}>
+      <table className={styles.deathTable} style={{ color: '#000000 ' }}>
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DECEASED NAME</td>
           <td style={{ paddingLeft: '10px' }}>
-            :{''}
-            <span className={styles.c3}>{deceasedname}</span>
+            : <span className={styles.c3}>{deceasedname}</span>
           </td>
         </tr>
         <tr>
@@ -216,13 +215,13 @@ export default function BarangayDeathCertificate({
         <tr>
           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MAIDEN NAME OF MOTHER</td>
           <td style={{ paddingLeft: '10px' }}>
-            : <span className={styles.c3}>{maiden}</span>
+            : <span className={styles.c3}>{maidennameofmother}</span>
           </td>
         </tr>
       </table>
 
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={styles.c4}>
         <span className={styles.c7}>
@@ -233,7 +232,7 @@ export default function BarangayDeathCertificate({
       <p className={styles.c4}>
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <p className={styles.c5}>
-          <span class="c1">
+          <span className={styles.c4}>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Done this <span className={styles.c3}>{day}</span> of{' '}
             <span className={styles.c3}>{month}</span>, <span className={styles.c3}>{year}</span> at the Office of the
             Punong Barangay of Kimanait, Pangantucan, Bukidnon.
@@ -244,13 +243,15 @@ export default function BarangayDeathCertificate({
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </p>
       <p className={styles.c5}>
-        <span class="c1">NOTE: Any erasure or alteration of any entry invalidates this Barangay Certification.</span>
+        <span className={styles.c4}>
+          NOTE: Any erasure or alteration of any entry invalidates this Barangay Certification.
+        </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
 
       <div style={{ float: 'right' }}>
@@ -258,21 +259,21 @@ export default function BarangayDeathCertificate({
           <span className={styles.c3}>{captain}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-          <span className={styles.c5}>{barangay}</span>
+          <span className={styles.c5}>Punong Barangay</span>
         </p>
       </div>
 
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
       <p className={(styles.c4, styles.c9)}>
-        <span className={styles.c3}></span>
+        <span className={styles.c3} />
       </p>
 
       <div style={{ float: 'left' }}>
@@ -280,23 +281,23 @@ export default function BarangayDeathCertificate({
           <span className={styles.c5}>Prepared by:</span>
         </p>
         <p className={(styles.c4, styles.c9)}>
-          <span className={styles.c3}></span>
+          <span className={styles.c3} />
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
           <span className={styles.c3}>{secretary}</span>
         </p>
         <p className={styles.c1} style={{ textAlign: 'center' }}>
-          <span className={styles.c5}>{sec}</span>
+          <span className={styles.c5}>Barangay Secretary</span>
         </p>
       </div>
-      <p class="c0">
-        <span class="c1"></span>
+      <p className="c0">
+        <span className="c1" />
       </p>
-      <p class="c0">
-        <span class="c1"></span>
+      <p className="c0">
+        <span className="c1" />
       </p>
-      <p class="c13">
-        <span class="c14"></span>
+      <p className="c13">
+        <span className="c14" />
       </p>
     </Box>
   );

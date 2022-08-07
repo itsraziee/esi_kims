@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Stack, Button } from '@mui/material';
 // components
 import Page from '../components/Page';
-
+import { useAuth } from '../hooks/useAuth';
 import Iconify from '../components/Iconify';
 // sections
 import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/demographics';
@@ -13,19 +13,20 @@ import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/dem
 
 export default function Demographics() {
   const theme = useTheme();
-
+  const user = useAuth();
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-          Demographics
+            Demographics
           </Typography>
-          <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
-            Add Data
-          </Button>
+          {user && (
+            <Button variant="contained" component={RouterLink} to="#" startIcon={<Iconify icon="eva:plus-fill" />}>
+              Add Data
+            </Button>
+          )}
         </Stack>
-      
 
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={8}>
@@ -90,7 +91,7 @@ export default function Demographics() {
                 theme.palette.chart.teal,
                 theme.palette.chart.pink,
                 theme.palette.chart.frenchlime,
-                theme.palette.chart.emerald
+                theme.palette.chart.emerald,
               ]}
             />
           </Grid>

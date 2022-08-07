@@ -19,7 +19,6 @@ ol {
   padding-left: 100px;
 }
 .c10 {
-  background-color: #ffffff;
   -webkit-text-decoration-skip: none;
   color: #595959;
   font-weight: 700;
@@ -31,9 +30,8 @@ ol {
   font-style: normal;
 }
 .c3 {
-  background-color: #ffffff;
   -webkit-text-decoration-skip: none;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: underline;
   vertical-align: baseline;
@@ -43,8 +41,7 @@ ol {
   font-style: normal;
 }
 .c5 {
-  background-color: #ffffff;
-  color: #595959;
+  color: #000000;
   font-weight: 400;
   text-decoration: none;
   vertical-align: baseline;
@@ -53,8 +50,7 @@ ol {
   font-style: normal;
 }
 .c8 {
-  background-color: #ffffff;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: none;
   vertical-align: baseline;
@@ -64,8 +60,7 @@ ol {
   text-align: center;
 }
 .c1 {
-  background-color: #ffffff;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   text-decoration: none;
   vertical-align: baseline;
@@ -127,11 +122,11 @@ ol {
   font-weight: 400;
 }
 .c13 {
-  background-color: #ffffff;
-  max-width: 468pt;
+  max-width:700pt;
   padding: 72pt 72pt 72pt 72pt;
 }
 .c7 {
+  color: #000000;
   font-size: 11pt;
   font-family: 'Verdana';
   font-weight: 400;
@@ -144,9 +139,8 @@ ol {
   height: 12pt;
 }
 .title {
-  background-color: #ffffff;
   padding-top: 24pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 36pt;
   padding-bottom: 6pt;
@@ -158,14 +152,14 @@ ol {
 }
 .subtitle {
   border-right-style: solid;
-  color: #666666;
+  color: #000000;
   border-top-width: 0pt;
   border-bottom-color: #000000;
   font-weight: 700;
   padding-left: 0pt;
   border-left-color: #000000;
   font-size: 24pt;
-  background-color: #ffffff;
+
   border-left-style: solid;
   border-top-color: #000000;
   font-family: 'Georgia';
@@ -186,24 +180,21 @@ ol {
   padding-right: 0pt;
 }
 li {
-  background-color: #ffffff;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 12pt;
   font-family: 'Times New Roman';
 }
 p {
-  background-color: #ffffff;
   margin: 0;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 12pt;
   font-family: 'Times New Roman';
 }
 h1 {
-  background-color: #ffffff;
   padding-top: 24pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 24pt;
   padding-bottom: 6pt;
@@ -215,9 +206,8 @@ h1 {
   text-align: center;
 }
 h2 {
-  background-color: #ffffff;
   padding-top: 18pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 18pt;
   padding-bottom: 4pt;
@@ -229,9 +219,8 @@ h2 {
   text-align: center;
 }
 h3 {
-  background-color: #ffffff;
   padding-top: 14pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 14pt;
   padding-bottom: 4pt;
@@ -243,9 +232,8 @@ h3 {
   text-align: center;
 }
 h4 {
-  background-color: #ffffff;
   padding-top: 12pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 12pt;
   padding-bottom: 2pt;
@@ -253,12 +241,10 @@ h4 {
   page-break-after: avoid;
   orphans: 2;
   widows: 2;
-  text-align: center;
 }
 h5 {
-  background-color: #ffffff;
   padding-top: 11pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 11pt;
   padding-bottom: 2pt;
@@ -269,9 +255,8 @@ h5 {
   text-align: center;
 }
 h6 {
-  background-color: #ffffff;
   padding-top: 10pt;
-  color: #595959;
+  color: #000000;
   font-weight: 700;
   font-size: 10pt;
   padding-bottom: 2pt;
