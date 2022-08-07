@@ -22,12 +22,6 @@ import Officials from './pages/Officials';
 import Demographics from './pages/Demographics';
 import Profile from './pages/Profile';
 import LegislativeForm from './pages/LegislativeForm';
-import BarangayBirthCertification from './pages/BarangayBirthCertification';
-import BarangayClearance from './pages/BarangayClearance';
-import CertificateOfResidency from './pages/CertificateOfResidency';
-import BarangayDeathCertification from './pages/BarangayDeathCertification';
-import CertificateOfIndigency from './pages/CertificateOfIndigency';
-import BarangayCertification from './pages/BarangayCertification';
 import RequestDocumentForm from './pages/RequestDocumentForm';
 import BillingTransaction from './pages/BillingTransaction';
 import BlotterForm from './pages/BlotterForm';
@@ -64,13 +58,7 @@ export default function Router() {
         { path: 'legislativeForm', element: <LegislativeForm /> },
         { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },
         { path: 'blotterForm', element: <BlotterForm /> },
-        
-        { path: 'barangaybirthcertification', element: <BarangayBirthCertification /> },
-        { path: 'barangaycertification', element: <BarangayCertification /> },
-        { path: 'barangayclearance', element: <BarangayClearance /> },
-        { path: 'barangaydeathcertification', element: <BarangayDeathCertification /> },
-        { path: 'certificateofresidency', element: <CertificateOfResidency /> },
-        { path: 'certificateofindigency', element: <CertificateOfIndigency /> },
+
         { path: 'billingTransaction', element: <BillingTransaction /> },
         { path: 'bhw', element: <BHW /> },
         { path: 'bns', element: <BNS /> },
@@ -79,10 +67,9 @@ export default function Router() {
         { path: 'cvo', element: <CVO /> },
         { path: 'pl', element: <PL /> },
         { path: 'newsUpdateForm', element: <NewsUpdateForm /> },
-        
       ],
     },
-    
+
     {
       path: '/',
       element: <LogoOnlyLayout />,
@@ -95,6 +82,5 @@ export default function Router() {
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
-
   ]);
 }
