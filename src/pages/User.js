@@ -1,236 +1,289 @@
-import { filter } from 'lodash';
-import { sentenceCase } from 'change-case';
-import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-// material
-import {
-  Card,
-  Table,
-  Stack,
-  Avatar,
-  Button,
-  Checkbox,
-  TableRow,
-  TableBody,
-  TableCell,
-  Container,
-  Typography,
-  TableContainer,
-  TablePagination,
-} from '@mui/material';
-// components
-import Page from '../components/Page';
-import Label from '../components/Label';
-import Scrollbar from '../components/Scrollbar';
-import Iconify from '../components/Iconify';
-import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/user';
-// mock
-import USERLIST from '../_mock/user';
-import AuthRequired from '../layouts/auth/AuthRequired';
-
-// ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-  { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
-  { id: '' },
-];
-
-// ----------------------------------------------------------------------
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-  }
-  return stabilizedThis.map((el) => el[0]);
-}
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import React from 'react';
+import moment from 'moment';
+import { useLocation } from 'react-router-dom';
+import { useResidents } from '../hooks/useResidents';
 
 export default function User() {
-  const [page, setPage] = useState(0);
+  const location = useLocation();
+  console.log({ location });
+  const purok = new URLSearchParams(location.search).get('purok');
+  console.log({ purok });
+  const rows = useResidents(purok);
 
-  const [order, setOrder] = useState('asc');
+  const columns = [
+    { field: 'id', headerName: 'ID', flex: 1, minWidth: 100 },
+    {
+      field: 'firstName',
+      headerName: 'First Name',
+      flex: 1,
+      minWidth: 150,
+      editable: true,
+    },
+    {
+      field: 'middleName',
+      headerName: 'Middle Name',
+      flex: 1,
+      minWidth: 150,
+      editable: true,
+    },
+    {
+      field: 'lastName',
+      headerName: 'Last Name',
+      flex: 1,
+      minWidth: 150,
+      editable: true,
+    },
+    {
+      field: 'purok',
+      headerName: 'Purok',
+      flex: 1,
+      minWidth: 150,
+      editable: true,
+    },
+    {
+      field: '',
+      headerName: 'Age',
+      valueGetter: (params) => moment().diff(params.row.dateOfBirth, 'years'),
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'citizenship',
+      headerName: 'Citizenship',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'collegeAddress',
+      headerName: 'College Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'collegeSchool',
+      headerName: 'College School',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'collegeYearGrad',
+      headerName: 'College Year Graduated',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'dateOfBirth',
+      headerName: 'Date of Birth',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'elementaryAddress',
+      headerName: 'Elementary Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'elementarySchool',
+      headerName: 'Elementary School',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'fathersName',
+      headerName: 'Fathers Name',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'fathersOccupation',
+      headerName: 'Fathers Occupation',
+      flex: 1,
+      minWidth: 150,
+    },
 
-  const [selected, setSelected] = useState([]);
+    {
+      field: 'height',
+      headerName: 'Height',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'highschoolAddress',
+      headerName: 'Highschool Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'highschoolName',
+      headerName: 'Highschool Name',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'highschoolYearGrad',
+      headerName: 'Highschool Year Grad',
+      flex: 1,
+      minWidth: 150,
+    },
 
-  const [orderBy, setOrderBy] = useState('name');
+    {
+      field: 'mothersAddress',
+      headerName: 'Mothers Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'mothersName',
+      headerName: 'Mothers Name',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'mothersOccupation',
+      headerName: 'Mothers Occupation',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'numberOfChildren',
+      headerName: 'Number Of Children',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'occupation',
+      headerName: 'Occupation',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'officialAddress',
+      headerName: 'Official Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'phoneNumber',
+      headerName: 'Phone Number',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'religion',
+      headerName: 'Religion',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'sex',
+      headerName: 'Sex',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'spouse',
+      headerName: 'Spouse',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'spouseAddress',
+      headerName: 'Spouse Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'uploadImage',
+      headerName: 'Upload Image',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'vocationalAddress',
+      headerName: 'Vocational Address',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'vocationalSchool',
+      headerName: 'Vocational School',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'vocationalYearGrad',
+      headerName: 'Vocational Year Grad',
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: 'weight',
+      headerName: 'Weight',
+      flex: 1,
+      minWidth: 150,
+    },
+  ];
 
-  const [filterName, setFilterName] = useState('');
-
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
-    }
-    setSelected(newSelected);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const handleFilterByName = (event) => {
-    setFilterName(event.target.value);
-  };
-
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
-
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
-
-  const isUserNotFound = filteredUsers.length === 0;
-
+  // const rows = [
+  //   {
+  //     id: '1bzWoVvEn2fk173B4cab',
+  //     age: 21,
+  //     citizenship: 'Filipino',
+  //     collegeAddress: 'Fortich Street, Malaybalay City, Bukidon',
+  //     collegeSchool: 'Bukidnon State University',
+  //     collegeYearGrad: 2022,
+  //     dateOfBirth: '11/07/2000',
+  //     elementaryAddress: 'Sumpong, Malaybalay City, Bukidnon',
+  //     elementarySchool: 'Sumpong Elementary School',
+  //     elementaryYearGrad: '2012-2013',
+  //     fathersAddress: 'Purok 8, Sumpong, Malaybalay City, Bukidnon',
+  //     fathersName: 'Agapito D. Acaso',
+  //     fathersOccupation: 'Mechanic',
+  //     firstName: 'John Bryan Pit',
+  //     height: '175 cm',
+  //     highschoolAddress: 'Fortich St., Malaybalay City, Bukidnon',
+  //     highschoolName: 'Bukidnon National Highschool',
+  //     highschoolYearGrad: '2019-2020',
+  //     lastName: 'Acaso',
+  //     middleName: 'Maturan',
+  //     mothersAddress: 'Purok 8, Sumpong Malaybalay City, Bukidnon',
+  //     mothersName: 'Jenefer M. Acaso',
+  //     mothersOccupation: 'Housewife',
+  //     numberOfChildren: 0,
+  //     occupation: 'Web Developer',
+  //     officialAddress: 'Purok 8, Sumpong, Malaybalay City, Bukidnon',
+  //     phoneNumber: '09123456789',
+  //     religion: 'Catholic',
+  //     sex: 'Male',
+  //     spouse: 'N/A',
+  //     spouseAddress: 'N/A',
+  //     status: 'active',
+  //     uploadImage: '',
+  //     vocationalAddress: 'Fortich St., Malaybalay City, Bukidnon',
+  //     vocationalSchool: 'Alternative Learning System',
+  //     vocationalYearGrad: '2022-2023',
+  //     weight: '45 kg',
+  //   },
+  // ];
   return (
-    <AuthRequired>
-      <Page title="User">
-        <Container>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h4" gutterBottom>
-              Residents
-            </Typography>
-           
-          </Stack>
-
-          <Card>
-            <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-
-            <Scrollbar>
-              <TableContainer sx={{ minWidth: 800 }}>
-                <Table>
-                  <UserListHead
-                    order={order}
-                    ord erBy={orderBy}
-                    headLabel={TABLE_HEAD}
-                    rowCount={USERLIST.length}
-                    numSelected={selected.length}
-                    onRequestSort={handleRequestSort}
-                    onSelectAllClick={handleSelectAllClick}
-                  />
-                  <TableBody>
-                    {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                      const { id, name, role, status, company, avatarUrl, isVerified } = row;
-                      const isItemSelected = selected.indexOf(name) !== -1;
-
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
-                          </TableCell>
-                          <TableCell component="th" scope="row" padding="none">
-                            <Stack direction="row" alignItems="center" spacing={2}>
-                              <Avatar alt={name} src={avatarUrl} />
-                              <Typography variant="subtitle2" noWrap>
-                                {name}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
-                          <TableCell align="left">{company}</TableCell>
-                          <TableCell align="left">{role}</TableCell>
-                          <TableCell align="left">{isVerified ? 'Yes' : 'No'}</TableCell>
-                          <TableCell align="left">
-                            <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
-                              {sentenceCase(status)}
-                            </Label>
-                          </TableCell>
-
-                          <TableCell align="right">
-                            <UserMoreMenu />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                    {emptyRows > 0 && (
-                      <TableRow style={{ height: 53 * emptyRows }}>
-                        <TableCell colSpan={6} />
-                      </TableRow>
-                    )}
-                  </TableBody>
-
-                  {isUserNotFound && (
-                    <TableBody>
-                      <TableRow>
-                        <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                          <SearchNotFound searchQuery={filterName} />
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  )}
-                </Table>
-              </TableContainer>
-            </Scrollbar>
-
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
-              component="div"
-              count={USERLIST.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Card>
-        </Container>
-      </Page>
-    </AuthRequired>
+    <DataGrid
+      autoHeight
+      rows={rows ?? []}
+      columns={columns}
+      components={{ Toolbar: GridToolbar }}
+      experimentalFeatures={{ newEditingApi: true }}
+      disableSelectionOnClick
+      loading={!rows}
+      rowsPerPageOptions={[5, 10, 20]}
+      pagination
+    />
   );
 }

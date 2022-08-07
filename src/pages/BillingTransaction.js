@@ -148,6 +148,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
             {documentType === 'Barangay Birth Certificate' && (
@@ -155,6 +156,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
             {documentType === 'Barangay Death Certificate' && (
@@ -162,6 +164,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
             {documentType === 'Tree Planting Certificate' && (
@@ -169,6 +172,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
             {documentType === 'Certificate of Indigency' && (
@@ -176,6 +180,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
             {documentType === 'Certificate of Residency' && (
@@ -183,6 +188,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
           </Dialog>
