@@ -1,18 +1,18 @@
 // material
-import { Container, Stack} from '@mui/material';
+import { Container, Stack } from '@mui/material';
 // components
 import Page from '../components/Page';
-import { SummonResolvedFormCard } from '../sections/@dashboard/forms';
+import { SummonFormCard } from '../sections/@dashboard/forms';
 // ----------------------------------------------------------------------
 // ----------------------------------------------------------------------
 
-export default function SummonResolvedForm() {
+export default function SummonForm() {
   return (
     <Page title="Summon Form">
       <Container sx={{ mt: 5, mb: 5 }}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <SummonResolvedFormCard />
-          </Stack>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <SummonFormCard />
+        </Stack>
       </Container>
     </Page>
   );

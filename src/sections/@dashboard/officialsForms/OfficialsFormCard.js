@@ -30,7 +30,7 @@ export default function OfficialsFormCard() {
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     sex: Yup.string().oneOf(['male', 'female']).required(),
-    dateOfBirth: Yup.string().required('Date of Birth is required'),
+    dateOfBirth: Yup.date().required('Date of Birth is required'),
     civilStatus: Yup.string().required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),

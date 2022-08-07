@@ -15,11 +15,11 @@ export default function Officials() {
   return (
     <Page title="Officials">
       <Container>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4" sx={{ mb: 5 }}>
-          Officials
-        </Typography>
-        {user && (
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h4" sx={{ mb: 5 }}>
+            Officials
+          </Typography>
+          {user && (
             <Button
               variant="contained"
               component={RouterLink}
@@ -29,7 +29,7 @@ export default function Officials() {
               Add Official
             </Button>
           )}
-          </Stack>
+        </Stack>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={8} md={3}>
             <OfficialsWidget

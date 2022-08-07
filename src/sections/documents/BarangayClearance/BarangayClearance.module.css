@@ -254,7 +254,6 @@ h4 {
   page-break-after: avoid;
   orphans: 2;
   widows: 2;
-  text-align: center;
 }
 h5 {
   padding-top: 11pt;
