@@ -4,16 +4,14 @@ import { Grid, Container, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 // components
 import Page from '../components/Page';
-import Iconify from '../components/Iconify';
 // sections
 import {
   AppNewsUpdate,
-  AppCurrentVisits,
-  AppWebsiteVisits,
   AppTrafficBySite,
   AppWidgetSummary,
   NewsUpdateCard,
 } from '../sections/@dashboard/app';
+import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/demographics';
 import { useAuth } from '../hooks/useAuth';
 import NEWSUPDATES from '../_mock/newsUpdate';
 import { useResidents } from '../hooks/useResidents';
@@ -228,7 +226,6 @@ export default function DashboardApp() {
     setPurok13Males(p13Males.length);
   }, [purok13]);
 
-
   const [purok1Females, setPurok1Females] = useState(0);
   const [purok2Females, setPurok2Females] = useState(0);
   const [purok3aFemales, setPurok3aFemales] = useState(0);
@@ -408,7 +405,7 @@ export default function DashboardApp() {
           )}
 
           <Grid item xs={12} md={6} lg={8}>
-            <AppWebsiteVisits
+            <DemographicsTable
               title="Population"
               subheader="(+43%) than last year"
               chartLabels={[
@@ -438,20 +435,50 @@ export default function DashboardApp() {
                   name: 'Male',
                   type: 'area',
                   fill: 'gradient',
-                  data: [purok1Males, purok2Males, purok3aMales, purok3bMales, purok4Males, purok5Males, purok6Males, purok7Males, purok8Males, purok9Males, purok10aMales, purok11bMales, purok12Males, purok13Males],
+                  data: [
+                    purok1Males,
+                    purok2Males,
+                    purok3aMales,
+                    purok3bMales,
+                    purok4Males,
+                    purok5Males,
+                    purok6Males,
+                    purok7Males,
+                    purok8Males,
+                    purok9Males,
+                    purok10aMales,
+                    purok11bMales,
+                    purok12Males,
+                    purok13Males,
+                  ],
                 },
                 {
                   name: 'Female',
                   type: 'line',
                   fill: 'solid',
-                  data: [purok1Females, purok2Females, purok3aFemales, purok3bFemales, purok4Females, purok5Females, purok6Females, purok7Females, purok8Females, purok9Females, purok10aFemales, purok11bFemales, purok12Females, purok13Females],
+                  data: [
+                    purok1Females,
+                    purok2Females,
+                    purok3aFemales,
+                    purok3bFemales,
+                    purok4Females,
+                    purok5Females,
+                    purok6Females,
+                    purok7Females,
+                    purok8Females,
+                    purok9Females,
+                    purok10aFemales,
+                    purok11bFemales,
+                    purok12Females,
+                    purok13Females,
+                  ],
                 },
               ]}
             />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentVisits
+            <DemographicsChart
               title="Current Population"
               chartData={populationData}
               chartColors={[
