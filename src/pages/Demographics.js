@@ -233,85 +233,85 @@ export default function Demographics() {
   const [purok13Females, setPurok13Females] = useState(0);
 
   useEffect(() => {
-    const p1Females = purok1?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p1Females = purok1?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok1Females(p1Females.length);
   }, [purok1]);
 
   useEffect(() => {
-    const p2Females = purok2?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p2Females = purok2?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok2Females(p2Females.length);
   }, [purok2]);
 
   useEffect(() => {
-    const p3aFemales = purok3a?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p3aFemales = purok3a?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok3aFemales(p3aFemales.length);
   }, [purok3a]);
 
   useEffect(() => {
-    const p3bFemales = purok3b?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p3bFemales = purok3b?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok3bFemales(p3bFemales.length);
   }, [purok3b]);
 
   useEffect(() => {
-    const p4Females = purok4?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p4Females = purok4?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok4Females(p4Females.length);
   }, [purok4]);
 
   useEffect(() => {
-    const p5Females = purok5?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p5Females = purok5?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok5Females(p5Females.length);
   }, [purok5]);
 
   useEffect(() => {
-    const p6Females = purok6?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p6Females = purok6?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok6Females(p6Females.length);
   }, [purok6]);
 
   useEffect(() => {
-    const p7Females = purok7?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p7Females = purok7?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok7Females(p7Females.length);
   }, [purok7]);
 
   useEffect(() => {
-    const p8Females = purok8?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p8Females = purok8?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok8Females(p8Females.length);
   }, [purok8]);
 
   useEffect(() => {
-    const p9Females = purok9?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p9Females = purok9?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok9Females(p9Females.length);
   }, [purok9]);
 
   useEffect(() => {
-    const p10aFemales = purok10a?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p10aFemales = purok10a?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok10aFemales(p10aFemales.length);
   }, [purok10a]);
 
   useEffect(() => {
-    const p11bFemales = purok11b?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p11bFemales = purok11b?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok11bFemales(p11bFemales.length);
   }, [purok11b]);
 
   useEffect(() => {
-    const p12Females = purok12?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p12Females = purok12?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok12Females(p12Females.length);
   }, [purok12]);
 
   useEffect(() => {
-    const p13Females = purok13?.filter((resident) => resident.sex === 'Female') ?? [];
+    const p13Females = purok13?.filter((resident) => resident.sex === 'female') ?? [];
 
     setPurok13Females(p13Females.length);
   }, [purok13]);

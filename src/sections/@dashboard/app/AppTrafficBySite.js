@@ -2,9 +2,29 @@ import * as Yup from 'yup';
 // @mui
 import PropTypes from 'prop-types';
 import { useFormik, Form, FormikProvider } from 'formik';
-import { Box, Card, Paper, Stack, Typography, TextField, CardHeader, CardContent, Grid } from '@mui/material';
+import {
+  Box,
+  Card,
+  Paper,
+  Stack,
+  Typography,
+  TextField,
+  CardHeader,
+  CardContent,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from '@mui/material';
 
 import { LoadingButton } from '@mui/lab';
+import { useState } from 'react';
+import { useSnackbar } from 'notistack';
+import RequestStatus from '../request/status/RequestStatus';
+import { getDocumentRequest } from '../../../service/documentRequest';
 // utils
 
 // ----------------------------------------------------------------------
@@ -18,37 +38,90 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
   const ReferenceNumber = Yup.object().shape({
     referenceNumber: Yup.string().min(2, 'Too Short!').required('Reference Number is required'),
   });
+  const [open, setOpen] = useState(false);
+  const [documentRequest, setDocumentRequest] = useState();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const formik = useFormik({
     initialValues: { referenceNumber: '' },
     validationSchema: ReferenceNumber,
-    onSubmit: (data) => {
+    onSubmit: async (data) => {
       console.log({ data });
+
+      return getDocumentRequest(data.referenceNumber).then((res) => {
+        console.log({ res });
+        if (!res.exists()) {
+          enqueueSnackbar('Reference number is not found, please try again later.', { variant: 'error' });
+          return;
+        }
+
+        const data = { ...res.data(), referenceNumber: res.id };
+        console.log({ resData: data });
+
+        setDocumentRequest(data);
+        handleClickOpen(true);
+      });
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
   return (
-    <Card {...other}>
-      <CardHeader title={title} subheader={subheader} />
-     
+    <>
+      <Card {...other}>
+        <CardHeader title={title} subheader={subheader} />
+
         <CardContent>
           <Box>
-            <Stack sx={{  mb: 1}} spacing={2}>
-              <TextField
-                fullWidth
-                name="referenceNumber"
-                label="Reference No."
-                {...getFieldProps('referenceNumber')}
-                error={Boolean(touched.referenceNumber && errors.referenceNumber)}
-                helperText={touched.referenceNumber && errors.referenceNumber}
-              />
-            </Stack>
-            <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
-              Submit
-            </LoadingButton>
+            <FormikProvider value={formik}>
+              <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+                <Stack sx={{ mb: 1 }} spacing={2}>
+                  <TextField
+                    fullWidth
+                    name="referenceNumber"
+                    label="Reference No."
+                    {...getFieldProps('referenceNumber')}
+                    error={Boolean(touched.referenceNumber && errors.referenceNumber)}
+                    helperText={touched.referenceNumber && errors.referenceNumber}
+                  />
+                </Stack>
+                <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={open}>
+                  Submit
+                </LoadingButton>
+              </Form>
+            </FormikProvider>
           </Box>
-         
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+      {documentRequest && (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Document Request Status</DialogTitle>
+          <DialogContent>
+            <RequestStatus
+              referenceNumber={documentRequest.referenceNumber}
+              remarks={documentRequest?.remarks ?? 'N/A'}
+              requestorName={documentRequest?.requestorName}
+              status={documentRequest?.status}
+              typeOfDocument={documentRequest?.type}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+      )}
+    </>
   );
 }
