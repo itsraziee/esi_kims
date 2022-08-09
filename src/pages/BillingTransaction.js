@@ -183,8 +183,8 @@ export default function BillingTransaction() {
                 requestorName={currentRow.requestorName}
               />
             )}
-            {documentType === 'Certificate of Residency' && (
-              <BarangayCertificateOfResidency
+            {documentType === 'Certificate of Tree Planting' && (
+              <BarangayTreePlantingCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"

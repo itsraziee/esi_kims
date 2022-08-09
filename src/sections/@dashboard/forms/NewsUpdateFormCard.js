@@ -2,38 +2,27 @@ import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // material
-import {
-  Button,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Stack,
-  TextField,
-  InputAdornment,
-  Card,
-  CardContent,
-  Typography,
-} from '@mui/material';
+import { Button, Stack, TextField, Card, CardContent, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { createOfficial } from '../../../service/official';
 // ----------------------------------------------------------------------
 
-export default function BlotterResolvedFormCard() {
+export default function NewsUpdateFormCard() {
   const navigate = useNavigate();
 
-  const BlotterResolvedFormSchema = Yup.object().shape({
-    title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
+  const NewsUpdateFormSchema = Yup.object().shape({
+    title: Yup.string().min(2, 'Too Short!').required('Title is required'),
+    description: Yup.string().min(2, 'Too Short!').required('Description is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
+      description: '',
     },
-    validationSchema: BlotterResolvedFormSchema,
+    validationSchema: NewsUpdateFormSchema,
     onSubmit: (data) => {
-      console.log({ data });
-      createOfficial(data)
+      console
+        .log({ data })
         .then((res) => console.log({ res }))
         .catch((err) => console.log({ err }));
       navigate('/dashboard/app', { replace: true });
@@ -49,7 +38,7 @@ export default function BlotterResolvedFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Upload Resolved Blotter
+                News Update Form
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
                 <TextField
@@ -57,8 +46,20 @@ export default function BlotterResolvedFormCard() {
                   name="title"
                   label="Title"
                   {...getFieldProps('title')}
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
+                  error={Boolean(touched.title && errors.title)}
+                  helperText={touched.title && errors.title}
+                />
+              </Stack>
+
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
+                <TextField
+                  fullWidth
+                  multiline
+                  name="description"
+                  label="Description"
+                  {...getFieldProps('description')}
+                  error={Boolean(touched.description && errors.description)}
+                  helperText={touched.description && errors.description}
                 />
               </Stack>
 

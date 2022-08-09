@@ -1,6 +1,5 @@
 export { default as LegislativeFormCard } from './LegislativeFormCard';
-export { default as BlotterUnresolvedFormCard } from './BlotterUnresolvedFormCard';
-export { default as BlotterResolvedFormCard } from './BlotterResolvedFormCard';
-export { default as SummonResolvedFormCard } from './SummonResolvedFormCard';
-export { default as SummonUnresolvedFormCard } from './SummonUnresolvedFormCard';
 export { default as RequestDocumentFormCard } from './RequestDocumentFormCard';
+export { default as NewsUpdateFormCard } from './NewsUpdateFormCard';
+export { default as BlotterFormCard } from './BlotterFormCard';
+export { default as SummonFormCard } from './SummonFormCard';

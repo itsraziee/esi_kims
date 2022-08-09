@@ -22,28 +22,16 @@ import Officials from './pages/Officials';
 import Demographics from './pages/Demographics';
 import Profile from './pages/Profile';
 import LegislativeForm from './pages/LegislativeForm';
-import BlotterUnresolved from './pages/BlotterUnresolved';
-import BlotterResolved from './pages/BlotterResolved';
-import SummonUnresolved from './pages/SummonUnresolved.';
-import SummonResolved from './pages/SummonResolved';
-import BarangayBirthCertification from './pages/BarangayBirthCertification';
-import BarangayClearance from './pages/BarangayClearance';
-import CertificateOfResidency from './pages/CertificateOfResidency';
-import BarangayDeathCertification from './pages/BarangayDeathCertificate';
-import CertificateOfIndigency from './pages/BarangayCertificateOfIndigency';
-import BarangayCertification from './pages/BarangayCertification';
-import BlotterUnresolvedForm from './pages/BlotterUnresolvedForm'; 
-import BlotterResolvedForm from './pages/BlotterResolvedForm'; 
-import SummonResolvedForm from './pages/SummonResolvedForm';
-import SummonUnresolvedForm from './pages/SummonUnresolvedForm';
 import RequestDocumentForm from './pages/RequestDocumentForm';
 import BillingTransaction from './pages/BillingTransaction';
+import BlotterForm from './pages/BlotterForm';
 import BHW from './pages/BHW';
 import BNS from './pages/BNS';
 import BO from './pages/BO';
 import BSPO from './pages/BSPO';
 import CVO from './pages/CVO';
 import PL from './pages/PL';
+import NewsUpdateForm from './pages/NewsUpdateForm';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -68,33 +56,20 @@ export default function Router() {
         { path: 'officialsProfile', element: <OfficialsProfile /> },
         { path: 'profile', element: <Profile /> },
         { path: 'legislativeForm', element: <LegislativeForm /> },
-        { path: 'blotter-unresolved', element: <BlotterUnresolved /> },
-        { path: 'blotterResolved', element: <BlotterResolved /> },
-        { path: 'summon-unresolved', element: <SummonUnresolved /> },
-        { path: 'summon-resolved', element: <SummonResolved /> },
-        { path: 'blotterUnresolvedForm', element: <BlotterUnresolvedForm /> },
-        { path: 'blotterResolvedForm', element: <BlotterResolvedForm /> },
-        { path: 'SummonResolvedForm', element: <SummonResolvedForm /> },
-        { path: 'SummonUnresolvedForm', element: <SummonUnresolvedForm /> },
         { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },
-        
-        { path: 'barangaybirthcertification', element: <BarangayBirthCertification /> },
-        { path: 'barangaycertification', element: <BarangayCertification /> },
-        { path: 'barangayclearance', element: <BarangayClearance /> },
-        { path: 'barangaydeathcertification', element: <BarangayDeathCertification /> },
-        { path: 'certificateofresidency', element: <CertificateOfResidency /> },
-        { path: 'certificateofindigency', element: <CertificateOfIndigency /> },
+        { path: 'blotterForm', element: <BlotterForm /> },
+
         { path: 'billingTransaction', element: <BillingTransaction /> },
         { path: 'bhw', element: <BHW /> },
         { path: 'bns', element: <BNS /> },
         { path: 'bo', element: <BO /> },
         { path: 'bspo', element: <BSPO /> },
         { path: 'cvo', element: <CVO /> },
-        { path: 'pl', element: <PL />},
-        
+        { path: 'pl', element: <PL /> },
+        { path: 'newsUpdateForm', element: <NewsUpdateForm /> },
       ],
     },
-    
+
     {
       path: '/',
       element: <LogoOnlyLayout />,
@@ -107,6 +82,5 @@ export default function Router() {
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
-
   ]);
 }
