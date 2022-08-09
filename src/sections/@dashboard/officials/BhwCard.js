@@ -1,27 +1,13 @@
 import PropTypes from 'prop-types';
-import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, IconButton, Menu, MenuItem } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Link, Card, Grid, Avatar, CardContent, Box, Typography } from '@mui/material';
 //
 import SvgIconStyle from '../../../components/SvgIconStyle';
+import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
-
-const options = [
-  {
-    label: 'Edit',
-    linkTo: '/dashboard/officials',
-  },
-  {
-    label: 'Delete',
-    linkTo: 'profile',
-  },
-];
-
-const ITEM_HEIGHT = 48;
 
 const CardMediaStyle = styled('div')({
   position: 'relative',
@@ -45,6 +31,14 @@ const AvatarStyle = styled(Avatar)(({ theme }) => ({
   bottom: theme.spacing(-2),
 }));
 
+const InfoStyle = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-end',
+  marginTop: theme.spacing(3),
+  color: theme.palette.text.disabled,
+}));
+
 const CoverImgStyle = styled('img')({
   top: 0,
   width: '100%',
@@ -64,14 +58,7 @@ export default function BhwCard({ post, index }) {
   const latestPostLarge = index;
   const latestPost = index;
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget, e.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const DELETE = [{  icon: 'fluent:delete-16-filled' }];
 
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
@@ -153,39 +140,26 @@ export default function BhwCard({ post, index }) {
             {name}
           </TitleStyle>
 
-          <IconButton
-            position="absolute"
-            float="right"
-            aria-label="more"
-            id="long-button"
-            aria-controls={open ? 'long-menu' : undefined}
-            aria-expanded={open ? 'true' : undefined}
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            <MoreVertIcon />
-          </IconButton>
-          <Menu
-            id="long-menu"
-            MenuListProps={{
-              'aria-labelledby': 'long-button',
-            }}
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            PaperProps={{
-              style: {
-                maxHeight: ITEM_HEIGHT * 4.5,
-                width: '20ch',
-              },
-            }}
-          >
-            {options.map((option) => (
-              <MenuItem key={option.label} to={option.linkTo} component={RouterLink} onClick={handleClose}>
-                {option.label}
-              </MenuItem>
+          <InfoStyle>
+            {DELETE.map((info, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  ml: index === 0 ? 0 : 1.5,
+                  ...((latestPostLarge || latestPost) && {
+                    color: 'grey.500',
+                  }),
+                }}
+              >
+                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
+                <Link underline="none" color="darkgray" variant="caption">
+                  Delete
+                </Link>
+              </Box>
             ))}
-          </Menu>
+          </InfoStyle>
         </CardContent>
       </Card>
     </Grid>
