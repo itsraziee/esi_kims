@@ -23,9 +23,10 @@ import { updateRemarks, updateStatus } from '../service/documentRequest';
 import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
-import CertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
-import CertificateOfResidency from '../sections/documents/BarangayCertificateOfResidency';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
+import BarangayCertification from '../sections/documents/BarangayCertification';
+import BarangayCertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
+import BarangayCertificateOfResidency from '../sections/documents/BarangayCertificateOfResidency';
 
 export default function BillingTransaction() {
   const rows = useDocumentRequests() ?? [];
@@ -142,32 +143,44 @@ export default function BillingTransaction() {
               </Toolbar>
             </AppBar>
             {documentType === 'Barangay Clearance' && <BarangayClearance />}
+            {documentType === 'Barangay Certificate' && (
+              <BarangayCertification
+                {...currentRow.data}
+                secretary="HAZEL JOY P. MANZAN"
+                captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
+              />
+            )}
             {documentType === 'Barangay Birth Certificate' && (
               <BarangayBirthCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
-            {documentType === ' Barangay Death Certificate' && (
+            {documentType === 'Barangay Death Certificate' && (
               <BarangayDeathCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
-            {documentType === 'Certificate Of Indigency' && (
-              <CertificateOfIndigency
+            {documentType === 'Tree Planting Certificate' && (
+              <BarangayTreePlantingCertificate
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
-            {documentType === 'Certificate Of Residency' && (
-              <CertificateOfResidency
+            {documentType === 'Certificate of Indigency' && (
+              <BarangayCertificateOfIndigency
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
             {documentType === 'Certificate of Tree Planting' && (
@@ -175,6 +188,7 @@ export default function BillingTransaction() {
                 {...currentRow.data}
                 secretary="HAZEL JOY P. MANZAN"
                 captain="JERRY P. PARADILLO"
+                requestorName={currentRow.requestorName}
               />
             )}
           </Dialog>

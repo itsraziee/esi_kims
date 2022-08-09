@@ -30,10 +30,10 @@ import {
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import { createOfficial } from '../../../service/official';
-import BarangayCertificateForm from './BarangayCertificateForm';
+import BarangayCertificateForm from './BarangayCertificationForm';
 import BarangayBirthCertificateForm from './BarangayBirthCertificateForm';
 import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
-import CertificateOfIndigencyForm from './CertificateOfIndigencyForm';
+import BarangayCertificateOfIndigencyForm from './BarangayCertificateOfIndigencyForm';
 import CertificateOfResidencyForm from './CertificateOfResidencyForm';
 import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
 import BarangayClearanceForm from './BarangayClearanceForm';
@@ -203,7 +203,7 @@ export default function RequestDocumentFormCard() {
             <BarangayTreePlantingCertificateForm
               onSubmitForm={async (data) => {
                 return createRequest(
-                  'Certificate of Tree Planting',
+                  'Tree Planting Certificate',
                   data,
                   formik.values.requestorname,
                   TREE_PLANTING_CERTIFICATE_PRICE
@@ -225,7 +225,7 @@ export default function RequestDocumentFormCard() {
             />
           )}
           {formik.values.typeOfDocument === 'certificate-of-indigency' && (
-            <CertificateOfIndigencyForm
+            <BarangayCertificateOfIndigencyForm
               onSubmitForm={async (data) => {
                 return createRequest(
                   'Certificate of Indigency',

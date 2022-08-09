@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 
 export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
+    name: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
     address: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
@@ -16,7 +16,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
 
   const formik = useFormik({
     initialValues: {
-      fullName: '',
+      name: '',
       address: '',
       citizenship: '',
       age: '',
@@ -38,11 +38,11 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
           <>
             <TextField
               fullWidth
-              name="fullName"
+              name="name"
               label="Full name"
-              {...getFieldProps('fullName')}
-              error={Boolean(touched.fullName && errors.fullName)}
-              helperText={touched.fullName && errors.fullName}
+              {...getFieldProps('name')}
+              error={Boolean(touched.name && errors.name)}
+              helperText={touched.name && errors.name}
             />
             <TextField
               fullWidth
