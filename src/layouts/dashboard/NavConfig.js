@@ -53,12 +53,6 @@ const navConfig = [
     path: '/dashboard/listOfPurok',
     icon: getIcon('ri:building-2-fill'),
   },
-  // {
-  //   auth_required: true,
-  //   title: 'residents',
-  //   path: '/dashboard/user',
-  //   icon: getIcon('fluent:people-audience-24-filled'),
-  // },
   {
     non_auth_required: true,
     title: 'login',
