@@ -95,6 +95,7 @@ export default function OfficialsFormCard() {
       officialAddress: '',
       age: '',
       sex: 'male',
+      title: '',
       dateOfBirth: '',
       civilStatus: 'single',
       citizenship: '',
@@ -187,7 +188,7 @@ export default function OfficialsFormCard() {
                       helperText={touched.lastName && errors.lastName}
                     />
                   </Stack>
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
                     <TextField
                       name="age"
                       label="Age"
@@ -220,6 +221,77 @@ export default function OfficialsFormCard() {
                       helperText={touched.dateOfBirth && errors.dateOfBirth}
                       InputLabelProps={{
                         shrink: true,
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
+                      <InputLabel id="status-select-label">Civil Status</InputLabel>
+                      <Select
+                        name="civilStatus"
+                        labelId="status-select-label"
+                        id="status-select"
+                        value={formik.values.civilStatus}
+                        label="civilStatus"
+                        onChange={handleChange}
+                        {...getFieldProps('civilStatus')}
+                        error={Boolean(touched.civilStatus && errors.civilStatus)}
+                      >
+                        <MenuItem value="single">Single</MenuItem>
+                        <MenuItem value="married">Married</MenuItem>
+                        <MenuItem value="separated">Separated</MenuItem>
+                        <MenuItem value="widowed">Widowed</MenuItem>
+                      </Select>
+                    </FormControl>
+
+                    <TextField
+                      fullWidth
+                      name="citizenship"
+                      label="Citizenship"
+                      {...getFieldProps('citizenship')}
+                      error={Boolean(touched.citizenship && errors.citizenship)}
+                      helperText={touched.citizenship && errors.citizenship}
+                    />
+
+                    <TextField
+                      fullWidth
+                      name="religion"
+                      label="Religion"
+                      {...getFieldProps('religion')}
+                      error={Boolean(touched.religion && errors.religion)}
+                      helperText={touched.religion && errors.religion}
+                    />
+                  </Stack>
+
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <TextField
+                      fullWidth
+                      name="height"
+                      label="Height"
+                      {...getFieldProps('height')}
+                      error={Boolean(touched.height && errors.height)}
+                      helperText={touched.height && errors.height}
+                    />
+
+                    <TextField
+                      fullWidth
+                      name="weight"
+                      label="Weight"
+                      {...getFieldProps('weight')}
+                      error={Boolean(touched.weight && errors.weight)}
+                      helperText={touched.weight && errors.weight}
+                    />
+
+                    <TextField
+                      fullWidth
+                      name="phone_number"
+                      label="Phone Number"
+                      id="outlined-start-adornment"
+                      {...getFieldProps('phoneNumber')}
+                      error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                      helperText={touched.phoneNumber && errors.phoneNumber}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">+63</InputAdornment>,
                       }}
                     />
                   </Stack>
@@ -263,78 +335,6 @@ export default function OfficialsFormCard() {
               </Grid>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
-                  <InputLabel id="status-select-label">Civil Status</InputLabel>
-                  <Select
-                    name="civilStatus"
-                    labelId="status-select-label"
-                    id="status-select"
-                    value={formik.values.civilStatus}
-                    label="civilStatus"
-                    onChange={handleChange}
-                    {...getFieldProps('civilStatus')}
-                    error={Boolean(touched.civilStatus && errors.civilStatus)}
-                  >
-                    <MenuItem value="single">Single</MenuItem>
-                    <MenuItem value="married">Married</MenuItem>
-                    <MenuItem value="separated">Separated</MenuItem>
-                    <MenuItem value="widowed">Widowed</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <TextField
-                  fullWidth
-                  name="citizenship"
-                  label="Citizenship"
-                  {...getFieldProps('citizenship')}
-                  error={Boolean(touched.citizenship && errors.citizenship)}
-                  helperText={touched.citizenship && errors.citizenship}
-                />
-              </Stack>
-
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  name="religion"
-                  label="Religion"
-                  {...getFieldProps('religion')}
-                  error={Boolean(touched.religion && errors.religion)}
-                  helperText={touched.religion && errors.religion}
-                />
-
-                <TextField
-                  fullWidth
-                  name="height"
-                  label="Height"
-                  {...getFieldProps('height')}
-                  error={Boolean(touched.height && errors.height)}
-                  helperText={touched.height && errors.height}
-                />
-
-                <TextField
-                  fullWidth
-                  name="weight"
-                  label="Weight"
-                  {...getFieldProps('weight')}
-                  error={Boolean(touched.weight && errors.weight)}
-                  helperText={touched.weight && errors.weight}
-                />
-
-                <TextField
-                  fullWidth
-                  name="phone_number"
-                  label="Phone Number"
-                  id="outlined-start-adornment"
-                  {...getFieldProps('phoneNumber')}
-                  error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                  helperText={touched.phoneNumber && errors.phoneNumber}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">+63</InputAdornment>,
-                  }}
-                />
-              </Stack>
-
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="occupation"
@@ -373,7 +373,7 @@ export default function OfficialsFormCard() {
                 <FormControl helperText={touched.position && errors.position} fullWidth>
                   <InputLabel id="position-select-label">Position</InputLabel>
                   <Select
-                    name="postion"
+                    name="position"
                     labelId="position-select-label"
                     id="position-select"
                     value={formik.values.position}
@@ -389,6 +389,7 @@ export default function OfficialsFormCard() {
                     <MenuItem value="BHW">BHW</MenuItem>
                   </Select>
                 </FormControl>
+                <TextField fullWidth name="title" label="Title" {...getFieldProps('title')} />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
