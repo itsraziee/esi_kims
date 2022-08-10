@@ -1,6 +1,6 @@
-
 // material
-import { Grid, Container, Stack, Typography } from '@mui/material';
+import { Grid, Container, Stack, Typography, IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 // components
 import Page from '../components/Page';
 import { BhwCard } from '../sections/@dashboard/officials';
@@ -18,9 +18,8 @@ export default function BHW() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-          Barangay Health Worker
+            Barangay Health Worker
           </Typography>
-        
         </Stack>
 
         <Grid container spacing={3}>
@@ -28,7 +27,7 @@ export default function BHW() {
             <BhwCard key={post.id} post={post} />
           ))}
         </Grid>
-        </Container>
+      </Container>
     </Page>
   );
 }

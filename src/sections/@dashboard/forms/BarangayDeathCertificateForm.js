@@ -12,6 +12,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     dateofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
     age: Yup.number().min(0, 'Must be positive!').required('Age is required'),
+    purok: Yup.number().min(0, 'Must be positive!').required('Purok is required'),
     causeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
     address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     civilstatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
@@ -29,6 +30,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const formik = useFormik({
     initialValues: {
       relationship: '',
+      purok: '',
       deceasedname: '',
       dateofdeath: '',
       age: '',
@@ -55,8 +57,8 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+       
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <TextField
               fullWidth
               name="deceasedname"
@@ -64,6 +66,14 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               {...getFieldProps('deceasedname')}
               error={Boolean(touched.deceasedname && errors.deceasedname)}
               helperText={touched.deceasedname && errors.deceasedname}
+            />
+            <TextField
+              fullWidth
+              name="purok"
+              label="Purok"
+              {...getFieldProps('purok')}
+              error={Boolean(touched.purok && errors.purok)}
+              helperText={touched.purok && errors.purok}
             />
             <TextField
               fullWidth
@@ -86,7 +96,11 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
                 shrink: true,
               }}
             />
-            <TextField
+            
+          </Stack>
+
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
+          <TextField
               fullWidth
               name="dateofdeath"
               id="dateofdeath"
@@ -99,9 +113,6 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
                 shrink: true,
               }}
             />
-          </Stack>
-
-          <Stack direction={{ xs: 'row' }} spacing={2}>
             <TextField
               name="age"
               label="Age"
@@ -127,7 +138,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             />
           </Stack>
 
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
@@ -172,7 +183,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             />
           </Stack>
 
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <TextField
               fullWidth
               name="nameoffather"
@@ -198,7 +209,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               helperText={touched.relationship && errors.relationship}
             />
           </Stack>
-        </Stack>
+        
 
         <Box sx={{ color: 'gray', my: 2 }}>
           <Typography sx={{ color: 'gray' }} variant="subtitle4">

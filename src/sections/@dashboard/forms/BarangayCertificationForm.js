@@ -5,7 +5,7 @@ import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Sel
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
-export default function BarangayCertificateForm(onSubmitForm) {
+export default function BarangayCertificateForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
     applicant: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Applicant is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
@@ -33,7 +33,7 @@ export default function BarangayCertificateForm(onSubmitForm) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      onSubmitForm(data);
+      return onSubmitForm(data);
     },
   });
 

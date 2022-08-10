@@ -150,7 +150,7 @@ export default function BarangayBirthCertificate({
         <span className={styles.c2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that </span>
         <span className={styles.c0}>
           <strong>
-            <span className={styles.underline}>{name}</span>
+            <span className={styles.underline}>{nameofchild}</span>
           </strong>
         </span>
         <span className={styles.c2}>, a resident of </span>

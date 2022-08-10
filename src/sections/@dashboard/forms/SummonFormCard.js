@@ -2,33 +2,26 @@ import * as Yup from 'yup';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
 // material
-import {
-  Button,
-  Stack,
-  TextField,
-  Card,
-  CardContent,
-  Typography,
-} from '@mui/material';
+import { Button, Stack, TextField, Card, CardContent, FormControl, InputLabel, Select, MenuItem,  Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import { createOfficial } from '../../../service/official';
 // ----------------------------------------------------------------------
 
-export default function SummonUnresolvedFormCard() {
+export default function SummonFormCard() {
   const navigate = useNavigate();
 
-  const SummonUnresolvedFormSchema = Yup.object().shape({
-    title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
+  const SummonFormCardSchema = Yup.object().shape({
+    caseType: Yup.string().oneOf(['unsolved', 'solved']).required('Case Type is required'),
+    title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       title: '',
     },
-    validationSchema: SummonUnresolvedFormSchema,
+    validationSchema: SummonFormCardSchema,
     onSubmit: (data) => {
-      console.log({ data });
-      createOfficial(data)
+      console
+        .log({ data })
         .then((res) => console.log({ res }))
         .catch((err) => console.log({ err }));
       navigate('/dashboard/app', { replace: true });
@@ -44,7 +37,7 @@ export default function SummonUnresolvedFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Upload Unresolved Summon
+                Summon 
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
                 <TextField
@@ -52,9 +45,23 @@ export default function SummonUnresolvedFormCard() {
                   name="title"
                   label="Title"
                   {...getFieldProps('title')}
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
+                  error={Boolean(touched.title && errors.title)}
+                  helperText={touched.title && errors.title}
                 />
+                <FormControl fullWidth>
+                  <InputLabel id="caseType-select-label">Case Type</InputLabel>
+                  <Select
+                    labelId="caseType-select-label"
+                    id="caseType-select"
+                    value={formik.values.caseType}
+                    label="Case Type"
+                    onChange={handleChange}
+                    name="caseType"
+                  >
+                    <MenuItem value="unsolved">Unsolved</MenuItem>
+                    <MenuItem value="solved">Solved</MenuItem>
+                  </Select>
+                </FormControl>
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

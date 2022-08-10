@@ -7,15 +7,15 @@ import { PropTypes } from 'prop-types';
 
 export default function CertificateOfResidencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
-    fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
-    address: Yup.string().required('Address is required'),
+    name: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
+    purok: Yup.string().required('Purok is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      fullName: '',
-      address: '',
+      name: '',
+      purok: '',
       citizenship: '',
     },
     validationSchema: RequestDocumentFormSchema,
@@ -34,19 +34,19 @@ export default function CertificateOfResidencyForm({onSubmitForm}) {
           <>
             <TextField
               fullWidth
-              name="fullname"
+              name="name"
               label="Full Name"
               {...getFieldProps('name')}
-              error={Boolean(touched.fullname && errors.fullname)}
-              helperText={touched.fullname && errors.fullname}
+              error={Boolean(touched.name && errors.name)}
+              helperText={touched.name && errors.name}
             />
             <TextField
               fullWidth
-              name="address"
-              label="Address"
-              {...getFieldProps('address')}
-              error={Boolean(touched.address && errors.address)}
-              helperText={touched.address && errors.address}
+              name="purok"
+              label="Purok"
+              {...getFieldProps('purok')}
+              error={Boolean(touched.purok && errors.purok)}
+              helperText={touched.purok && errors.purok}
             />
             <TextField
               fullWidth

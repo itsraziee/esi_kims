@@ -16,18 +16,18 @@ DemographicsTable.propTypes = {
 };
 
 export default function DemographicsTable({ title, subheader, chartLabels, chartData, ...other }) {
-  const chartOptions = merge( PopulationChart(), {
+  const chartOptions = merge(PopulationChart(), {
     plotOptions: { bar: { columnWidth: '16%' } },
     fill: { type: chartData.map((i) => i.fill) },
     labels: chartLabels,
-    xaxis: { type: 'datetime' },
+    xaxis: { type: 'string' },
     tooltip: {
       shared: true,
       intersect: false,
       y: {
         formatter: (y) => {
           if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} visits`;
+            return `${y.toFixed(0)} residents`;
           }
           return y;
         },

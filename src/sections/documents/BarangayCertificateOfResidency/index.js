@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import styles from './BarangayCertificateOfResidency.module.css';
 
-export default function CertificateOfResidency({ fullName, purok, day, month, year, bearer, secretary, captain }) {
+export default function CertificateOfResidency({ name, purok, day, month, year, bearer, secretary, captain }) {
   return (
     <Box className={styles.c13}>
       <p className={styles.c6}>
@@ -122,7 +122,7 @@ export default function CertificateOfResidency({ fullName, purok, day, month, ye
       <p className={styles.c7}>
         <span className={styles.c1}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify{' '}
-          <span className={styles.fillup}>{fullName}</span>, Filipino citizen is a bonified resident of Purok{' '}
+          <span className={styles.fillup}>{name}</span>, Filipino citizen is a bonified resident of Purok{' '}
           <span className={styles.fillup}>{purok}</span>, Kimanait, Pangantucan, Bukidnon.
         </span>
       </p>
@@ -169,7 +169,7 @@ export default function CertificateOfResidency({ fullName, purok, day, month, ye
       </p>
       <div style={{ float: 'right' }}>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
-          <span className={styles.c2}>{fullName}</span>
+          <span className={styles.c2}>{name}</span>
         </p>
         <p className={styles.c4} style={{ textAlign: 'center' }}>
           <span className={styles.c1}>Owner</span>

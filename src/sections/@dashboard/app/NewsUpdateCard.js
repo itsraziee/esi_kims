@@ -1,3 +1,4 @@
+import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import PropTypes from 'prop-types';
 import { Box, Stack, Link, Card, Button, Divider, Typography, CardHeader } from '@mui/material';
@@ -6,7 +7,7 @@ import { fToNow } from '../../../utils/formatTime';
 // components
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
-
+import { useAuth } from '../../../hooks/useAuth';
 // ----------------------------------------------------------------------
 
 NewsUpdateCard.propTypes = {
@@ -16,10 +17,23 @@ NewsUpdateCard.propTypes = {
 };
 
 export default function NewsUpdateCard({ title, subheader, list, ...other }) {
+  const user = useAuth();
   return (
     <Card {...other}>
-      <CardHeader title={title} subheader={subheader} />
-
+      <Stack direction="row" justifyContent="space-between">
+        <CardHeader title={title} subheader={subheader} />
+        {user && (
+          <Button
+            sx={{ margin: 3 }}
+            variant="contained"
+            component={RouterLink}
+            to="/dashboard/NewsUpdateForm"
+            startIcon={<Iconify icon="eva:plus-fill" />}
+          >
+            Add News
+          </Button>
+        )}
+      </Stack>
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
           {list.map((news) => (
