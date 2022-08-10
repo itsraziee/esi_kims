@@ -57,8 +57,8 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+       
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <TextField
               fullWidth
               name="deceasedname"
@@ -99,7 +99,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             
           </Stack>
 
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <TextField
               fullWidth
               name="dateofdeath"
@@ -138,7 +138,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             />
           </Stack>
 
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
@@ -183,7 +183,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             />
           </Stack>
 
-          <Stack direction={{ xs: 'row' }} spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
             <TextField
               fullWidth
               name="nameoffather"
@@ -209,7 +209,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               helperText={touched.relationship && errors.relationship}
             />
           </Stack>
-        </Stack>
+        
 
         <Box sx={{ color: 'gray', my: 2 }}>
           <Typography sx={{ color: 'gray' }} variant="subtitle4">
