@@ -389,7 +389,7 @@ export default function OfficialsFormCard() {
                     <MenuItem value="BHW">BHW</MenuItem>
                   </Select>
                 </FormControl>
-                <TextField fullWidth name="title" label="Title" />
+                <TextField fullWidth name="title" label="Title" {...getFieldProps('title')} />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
