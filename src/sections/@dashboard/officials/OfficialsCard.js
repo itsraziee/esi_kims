@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, Typography } from '@mui/material';
-
+import { Link, Card, Grid, Avatar, CardContent, Box, Typography } from '@mui/material';
 //
 import SvgIconStyle from '../../../components/SvgIconStyle';
+import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +31,14 @@ const AvatarStyle = styled(Avatar)(({ theme }) => ({
   bottom: theme.spacing(-2),
 }));
 
+const InfoStyle = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-end',
+  marginTop: theme.spacing(3),
+  color: theme.palette.text.disabled,
+}));
+
 const CoverImgStyle = styled('img')({
   top: 0,
   width: '100%',
@@ -51,6 +59,7 @@ export default function OfficialsCard({ post, index }) {
   const latestPostLarge = index;
   const latestPost = index;
 
+  const DELETE = [{ icon: 'fluent:delete-16-filled' }];
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
       <Card sx={{ position: 'relative' }}>
@@ -133,6 +142,27 @@ export default function OfficialsCard({ post, index }) {
           <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
             {position}
           </Typography>
+
+          <InfoStyle>
+            {DELETE.map((info, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  ml: index === 0 ? 0 : 1.5,
+                  ...((latestPostLarge || latestPost) && {
+                    color: 'grey.500',
+                  }),
+                }}
+              >
+                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
+                <Link underline="none" color="darkgray" variant="caption">
+                  Delete
+                </Link>
+              </Box>
+            ))}
+          </InfoStyle>
         </CardContent>
       </Card>
     </Grid>
