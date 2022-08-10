@@ -14,16 +14,21 @@ import {
   Card,
   CardContent,
   Typography,
+  Grid,
+  Box,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 import { useSnackbar } from 'notistack';
+import { useState } from 'react';
 import { createOfficial } from '../../../service/official';
 // ----------------------------------------------------------------------
 
 export default function OfficialsFormCard() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const [imageObjectUrl, setImageObjectUrl] = useState();
+
   const OfficialsFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
@@ -154,73 +159,110 @@ export default function OfficialsFormCard() {
               <Typography variant="subtitle3" noWrap>
                 Personal Data
               </Typography>
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      name="firstName"
+                      label="First name"
+                      {...getFieldProps('firstName')}
+                      error={Boolean(touched.firstName && errors.firstName)}
+                      helperText={touched.firstName && errors.firstName}
+                    />
+                    <TextField
+                      fullWidth
+                      name="middleName"
+                      label="Middle name"
+                      {...getFieldProps('middleName')}
+                      error={Boolean(touched.middleName && errors.middleName)}
+                      helperText={touched.middleName && errors.middleName}
+                    />
+                    <TextField
+                      fullWidth
+                      name="lastName"
+                      label="Last name"
+                      {...getFieldProps('lastName')}
+                      error={Boolean(touched.lastName && errors.lastName)}
+                      helperText={touched.lastName && errors.lastName}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      name="age"
+                      label="Age"
+                      {...getFieldProps('age')}
+                      error={Boolean(touched.age && errors.age)}
+                      helperText={touched.age && errors.age}
+                    />
+                    <FormControl fullWidth>
+                      <InputLabel id="sex-select-label">Sex</InputLabel>
+                      <Select
+                        labelId="sex-select-label"
+                        id="sex-select"
+                        value={formik.values.sex}
+                        label="sex"
+                        onChange={handleChange}
+                        name="sex"
+                      >
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <TextField
+                      fullWidth
+                      name="dateOfBirth"
+                      id="dateOfBirth"
+                      label="Date of Birth"
+                      type="date"
+                      {...getFieldProps('dateOfBirth')}
+                      error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
+                      helperText={touched.dateOfBirth && errors.dateOfBirth}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
+                    {imageObjectUrl && (
+                      <Grid item>
+                        <Box sx={{ borderRadius: 20 }}>
+                          <img
+                            src={imageObjectUrl}
+                            alt="Upload preview"
+                            style={{
+                              width: 200,
+                              height: 200,
+                              backgroundPosition: 'center center',
+                              backgroundRepeat: 'no-repeat',
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    )}
+                    <Grid item>
+                      <Button sx={{ width: 200 }} variant="contained" component="label" fullWidth>
+                        Upload Image
+                        <input
+                          type="file"
+                          hidden
+                          multiple={false}
+                          onChange={(e) => {
+                            console.log({ e });
+                            const objectUrl = URL.createObjectURL(e.target.files[0]);
+                            console.log({ objectUrl });
+                            setImageObjectUrl(objectUrl);
+                          }}
+                        />
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  name="firstName"
-                  label="First name"
-                  {...getFieldProps('firstName')}
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
-                />
-
-                <TextField
-                  fullWidth
-                  name="middleName"
-                  label="Middle name"
-                  {...getFieldProps('middleName')}
-                  error={Boolean(touched.middleName && errors.middleName)}
-                  helperText={touched.middleName && errors.middleName}
-                />
-
-                <TextField
-                  fullWidth
-                  name="lastName"
-                  label="Last name"
-                  {...getFieldProps('lastName')}
-                  error={Boolean(touched.lastName && errors.lastName)}
-                  helperText={touched.lastName && errors.lastName}
-                />
-
-                <TextField
-                  name="age"
-                  label="Age"
-                  {...getFieldProps('age')}
-                  error={Boolean(touched.age && errors.age)}
-                  helperText={touched.age && errors.age}
-                />
-              </Stack>
-
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth>
-                  <InputLabel id="sex-select-label">Sex</InputLabel>
-                  <Select
-                    labelId="sex-select-label"
-                    id="sex-select"
-                    value={formik.values.sex}
-                    label="sex"
-                    onChange={handleChange}
-                    name="sex"
-                  >
-                    <MenuItem value="male">Male</MenuItem>
-                    <MenuItem value="female">Female</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <TextField
-                  fullWidth
-                  name="dateOfBirth"
-                  id="dateOfBirth"
-                  label="Date of Birth"
-                  type="date"
-                  {...getFieldProps('dateOfBirth')}
-                  error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
-                  helperText={touched.dateOfBirth && errors.dateOfBirth}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-
                 <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
                   <InputLabel id="status-select-label">Civil Status</InputLabel>
                   <Select
@@ -564,11 +606,6 @@ export default function OfficialsFormCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
-                  Upload Image
-                  <input type="file" hidden />
-                </Button>
-
                 <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                   Submit
                 </LoadingButton>
