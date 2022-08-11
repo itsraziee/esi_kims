@@ -17,9 +17,6 @@ import {
   Stack,
   TextField,
   Typography,
-  Grid,
-  Avatar,
-  Box,
 } from '@mui/material';
 
 import { getDownloadURL } from 'firebase/storage';
