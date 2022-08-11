@@ -1,7 +1,7 @@
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import React from 'react';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
+import AuthRequired from 'src/layouts/auth/AuthRequired';
 import { useResidents } from '../hooks/useResidents';
 
 export default function User() {
@@ -274,16 +274,18 @@ export default function User() {
   //   },
   // ];
   return (
-    <DataGrid
-      autoHeight
-      rows={rows ?? []}
-      columns={columns}
-      components={{ Toolbar: GridToolbar }}
-      experimentalFeatures={{ newEditingApi: true }}
-      disableSelectionOnClick
-      loading={!rows}
-      rowsPerPageOptions={[5, 10, 20]}
-      pagination
-    />
+    <AuthRequired>
+      <DataGrid
+        autoHeight
+        rows={rows ?? []}
+        columns={columns}
+        components={{ Toolbar: GridToolbar }}
+        experimentalFeatures={{ newEditingApi: true }}
+        disableSelectionOnClick
+        loading={!rows}
+        rowsPerPageOptions={[5, 10, 20]}
+        pagination
+      />
+    </AuthRequired>
   );
 }

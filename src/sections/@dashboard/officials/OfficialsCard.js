@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import SvgIconStyle from '../../../components/SvgIconStyle';
+import { useAuth } from '../../../hooks/useAuth';
 import { deleteOfficial } from '../../../service/official';
 
 // ----------------------------------------------------------------------
@@ -61,6 +62,7 @@ export default function OfficialsCard({ official, index }) {
   const latestPostLarge = index;
   const latestPost = index;
   const navigate = useNavigate();
+  const user = useAuth();
 
   const DELETE = [{ icon: 'fluent:delete-16-filled' }];
   return (
@@ -144,8 +146,8 @@ export default function OfficialsCard({ official, index }) {
             {title}
           </Typography>
 
-          <InfoStyle>
-            {DELETE.map((info, index) => (
+          {user && (
+            <InfoStyle>
               <Box
                 key={index}
                 sx={{
@@ -184,8 +186,8 @@ export default function OfficialsCard({ official, index }) {
                   Delete
                 </Link> */}
               </Box>
-            ))}
-          </InfoStyle>
+            </InfoStyle>
+          )}
         </CardContent>
       </Card>
     </Grid>

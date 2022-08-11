@@ -1,32 +1,19 @@
-import * as React from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  AppBar,
-  Button,
-  ButtonBase,
-  Container,
-  Dialog,
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Slide,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, Button, Container, Dialog, IconButton, Slide, Toolbar, Typography } from '@mui/material';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
+import * as React from 'react';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
-import { updateRemarks, updateStatus } from '../service/documentRequest';
-import BarangayClearance from '../sections/documents/BarangayClearance';
+import AuthRequired from '../layouts/auth/AuthRequired';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
-import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
-import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
-import BarangayCertification from '../sections/documents/BarangayCertification';
 import BarangayCertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
 import BarangayCertificateOfResidency from '../sections/documents/BarangayCertificateOfResidency';
+import BarangayCertification from '../sections/documents/BarangayCertification';
+import BarangayClearance from '../sections/documents/BarangayClearance';
+import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
+import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
+import { updateRemarks, updateStatus } from '../service/documentRequest';
 
 export default function BillingTransaction() {
   const rows = useDocumentRequests() ?? [];
@@ -118,90 +105,92 @@ export default function BillingTransaction() {
   });
 
   return (
-    <Page title="Billing Transaction">
-      <Container sx={{ mt: 5, mb: 5 }}>
-        <DataGrid
-          experimentalFeatures={{ newEditingApi: true }}
-          components={{ Toolbar: GridToolbar }}
-          rows={rows}
-          columns={columns}
-          autoHeight
-        />
-        {printOpen && ( // Note: Important, button disables after closing dialog
-          <Dialog fullScreen open={printOpen} onClose={handlePrintClose} TransitionComponent={Transition}>
-            <AppBar sx={{ position: 'relative' }}>
-              <Toolbar>
-                <IconButton edge="start" color="inherit" onClick={handlePrintClose} aria-label="close">
-                  <CloseIcon />
-                </IconButton>
-                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  Preview
-                </Typography>
-                <Button autoFocus color="inherit" onClick={handlePrintClose}>
-                  Print
-                </Button>
-              </Toolbar>
-            </AppBar>
-            {documentType === 'Barangay Clearance' && <BarangayClearance />}
-            {documentType === 'Barangay Certificate' && (
-              <BarangayCertification
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-            {documentType === 'Barangay Birth Certificate' && (
-              <BarangayBirthCertificate
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-            {documentType === 'Barangay Death Certificate' && (
-              <BarangayDeathCertificate
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-            {documentType === 'Tree Planting Certificate' && (
-              <BarangayTreePlantingCertificate
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-            {documentType === 'Certificate of Indigency' && (
-              <BarangayCertificateOfIndigency
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-            {documentType === 'Certificate of Residency' && (
-              <BarangayCertificateOfResidency
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-            {documentType === 'Certificate of Tree Planting' && (
-              <BarangayTreePlantingCertificate
-                {...currentRow.data}
-                secretary="HAZEL JOY P. MANZAN"
-                captain="JERRY P. PARADILLO"
-                requestorName={currentRow.requestorName}
-              />
-            )}
-          </Dialog>
-        )}
-      </Container>
-    </Page>
+    <AuthRequired>
+      <Page title="Billing Transaction">
+        <Container sx={{ mt: 5, mb: 5 }}>
+          <DataGrid
+            experimentalFeatures={{ newEditingApi: true }}
+            components={{ Toolbar: GridToolbar }}
+            rows={rows}
+            columns={columns}
+            autoHeight
+          />
+          {printOpen && ( // Note: Important, button disables after closing dialog
+            <Dialog fullScreen open={printOpen} onClose={handlePrintClose} TransitionComponent={Transition}>
+              <AppBar sx={{ position: 'relative' }}>
+                <Toolbar>
+                  <IconButton edge="start" color="inherit" onClick={handlePrintClose} aria-label="close">
+                    <CloseIcon />
+                  </IconButton>
+                  <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                    Preview
+                  </Typography>
+                  <Button autoFocus color="inherit" onClick={handlePrintClose}>
+                    Print
+                  </Button>
+                </Toolbar>
+              </AppBar>
+              {documentType === 'Barangay Clearance' && <BarangayClearance />}
+              {documentType === 'Barangay Certificate' && (
+                <BarangayCertification
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+              {documentType === 'Barangay Birth Certificate' && (
+                <BarangayBirthCertificate
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+              {documentType === 'Barangay Death Certificate' && (
+                <BarangayDeathCertificate
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+              {documentType === 'Tree Planting Certificate' && (
+                <BarangayTreePlantingCertificate
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+              {documentType === 'Certificate of Indigency' && (
+                <BarangayCertificateOfIndigency
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+              {documentType === 'Certificate of Residency' && (
+                <BarangayCertificateOfResidency
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+              {documentType === 'Certificate of Tree Planting' && (
+                <BarangayTreePlantingCertificate
+                  {...currentRow.data}
+                  secretary="HAZEL JOY P. MANZAN"
+                  captain="JERRY P. PARADILLO"
+                  requestorName={currentRow.requestorName}
+                />
+              )}
+            </Dialog>
+          )}
+        </Container>
+      </Page>
+    </AuthRequired>
   );
 }
