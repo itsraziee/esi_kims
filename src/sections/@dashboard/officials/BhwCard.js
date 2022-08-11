@@ -1,9 +1,12 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, Box, Typography } from '@mui/material';
+import { Link, Card, Grid, Avatar, CardContent, Box, IconButton, Tooltip, Typography } from '@mui/material';
 //
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import SvgIconStyle from '../../../components/SvgIconStyle';
 import Iconify from '../../../components/Iconify';
 
@@ -35,7 +38,6 @@ const InfoStyle = styled('div')(({ theme }) => ({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'flex-end',
-  marginTop: theme.spacing(3),
   color: theme.palette.text.disabled,
 }));
 
@@ -58,7 +60,7 @@ export default function BhwCard({ post, index }) {
   const latestPostLarge = index;
   const latestPost = index;
 
-  const DELETE = [{  icon: 'fluent:delete-16-filled' }];
+  const DELETE = [{ icon: 'fluent:delete-16-filled' }];
 
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
@@ -153,10 +155,20 @@ export default function BhwCard({ post, index }) {
                   }),
                 }}
               >
-                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
+                <Tooltip title="Edit">
+                  <IconButton sx={{ mb: -2 }}>
+                    <EditIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton sx={{ mb: -2 }}>
+                    <DeleteIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
+                {/* <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
                 <Link underline="none" color="darkgray" variant="caption">
                   Delete
-                </Link>
+                </Link> */}
               </Box>
             ))}
           </InfoStyle>
