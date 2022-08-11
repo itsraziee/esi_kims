@@ -315,7 +315,7 @@ export default function OfficialsFormCard() {
                 <Grid item xs={12} sm={6}>
                   <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
                     <Grid item>
-                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 200, width: 200 }} />
+                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 220, width: 220 }} />
                     </Grid>
 
                     <Grid item>
