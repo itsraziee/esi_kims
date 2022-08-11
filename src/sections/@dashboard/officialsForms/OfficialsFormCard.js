@@ -21,13 +21,15 @@ import { LoadingButton } from '@mui/lab';
 
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { createOfficial } from '../../../service/official';
+import { getDownloadURL } from 'firebase/storage';
+import { createOfficial, updateOfficialImage, uploadOfficialPhoto } from '../../../service/official';
 // ----------------------------------------------------------------------
 
 export default function OfficialsFormCard() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [imageObjectUrl, setImageObjectUrl] = useState();
+  const [officialPhoto, setOfficialPhoto] = useState();
 
   const OfficialsFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
@@ -131,14 +133,27 @@ export default function OfficialsFormCard() {
     validationSchema: OfficialsFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      createOfficial(data)
+      return createOfficial(data)
         .then((res) => {
           console.log({ res });
+          const uploadedOfficial = res;
+
           if (res) {
-            enqueueSnackbar('Added successfully.', {
-              variant: 'success',
-            });
-            navigate('/dashboard/app', { replace: true });
+            return uploadOfficialPhoto(officialPhoto)
+              .then((res) => {
+                console.log({ res });
+                getDownloadURL(res.ref).then((url) => {
+                  updateOfficialImage(uploadedOfficial.id, url).then((res) => {
+                    enqueueSnackbar('Added successfully.', {
+                      variant: 'success',
+                    });
+                    navigate('/dashboard/app', { replace: true });
+                  });
+                });
+              })
+              .catch((err) => {
+                console.log({ err });
+              });
           }
         })
         .catch((err) => {
@@ -251,7 +266,9 @@ export default function OfficialsFormCard() {
                           multiple={false}
                           onChange={(e) => {
                             console.log({ e });
-                            const objectUrl = URL.createObjectURL(e.target.files[0]);
+                            const imageFile = e.target.files[0];
+                            const objectUrl = URL.createObjectURL(imageFile);
+                            setOfficialPhoto(imageFile);
                             console.log({ objectUrl });
                             setImageObjectUrl(objectUrl);
                           }}

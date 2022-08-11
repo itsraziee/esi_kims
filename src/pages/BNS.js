@@ -1,9 +1,10 @@
-
 // material
 import { Grid, Container, Stack, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { useOfficials } from '../hooks/useOfficials';
 // components
 import Page from '../components/Page';
-import { BnsCard } from '../sections/@dashboard/officials';
+import { BnsCard, OfficialsCard } from '../sections/@dashboard/officials';
 
 // mock
 import BNSPOSTS from '../_mock/bns';
@@ -13,6 +14,12 @@ import BNSPOSTS from '../_mock/bns';
 // ----------------------------------------------------------------------
 
 export default function BNS() {
+  const officials = useOfficials('BNS');
+
+  useEffect(() => {
+    console.log({ officials });
+  }, [officials]);
+
   return (
     <Page title="Barangay Nutrition Scholar">
       <Container>
@@ -20,13 +27,10 @@ export default function BNS() {
           <Typography variant="h4" gutterBottom>
             Barangay Nutrition Scholars
           </Typography>
-         
         </Stack>
 
         <Grid container spacing={3}>
-          {BNSPOSTS.map((post) => (
-            <BnsCard key={post.id} post={post} />
-          ))}
+          {officials && officials.map((official) => <OfficialsCard key={official.id} official={official} />)}
         </Grid>
       </Container>
     </Page>
