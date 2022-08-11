@@ -17,6 +17,7 @@ import {
   Stack,
   TextField,
   Typography,
+  Avatar,
 } from '@mui/material';
 
 import { getDownloadURL } from 'firebase/storage';
@@ -322,22 +323,14 @@ export default function EditOfficialsFormCard({ initialValues, uid }) {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
-                    {(imageObjectUrl || initialValues?.uploadImage) && (
-                      <Grid item>
-                        <Box sx={{ borderRadius: 20 }}>
-                          <img
-                            src={imageObjectUrl ?? initialValues?.uploadImage}
-                            alt="Upload preview"
-                            style={{
-                              width: 200,
-                              height: 200,
-                              backgroundPosition: 'center center',
-                              backgroundRepeat: 'no-repeat',
-                            }}
-                          />
-                        </Box>
-                      </Grid>
-                    )}
+                    <Grid item>
+                      <Avatar
+                        src={imageObjectUrl ?? initialValues?.uploadImage}
+                        alt="Upload preview"
+                        sx={{ height: 220, width: 220 }}
+                      />
+                    </Grid>
+
                     <Grid item>
                       <Button sx={{ width: 200 }} variant="contained" component="label" fullWidth>
                         Upload Image
