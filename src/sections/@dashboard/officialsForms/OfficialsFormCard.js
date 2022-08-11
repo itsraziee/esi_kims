@@ -319,7 +319,7 @@ export default function OfficialsFormCard() {
                     </Grid>
 
                     <Grid item>
-                      <Button sx={{ width: 200 }} variant="contained" component="label" fullWidth>
+                      <Button sx={{ width: 200, mt: 1 }} variant="contained" component="label" fullWidth>
                         Upload Image
                         <input
                           type="file"
