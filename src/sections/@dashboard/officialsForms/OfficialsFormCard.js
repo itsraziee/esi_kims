@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 // material
 import { LoadingButton } from '@mui/lab';
 import {
-  Box,
+  Avatar,
   Button,
   Card,
   CardContent,
