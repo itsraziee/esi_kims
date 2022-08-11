@@ -158,12 +158,12 @@ export default function OfficialsCard({ official, index }) {
                 }}
               >
                 <Tooltip title="Edit">
-                  <IconButton sx={{ mb: -2 }}>
+                  <IconButton to="/dashboard/app" component={RouterLink} sx={{ mb: -2, mt: -4 }}>
                     <EditIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">
-                  <IconButton sx={{ mb: -2 }}>
+                  <IconButton sx={{ mb: -2, mt: -4  }}>
                     <DeleteIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>

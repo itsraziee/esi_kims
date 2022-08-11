@@ -127,11 +127,9 @@ export default function BhwCard({ post, index }) {
           }}
         >
           <TitleStyle
-            to="#"
             color="inherit"
             variant="subtitle2"
-            underline="hover"
-            component={RouterLink}
+            underline="hidden"
             sx={{
               ...(latestPostLarge && { typography: 'h5', height: 60 }),
               ...((latestPostLarge || latestPost) && {
@@ -156,7 +154,7 @@ export default function BhwCard({ post, index }) {
                 }}
               >
                 <Tooltip title="Edit">
-                  <IconButton sx={{ mb: -2 }}>
+                  <IconButton to="/dashboard/app" component={RouterLink} sx={{ mb: -2 }}>
                     <EditIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>
