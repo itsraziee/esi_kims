@@ -1,8 +1,8 @@
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
-import AuthRequired from 'src/layouts/auth/AuthRequired';
 import { useResidents } from '../hooks/useResidents';
+import AuthRequired from '../layouts/auth/AuthRequired';
 
 export default function User() {
   const location = useLocation();
