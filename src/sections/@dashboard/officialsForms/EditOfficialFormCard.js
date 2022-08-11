@@ -138,21 +138,25 @@ export default function EditOfficialsFormCard({ initialValues, uid }) {
         .then((res) => {
           console.log({ res });
 
-          return uploadOfficialPhoto(officialPhoto, uid)
-            .then((res) => {
-              console.log({ res });
-              getDownloadURL(res.ref).then((url) => {
-                updateOfficialImage(uid, url).then((res) => {
-                  enqueueSnackbar('Updated successfully.', {
-                    variant: 'success',
+          if (officialPhoto) {
+            return uploadOfficialPhoto(officialPhoto, uid)
+              .then((res) => {
+                console.log({ res });
+                getDownloadURL(res.ref).then((url) => {
+                  updateOfficialImage(uid, url).then((res) => {
+                    enqueueSnackbar('Updated successfully.', {
+                      variant: 'success',
+                    });
                   });
-                  navigate('/dashboard/app', { replace: true });
                 });
+              })
+              .catch((err) => {
+                console.log({ err });
               });
-            })
-            .catch((err) => {
-              console.log({ err });
-            });
+          }
+          enqueueSnackbar('Updated successfully.', {
+            variant: 'success',
+          });
         })
         .catch((err) => {
           console.log({ err });
