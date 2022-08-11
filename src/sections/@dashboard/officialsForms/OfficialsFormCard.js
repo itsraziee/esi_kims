@@ -174,7 +174,7 @@ export default function OfficialsFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Personal Data
+                Officials Form
               </Typography>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
