@@ -138,7 +138,7 @@ export default function OfficialsFormCard() {
           console.log({ res });
           const uploadedOfficial = res;
 
-          if (res) {
+          if (officialPhoto) {
             return uploadOfficialPhoto(officialPhoto, uploadedOfficial.id)
               .then((res) => {
                 console.log({ res });
@@ -155,6 +155,11 @@ export default function OfficialsFormCard() {
                 console.log({ err });
               });
           }
+
+          enqueueSnackbar('Added successfully.', {
+            variant: 'success',
+          });
+          navigate('/dashboard/app', { replace: true });
         })
         .catch((err) => {
           console.log({ err });
