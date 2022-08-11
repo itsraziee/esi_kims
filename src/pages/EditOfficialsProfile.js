@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 // components
 import { useLocation } from 'react-router-dom';
 import Page from '../components/Page';
+import AuthRequired from '../layouts/auth/AuthRequired';
 import EditOfficialsFormCard from '../sections/@dashboard/officialsForms/EditOfficialFormCard';
 import { getOfficialData } from '../service/official';
 
@@ -20,12 +21,14 @@ export default function EditOfficialsProfile() {
   }, []);
 
   return (
-    <Page title="Officials Profile">
-      <Container sx={{ mt: 5, mb: 5 }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <EditOfficialsFormCard initialValues={officialData} uid={uid} />
-        </Stack>
-      </Container>
-    </Page>
+    <AuthRequired>
+      <Page title="Officials Profile">
+        <Container sx={{ mt: 5, mb: 5 }}>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+            <EditOfficialsFormCard initialValues={officialData} uid={uid} />
+          </Stack>
+        </Container>
+      </Page>
+    </AuthRequired>
   );
 }
