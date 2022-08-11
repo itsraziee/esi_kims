@@ -17,6 +17,9 @@ import {
   Stack,
   TextField,
   Typography,
+  Grid,
+  Avatar,
+  Box,
 } from '@mui/material';
 
 import { getDownloadURL } from 'firebase/storage';
@@ -172,7 +175,7 @@ export default function OfficialsFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Personal Data
+                Officials Form
               </Typography>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
@@ -312,24 +315,12 @@ export default function OfficialsFormCard() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
-                    {imageObjectUrl && (
-                      <Grid item>
-                        <Box sx={{ borderRadius: 20 }}>
-                          <img
-                            src={imageObjectUrl}
-                            alt="Upload preview"
-                            style={{
-                              width: 200,
-                              height: 200,
-                              backgroundPosition: 'center center',
-                              backgroundRepeat: 'no-repeat',
-                            }}
-                          />
-                        </Box>
-                      </Grid>
-                    )}
                     <Grid item>
-                      <Button sx={{ width: 200 }} variant="contained" component="label" fullWidth>
+                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 220, width: 220 }} />
+                    </Grid>
+
+                    <Grid item>
+                      <Button sx={{ width: 200, mt: 1 }} variant="contained" component="label" fullWidth>
                         Upload Image
                         <input
                           type="file"
