@@ -50,12 +50,12 @@ const CoverImgStyle = styled('img')({
 // ----------------------------------------------------------------------
 
 OfficialsCard.propTypes = {
-  post: PropTypes.object.isRequired,
+  official: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function OfficialsCard({ post, index }) {
-  const { cover, name, position, author } = post;
+export default function OfficialsCard({ official, index }) {
+  const { uploadImage, name, position } = official;
   const latestPostLarge = index;
   const latestPost = index;
 
@@ -98,8 +98,8 @@ export default function OfficialsCard({ post, index }) {
             }}
           />
           <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
+            alt={name}
+            src={uploadImage}
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
@@ -111,7 +111,7 @@ export default function OfficialsCard({ post, index }) {
             }}
           />
 
-          <CoverImgStyle alt={name} src={cover} />
+          <CoverImgStyle alt={name} src={uploadImage} />
         </CardMediaStyle>
 
         <CardContent

@@ -1,5 +1,7 @@
-import { addDoc, collection } from 'firebase/firestore';
-import { firestore } from '../firebase-init';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
+import { firestore, storage } from '../firebase-init';
 
 export async function createOfficial({
   firstName,
@@ -127,4 +129,21 @@ export async function createOfficial({
     console.log({ res });
     return res;
   });
+}
+
+export function updateOfficialImage(uid, url) {
+  const officialDoc = doc(firestore, `official/${uid}`);
+  return updateDoc(officialDoc, { uploadImage: url });
+}
+
+export async function uploadOfficialPhoto(file) {
+  console.log({ file });
+  const filenameSegments = file.name.split('.');
+  console.log({ filenameSegments });
+  const filenameExtension = filenameSegments[filenameSegments.length - 1];
+  console.log({ filenameExtension });
+
+  const storageRef = ref(storage, `official/${uuidv4()}.${filenameExtension}`);
+
+  return uploadBytes(storageRef, file);
 }
