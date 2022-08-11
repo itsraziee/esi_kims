@@ -32,6 +32,7 @@ import BSPO from './pages/BSPO';
 import CVO from './pages/CVO';
 import PL from './pages/PL';
 import NewsUpdateForm from './pages/NewsUpdateForm';
+import EditOfficialsProfile from './pages/EditOfficialsProfile';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -54,6 +55,7 @@ export default function Router() {
         { path: 'official', element: <Officials /> },
         { path: 'demographics', element: <Demographics /> },
         { path: 'officialsProfile', element: <OfficialsProfile /> },
+        { path: 'editOfficialsProfile', element: <EditOfficialsProfile /> },
         { path: 'profile', element: <Profile /> },
         { path: 'legislativeForm', element: <LegislativeForm /> },
         { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },

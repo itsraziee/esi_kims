@@ -1,14 +1,13 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
 // material
+import { Avatar, Box, Card, CardContent, Grid, IconButton, Link, Tooltip, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, Box, IconButton, Tooltip, Typography } from '@mui/material';
 //
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 import SvgIconStyle from '../../../components/SvgIconStyle';
-import Iconify from '../../../components/Iconify';
+import { deleteOfficial } from '../../../service/official';
 
 // ----------------------------------------------------------------------
 
@@ -58,9 +57,10 @@ OfficialsCard.propTypes = {
 };
 
 export default function OfficialsCard({ official, index }) {
-  const { uploadImage, name, position } = official;
+  const { uploadImage, name, title } = official;
   const latestPostLarge = index;
   const latestPost = index;
+  const navigate = useNavigate();
 
   const DELETE = [{ icon: 'fluent:delete-16-filled' }];
   return (
@@ -141,7 +141,7 @@ export default function OfficialsCard({ official, index }) {
             {name}
           </TitleStyle>
           <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {position}
+            {title}
           </Typography>
 
           <InfoStyle>
@@ -158,12 +158,23 @@ export default function OfficialsCard({ official, index }) {
                 }}
               >
                 <Tooltip title="Edit">
-                  <IconButton sx={{ mb: -2 }}>
+                  <IconButton
+                    sx={{ mb: -2 }}
+                    onClick={() => {
+                      console.log('Edit clicked:', official.id);
+                      navigate(`/dashboard/editOfficialsProfile?uid=${official.id}`);
+                    }}
+                  >
                     <EditIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">
-                  <IconButton sx={{ mb: -2 }}>
+                  <IconButton
+                    sx={{ mb: -2 }}
+                    onClick={() => {
+                      deleteOfficial(official.id);
+                    }}
+                  >
                     <DeleteIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>
