@@ -17,18 +17,15 @@ import {
   Stack,
   TextField,
   Typography,
-  Grid,
-  Avatar,
-  Box,
 } from '@mui/material';
 
 import { getDownloadURL } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
-import { useState } from 'react';
-import { createOfficial, updateOfficialImage, uploadOfficialPhoto } from '../../../service/official';
+import { useEffect, useState } from 'react';
+import { updateOfficial, updateOfficialImage, uploadOfficialPhoto } from '../../../service/official';
 // ----------------------------------------------------------------------
 
-export default function OfficialsFormCard() {
+export default function EditOfficialsFormCard({ initialValues, uid }) {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [imageObjectUrl, setImageObjectUrl] = useState();
@@ -136,28 +133,25 @@ export default function OfficialsFormCard() {
     validationSchema: OfficialsFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      return createOfficial(data)
+      return updateOfficial(data, uid)
         .then((res) => {
           console.log({ res });
-          const uploadedOfficial = res;
 
-          if (res) {
-            return uploadOfficialPhoto(officialPhoto, uploadedOfficial.id)
-              .then((res) => {
-                console.log({ res });
-                getDownloadURL(res.ref).then((url) => {
-                  updateOfficialImage(uploadedOfficial.id, url).then((res) => {
-                    enqueueSnackbar('Added successfully.', {
-                      variant: 'success',
-                    });
-                    navigate('/dashboard/app', { replace: true });
+          return uploadOfficialPhoto(officialPhoto, uid)
+            .then((res) => {
+              console.log({ res });
+              getDownloadURL(res.ref).then((url) => {
+                updateOfficialImage(uid, url).then((res) => {
+                  enqueueSnackbar('Updated successfully.', {
+                    variant: 'success',
                   });
+                  navigate('/dashboard/app', { replace: true });
                 });
-              })
-              .catch((err) => {
-                console.log({ err });
               });
-          }
+            })
+            .catch((err) => {
+              console.log({ err });
+            });
         })
         .catch((err) => {
           console.log({ err });
@@ -165,6 +159,19 @@ export default function OfficialsFormCard() {
         });
     },
   });
+
+  useEffect(() => {
+    let cancel = false;
+
+    if (!initialValues) return;
+
+    if (!cancel) {
+      formik.setValues({ ...initialValues, title: initialValues?.title ?? '' });
+    }
+    return () => {
+      cancel = true;
+    };
+  }, [initialValues]);
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
 
@@ -175,7 +182,7 @@ export default function OfficialsFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Officials Form
+                Personal Data
               </Typography>
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={6}>
@@ -315,12 +322,24 @@ export default function OfficialsFormCard() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
+                    {(imageObjectUrl || initialValues?.uploadImage) && (
+                      <Grid item>
+                        <Box sx={{ borderRadius: 20 }}>
+                          <img
+                            src={imageObjectUrl ?? initialValues?.uploadImage}
+                            alt="Upload preview"
+                            style={{
+                              width: 200,
+                              height: 200,
+                              backgroundPosition: 'center center',
+                              backgroundRepeat: 'no-repeat',
+                            }}
+                          />
+                        </Box>
+                      </Grid>
+                    )}
                     <Grid item>
-                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 220, width: 220 }} />
-                    </Grid>
-
-                    <Grid item>
-                      <Button sx={{ width: 200, mt: 1 }} variant="contained" component="label" fullWidth>
+                      <Button sx={{ width: 200 }} variant="contained" component="label" fullWidth>
                         Upload Image
                         <input
                           type="file"

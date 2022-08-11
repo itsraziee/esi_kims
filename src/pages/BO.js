@@ -1,14 +1,12 @@
 // material
-import { Grid, Container, Stack, Typography } from '@mui/material';
+import { Container, Grid, Stack, Typography } from '@mui/material';
 // components
 import { useEffect } from 'react';
-import { useOfficials } from '../hooks/useOfficials';
 import Page from '../components/Page';
-import Iconify from '../components/Iconify';
+import { useOfficials } from '../hooks/useOfficials';
 import { OfficialsCard } from '../sections/@dashboard/officials';
 
 // mock
-import POSTS from '../_mock/officials';
 
 // ----------------------------------------------------------------------
 
