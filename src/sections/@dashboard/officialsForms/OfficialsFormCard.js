@@ -47,7 +47,7 @@ export default function OfficialsFormCard() {
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     address: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
-    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW']).required('Position is required'),
+    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW', 'PL']).required('Position is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     numberOfChildren: Yup.number()
@@ -404,6 +404,7 @@ export default function OfficialsFormCard() {
                     <MenuItem value="BSPO">BSPO</MenuItem>
                     <MenuItem value="BNS">BNS</MenuItem>
                     <MenuItem value="BHW">BHW</MenuItem>
+                    <MenuItem value="PL">Purok Leader</MenuItem>
                   </Select>
                 </FormControl>
                 <TextField fullWidth name="title" label="Title" {...getFieldProps('title')} />
