@@ -15,6 +15,7 @@ import {
   CardContent,
   Typography,
   Grid,
+  Avatar,
   Box,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -313,22 +314,10 @@ export default function OfficialsFormCard() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
-                    {imageObjectUrl && (
-                      <Grid item>
-                        <Box sx={{ borderRadius: 20 }}>
-                          <img
-                            src={imageObjectUrl}
-                            alt="Upload preview"
-                            style={{
-                              width: 200,
-                              height: 200,
-                              backgroundPosition: 'center center',
-                              backgroundRepeat: 'no-repeat',
-                            }}
-                          />
-                        </Box>
-                      </Grid>
-                    )}
+                    <Grid item>
+                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 200, width: 200 }} />
+                    </Grid>
+
                     <Grid item>
                       <Button sx={{ width: 200 }} variant="contained" component="label" fullWidth>
                         Upload Image
