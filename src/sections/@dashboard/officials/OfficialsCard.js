@@ -89,7 +89,7 @@ export default function OfficialsCard({ official, index }) {
         >
           <SvgIconStyle
             color="paper"
-            src="/static/icons/shape-avatar.svg"
+            src="/static/icons/shapeAvatar.svg"
             sx={{
               width: 80,
               height: 36,
@@ -113,7 +113,6 @@ export default function OfficialsCard({ official, index }) {
               }),
             }}
           />
-
           <CoverImgStyle alt={name} src={uploadImage} />
         </CardMediaStyle>
 
@@ -178,11 +177,6 @@ export default function OfficialsCard({ official, index }) {
                     <DeleteIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>
-
-                {/* <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Link underline="none" color="darkgray" variant="caption">
-                  Delete
-                </Link> */}
               </Box>
             ))}
           </InfoStyle>

@@ -167,10 +167,6 @@ export default function CvoCard({ post, index }) {
                     <DeleteIcon sx={{ width: 20, height: 22 }} />
                   </IconButton>
                 </Tooltip>
-                {/* <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Link underline="none" color="darkgray" variant="caption">
-                  Delete
-                </Link> */}
               </Box>
             ))}
           </InfoStyle>
