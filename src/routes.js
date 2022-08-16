@@ -3,36 +3,37 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
-import Blog from './pages/Blog';
-import User from './pages/User';
-import Login from './pages/Login';
-import NotFound from './pages/Page404';
-import Register from './pages/Register';
-import Products from './pages/Products';
-import DashboardApp from './pages/DashboardApp';
-import ListOfPurok from './pages/ListOfPurok';
 import About from './pages/About';
-import ResidentsProfile from './pages/ResidentsProfile';
-import Legislative from './pages/Legislative';
-import DocumentServices from './pages/DocumentServices';
-import Summon from './pages/Summon';
-import OfficialsProfile from './pages/OfficialsProfile';
-import Blotter from './pages/Blotter';
-import Officials from './pages/Officials';
-import Demographics from './pages/Demographics';
-import Profile from './pages/Profile';
-import LegislativeForm from './pages/LegislativeForm';
-import RequestDocumentForm from './pages/RequestDocumentForm';
-import BillingTransaction from './pages/BillingTransaction';
-import BlotterForm from './pages/BlotterForm';
 import BHW from './pages/BHW';
+import BillingTransaction from './pages/BillingTransaction';
+import Blog from './pages/Blog';
+import Blotter from './pages/Blotter';
+import BlotterForm from './pages/BlotterForm';
 import BNS from './pages/BNS';
 import BO from './pages/BO';
 import BSPO from './pages/BSPO';
 import CVO from './pages/CVO';
-import PL from './pages/PL';
-import NewsUpdateForm from './pages/NewsUpdateForm';
+import DashboardApp from './pages/DashboardApp';
+import Demographics from './pages/Demographics';
+import DocumentServices from './pages/DocumentServices';
 import EditOfficialsProfile from './pages/EditOfficialsProfile';
+import Legislative from './pages/Legislative';
+import LegislativeForm from './pages/LegislativeForm';
+import ListOfPurok from './pages/ListOfPurok';
+import Login from './pages/Login';
+import NewsUpdateForm from './pages/NewsUpdateForm';
+import Officials from './pages/Officials';
+import OfficialsProfile from './pages/OfficialsProfile';
+import NotFound from './pages/Page404';
+import PL from './pages/PL';
+import Products from './pages/Products';
+import Profile from './pages/Profile';
+import Register from './pages/Register';
+import RequestDocumentForm from './pages/RequestDocumentForm';
+import ResidentsProfile from './pages/ResidentsProfile';
+import Summon from './pages/Summon';
+import User from './pages/User';
+import ViewLegislative from './pages/ViewLegislative';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -49,6 +50,7 @@ export default function Router() {
         { path: 'about', element: <About /> },
         { path: 'residentsProfile', element: <ResidentsProfile /> },
         { path: 'legislative', element: <Legislative /> },
+        { path: 'viewLegislative', element: <ViewLegislative /> },
         { path: 'documentServices', element: <DocumentServices /> },
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },

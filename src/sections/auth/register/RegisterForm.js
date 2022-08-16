@@ -1,12 +1,13 @@
-import * as Yup from 'yup';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useState } from 'react';
-import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 // component
 import Iconify from '../../../components/Iconify';
+import { createAccount, setProfile } from '../../../service/auth';
 
 // ----------------------------------------------------------------------
 
@@ -34,8 +35,14 @@ export default function RegisterForm() {
       password: '',
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard/app', { replace: true });
+    onSubmit: async (values) => {
+      console.log({ values });
+      const { email, password, firstName, lastName } = values;
+      return createAccount(email, password).then((accountRes) => {
+        const uid = accountRes.user.uid;
+        setProfile(uid, firstName, lastName);
+        navigate('/dashboard/app', { replace: true });
+      });
     },
   });
 
