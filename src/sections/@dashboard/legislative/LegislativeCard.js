@@ -1,7 +1,7 @@
 // @mui
-import PropTypes from 'prop-types';
-import { alpha, styled } from '@mui/material/styles';
 import { Card, Link, Typography } from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 // utils
 // components
 import Iconify from '../../../components/Iconify';

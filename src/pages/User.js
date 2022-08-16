@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
 import { useLocation } from 'react-router-dom';
@@ -275,6 +276,9 @@ export default function User() {
   // ];
   return (
     <AuthRequired>
+      <Typography variant="h4" sx={{ mb: 5 }}>
+        All Residents
+      </Typography>
       <DataGrid
         autoHeight
         rows={rows ?? []}

@@ -107,6 +107,9 @@ export default function BillingTransaction() {
   return (
     <AuthRequired>
       <Page title="Billing Transaction">
+        <Typography variant="h4" sx={{ mb: 5, ml: 4 }}>
+          Billing Transaction
+        </Typography>
         <Container sx={{ mt: 5, mb: 5 }}>
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
