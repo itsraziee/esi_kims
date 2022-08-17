@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 // material
+import { Avatar, Box, Drawer, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Box, Link, Drawer, Typography, Avatar } from '@mui/material';
 // mock
 import account from '../../_mock/account';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // components
 import Logo from '../../components/Logo';
-import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
+import Scrollbar from '../../components/Scrollbar';
 //
-import navConfig from './NavConfig';
 import { useAuth } from '../../hooks/useAuth';
 import { useProfile } from '../../hooks/useProfile';
+import navConfig from './NavConfig';
 
 // ----------------------------------------------------------------------
 
@@ -71,7 +71,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       {user && profile && (
         <Box sx={{ mb: 5, mx: 2.5 }}>
           <AccountStyle>
-            <Avatar src={user?.photoURL} alt="photoURL" />
+            <Avatar src={profile?.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                 {`${profile?.firstName} ${profile?.lastName}`}
