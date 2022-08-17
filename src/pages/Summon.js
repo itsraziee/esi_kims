@@ -23,7 +23,7 @@ export default function Summon() {
             <Button
               variant="contained"
               component={RouterLink}
-              to="/dashboard/blotterForm"
+              to="/dashboard/summonForm"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
               Add Summon
