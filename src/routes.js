@@ -35,6 +35,7 @@ import Summon from './pages/Summon';
 import SummonForm from './pages/SummonForm';
 import User from './pages/User';
 import ViewLegislative from './pages/ViewLegislative';
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -64,7 +65,6 @@ export default function Router() {
         { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },
         { path: 'blotterForm', element: <BlotterForm /> },
         { path: 'summonForm', element: <SummonForm /> },
-
         { path: 'billingTransaction', element: <BillingTransaction /> },
         { path: 'bhw', element: <BHW /> },
         { path: 'bns', element: <BNS /> },
