@@ -1,9 +1,21 @@
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
-import { Button, Stack, TextField, Card, CardContent, FormControl, InputLabel, Select, MenuItem,  Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import {
+  Button,
+  Card,
+  CardContent,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { createBlotter } from '../../../service/blotter';
 // ----------------------------------------------------------------------
 
 export default function BlotterFormCard() {
@@ -11,20 +23,19 @@ export default function BlotterFormCard() {
 
   const BlotterFormCardSchema = Yup.object().shape({
     caseType: Yup.string().oneOf(['unsolved', 'solved']).required('Case Type is required'),
-    title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
+    caseNumber: Yup.number().min(0).required('Case number is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      title: '',
+      caseNumber: '',
+      caseType: 'unsolved',
     },
     validationSchema: BlotterFormCardSchema,
     onSubmit: (data) => {
-      console
-        .log({ data })
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
-      navigate('/dashboard/app', { replace: true });
+      return createBlotter(data.caseNumber, data.caseType).then((res) => {
+        navigate('/dashboard/app', { replace: true });
+      });
     },
   });
 
@@ -37,16 +48,17 @@ export default function BlotterFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Blotter 
+                Blotter
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
                 <TextField
                   fullWidth
-                  name="title"
-                  label="Title"
-                  {...getFieldProps('title')}
-                  error={Boolean(touched.title && errors.title)}
-                  helperText={touched.title && errors.title}
+                  name="caseNumber"
+                  label="Case No."
+                  {...getFieldProps('caseNumber')}
+                  error={Boolean(touched.caseNumber && errors.caseNumber)}
+                  helperText={touched.caseNumber && errors.caseNumber}
+                  type="number"
                 />
                 <FormControl fullWidth>
                   <InputLabel id="caseType-select-label">Case Type</InputLabel>
