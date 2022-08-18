@@ -1,36 +1,43 @@
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
+import { LoadingButton } from '@mui/lab';
 import {
+  Avatar,
   Button,
+  Card,
+  CardContent,
+  FormControl,
+  Grid,
+  InputAdornment,
   InputLabel,
   MenuItem,
-  FormControl,
   Select,
   Stack,
   TextField,
-  InputAdornment,
-  Card,
-  CardContent,
   Typography,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 
+import { getDownloadURL } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
-import { createOfficial } from '../../../service/official';
+import { useState } from 'react';
+import { createOfficial, updateOfficialImage, uploadOfficialPhoto } from '../../../service/official';
 // ----------------------------------------------------------------------
 
 export default function OfficialsFormCard() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const [imageObjectUrl, setImageObjectUrl] = useState();
+  const [officialPhoto, setOfficialPhoto] = useState();
+
   const OfficialsFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     sex: Yup.string().oneOf(['male', 'female']).required(),
-    dateOfBirth: Yup.string().required('Date of Birth is required'),
+    dateOfBirth: Yup.date().required('Date of Birth is required'),
     civilStatus: Yup.string().required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
@@ -38,9 +45,9 @@ export default function OfficialsFormCard() {
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
     phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone Number required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    address: Yup.string().required('Address is required'),
+    officialAddress: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
-    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW']).required('Position is required'),
+    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW', 'PL']).required('Position is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     numberOfChildren: Yup.number()
@@ -87,9 +94,9 @@ export default function OfficialsFormCard() {
       firstName: '',
       middleName: '',
       lastName: '',
-      officialAddress: '',
       age: '',
       sex: 'male',
+      title: '',
       dateOfBirth: '',
       civilStatus: 'single',
       citizenship: '',
@@ -98,7 +105,7 @@ export default function OfficialsFormCard() {
       weight: '',
       phoneNumber: '',
       occupation: '',
-      address: '',
+      officialAddress: '',
       status: 'active',
       position: '',
       spouse: '',
@@ -126,15 +133,33 @@ export default function OfficialsFormCard() {
     validationSchema: OfficialsFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      createOfficial(data)
+      return createOfficial(data)
         .then((res) => {
           console.log({ res });
-          if (res) {
-            enqueueSnackbar('Added successfully.', {
-              variant: 'success',
-            });
-            navigate('/dashboard/app', { replace: true });
+          const uploadedOfficial = res;
+
+          if (officialPhoto) {
+            return uploadOfficialPhoto(officialPhoto, uploadedOfficial.id)
+              .then((res) => {
+                console.log({ res });
+                getDownloadURL(res.ref).then((url) => {
+                  updateOfficialImage(uploadedOfficial.id, url).then((res) => {
+                    enqueueSnackbar('Added successfully.', {
+                      variant: 'success',
+                    });
+                    navigate('/dashboard/app', { replace: true });
+                  });
+                });
+              })
+              .catch((err) => {
+                console.log({ err });
+              });
           }
+
+          enqueueSnackbar('Added successfully.', {
+            variant: 'success',
+          });
+          navigate('/dashboard/app', { replace: true });
         })
         .catch((err) => {
           console.log({ err });
@@ -152,145 +177,171 @@ export default function OfficialsFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Personal Data
+                Officials Form
               </Typography>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  name="firstName"
-                  label="First name"
-                  {...getFieldProps('firstName')}
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
-                />
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      name="firstName"
+                      label="First name"
+                      {...getFieldProps('firstName')}
+                      error={Boolean(touched.firstName && errors.firstName)}
+                      helperText={touched.firstName && errors.firstName}
+                    />
+                    <TextField
+                      fullWidth
+                      name="middleName"
+                      label="Middle name"
+                      {...getFieldProps('middleName')}
+                      error={Boolean(touched.middleName && errors.middleName)}
+                      helperText={touched.middleName && errors.middleName}
+                    />
+                    <TextField
+                      fullWidth
+                      name="lastName"
+                      label="Last name"
+                      {...getFieldProps('lastName')}
+                      error={Boolean(touched.lastName && errors.lastName)}
+                      helperText={touched.lastName && errors.lastName}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <TextField
+                      name="age"
+                      label="Age"
+                      {...getFieldProps('age')}
+                      error={Boolean(touched.age && errors.age)}
+                      helperText={touched.age && errors.age}
+                    />
+                    <FormControl fullWidth>
+                      <InputLabel id="sex-select-label">Sex</InputLabel>
+                      <Select
+                        labelId="sex-select-label"
+                        id="sex-select"
+                        value={formik.values.sex}
+                        label="sex"
+                        onChange={handleChange}
+                        name="sex"
+                      >
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <TextField
+                      fullWidth
+                      name="dateOfBirth"
+                      id="dateOfBirth"
+                      label="Date of Birth"
+                      type="date"
+                      {...getFieldProps('dateOfBirth')}
+                      error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
+                      helperText={touched.dateOfBirth && errors.dateOfBirth}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
+                      <InputLabel id="status-select-label">Civil Status</InputLabel>
+                      <Select
+                        name="civilStatus"
+                        labelId="status-select-label"
+                        id="status-select"
+                        value={formik.values.civilStatus}
+                        label="civilStatus"
+                        onChange={handleChange}
+                        {...getFieldProps('civilStatus')}
+                        error={Boolean(touched.civilStatus && errors.civilStatus)}
+                      >
+                        <MenuItem value="single">Single</MenuItem>
+                        <MenuItem value="married">Married</MenuItem>
+                        <MenuItem value="separated">Separated</MenuItem>
+                        <MenuItem value="widowed">Widowed</MenuItem>
+                      </Select>
+                    </FormControl>
 
-                <TextField
-                  fullWidth
-                  name="middleName"
-                  label="Middle name"
-                  {...getFieldProps('middleName')}
-                  error={Boolean(touched.middleName && errors.middleName)}
-                  helperText={touched.middleName && errors.middleName}
-                />
+                    <TextField
+                      fullWidth
+                      name="citizenship"
+                      label="Citizenship"
+                      {...getFieldProps('citizenship')}
+                      error={Boolean(touched.citizenship && errors.citizenship)}
+                      helperText={touched.citizenship && errors.citizenship}
+                    />
 
-                <TextField
-                  fullWidth
-                  name="lastName"
-                  label="Last name"
-                  {...getFieldProps('lastName')}
-                  error={Boolean(touched.lastName && errors.lastName)}
-                  helperText={touched.lastName && errors.lastName}
-                />
+                    <TextField
+                      fullWidth
+                      name="religion"
+                      label="Religion"
+                      {...getFieldProps('religion')}
+                      error={Boolean(touched.religion && errors.religion)}
+                      helperText={touched.religion && errors.religion}
+                    />
+                  </Stack>
 
-                <TextField
-                  name="age"
-                  label="Age"
-                  {...getFieldProps('age')}
-                  error={Boolean(touched.age && errors.age)}
-                  helperText={touched.age && errors.age}
-                />
-              </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <TextField
+                      fullWidth
+                      name="height"
+                      label="Height"
+                      {...getFieldProps('height')}
+                      error={Boolean(touched.height && errors.height)}
+                      helperText={touched.height && errors.height}
+                    />
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth>
-                  <InputLabel id="sex-select-label">Sex</InputLabel>
-                  <Select
-                    labelId="sex-select-label"
-                    id="sex-select"
-                    value={formik.values.sex}
-                    label="sex"
-                    onChange={handleChange}
-                    name="sex"
-                  >
-                    <MenuItem value="male">Male</MenuItem>
-                    <MenuItem value="female">Female</MenuItem>
-                  </Select>
-                </FormControl>
+                    <TextField
+                      fullWidth
+                      name="weight"
+                      label="Weight"
+                      {...getFieldProps('weight')}
+                      error={Boolean(touched.weight && errors.weight)}
+                      helperText={touched.weight && errors.weight}
+                    />
 
-                <TextField
-                  fullWidth
-                  name="dateOfBirth"
-                  id="dateOfBirth"
-                  label="Date of Birth"
-                  type="date"
-                  {...getFieldProps('dateOfBirth')}
-                  error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
-                  helperText={touched.dateOfBirth && errors.dateOfBirth}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
+                    <TextField
+                      fullWidth
+                      name="phone_number"
+                      label="Phone Number"
+                      id="outlined-start-adornment"
+                      {...getFieldProps('phoneNumber')}
+                      error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                      helperText={touched.phoneNumber && errors.phoneNumber}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">+63</InputAdornment>,
+                      }}
+                    />
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
+                    <Grid item>
+                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 220, width: 220 }} />
+                    </Grid>
 
-                <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
-                  <InputLabel id="status-select-label">Civil Status</InputLabel>
-                  <Select
-                    name="civilStatus"
-                    labelId="status-select-label"
-                    id="status-select"
-                    value={formik.values.civilStatus}
-                    label="civilStatus"
-                    onChange={handleChange}
-                    {...getFieldProps('civilStatus')}
-                    error={Boolean(touched.civilStatus && errors.civilStatus)}
-                  >
-                    <MenuItem value="single">Single</MenuItem>
-                    <MenuItem value="married">Married</MenuItem>
-                    <MenuItem value="separated">Separated</MenuItem>
-                    <MenuItem value="widowed">Widowed</MenuItem>
-                  </Select>
-                </FormControl>
-
-                <TextField
-                  fullWidth
-                  name="citizenship"
-                  label="Citizenship"
-                  {...getFieldProps('citizenship')}
-                  error={Boolean(touched.citizenship && errors.citizenship)}
-                  helperText={touched.citizenship && errors.citizenship}
-                />
-              </Stack>
-
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  name="religion"
-                  label="Religion"
-                  {...getFieldProps('religion')}
-                  error={Boolean(touched.religion && errors.religion)}
-                  helperText={touched.religion && errors.religion}
-                />
-
-                <TextField
-                  fullWidth
-                  name="height"
-                  label="Height"
-                  {...getFieldProps('height')}
-                  error={Boolean(touched.height && errors.height)}
-                  helperText={touched.height && errors.height}
-                />
-
-                <TextField
-                  fullWidth
-                  name="weight"
-                  label="Weight"
-                  {...getFieldProps('weight')}
-                  error={Boolean(touched.weight && errors.weight)}
-                  helperText={touched.weight && errors.weight}
-                />
-
-                <TextField
-                  fullWidth
-                  name="phone_number"
-                  label="Phone Number"
-                  id="outlined-start-adornment"
-                  {...getFieldProps('phoneNumber')}
-                  error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                  helperText={touched.phoneNumber && errors.phoneNumber}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">+63</InputAdornment>,
-                  }}
-                />
-              </Stack>
+                    <Grid item>
+                      <Button sx={{ width: 200, mt: 1 }} variant="contained" component="label" fullWidth>
+                        Upload Image
+                        <input
+                          type="file"
+                          hidden
+                          multiple={false}
+                          onChange={(e) => {
+                            console.log({ e });
+                            const imageFile = e.target.files[0];
+                            const objectUrl = URL.createObjectURL(imageFile);
+                            setOfficialPhoto(imageFile);
+                            console.log({ objectUrl });
+                            setImageObjectUrl(objectUrl);
+                          }}
+                        />
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
@@ -304,11 +355,11 @@ export default function OfficialsFormCard() {
 
                 <TextField
                   fullWidth
-                  name="address"
+                  name="officialAddress"
                   label="Address"
-                  {...getFieldProps('address')}
-                  error={Boolean(touched.address && errors.address)}
-                  helperText={touched.address && errors.address}
+                  {...getFieldProps('officialAddress')}
+                  error={Boolean(touched.officialAddress && errors.officialAddress)}
+                  helperText={touched.officialAddress && errors.officialAddress}
                 />
 
                 <FormControl helperText={touched.status && errors.status} fullWidth>
@@ -331,7 +382,7 @@ export default function OfficialsFormCard() {
                 <FormControl helperText={touched.position && errors.position} fullWidth>
                   <InputLabel id="position-select-label">Position</InputLabel>
                   <Select
-                    name="postion"
+                    name="position"
                     labelId="position-select-label"
                     id="position-select"
                     value={formik.values.position}
@@ -345,8 +396,10 @@ export default function OfficialsFormCard() {
                     <MenuItem value="BSPO">BSPO</MenuItem>
                     <MenuItem value="BNS">BNS</MenuItem>
                     <MenuItem value="BHW">BHW</MenuItem>
+                    <MenuItem value="PL">Purok Leader</MenuItem>
                   </Select>
                 </FormControl>
+                <TextField fullWidth name="title" label="Title" {...getFieldProps('title')} />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -564,11 +617,6 @@ export default function OfficialsFormCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
-                  Upload Image
-                  <input type="file" hidden />
-                </Button>
-
                 <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                   Submit
                 </LoadingButton>

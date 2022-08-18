@@ -1,11 +1,10 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebase-init';
 
 export async function createResident({
   firstName,
   middleName,
   lastName,
-  age,
   officialAddress,
   dateOfBirth,
   citizenship,
@@ -46,7 +45,6 @@ export async function createResident({
     firstName,
     middleName,
     lastName,
-    age,
     officialAddress,
     dateOfBirth,
     citizenship,
@@ -87,7 +85,6 @@ export async function createResident({
     firstName,
     middleName,
     lastName,
-    age,
     officialAddress,
     dateOfBirth,
     citizenship,
@@ -127,4 +124,10 @@ export async function createResident({
     console.log({ res });
     return res;
   });
+}
+
+export function updateResident(uid, data) {
+  const residentRef = doc(firestore, `resident/${uid}`);
+
+  return updateDoc(residentRef, data);
 }

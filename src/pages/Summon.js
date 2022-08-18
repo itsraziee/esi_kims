@@ -1,25 +1,68 @@
+import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Container, Typography } from '@mui/material';
-import AuthRequired from '../layouts/auth/AuthRequired';
+import { Button, Container, Grid, MenuItem, Select, Stack, Typography } from '@mui/material';
 // components
+import { useEffect, useState } from 'react';
 import Page from '../components/Page';
-import { SummonList } from '../sections/@dashboard/summon';
-// mock
-import SUMMON from '../_mock/summon';
 
+import Iconify from '../components/Iconify';
+import { SummonCard } from '../sections/@dashboard/summon';
+
+import { useAuth } from '../hooks/useAuth';
+import { useSummons } from '../hooks/useSummons';
 // ----------------------------------------------------------------------
 
 export default function Summon() {
+  const user = useAuth();
+  const [solved, setSolved] = useState(false);
+  const summons = useSummons(solved);
+
+  useEffect(() => {
+    console.log({ summons });
+  }, [summons]);
+
   return (
-    <AuthRequired>
-      <Page title="Summon">
-        <Container>
+    <Page title="Summon">
+      <Container>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" sx={{ mb: 5 }}>
             Summon
           </Typography>
-          <SummonList summons={SUMMON} />
-        </Container>
-      </Page>
-    </AuthRequired>
+          <Grid container spacing={1} direction="row" justifyContent="flex-end" alignItems="center">
+            <Grid item>
+              <Select
+                size="small"
+                value={solved}
+                onChange={(e) => {
+                  setSolved(e.target.value);
+                }}
+              >
+                <MenuItem value={false}>Unsolved</MenuItem>
+                <MenuItem value>Solved</MenuItem>
+              </Select>
+            </Grid>
+            {user && (
+              <Grid item>
+                <Button
+                  variant="contained"
+                  component={RouterLink}
+                  to="/dashboard/summonForm"
+                  startIcon={<Iconify icon="eva:plus-fill" />}
+                >
+                  Add Summon
+                </Button>
+              </Grid>
+            )}
+          </Grid>
+        </Stack>
+        <Grid container spacing={3}>
+          {summons?.map((summon) => (
+            <Grid item xs={12} sm={8} md={3}>
+              <SummonCard title={summon?.caseNumber} url={summon?.pdfURL} icon={'clarity:document-solid'} />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </Page>
   );
 }

@@ -1,11 +1,14 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent } from '@mui/material';
-
+import { Link, Card, Grid, Avatar, CardContent, Box, IconButton, Tooltip, Typography } from '@mui/material';
 //
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import SvgIconStyle from '../../../components/SvgIconStyle';
+import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +34,13 @@ const AvatarStyle = styled(Avatar)(({ theme }) => ({
   bottom: theme.spacing(-2),
 }));
 
+const InfoStyle = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'flex-end',
+  color: theme.palette.text.disabled,
+}));
+
 const CoverImgStyle = styled('img')({
   top: 0,
   width: '100%',
@@ -38,8 +48,7 @@ const CoverImgStyle = styled('img')({
   objectFit: 'cover',
   position: 'absolute',
 });
-
-// ----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 
 BhwCard.propTypes = {
   post: PropTypes.object.isRequired,
@@ -47,9 +56,11 @@ BhwCard.propTypes = {
 };
 
 export default function BhwCard({ post, index }) {
-  const { cover, name,  author } = post;
+  const { cover, name, author } = post;
   const latestPostLarge = index;
   const latestPost = index;
+
+  const DELETE = [{ icon: 'fluent:delete-16-filled' }];
 
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
@@ -116,11 +127,9 @@ export default function BhwCard({ post, index }) {
           }}
         >
           <TitleStyle
-            to="#"
             color="inherit"
             variant="subtitle2"
-            underline="hover"
-            component={RouterLink}
+            underline="hidden"
             sx={{
               ...(latestPostLarge && { typography: 'h5', height: 60 }),
               ...((latestPostLarge || latestPost) && {
@@ -130,6 +139,33 @@ export default function BhwCard({ post, index }) {
           >
             {name}
           </TitleStyle>
+
+          <InfoStyle>
+            {DELETE.map((info, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  ml: index === 0 ? 0 : 1.5,
+                  ...((latestPostLarge || latestPost) && {
+                    color: 'grey.500',
+                  }),
+                }}
+              >
+                <Tooltip title="Edit">
+                  <IconButton to="/dashboard/app" component={RouterLink} sx={{ mb: -2 }}>
+                    <EditIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton sx={{ mb: -2 }}>
+                    <DeleteIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            ))}
+          </InfoStyle>
         </CardContent>
       </Card>
     </Grid>

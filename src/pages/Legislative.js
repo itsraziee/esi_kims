@@ -1,24 +1,32 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Container, Typography, Button, Stack } from '@mui/material';
+import { Button, Container, Grid, Stack, Typography } from '@mui/material';
 // components
+import { useEffect } from 'react';
 import Page from '../components/Page';
-import { LegislativeList } from '../sections/@dashboard/legislative';
 
-// mock
-import LEGISLATIVE from '../_mock/legislative';
 import Iconify from '../components/Iconify';
+import { LegislativeCard } from '../sections/@dashboard/legislative';
+
 import { useAuth } from '../hooks/useAuth';
+import { useLegislatives } from '../hooks/useLegislatives';
 // ----------------------------------------------------------------------
 
 export default function Legislative() {
   const user = useAuth();
+
+  const legislatives = useLegislatives();
+
+  useEffect(() => {
+    console.log({ legislatives });
+  }, [legislatives]);
+
   return (
     <Page title="Legislative">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            Barangay Ordinance
+          <Typography variant="h4" sx={{ mb: 5 }}>
+            Legislative
           </Typography>
           {user && (
             <Button
@@ -27,12 +35,23 @@ export default function Legislative() {
               to="/dashboard/legislativeForm"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Ordinance
+              Add Legislative
             </Button>
           )}
         </Stack>
-
-        <LegislativeList legislatives={LEGISLATIVE} />
+        <Grid container spacing={3}>
+          {legislatives?.map((legislative) => {
+            return (
+              <Grid item xs={12} sm={8} md={3}>
+                <LegislativeCard
+                  title={legislative.title}
+                  url={`/dashboard/viewlegislative/?uid=${legislative.id}`}
+                  icon={'clarity:document-solid'}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
       </Container>
     </Page>
   );

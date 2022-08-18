@@ -27,17 +27,16 @@ export default function ResidentsProfileCard() {
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
-    age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
-    dateOfBirth: Yup.string().required('Date of Birth is required'),
+    dateOfBirth: Yup.date().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
     weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
-    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Age required'),
+    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    address: Yup.string().required('Address is required'),
+    officialAddress: Yup.string().required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     tribe: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Tribe is required'),
@@ -47,22 +46,7 @@ export default function ResidentsProfileCard() {
       .integer('Number of Children must be an integer')
       .required('Number of Children is required'),
     purok: Yup.string()
-      .oneOf([
-        'purok1',
-        'purok2',
-        'purok3a',
-        'purok3b',
-        'purok4',
-        'purok5',
-        'purok6',
-        'purok7',
-        'purok8',
-        'purok9',
-        'purok10a',
-        'purok11b',
-        'purok12',
-        'purok13',
-      ])
+      .oneOf(['1', '2', '3a', '3b', '4', '5', '6', '7', '8', '9', '10a', '11b', '12', '13'])
       .required('Purok is required'),
     fathersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Father Name is required'),
     fathersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
@@ -70,10 +54,7 @@ export default function ResidentsProfileCard() {
     mothersName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Name is required'),
     mothersOccupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     mothersAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Mother Address is required'),
-    elementarySchool: Yup.string()
-      .min(2, 'Too Short!')
-      .max(100, 'Too Long!')
-      .required('Name of School is required'),
+    elementarySchool: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of School is required'),
     elementaryAddress: Yup.string()
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
@@ -108,7 +89,6 @@ export default function ResidentsProfileCard() {
       middleName: '',
       lastName: '',
       officialAddress: '',
-      age: '',
       sex: '',
       dateOfBirth: '',
       civilStatus: '',
@@ -118,7 +98,6 @@ export default function ResidentsProfileCard() {
       weight: '',
       phoneNumber: '',
       occupation: '',
-      address: '',
       status: '',
       spouse: '',
       tribe: '',
@@ -151,13 +130,13 @@ export default function ResidentsProfileCard() {
         .then((res) => {
           console.log({ res });
           if (res) {
-            enqueueSnackbar('Resident Added successfully', { 
+            enqueueSnackbar('Resident Added successfully', {
               variant: 'success',
             });
             navigate('/dashboard/app', { replace: true });
           }
         })
-        .catch((err) => { 
+        .catch((err) => {
           console.log({ err });
           enqueueSnackbar('Invalid input', { variant: 'error' });
         });
@@ -202,14 +181,6 @@ export default function ResidentsProfileCard() {
                   {...getFieldProps('lastName')}
                   error={Boolean(touched.lastName && errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
-                />
-
-                <TextField
-                  name="age"
-                  label="Age"
-                  {...getFieldProps('age')}
-                  error={Boolean(touched.age && errors.age)}
-                  helperText={touched.age && errors.age}
                 />
               </Stack>
 
@@ -328,11 +299,11 @@ export default function ResidentsProfileCard() {
 
                 <TextField
                   fullWidth
-                  name="address"
+                  name="officialAddress"
                   label="Address"
-                  {...getFieldProps('address')}
-                  error={Boolean(touched.address && errors.address)}
-                  helperText={touched.address && errors.address}
+                  {...getFieldProps('officialAddress')}
+                  error={Boolean(touched.officialAddress && errors.officialAddress)}
+                  helperText={touched.officialAddress && errors.officialAddress}
                 />
 
                 <FormControl helperText={touched.status && errors.status} fullWidth>
@@ -375,7 +346,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="spouseAddress"
-                  label="Address"
+                  label="Spouse Address"
                   {...getFieldProps('spouseAddress')}
                   error={Boolean(touched.spouseAddress && errors.spouseAddress)}
                   helperText={touched.spouseAddress && errors.spouseAddress}
@@ -402,19 +373,20 @@ export default function ResidentsProfileCard() {
                     {...getFieldProps('purok')}
                     error={Boolean(touched.purok && errors.purok)}
                   >
-                    <MenuItem value="purok1">Purok 1</MenuItem>
-                    <MenuItem value="purok2">Purok 2</MenuItem>
-                    <MenuItem value="purok3a">Purok 3A</MenuItem>
-                    <MenuItem value="purok4">Purok 4</MenuItem>
-                    <MenuItem value="purok5">Purok 5</MenuItem>
-                    <MenuItem value="purok6">Purok 6</MenuItem>
-                    <MenuItem value="purok7">Purok 7</MenuItem>
-                    <MenuItem value="purok8">Purok 8</MenuItem>
-                    <MenuItem value="purok9">Purok 9</MenuItem>
-                    <MenuItem value="purok10a">Purok 10A</MenuItem>
-                    <MenuItem value="purok11b">Purok 11B</MenuItem>
-                    <MenuItem value="purok12">Purok 12</MenuItem>
-                    <MenuItem value="purok13">Purok 13</MenuItem>
+                    <MenuItem value="1">Purok 1</MenuItem>
+                    <MenuItem value="2">Purok 2</MenuItem>
+                    <MenuItem value="3a">Purok 3A</MenuItem>
+                    <MenuItem value="3b">Purok 3B</MenuItem>
+                    <MenuItem value="4">Purok 4</MenuItem>
+                    <MenuItem value="5">Purok 5</MenuItem>
+                    <MenuItem value="6">Purok 6</MenuItem>
+                    <MenuItem value="7">Purok 7</MenuItem>
+                    <MenuItem value="8">Purok 8</MenuItem>
+                    <MenuItem value="9">Purok 9</MenuItem>
+                    <MenuItem value="10a">Purok 10A</MenuItem>
+                    <MenuItem value="11b">Purok 11B</MenuItem>
+                    <MenuItem value="12">Purok 12</MenuItem>
+                    <MenuItem value="13">Purok 13</MenuItem>
                   </Select>
                 </FormControl>
               </Stack>

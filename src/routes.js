@@ -3,47 +3,39 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
-import Blog from './pages/Blog';
-import User from './pages/User';
-import Login from './pages/Login';
-import NotFound from './pages/Page404';
-import Register from './pages/Register';
-import Products from './pages/Products';
-import DashboardApp from './pages/DashboardApp';
-import ListOfPurok from './pages/ListOfPurok';
 import About from './pages/About';
-import ResidentsProfile from './pages/ResidentsProfile';
-import Legislative from './pages/Legislative';
-import DocumentServices from './pages/DocumentServices';
-import Summon from './pages/Summon';
-import OfficialsProfile from './pages/OfficialsProfile';
-import Blotter from './pages/Blotter';
-import Officials from './pages/Officials';
-import Demographics from './pages/Demographics';
-import Profile from './pages/Profile';
-import LegislativeForm from './pages/LegislativeForm';
-import BlotterUnresolved from './pages/BlotterUnresolved';
-import BlotterResolved from './pages/BlotterResolved';
-import SummonUnresolved from './pages/SummonUnresolved.';
-import SummonResolved from './pages/SummonResolved';
-import BarangayBirthCertification from './pages/BarangayBirthCertification';
-import BarangayClearance from './pages/BarangayClearance';
-import CertificateOfResidency from './pages/CertificateOfResidency';
-import BarangayDeathCertification from './pages/BarangayDeathCertification';
-import CertificateOfIndigency from './pages/CertificateOfIndigency';
-import BarangayCertification from './pages/BarangayCertification';
-import BlotterUnresolvedForm from './pages/BlotterUnresolvedForm'; 
-import BlotterResolvedForm from './pages/BlotterResolvedForm'; 
-import SummonResolvedForm from './pages/SummonResolvedForm';
-import SummonUnresolvedForm from './pages/SummonUnresolvedForm';
-import RequestDocumentForm from './pages/RequestDocumentForm';
-import BillingTransaction from './pages/BillingTransaction';
 import BHW from './pages/BHW';
+import BillingTransaction from './pages/BillingTransaction';
+import Blog from './pages/Blog';
+import Blotter from './pages/Blotter';
+import BlotterForm from './pages/BlotterForm';
 import BNS from './pages/BNS';
 import BO from './pages/BO';
 import BSPO from './pages/BSPO';
 import CVO from './pages/CVO';
+import DashboardApp from './pages/DashboardApp';
+import Demographics from './pages/Demographics';
+import DocumentServices from './pages/DocumentServices';
+import EditOfficialsProfile from './pages/EditOfficialsProfile';
+import Legislative from './pages/Legislative';
+import LegislativeForm from './pages/LegislativeForm';
+import ListOfPurok from './pages/ListOfPurok';
+import Login from './pages/Login';
+import NewsUpdateForm from './pages/NewsUpdateForm';
+import Officials from './pages/Officials';
+import OfficialsProfile from './pages/OfficialsProfile';
+import NotFound from './pages/Page404';
 import PL from './pages/PL';
+import Products from './pages/Products';
+import Profile from './pages/Profile';
+import Register from './pages/Register';
+import RequestDocumentForm from './pages/RequestDocumentForm';
+import ResidentsProfile from './pages/ResidentsProfile';
+import Summon from './pages/Summon';
+import SummonForm from './pages/SummonForm';
+import User from './pages/User';
+import ViewLegislative from './pages/ViewLegislative';
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -60,41 +52,30 @@ export default function Router() {
         { path: 'about', element: <About /> },
         { path: 'residentsProfile', element: <ResidentsProfile /> },
         { path: 'legislative', element: <Legislative /> },
+        { path: 'viewLegislative', element: <ViewLegislative /> },
         { path: 'documentServices', element: <DocumentServices /> },
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },
         { path: 'official', element: <Officials /> },
         { path: 'demographics', element: <Demographics /> },
         { path: 'officialsProfile', element: <OfficialsProfile /> },
+        { path: 'editOfficialsProfile', element: <EditOfficialsProfile /> },
         { path: 'profile', element: <Profile /> },
         { path: 'legislativeForm', element: <LegislativeForm /> },
-        { path: 'blotter-unresolved', element: <BlotterUnresolved /> },
-        { path: 'blotterResolved', element: <BlotterResolved /> },
-        { path: 'summon-unresolved', element: <SummonUnresolved /> },
-        { path: 'summon-resolved', element: <SummonResolved /> },
-        { path: 'blotterUnresolvedForm', element: <BlotterUnresolvedForm /> },
-        { path: 'blotterResolvedForm', element: <BlotterResolvedForm /> },
-        { path: 'SummonResolvedForm', element: <SummonResolvedForm /> },
-        { path: 'SummonUnresolvedForm', element: <SummonUnresolvedForm /> },
         { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },
-        
-        { path: 'barangaybirthcertification', element: <BarangayBirthCertification /> },
-        { path: 'barangaycertification', element: <BarangayCertification /> },
-        { path: 'barangayclearance', element: <BarangayClearance /> },
-        { path: 'barangaydeathcertification', element: <BarangayDeathCertification /> },
-        { path: 'certificateofresidency', element: <CertificateOfResidency /> },
-        { path: 'certificateofindigency', element: <CertificateOfIndigency /> },
+        { path: 'blotterForm', element: <BlotterForm /> },
+        { path: 'summonForm', element: <SummonForm /> },
         { path: 'billingTransaction', element: <BillingTransaction /> },
         { path: 'bhw', element: <BHW /> },
         { path: 'bns', element: <BNS /> },
         { path: 'bo', element: <BO /> },
         { path: 'bspo', element: <BSPO /> },
         { path: 'cvo', element: <CVO /> },
-        { path: 'pl', element: <PL />},
-        
+        { path: 'pl', element: <PL /> },
+        { path: 'newsUpdateForm', element: <NewsUpdateForm /> },
       ],
     },
-    
+
     {
       path: '/',
       element: <LogoOnlyLayout />,
@@ -107,6 +88,5 @@ export default function Router() {
       ],
     },
     { path: '*', element: <Navigate to="/404" replace /> },
-
   ]);
 }

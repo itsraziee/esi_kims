@@ -1,0 +1,16 @@
+.c1 {
+  color: #000000;
+  font-weight: 400;
+  text-decoration: none;
+  vertical-align: baseline;
+  font-size: 12pt;
+  font-family: 'Inter';
+  font-style: normal;
+  line-height: 150%;
+  margin-bottom: 9px;
+}
+
+.underline {
+    text-decoration: underline;
+  }
+  

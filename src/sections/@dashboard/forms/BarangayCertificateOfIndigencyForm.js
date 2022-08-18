@@ -5,7 +5,7 @@ import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Sel
 import { LoadingButton } from '@mui/lab';
 import { PropTypes } from 'prop-types';
 
-export default function CertificateOfIndigencyForm({onSubmitForm}) {
+export default function BarangayCertificateOfIndigencyForm({onSubmitForm}) {
   const RequestDocumentFormSchema = Yup.object().shape({
     civilstatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
@@ -98,7 +98,7 @@ export default function CertificateOfIndigencyForm({onSubmitForm}) {
   );
 }
 
-CertificateOfIndigencyForm.propTypes = {
+BarangayCertificateOfIndigencyForm.propTypes = {
   // Function to call on submit
   onSubmitForm: PropTypes.func.isRequired,
 };

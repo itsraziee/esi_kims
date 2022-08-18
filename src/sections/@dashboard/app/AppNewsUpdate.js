@@ -19,7 +19,6 @@ export default function AppNewsUpdate({ title, subheader, list, ...other }) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
-
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
           {list.map((news) => (

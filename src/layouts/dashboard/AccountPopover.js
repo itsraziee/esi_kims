@@ -1,15 +1,14 @@
 import { useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
+import { Avatar, Box, Divider, IconButton, MenuItem, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
-import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton } from '@mui/material';
 import { signOut } from 'firebase/auth';
 import { useSnackbar } from 'notistack';
 // components
 import MenuPopover from '../../components/MenuPopover';
 // mocks_
 import { auth } from '../../firebase-init';
-import account from '../../_mock/account';
 import { useAuth } from '../../hooks/useAuth';
 import { useProfile } from '../../hooks/useProfile';
 
@@ -74,7 +73,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar src={user?.photoURL} alt="photoURL" />
+        <Avatar src={profile?.photoURL} alt="photoURL" />
       </IconButton>
 
       <MenuPopover
