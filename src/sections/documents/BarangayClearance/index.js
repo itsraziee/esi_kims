@@ -2,39 +2,41 @@ import { Box } from '@mui/material';
 import React from 'react';
 import styles from './BarangayClearance.module.css';
 
-export default function BarangayClearance({
-  fileNo,
-  description,
-  day,
-  month,
-  year,
-  firstname,
-  middlename,
-  lastname,
-  suffix,
-  address,
-  citizenship,
-  sex,
-  age,
-  religion,
-  civilstatus,
-  birthday,
-  birthmonth,
-  birthyear,
-  placeofbirth,
-  height,
-  weight,
-  valday,
-  valmonth,
-  valyear,
-  purpose,
-  resCertNo,
-  placeIssued,
-  punongbarangay,
-  barangayKagawad,
-}) {
+const BarangayClearance = React.forwardRef((props, ref) => {
+  const {
+    fileNo,
+    description,
+    day,
+    month,
+    year,
+    firstname,
+    middlename,
+    lastname,
+    suffix,
+    address,
+    citizenship,
+    sex,
+    age,
+    religion,
+    civilstatus,
+    birthday,
+    birthmonth,
+    birthyear,
+    placeofbirth,
+    height,
+    weight,
+    valday,
+    valmonth,
+    valyear,
+    purpose,
+    resCertNo,
+    placeIssued,
+    punongbarangay,
+    barangayKagawad,
+  } = props;
+
   return (
-    <Box className={styles.c13}>
+    <Box className={styles.c13} ref={ref}>
       <p className={styles.c6}>
         <span className={styles.c1}>Republic of the Philippines</span>
         <span
@@ -490,4 +492,6 @@ export default function BarangayClearance({
       </p>
     </Box>
   );
-}
+});
+
+export default BarangayClearance;

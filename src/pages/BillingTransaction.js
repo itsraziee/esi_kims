@@ -3,6 +3,8 @@ import { AppBar, Button, Container, Dialog, IconButton, Slide, Toolbar, Typograp
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
 import * as React from 'react';
+import { useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import AuthRequired from '../layouts/auth/AuthRequired';
@@ -20,6 +22,11 @@ export default function BillingTransaction() {
   const [printOpen, setPrintOpen] = React.useState(false);
   const [documentType, setDocumentType] = React.useState();
   const [currentRow, setCurrentRow] = React.useState();
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const handlePrintOpen = () => {
     setPrintOpen(true);
@@ -128,18 +135,19 @@ export default function BillingTransaction() {
                   <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     Preview
                   </Typography>
-                  <Button autoFocus color="inherit" onClick={handlePrintClose}>
+                  <Button autoFocus color="inherit" onClick={handlePrint}>
                     Print
                   </Button>
                 </Toolbar>
               </AppBar>
-              {documentType === 'Barangay Clearance' && <BarangayClearance />}
+              {documentType === 'Barangay Clearance' && <BarangayClearance ref={componentRef} />}
               {documentType === 'Barangay Certificate' && (
                 <BarangayCertification
                   {...currentRow.data}
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
               {documentType === 'Barangay Birth Certificate' && (
@@ -148,6 +156,7 @@ export default function BillingTransaction() {
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
               {documentType === 'Barangay Death Certificate' && (
@@ -156,6 +165,7 @@ export default function BillingTransaction() {
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
               {documentType === 'Tree Planting Certificate' && (
@@ -164,6 +174,7 @@ export default function BillingTransaction() {
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
               {documentType === 'Certificate of Indigency' && (
@@ -172,6 +183,7 @@ export default function BillingTransaction() {
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
               {documentType === 'Certificate of Residency' && (
@@ -180,6 +192,7 @@ export default function BillingTransaction() {
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
               {documentType === 'Certificate of Tree Planting' && (
@@ -188,6 +201,7 @@ export default function BillingTransaction() {
                   secretary="HAZEL JOY P. MANZAN"
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
+                  ref={componentRef}
                 />
               )}
             </Dialog>

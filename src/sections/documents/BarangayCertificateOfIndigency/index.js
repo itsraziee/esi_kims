@@ -1,20 +1,12 @@
-import React from 'react';
 import { Box } from '@mui/material';
+import React from 'react';
 import styles from './BarangayCertificateOfIndigency.module.css';
 
-export default function BarangayCertificateOfIndigency({
-  fullName,
-  purok,
-  day,
-  month,
-  year,
+const BarangayCertificateOfIndigency = React.forwardRef((props, ref) => {
+  const { fullName, purok, day, month, year, secretary, captain, civilstatus } = props;
 
-  secretary,
-  captain,
-  civilstatus,
-}) {
   return (
-    <Box className={styles.c13}>
+    <Box className={styles.c13} ref={ref}>
       <p className={styles.c6}>
         <span className={styles.c1}>Republic of the Philippines</span>
         <span
@@ -249,4 +241,6 @@ export default function BarangayCertificateOfIndigency({
       </table>
     </Box>
   );
-}
+});
+
+export default BarangayCertificateOfIndigency;
