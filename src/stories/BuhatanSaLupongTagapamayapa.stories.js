@@ -11,9 +11,9 @@ const Template = (args) => <BuhatanSaLupongTagapamayapaComponent {...args} />;
 export const BuhatansaLupongTagapamayapa = Template.bind({});
 BuhatansaLupongTagapamayapa.args = {
   nagsumbong: 'Glenmark',
-  sinumbong: 'Jessel',
+  sinumbong: 'Jessel Marie Pelarca',
   casenumber: '101',
-  about: 'theft',
+  about: 'Theft',
   ngadtokang: 'Glen',
   date: '12',
   month: 'August',
