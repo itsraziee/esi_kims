@@ -35,7 +35,9 @@ export default function LegislativeCard({ title, icon, color = 'primary', sx, ur
       <Card
         sx={{
           py: 5,
+          px: 5,
           boxShadow: 0,
+          height: '100%',
           textAlign: 'center',
           color: (theme) => theme.palette[color].darker,
           bgcolor: (theme) => theme.palette[color].lighter,

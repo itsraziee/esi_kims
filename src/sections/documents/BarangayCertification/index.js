@@ -1,24 +1,24 @@
 import { Box } from '@mui/material';
-import { fontWeight, style } from '@mui/system';
 import React from 'react';
 import styles from './BarangayElectrificationCertificate.module.css';
 
-export default function BarangayCertification({
-  applicant,
-  address,
-  day,
-  month,
-  year,
-  or,
-  ordateissued,
-  placeissued,
-  ctc,
-  ctcdateissued,
-  secretary,
-  captain,
-}) {
+const BarangayCertification = React.forwardRef((props, ref) => {
+  const {
+    applicant,
+    address,
+    day,
+    month,
+    year,
+    or,
+    ordateissued,
+    placeissued,
+    ctc,
+    ctcdateissued,
+    secretary,
+    captain,
+  } = props;
   return (
-    <Box className={styles.c13}>
+    <Box className={styles.c13} ref={ref}>
       <p className={styles.c6}>
         <span className={styles.c1}>Republic of the Philippines</span>
         <span
@@ -289,4 +289,6 @@ export default function BarangayCertification({
       </table>
     </Box>
   );
-}
+});
+
+export default BarangayCertification;

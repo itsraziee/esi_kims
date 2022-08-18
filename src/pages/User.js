@@ -12,6 +12,7 @@ export default function User() {
   const purok = new URLSearchParams(location.search).get('purok');
   console.log({ purok });
   const rows = useResidents(purok);
+  const purokList = ['1', '2', '3a', '3b', '4', '5', '6', '7', '8', '9', '10A', '11B', '12', '13'];
 
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 100 },
@@ -266,7 +267,6 @@ export default function User() {
         });
         return { ...params.row, highschoolAddress: params.value };
       },
-      
     },
     {
       field: 'highschoolName',
@@ -492,7 +492,6 @@ export default function User() {
         });
         return { ...params.row, status: params.value };
       },
-
     },
     {
       field: 'uploadImage',
@@ -620,7 +619,7 @@ export default function User() {
   return (
     <AuthRequired>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        All Residents
+        {purokList.includes(purok) ? `Purok ${purok.toUpperCase()}` : 'All Residents'}
       </Typography>
       <DataGrid
         autoHeight

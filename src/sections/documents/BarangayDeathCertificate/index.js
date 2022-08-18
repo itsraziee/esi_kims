@@ -1,36 +1,36 @@
 import { Box } from '@mui/material';
-import { fontWeight, style } from '@mui/system';
 import React from 'react';
 import styles from './BarangayDeathCertificate.module.css';
 
-export default function BarangayDeathCertificate({
-  // naa pay ibutang dire
-  name,
-  relationship,
-  purok,
-  day,
-  month,
-  year,
-  deceasedname,
-  placeofdeath,
-  dateofbirth,
-  dateofdeath,
-  age,
-  causeofdeath,
-  address,
-  civilstatus,
-  placeburried,
-  religion,
-  occupation,
-  nameoffather,
-  maidennameofmother,
-  captain,
-  secretary,
-  requestorName,
+const BarangayDeathCertificate = React.forwardRef((props, ref) => {
+  const {
+    // naa pay ibutang dire
+    name,
+    relationship,
+    purok,
+    day,
+    month,
+    year,
+    deceasedname,
+    placeofdeath,
+    dateofbirth,
+    dateofdeath,
+    age,
+    causeofdeath,
+    address,
+    civilstatus,
+    placeburried,
+    religion,
+    occupation,
+    nameoffather,
+    maidennameofmother,
+    captain,
+    secretary,
+    requestorName,
+  } = props;
 
-}) {
   return (
-    <Box className={styles.c13}>
+    <Box className={styles.c13} ref={ref}>
       <p className={styles.c6}>
         <span className={styles.c1}>Republic of the Philippines</span>
         <span
@@ -301,4 +301,6 @@ export default function BarangayDeathCertificate({
       </p>
     </Box>
   );
-}
+});
+
+export default BarangayDeathCertificate;

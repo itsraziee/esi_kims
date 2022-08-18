@@ -1,42 +1,44 @@
-import React from 'react';
 import { Box } from '@mui/material';
+import React from 'react';
 import styles from './BarangayBirthCertificate.module.css';
 
 // TODO fix name, date, punong barangay, secretary,
-export default function BarangayBirthCertificate({
-  name,
-  purok,
-  nameofchild,
-  sex,
-  dateofbirth,
-  weight,
-  birthorder,
-  death,
-  placeofbirth,
-  nameofmother,
-  mothercitizenship,
-  motheroccupation,
-  nameoffather,
-  fathercitizenship,
-  fatheroccupation,
-  dateofmarriage,
-  placeofmarriage,
-  nameofattendant,
-  addressofattendant,
-  since,
-  namerequest,
-  day,
-  month,
-  year,
-  or,
-  dateissued,
-  placeissued,
-  captain,
-  secretary,
-  amountpaid,
-}) {
+const BarangayBirthCertificate = React.forwardRef((props, ref) => {
+  const {
+    name,
+    purok,
+    nameofchild,
+    sex,
+    dateofbirth,
+    weight,
+    birthorder,
+    death,
+    placeofbirth,
+    nameofmother,
+    mothercitizenship,
+    motheroccupation,
+    nameoffather,
+    fathercitizenship,
+    fatheroccupation,
+    dateofmarriage,
+    placeofmarriage,
+    nameofattendant,
+    addressofattendant,
+    since,
+    namerequest,
+    day,
+    month,
+    year,
+    or,
+    dateissued,
+    placeissued,
+    captain,
+    secretary,
+    amountpaid,
+  } = props;
+
   return (
-    <Box className={styles.c10}>
+    <Box className={styles.c10} ref={ref}>
       <p className={styles.c5}>
         <span className={styles.c0}>Republic of the Philippines</span>
         <span
@@ -498,4 +500,6 @@ export default function BarangayBirthCertificate({
       </p>
     </Box>
   );
-}
+});
+
+export default BarangayBirthCertificate;
