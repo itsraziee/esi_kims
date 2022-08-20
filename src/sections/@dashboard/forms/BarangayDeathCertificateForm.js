@@ -7,15 +7,20 @@ import {
   Button,
   Chip,
   Dialog,
+  DialogActions,
+  DialogContentText,
+  DialogTitle,
   FormControl,
   Grid,
   IconButton,
   InputLabel,
+  Link,
   MenuItem,
   Select,
   Stack,
   TextField,
   Toolbar,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { Form, FormikProvider, useFormik } from 'formik';
@@ -53,6 +58,9 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
   const [requirementsFile, setRequirementsFile] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [openReferenceNumber, setOpenReferenceNumber] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState();
+  const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
 
   const formik = useFormik({
     initialValues: {
@@ -84,10 +92,14 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             return getRequirementsUrl(filenames, requestUid).then((res) => {
               const requestUrls = res;
               console.log({ requestUrls });
-              updateRequestRequirements(requestUid, requestUrls).then((res) => {
+              return updateRequestRequirements(requestUid, requestUrls).then((res) => {
                 enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
                   variant: 'success',
                 });
+
+                setReferenceNumber(requestUid);
+                setOpenReferenceNumber(true);
+                setTimeout(() => setReferenceNumberCloseLoading(false), 5000);
               });
             });
           })
@@ -367,6 +379,51 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             </Toolbar>
           </AppBar>
           <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
+        </Dialog>
+
+        <Dialog open={openReferenceNumber}>
+          <DialogTitle>Reference Number</DialogTitle>
+          <DialogContentText sx={{ p: 5 }}>
+            Your Reference Number is:{' '}
+            <Tooltip title="Copy to clipboard">
+              <Link
+                sx={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(referenceNumber)
+                    .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+                }}
+              >
+                {referenceNumber}
+              </Link>
+            </Tooltip>
+          </DialogContentText>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(referenceNumber)
+                  .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+              }}
+              sx={{ color: 'white' }}
+            >
+              Copy
+            </Button>
+            <LoadingButton
+              variant="contained"
+              color="error"
+              onClick={() => {
+                setOpenReferenceNumber(false);
+                setReferenceNumberCloseLoading(true);
+                window.location.reload();
+              }}
+              loading={referenceNumberCloseLoading}
+            >
+              Close
+            </LoadingButton>
+          </DialogActions>
         </Dialog>
       </Form>
     </FormikProvider>

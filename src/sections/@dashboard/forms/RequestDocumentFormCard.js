@@ -25,7 +25,6 @@ import {
   TREE_PLANTING_CERTIFICATE_PRICE,
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
-import { createOfficial } from '../../../service/official';
 import BarangayBirthCertificateForm from './BarangayBirthCertificateForm';
 import BarangayCertificateOfIndigencyForm from './BarangayCertificateOfIndigencyForm';
 import BarangayCertificateForm from './BarangayCertificationForm';
@@ -51,17 +50,13 @@ export default function RequestDocumentFormCard() {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      createOfficial(data)
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
-      navigate('/dashboard/app', { replace: true });
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
 
   return (
-    <Card fullwidth>
+    <Card>
       <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
       <CardContent>
         <Stack spacing={1}>
