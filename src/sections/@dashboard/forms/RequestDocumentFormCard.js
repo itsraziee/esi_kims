@@ -1,42 +1,38 @@
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
 import {
-  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
-  FormControl,
   Select,
   Stack,
   TextField,
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  FormHelperText,
-  CardHeader,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
+  BARANGAY_CERTIFICATION_PRICE,
   BARANGAY_CLEARANCE_PRICE,
   BARANGAY_DEATH_CERTIFICATE_PRICE,
   CERTIFICATE_OF_INDIGENCY_PRICE,
   CERTIFICATE_OF_RESIDENCY_PRICE,
   TREE_PLANTING_CERTIFICATE_PRICE,
-  BARANGAY_CERTIFICATION_PRICE,
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import { createOfficial } from '../../../service/official';
-import BarangayCertificateForm from './BarangayCertificationForm';
 import BarangayBirthCertificateForm from './BarangayBirthCertificateForm';
-import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
 import BarangayCertificateOfIndigencyForm from './BarangayCertificateOfIndigencyForm';
-import CertificateOfResidencyForm from './CertificateOfResidencyForm';
-import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
+import BarangayCertificateForm from './BarangayCertificationForm';
 import BarangayClearanceForm from './BarangayClearanceForm';
+import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
+import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
+import CertificateOfResidencyForm from './CertificateOfResidencyForm';
 // ----------------------------------------------------------------------
 
 export default function RequestDocumentFormCard() {
@@ -137,20 +133,7 @@ export default function RequestDocumentFormCard() {
                   data,
                   formik.values.requestorname,
                   BARANGAY_DEATH_CERTIFICATE_PRICE
-                )
-                  .then((res) => {
-                    console.log({ res });
-                    if (res) {
-                      enqueueSnackbar('Barangay Death Certificate Request Submitted Successfully.', {
-                        variant: 'success',
-                      });
-                      navigate('/dashboard/app', { replace: true });
-                    }
-                  })
-                  .catch((err) => {
-                    console.log({ err });
-                    enqueueSnackbar('Request Failed.', { variant: 'error' });
-                  });
+                );
               }}
             />
           )}
