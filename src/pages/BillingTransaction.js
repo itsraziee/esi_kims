@@ -1,5 +1,5 @@
-import CloseIcon from '@mui/icons-material/Close';
-import { AppBar, Button, Container, Dialog, IconButton, Slide, Toolbar, Typography } from '@mui/material';
+import Close from '@mui/icons-material/Close';
+import { AppBar, Button, Chip, Container, Dialog, Grid, IconButton, Slide, Toolbar, Typography } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
 import * as React from 'react';
@@ -22,6 +22,7 @@ export default function BillingTransaction() {
   const [printOpen, setPrintOpen] = React.useState(false);
   const [documentType, setDocumentType] = React.useState();
   const [currentRow, setCurrentRow] = React.useState();
+  const [previewSrc, setPreviewSrc] = React.useState();
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -127,10 +128,10 @@ export default function BillingTransaction() {
           />
           {printOpen && ( // Note: Important, button disables after closing dialog
             <Dialog fullScreen open={printOpen} onClose={handlePrintClose} TransitionComponent={Transition}>
-              <AppBar sx={{ position: 'relative' }}>
+              <AppBar sx={{ position: 'fixed' }}>
                 <Toolbar>
                   <IconButton edge="start" color="inherit" onClick={handlePrintClose} aria-label="close">
-                    <CloseIcon />
+                    <Close />
                   </IconButton>
                   <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     Preview
@@ -166,6 +167,9 @@ export default function BillingTransaction() {
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
                   ref={componentRef}
+                  day={moment().format('Do')}
+                  month={moment().format('MMMM')}
+                  year={moment().format('YYYY')}
                 />
               )}
               {documentType === 'Tree Planting Certificate' && (
@@ -204,8 +208,39 @@ export default function BillingTransaction() {
                   ref={componentRef}
                 />
               )}
+              <Grid container sx={{ p: 5 }} spacing={1}>
+                <Grid item xs={12}>
+                  <Typography>Requirements:</Typography>
+                </Grid>
+                {currentRow?.urls?.map((url) => (
+                  <Grid item>
+                    <Chip
+                      color="primary"
+                      onClick={() => {
+                        setPreviewSrc(url.url);
+                      }}
+                      label={url.filename}
+                      key={url.url}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
             </Dialog>
           )}
+
+          <Dialog onClose={() => setPreviewSrc(null)} open={previewSrc} fullScreen>
+            <AppBar sx={{ position: 'fixed' }}>
+              <Toolbar>
+                <IconButton edge="start" color="inherit" onClick={() => setPreviewSrc(null)} aria-label="close">
+                  <Close />
+                </IconButton>
+                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  Preview
+                </Typography>
+              </Toolbar>
+            </AppBar>
+            <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
+          </Dialog>
         </Container>
       </Page>
     </AuthRequired>
