@@ -399,7 +399,14 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               }}
             />
           </Button>
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            disabled={requirementsFile?.length < 1}
+          >
             Submit
           </LoadingButton>
         </Stack>
