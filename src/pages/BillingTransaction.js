@@ -158,6 +158,9 @@ export default function BillingTransaction() {
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
                   ref={componentRef}
+                  day={moment().format('Do')}
+                  month={moment().format('MMMM')}
+                  year={moment().format('YYYY')}
                 />
               )}
               {documentType === 'Barangay Death Certificate' && (
@@ -212,6 +215,7 @@ export default function BillingTransaction() {
                 <Grid item xs={12}>
                   <Typography>Requirements:</Typography>
                 </Grid>
+                {!(currentRow?.urls?.length > 0) && <Chip color="warning" label="None" key="no-req" />}
                 {currentRow?.urls?.map((url) => (
                   <Grid item>
                     <Chip
@@ -229,7 +233,7 @@ export default function BillingTransaction() {
           )}
 
           <Dialog onClose={() => setPreviewSrc(null)} open={previewSrc} fullScreen>
-            <AppBar sx={{ position: 'fixed' }}>
+            <AppBar sx={{ position: 'relative' }}>
               <Toolbar>
                 <IconButton edge="start" color="inherit" onClick={() => setPreviewSrc(null)} aria-label="close">
                   <Close />

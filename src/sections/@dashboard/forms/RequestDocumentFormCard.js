@@ -235,20 +235,7 @@ export default function RequestDocumentFormCard() {
                   data,
                   formik.values.requestorname,
                   BARANGAY_BIRTH_CERTIFICATE_PRICE
-                )
-                  .then((res) => {
-                    console.log({ res });
-                    if (res) {
-                      enqueueSnackbar('Barangay Birth Certificate Request Submitted Successfully.', {
-                        variant: 'success',
-                      });
-                      navigate('/dashboard/app', { replace: true });
-                    }
-                  })
-                  .catch((err) => {
-                    console.log({ err });
-                    enqueueSnackbar('Request Failed.', { variant: 'error' });
-                  });
+                );
               }}
             />
           )}
