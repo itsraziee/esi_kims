@@ -14,6 +14,7 @@ import {
   Select,
   Stack,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
@@ -74,25 +75,28 @@ export default function RequestDocumentFormCard() {
             error={Boolean(errors.typeOfDocument)}
           >
             <InputLabel id="status-select-label">Select Type of Document</InputLabel>
-            <Select
-              name="typeOfDocument"
-              labelId="typeOfDocument"
-              id="typeOfDocument"
-              value={formik.values.typeOfDocument}
-              label="Select Type of Documents"
-              onChange={handleChange}
-              {...getFieldProps('typeOfDocument')}
-              error={Boolean(touched.typeOfDocument && errors.typeOfDocument)}
-              helperText={touched.typeOfDocument && errors.typeOfDocument}
-            >
-              <MenuItem value="barangay-clearance">Barangay Clearance</MenuItem>
-              <MenuItem value="birth-certificate">Barangay Birth Certificate</MenuItem>
-              <MenuItem value="death-certificate">Barangay Death Certificate</MenuItem>
-              <MenuItem value="certification">Barangay Certification</MenuItem>
-              <MenuItem value="certificate-of-indigency">Certificate Of Indigency</MenuItem>
-              <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
-              <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
-            </Select>
+            <Tooltip title={!formik.values.requestorname ? 'Requestor Name is required' : ''}>
+              <Select
+                name="typeOfDocument"
+                labelId="typeOfDocument"
+                id="typeOfDocument"
+                value={formik.values.typeOfDocument}
+                label="Select Type of Documents"
+                onChange={handleChange}
+                {...getFieldProps('typeOfDocument')}
+                error={Boolean(touched.typeOfDocument && errors.typeOfDocument)}
+                helperText={touched.typeOfDocument && errors.typeOfDocument}
+                disabled={!formik.values.requestorname}
+              >
+                <MenuItem value="barangay-clearance">Barangay Clearance</MenuItem>
+                <MenuItem value="birth-certificate">Barangay Birth Certificate</MenuItem>
+                <MenuItem value="death-certificate">Barangay Death Certificate</MenuItem>
+                <MenuItem value="certification">Barangay Certification</MenuItem>
+                <MenuItem value="certificate-of-indigency">Certificate Of Indigency</MenuItem>
+                <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
+                <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
+              </Select>
+            </Tooltip>
             {Boolean(errors.typeOfDocument) && <FormHelperText>Please select a type of document.</FormHelperText>}
           </FormControl>
           {formik.values.typeOfDocument === 'certification' && (
@@ -135,20 +139,7 @@ export default function RequestDocumentFormCard() {
           {formik.values.typeOfDocument === 'barangay-clearance' && (
             <BarangayClearanceForm
               onSubmitForm={async (data) => {
-                return createRequest('Barangay Clearance', data, formik.values.requestorname, BARANGAY_CLEARANCE_PRICE)
-                  .then((res) => {
-                    console.log({ res });
-                    if (res) {
-                      enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
-                        variant: 'success',
-                      });
-                      navigate('/dashboard/app', { replace: true });
-                    }
-                  })
-                  .catch((err) => {
-                    console.log({ err });
-                    enqueueSnackbar('Request Failed.', { variant: 'error' });
-                  });
+                return createRequest('Barangay Clearance', data, formik.values.requestorname, BARANGAY_CLEARANCE_PRICE);
               }}
             />
           )}

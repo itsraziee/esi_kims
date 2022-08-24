@@ -1,16 +1,49 @@
-import React from 'react';
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { uuidv4 } from '@firebase/util';
+import Close from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
+import {
+  AppBar,
+  Box,
+  Button,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 import { PropTypes } from 'prop-types';
+import { useState } from 'react';
+import * as Yup from 'yup';
+import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 
 export default function BarangayClearanceForm({ onSubmitForm }) {
+  const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
+  const [previewSrc, setPreviewSrc] = useState();
+  const [requirementsFile, setRequirementsFile] = useState([]);
+  const [openReferenceNumber, setOpenReferenceNumber] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState();
+  const { enqueueSnackbar } = useSnackbar();
+  const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
+
   const RequestDocumentFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
-    suffix: Yup.string().max(3, 'Too Long!').required('Suffix is required'),
+    suffix: Yup.string().max(3, 'Too Long!'),
     address: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
@@ -43,13 +76,53 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
       purpose: '',
     },
     validationSchema: RequestDocumentFormSchema,
+
     onSubmit: (data) => {
       console.log({ data });
-      return onSubmitForm(data);
+      return onSubmitForm(data)
+        .then((res) => {
+          const requestUid = res.id;
+
+          return uploadRequirements(requirementsFile, requestUid).then((res) => {
+            const filenames = requirementsFile.map((requirement) => requirement.file.name);
+            return getRequirementsUrl(filenames, requestUid).then((res) => {
+              const requestUrls = res;
+              return updateRequestRequirements(requestUid, requestUrls).then((res) => {
+                enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                  variant: 'success',
+                });
+
+                setReferenceNumber(requestUid);
+                setOpenReferenceNumber(true);
+                setTimeout(() => setReferenceNumberCloseLoading(false), 5000);
+              });
+            });
+          });
+        })
+        .catch((err) => {
+          console.log({ err });
+          enqueueSnackbar('Request Failed.', { variant: 'error' });
+        });
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
+
+  function handleDelete(id) {
+    console.log({ id });
+
+    setRequirementsFile(
+      requirementsFile.filter((file) => {
+        return id !== file.id;
+      })
+    );
+
+    setRequirementObjectURLs(
+      requirementObjectURLs.filter((reqUrl) => {
+        return id !== reqUrl.id;
+      })
+    );
+  }
 
   return (
     <FormikProvider value={formik}>
@@ -108,7 +181,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
             />
-           <FormControl helperText={touched.sex && errors.sex} fullWidth>
+            <FormControl helperText={touched.sex && errors.sex} fullWidth>
               <InputLabel id="sex-select-label">Sex</InputLabel>
               <Select
                 name="sex"
@@ -221,13 +294,132 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
             Upload Requirements
-            <input type="file" hidden />
+            <input
+              type="file"
+              hidden
+              multiple
+              onChange={(e) => {
+                const files = [...e.target.files];
+                console.log({ e, files });
+                if (files) {
+                  const id = uuidv4();
+                  setRequirementObjectURLs((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      return {
+                        fileName: file.name,
+                        link: URL.createObjectURL(file),
+                        id,
+                      };
+                    });
+
+                    return [...prev, ...newFiles];
+                  });
+
+                  setRequirementsFile((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      return { file, id };
+                    });
+
+                    return [...prev, ...newFiles];
+                  });
+                }
+              }}
+            />
           </Button>
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            disabled={requirementsFile?.length < 1}
+          >
             Submit
           </LoadingButton>
         </Stack>
+        {requirementObjectURLs.length > 0 && (
+          <Grid container spacing={1} sx={{ my: 1 }}>
+            {requirementObjectURLs.map((reqUrl) => {
+              console.log({ reqUrl });
+              return (
+                <Grid item key={reqUrl.id}>
+                  <Chip
+                    color="primary"
+                    label={reqUrl.fileName}
+                    component="a"
+                    onClick={() => {
+                      setPreviewSrc(reqUrl.link);
+                    }}
+                    target="_blank"
+                    onDelete={() => handleDelete(reqUrl.id)}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
       </Form>
+
+      <Dialog onClose={() => setPreviewSrc(null)} open={previewSrc} fullScreen>
+        <AppBar sx={{ position: 'fixed' }}>
+          <Toolbar>
+            <IconButton edge="start" color="inherit" onClick={() => setPreviewSrc(null)} aria-label="close">
+              <Close />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Preview
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
+      </Dialog>
+
+      <Dialog open={openReferenceNumber}>
+        <DialogTitle>Reference Number</DialogTitle>
+        <DialogContentText sx={{ p: 5 }}>
+          Your Reference Number is:{' '}
+          <Tooltip title="Copy to clipboard">
+            <Link
+              sx={{ cursor: 'pointer' }}
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(referenceNumber)
+                  .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+              }}
+            >
+              {referenceNumber}
+            </Link>
+          </Tooltip>
+        </DialogContentText>
+        <DialogActions>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              navigator.clipboard
+                .writeText(referenceNumber)
+                .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+            }}
+            sx={{ color: 'white' }}
+          >
+            Copy
+          </Button>
+          <LoadingButton
+            variant="contained"
+            color="error"
+            onClick={() => {
+              setOpenReferenceNumber(false);
+              setReferenceNumberCloseLoading(true);
+              window.location.reload();
+            }}
+            loading={referenceNumberCloseLoading}
+          >
+            Close
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
     </FormikProvider>
   );
 }
