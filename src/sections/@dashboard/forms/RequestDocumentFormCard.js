@@ -107,20 +107,7 @@ export default function RequestDocumentFormCard() {
                   data,
                   formik.values.requestorname,
                   BARANGAY_CERTIFICATION_PRICE
-                )
-                  .then((res) => {
-                    console.log({ res });
-                    if (res) {
-                      enqueueSnackbar('Barangay Certificate Request Submitted Successfully.', {
-                        variant: 'success',
-                      });
-                      navigate('/dashboard/app', { replace: true });
-                    }
-                  })
-                  .catch((err) => {
-                    console.log({ err });
-                    enqueueSnackbar('Request Failed.', { variant: 'error' });
-                  });
+                );
               }}
             />
           )}
@@ -138,6 +125,7 @@ export default function RequestDocumentFormCard() {
           )}
           {formik.values.typeOfDocument === 'barangay-clearance' && (
             <BarangayClearanceForm
+              // TODO duplicate on other document forms, remove then and catch
               onSubmitForm={async (data) => {
                 return createRequest('Barangay Clearance', data, formik.values.requestorname, BARANGAY_CLEARANCE_PRICE);
               }}
