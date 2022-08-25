@@ -185,6 +185,9 @@ export default function BillingTransaction() {
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
                   ref={componentRef}
+                  day={moment().format('Do')}
+                  month={moment().format('MMMM')}
+                  year={moment().format('YYYY')}
                 />
               )}
               {documentType === 'Certificate of Indigency' && (
@@ -194,6 +197,9 @@ export default function BillingTransaction() {
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
                   ref={componentRef}
+                  day={moment().format('Do')}
+                  month={moment().format('MMMM')}
+                  year={moment().format('YYYY')}
                 />
               )}
               {documentType === 'Certificate of Residency' && (
@@ -215,6 +221,9 @@ export default function BillingTransaction() {
                   captain="JERRY P. PARADILLO"
                   requestorName={currentRow.requestorName}
                   ref={componentRef}
+                  day={moment().format('Do')}
+                  month={moment().format('MMMM')}
+                  year={moment().format('YYYY')}
                 />
               )}
               <Grid container sx={{ p: 5 }} spacing={1}>
