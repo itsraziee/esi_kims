@@ -36,6 +36,7 @@ import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } fro
 // TODO: Fathers Occupation error message is not working (mag red ra sya peru dili ga show ang error message)!
 
 export default function BarangayBirthCertificateForm({ onSubmitForm }) {
+  // TODO duplicate on other document forms
   const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
   const [previewSrc, setPreviewSrc] = useState();
   const [requirementsFile, setRequirementsFile] = useState([]);
@@ -43,6 +44,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
   const [referenceNumber, setReferenceNumber] = useState();
   const { enqueueSnackbar } = useSnackbar();
   const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
+  // end duplicate
 
   const RequestDocumentFormSchema = Yup.object().shape({
     nameofchild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
