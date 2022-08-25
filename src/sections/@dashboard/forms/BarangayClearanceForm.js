@@ -302,10 +302,10 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 const files = [...e.target.files];
                 console.log({ e, files });
                 if (files) {
-                  const id = uuidv4();
                   setRequirementObjectURLs((prev) => {
                     const newFiles = files.map((file) => {
                       console.log({ file });
+                      const id = uuidv4();
                       return {
                         fileName: file.name,
                         link: URL.createObjectURL(file),
@@ -319,6 +319,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                   setRequirementsFile((prev) => {
                     const newFiles = files.map((file) => {
                       console.log({ file });
+                      const id = uuidv4();
                       return { file, id };
                     });
 

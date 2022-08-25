@@ -110,35 +110,40 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      return onSubmitForm(data)
-        .then((res) => {
-          const requestUid = res.id;
+      return (
+        onSubmitForm(data)
+          // TODO duplicate on other forms
+          .then((res) => {
+            const requestUid = res.id;
 
-          return uploadRequirements(requirementsFile, requestUid).then((res) => {
-            const filenames = requirementsFile.map((requirement) => requirement.file.name);
-            return getRequirementsUrl(filenames, requestUid).then((res) => {
-              const requestUrls = res;
-              return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
-                  variant: 'success',
+            return uploadRequirements(requirementsFile, requestUid).then((res) => {
+              const filenames = requirementsFile.map((requirement) => requirement.file.name);
+              return getRequirementsUrl(filenames, requestUid).then((res) => {
+                const requestUrls = res;
+                return updateRequestRequirements(requestUid, requestUrls).then((res) => {
+                  enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                    variant: 'success',
+                  });
+
+                  setReferenceNumber(requestUid);
+                  setOpenReferenceNumber(true);
+                  setTimeout(() => setReferenceNumberCloseLoading(false), 5000);
                 });
-
-                setReferenceNumber(requestUid);
-                setOpenReferenceNumber(true);
-                setTimeout(() => setReferenceNumberCloseLoading(false), 5000);
               });
             });
-          });
-        })
-        .catch((err) => {
-          console.log({ err });
-          enqueueSnackbar('Request Failed.', { variant: 'error' });
-        });
+          })
+          .catch((err) => {
+            console.log({ err });
+            enqueueSnackbar('Request Failed.', { variant: 'error' });
+          })
+        // End duplicate
+      );
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
 
+  // TODO duplicate on other document forms
   function handleDelete(id) {
     console.log({ id });
 
@@ -154,6 +159,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
       })
     );
   }
+  // end duplicate on other forms
 
   return (
     <FormikProvider value={formik}>
@@ -369,14 +375,15 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               type="file"
               hidden
               multiple
+              // TODO duplicate on other document forms
               onChange={(e) => {
                 const files = [...e.target.files];
                 console.log({ e, files });
                 if (files) {
-                  const id = uuidv4();
                   setRequirementObjectURLs((prev) => {
                     const newFiles = files.map((file) => {
                       console.log({ file });
+                      const id = uuidv4();
                       return {
                         fileName: file.name,
                         link: URL.createObjectURL(file),
@@ -390,6 +397,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
                   setRequirementsFile((prev) => {
                     const newFiles = files.map((file) => {
                       console.log({ file });
+                      const id = uuidv4();
                       return { file, id };
                     });
 
@@ -397,6 +405,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
                   });
                 }
               }}
+              // end duplicate
             />
           </Button>
           <LoadingButton
@@ -411,6 +420,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           </LoadingButton>
         </Stack>
 
+        {/* TODO duplicate on other document forms */}
         {requirementObjectURLs.length > 0 && (
           <Grid container spacing={1} sx={{ my: 1 }}>
             {requirementObjectURLs.map((reqUrl) => {
@@ -491,6 +501,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             </LoadingButton>
           </DialogActions>
         </Dialog>
+        {/* end duplicate on other document forms */}
       </Form>
     </FormikProvider>
   );
