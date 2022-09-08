@@ -35,7 +35,7 @@ import Summon from './pages/Summon';
 import SummonForm from './pages/SummonForm';
 import User from './pages/User';
 import ViewLegislative from './pages/ViewLegislative';
-
+import ViewSummonPdf from './pages/ViewSummonPdf';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -53,6 +53,7 @@ export default function Router() {
         { path: 'residentsProfile', element: <ResidentsProfile /> },
         { path: 'legislative', element: <Legislative /> },
         { path: 'viewLegislative', element: <ViewLegislative /> },
+        { path: 'viewSummonPdf', element: <ViewSummonPdf /> },
         { path: 'documentServices', element: <DocumentServices /> },
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },

@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
@@ -17,4 +17,17 @@ export async function updatePdfURL(uid, pdfRef) {
   return getDownloadURL(pdfRef).then((pdfURL) => {
     return updateDoc(summonRef, { pdfURL });
   });
+}
+
+export function getSummon(uid) {
+  return getDoc(doc(firestore, `summon/${uid}`));
+}
+
+export function solveSummon(uid, checked) {
+  const summonRef = doc(firestore, `summon/${uid}`);
+
+  if (checked) {
+    return updateDoc(summonRef, { caseType: 'solved' });
+  }
+  return updateDoc(summonRef, { caseType: 'unsolved' });
 }

@@ -58,7 +58,11 @@ export default function Summon() {
         <Grid container spacing={3}>
           {summons?.map((summon) => (
             <Grid item xs={12} sm={8} md={3}>
-              <SummonCard title={summon?.caseNumber} url={summon?.pdfURL} icon={'clarity:document-solid'} />
+              <SummonCard
+                title={summon?.caseNumber}
+                url={`/dashboard/viewSummonPdf/?uid=${summon.id}`}
+                icon={'clarity:document-solid'}
+              />
             </Grid>
           ))}
         </Grid>

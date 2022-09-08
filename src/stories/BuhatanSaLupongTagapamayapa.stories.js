@@ -1,4 +1,3 @@
-import React from 'react';
 import { default as BuhatanSaLupongTagapamayapaComponent } from '../sections/documents/BuhatanSaLupongTagapamayapa';
 
 export default {
@@ -10,11 +9,11 @@ const Template = (args) => <BuhatanSaLupongTagapamayapaComponent {...args} />;
 
 export const BuhatansaLupongTagapamayapa = Template.bind({});
 BuhatansaLupongTagapamayapa.args = {
-  nagsumbong: 'Glenmark',
-  sinumbong: 'Jessel Marie Pelarca',
-  casenumber: '101',
+  complainant: 'Glenmark',
+  defendant: 'Jessel Marie Pelarca',
+  consequence: 'Ma priso',
+  caseNumber: '101',
   about: 'Theft',
-  ngadtokang: 'Glen',
   date: '12',
   month: 'August',
   year: '2022',
