@@ -1,10 +1,10 @@
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
 export function updateProfile(uid, profileData) {
   console.log({ uid, profileData });
-  return setDoc(doc(firestore, `profile/${uid}`), profileData);
+  return updateDoc(doc(firestore, `profile/${uid}`), profileData);
 }
 
 export async function getProfile(uid) {
