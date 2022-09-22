@@ -363,7 +363,6 @@ export default function Demographics() {
           <Grid item xs={12} md={6} lg={8}>
             <DemographicsTable
               title="Population"
-              subheader="(+43%) than last year"
               chartLabels={[
                 'Purok 1',
                 'Purok 2',
