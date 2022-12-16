@@ -42,7 +42,7 @@ export default function BillingTransaction() {
   }, [rows]);
 
   const columns = [
-    { field: 'id', headerName: 'ID', flex: 1 },
+    { field: 'id', headerName: 'Reference Number', flex: 1 },
     { field: 'requestorName', headerName: 'Name', flex: 1 },
     {
       field: 'datetime',

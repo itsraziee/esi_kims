@@ -1,13 +1,12 @@
-import { Link as RouterLink } from 'react-router-dom';
 // @mui
+import { Container, Grid, Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Stack, Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 // components
 import Page from '../components/Page';
 // sections
-import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/demographics';
 import { useResidents } from '../hooks/useResidents';
+import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/demographics';
 // ----------------------------------------------------------------------
 
 export default function Demographics() {

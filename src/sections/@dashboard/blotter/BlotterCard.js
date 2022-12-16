@@ -21,7 +21,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-Blotter.propTypes = {
+BlotterCard.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
@@ -29,7 +29,7 @@ Blotter.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function Blotter({ title, icon, color = 'primary', sx, url = null, ...other }) {
+export default function BlotterCard({ title, icon, color = 'primary', sx, url = null, ...other }) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
