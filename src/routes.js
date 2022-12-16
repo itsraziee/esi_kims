@@ -34,6 +34,7 @@ import ResidentsProfile from './pages/ResidentsProfile';
 import Summon from './pages/Summon';
 import SummonForm from './pages/SummonForm';
 import User from './pages/User';
+import ViewBlotterPdf from './pages/ViewBlotterPdf';
 import ViewLegislative from './pages/ViewLegislative';
 import ViewSummonPdf from './pages/ViewSummonPdf';
 // ----------------------------------------------------------------------
@@ -54,6 +55,7 @@ export default function Router() {
         { path: 'legislative', element: <Legislative /> },
         { path: 'viewLegislative', element: <ViewLegislative /> },
         { path: 'viewSummonPdf', element: <ViewSummonPdf /> },
+        { path: 'viewBlotterPdf', element: <ViewBlotterPdf /> },
         { path: 'documentServices', element: <DocumentServices /> },
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },
