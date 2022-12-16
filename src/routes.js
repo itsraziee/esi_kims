@@ -15,6 +15,8 @@ import BSPO from './pages/BSPO';
 import CVO from './pages/CVO';
 import DashboardApp from './pages/DashboardApp';
 import Demographics from './pages/Demographics';
+import DisclosureBoard from './pages/DisclosureBoard';
+import DisclosureBoardForm from './pages/DisclosureBoardForm';
 import DocumentServices from './pages/DocumentServices';
 import EditOfficialsProfile from './pages/EditOfficialsProfile';
 import Legislative from './pages/Legislative';
@@ -26,7 +28,6 @@ import Officials from './pages/Officials';
 import OfficialsProfile from './pages/OfficialsProfile';
 import NotFound from './pages/Page404';
 import PL from './pages/PL';
-import Products from './pages/Products';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import RequestDocumentForm from './pages/RequestDocumentForm';
@@ -35,6 +36,7 @@ import Summon from './pages/Summon';
 import SummonForm from './pages/SummonForm';
 import User from './pages/User';
 import ViewBlotterPdf from './pages/ViewBlotterPdf';
+import ViewDisclosureBoard from './pages/viewDisclosureBoard';
 import ViewLegislative from './pages/ViewLegislative';
 import ViewSummonPdf from './pages/ViewSummonPdf';
 // ----------------------------------------------------------------------
@@ -47,7 +49,6 @@ export default function Router() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
         { path: 'listOfPurok', element: <ListOfPurok /> },
         { path: 'about', element: <About /> },
@@ -56,6 +57,7 @@ export default function Router() {
         { path: 'viewLegislative', element: <ViewLegislative /> },
         { path: 'viewSummonPdf', element: <ViewSummonPdf /> },
         { path: 'viewBlotterPdf', element: <ViewBlotterPdf /> },
+        { path: 'viewDisclosureBoard', element: <ViewDisclosureBoard /> },
         { path: 'documentServices', element: <DocumentServices /> },
         { path: 'summon', element: <Summon /> },
         { path: 'blotter', element: <Blotter /> },
@@ -65,6 +67,8 @@ export default function Router() {
         { path: 'editOfficialsProfile', element: <EditOfficialsProfile /> },
         { path: 'profile', element: <Profile /> },
         { path: 'legislativeForm', element: <LegislativeForm /> },
+        { path: 'disclosureBoardForm', element: <DisclosureBoardForm /> },
+        { path: 'disclosureBoard', element: <DisclosureBoard /> },
         { path: 'RequestDocumentForm', element: <RequestDocumentForm /> },
         { path: 'blotterForm', element: <BlotterForm /> },
         { path: 'summonForm', element: <SummonForm /> },
