@@ -1,22 +1,23 @@
-import * as Yup from 'yup';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
+import { LoadingButton } from '@mui/lab';
 import {
-  Stack,
-  TextField,
-  InputAdornment,
+  Button,
   Card,
   CardContent,
-  Button,
+  FormControl,
+  FormHelperText,
+  InputAdornment,
   InputLabel,
   MenuItem,
-  FormControl,
   Select,
+  Stack,
+  TextField,
   Typography,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import { createResident } from '../../../service/residents';
 // ----------------------------------------------------------------------
 
@@ -185,7 +186,26 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl helperText={touched.sex && errors.sex} fullWidth>
+                <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+                  <InputLabel id="status-select-label">Sex</InputLabel>
+                  <Select
+                    name="sex"
+                    labelId="sex"
+                    id="sex"
+                    value={formik.values.sex}
+                    label="Select a Sex"
+                    onChange={handleChange}
+                    {...getFieldProps('sex')}
+                    error={Boolean(touched.sex && errors.sex)}
+                    helperText={touched.sex && errors.sex}
+                  >
+                    <MenuItem value="male">Male</MenuItem>
+                    <MenuItem value="female">Female</MenuItem>
+                  </Select>
+                  {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+                </FormControl>
+
+                {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
                   <InputLabel id="sex-select-label">Sex</InputLabel>
                   <Select
                     name="sex"
@@ -200,7 +220,7 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
 
                 <TextField
                   fullWidth

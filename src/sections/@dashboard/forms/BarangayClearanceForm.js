@@ -11,6 +11,7 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputLabel,
@@ -23,6 +24,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { PropTypes } from 'prop-types';
@@ -44,7 +46,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     suffix: Yup.string().max(3, 'Too Long!'),
-    address: Yup.string().required('Address is required'),
+    purok: Yup.string().required('Purok is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
@@ -63,7 +65,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
       middleName: '',
       lastName: '',
       suffix: '',
-      address: '',
+      purok: '',
       citizenship: '',
       sex: '',
       age: '',
@@ -165,14 +167,48 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
         </Stack>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <>
-            <TextField
+            {/* <TextField
               fullWidth
               name="address"
               label="Address"
               {...getFieldProps('address')}
               error={Boolean(touched.address && errors.address)}
               helperText={touched.address && errors.address}
-            />
+            /> */}
+            <FormControl
+              helperText={touched.purok && errors.purok}
+              fullWidth
+              error={Boolean(errors.purok)}
+            >
+              <InputLabel id="status-select-label">Purok</InputLabel>
+              <Select
+                name="purok"
+                labelId="purok"
+                id="purok"
+                value={formik.values.purok}
+                label="Select a purok"
+                onChange={handleChange}
+                {...getFieldProps('purok')}
+                error={Boolean(touched.purok && errors.purok)}
+                helperText={touched.purok && errors.purok}
+              >
+                <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+                <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+                <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+                <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+                <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+                <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+                <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+                <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+                <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+                <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+                <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+                <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+                <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+                <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+              </Select>
+              {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+            </FormControl>
             <TextField
               fullWidth
               name="citizenship"
@@ -181,7 +217,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
             />
-            <FormControl helperText={touched.sex && errors.sex} fullWidth>
+            {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
               <InputLabel id="sex-select-label">Sex</InputLabel>
               <Select
                 name="sex"
@@ -196,6 +232,24 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <MenuItem value="male">Male</MenuItem>
                 <MenuItem value="female">Female</MenuItem>
               </Select>
+            </FormControl> */}
+            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+              <InputLabel id="status-select-label">Sex</InputLabel>
+              <Select
+                name="sex"
+                labelId="sex"
+                id="sex"
+                value={formik.values.sex}
+                label="Select a Sex"
+                onChange={handleChange}
+                {...getFieldProps('sex')}
+                error={Boolean(touched.sex && errors.sex)}
+                helperText={touched.sex && errors.sex}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+              {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
             </FormControl>
           </>
         </Stack>
@@ -217,7 +271,26 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.religion && errors.religion)}
               helperText={touched.religion && errors.religion}
             />
-            <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
+            <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth error={Boolean(errors.civilStatus)}>
+              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <Select
+                name="civilStatus"
+                labelId="civilStatus"
+                id="civilStatus"
+                value={formik.values.civilStatus}
+                label="Select a Civil Status"
+                onChange={handleChange}
+                {...getFieldProps('civilStatus')}
+                error={Boolean(touched.civilStatus && errors.civilStatus)}
+              >
+                <MenuItem value="single">Single</MenuItem>
+                <MenuItem value="married">Married</MenuItem>
+                <MenuItem value="separated">Separated</MenuItem>
+                <MenuItem value="widowed">Widowed</MenuItem>
+              </Select>
+              {Boolean(errors.civilStatus) && <FormHelperText>Please select a Civil Status.</FormHelperText>}
+            </FormControl>
+            {/* <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
                 name="civilStatus"
@@ -234,7 +307,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <MenuItem value="separated">Separated</MenuItem>
                 <MenuItem value="widowed">Widowed</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
             <TextField
               fullWidth
               name="dateOfBirth"
@@ -260,6 +333,14 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.placeOfBirth && errors.placeOfBirth)}
               helperText={touched.placeOfBirth && errors.placeOfBirth}
             />
+            {/* <TextField
+              fullWidth
+              name="height"
+              label="Height"
+              {...getFieldProps('height')}
+              error={Boolean(touched.height && errors.height)}
+              helperText={touched.height && errors.height}
+            /> */}
             <TextField
               fullWidth
               name="height"
@@ -267,6 +348,9 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               {...getFieldProps('height')}
               error={Boolean(touched.height && errors.height)}
               helperText={touched.height && errors.height}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">in</InputAdornment>,
+              }}
             />
             <TextField
               fullWidth
@@ -275,7 +359,18 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               {...getFieldProps('weight')}
               error={Boolean(touched.weight && errors.weight)}
               helperText={touched.weight && errors.weight}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+              }}
             />
+            {/* <TextField
+              fullWidth
+              name="weight"
+              label="Weight"
+              {...getFieldProps('weight')}
+              error={Boolean(touched.weight && errors.weight)}
+              helperText={touched.weight && errors.weight}
+            /> */}
             <TextField
               fullWidth
               name="purpose"
