@@ -5,15 +5,15 @@ import * as Yup from 'yup';
 import { LoadingButton } from '@mui/lab';
 import { Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { createLegislative, updateLegislativePdf, uploadLegislativePdf } from '../../../service/legislative';
+import { createDisclosureBoard, updateDisclosureBoardPdf, uploadDisclosureBoardPdf } from '../../../service/disclosureBoard';
 // ----------------------------------------------------------------------
 
-export default function LegislativeFormCard() {
+export default function DisclosureBoardFormCard() {
   const navigate = useNavigate();
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState();
   const [pdfFile, setPdfFile] = useState();
 
-  const LegislativeFormSchema = Yup.object().shape({
+  const DisclosureBoardFormSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
   });
 
@@ -21,19 +21,19 @@ export default function LegislativeFormCard() {
     initialValues: {
       title: '',
     },
-    validationSchema: LegislativeFormSchema,
+    validationSchema: DisclosureBoardFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      return createLegislative(data)
+      return createDisclosureBoard(data)
         .then((res) => {
-          const legislativeUid = res.id;
+          const disclosureBoardUid = res.id;
           console.log({ res });
 
-          return uploadLegislativePdf(legislativeUid, pdfFile).then((res) => {
+          return uploadDisclosureBoardPdf(disclosureBoardUid, pdfFile).then((res) => {
             console.log(res);
 
-            return updateLegislativePdf(legislativeUid).then((res) => {
-              navigate('/dashboard/legislative/', { replace: true });
+            return updateDisclosureBoardPdf(disclosureBoardUid).then((res) => {
+              navigate('/dashboard/disclosureBoard/', { replace: true });
             });
           });
         })
@@ -54,7 +54,7 @@ export default function LegislativeFormCard() {
               <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Stack spacing={3}>
                   <Typography variant="subtitle3" noWrap>
-                    Upload Legislative
+                    Upload Full Disclosure
                   </Typography>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
                     <TextField
