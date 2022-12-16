@@ -1,15 +1,14 @@
 // @mui
-import { Link as RouterLink } from 'react-router-dom';
-import { Grid, Container, Typography, useTheme } from '@mui/material';
+import { Container, Grid, Typography, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 // components
 import Page from '../components/Page';
 // sections
-import { AppNewsUpdate, AppTrafficBySite, AppWidgetSummary, NewsUpdateCard } from '../sections/@dashboard/app';
-import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/demographics';
 import { useAuth } from '../hooks/useAuth';
-import NEWSUPDATES from '../_mock/newsUpdate';
 import { useResidents } from '../hooks/useResidents';
+import { AppTrafficBySite, AppWidgetSummary, NewsUpdateCard } from '../sections/@dashboard/app';
+import { DemographicsChart, DemographicsTable } from '../sections/@dashboard/demographics';
+import NEWSUPDATES from '../_mock/newsUpdate';
 
 // ----------------------------------------------------------------------
 
@@ -498,6 +497,14 @@ export default function DashboardApp() {
               total={0}
               color="info"
               url="/dashboard/RequestDocumentForm"
+              icon={'icon-park-solid:image-files'}
+            />
+
+            <AppWidgetSummary
+              title="Feedback"
+              total={0}
+              color="info"
+              url="/dashboard/FeedbackDialog"
               icon={'icon-park-solid:image-files'}
             />
           </Grid>

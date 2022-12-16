@@ -36,6 +36,7 @@ import SummonForm from './pages/SummonForm';
 import User from './pages/User';
 import ViewLegislative from './pages/ViewLegislative';
 import ViewSummonPdf from './pages/ViewSummonPdf';
+import FeedbackDialog from './pages/FeedbackDialog';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -74,6 +75,7 @@ export default function Router() {
         { path: 'cvo', element: <CVO /> },
         { path: 'pl', element: <PL /> },
         { path: 'newsUpdateForm', element: <NewsUpdateForm /> },
+        { path: 'feedbackDialog', element: <FeedbackDialog /> },
       ],
     },
 
