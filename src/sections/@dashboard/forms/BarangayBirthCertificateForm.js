@@ -11,6 +11,7 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputLabel,
@@ -23,6 +24,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { PropTypes } from 'prop-types';
@@ -176,15 +178,47 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             helperText={touched.nameofchild && errors.nameofchild}
           />
 
-          <TextField
+          {/* <TextField
             fullWidth
             name="purok"
             label="Purok"
             {...getFieldProps('purok')}
             error={Boolean(touched.purok && errors.purok)}
             helperText={touched.purok && errors.purok}
-          />
-          <FormControl helperText={touched.sex && errors.sex} fullWidth>
+          /> */}
+
+          <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+            <InputLabel id="status-select-label">Purok</InputLabel>
+            <Select
+              name="purok"
+              labelId="purok"
+              id="purok"
+              value={formik.values.purok}
+              label="Select a purok"
+              onChange={handleChange}
+              {...getFieldProps('purok')}
+              error={Boolean(touched.purok && errors.purok)}
+              helperText={touched.purok && errors.purok}
+            >
+              <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+              <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+              <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+              <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+              <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+              <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+              <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+              <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+              <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+              <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+              <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+              <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+              <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+              <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+            </Select>
+            {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+          </FormControl>
+
+          {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
             <InputLabel id="sex-select-label">Sex</InputLabel>
             <Select
               name="sex"
@@ -199,6 +233,24 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
+          </FormControl> */}
+          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+            <InputLabel id="status-select-label">Sex</InputLabel>
+            <Select
+              name="sex"
+              labelId="sex"
+              id="sex"
+              value={formik.values.sex}
+              label="Select a Sex"
+              onChange={handleChange}
+              {...getFieldProps('sex')}
+              error={Boolean(touched.sex && errors.sex)}
+              helperText={touched.sex && errors.sex}
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+            </Select>
+            {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
           </FormControl>
           <TextField
             fullWidth
@@ -226,6 +278,14 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
         </Stack>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
+          {/* <TextField
+            fullWidth
+            name="weight"
+            label="Weight"
+            {...getFieldProps('weight')}
+            error={Boolean(touched.weight && errors.weight)}
+            helperText={touched.weight && errors.weight}
+          /> */}
           <TextField
             fullWidth
             name="weight"
@@ -233,6 +293,9 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             {...getFieldProps('weight')}
             error={Boolean(touched.weight && errors.weight)}
             helperText={touched.weight && errors.weight}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+            }}
           />
           <TextField
             // sx={{ minWidth: 91, mt: 2 }}
