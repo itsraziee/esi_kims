@@ -215,7 +215,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               <MenuItem value="12">Purok 12 Siniloan</MenuItem>
               <MenuItem value="13">Purok 13 Kiramong</MenuItem>
             </Select>
-            {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+            {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
           </FormControl>
 
           {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
@@ -250,7 +250,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
-            {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+            {Boolean(errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
           </FormControl>
           <TextField
             fullWidth
@@ -294,7 +294,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.weight && errors.weight)}
             helperText={touched.weight && errors.weight}
             InputProps={{
-              startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+              endAdornment: <InputAdornment position="start">kg</InputAdornment>,
             }}
           />
           <TextField

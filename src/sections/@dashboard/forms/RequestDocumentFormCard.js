@@ -57,7 +57,7 @@ export default function RequestDocumentFormCard() {
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
 
   return (
-    <Card>
+    <Card sx={{ width: '100%' }}>
       <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
       <CardContent>
         <Stack spacing={1}>

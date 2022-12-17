@@ -175,11 +175,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.address && errors.address)}
               helperText={touched.address && errors.address}
             /> */}
-            <FormControl
-              helperText={touched.purok && errors.purok}
-              fullWidth
-              error={Boolean(errors.purok)}
-            >
+            <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
               <InputLabel id="status-select-label">Purok</InputLabel>
               <Select
                 name="purok"
@@ -271,7 +267,11 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.religion && errors.religion)}
               helperText={touched.religion && errors.religion}
             />
-            <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth error={Boolean(errors.civilStatus)}>
+            <FormControl
+              helperText={touched.civilStatus && errors.civilStatus}
+              fullWidth
+              error={Boolean(errors.civilStatus)}
+            >
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
                 name="civilStatus"
@@ -349,7 +349,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.height && errors.height)}
               helperText={touched.height && errors.height}
               InputProps={{
-                startAdornment: <InputAdornment position="start">in</InputAdornment>,
+                endAdornment: <InputAdornment position="start">in</InputAdornment>,
               }}
             />
             <TextField
@@ -360,7 +360,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.weight && errors.weight)}
               helperText={touched.weight && errors.weight}
               InputProps={{
-                startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+                endAdornment: <InputAdornment position="start">kg</InputAdornment>,
               }}
             />
             {/* <TextField

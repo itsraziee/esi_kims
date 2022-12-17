@@ -11,6 +11,7 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputLabel,
@@ -42,7 +43,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
     applicant: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Applicant is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
-    address: Yup.string().required('Address is required'),
+    purok: Yup.string().required('Address is required'),
     purpose: Yup.string().required('Purpose is required'),
     layout: Yup.string().required('Layout is required'),
     beam: Yup.string().required('Beam is required'),
@@ -55,7 +56,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
     initialValues: {
       applicant: '',
       sex: '',
-      address: '',
+      purok: '',
       purpose: '',
       layout: '',
       beam: '',
@@ -115,48 +116,78 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
-          <>
-            <TextField
-              fullWidth
-              name="applicant"
-              label="Applicant"
-              {...getFieldProps('applicant')}
-              error={Boolean(touched.applicant && errors.applicant)}
-              helperText={touched.applicant && errors.applicant}
-            />
-            <FormControl helperText={touched.sex && errors.sex} fullWidth>
-              <InputLabel id="sex-select-label">Sex</InputLabel>
-              <Select
-                name="sex"
-                labelId="sex-select-label"
-                id="sex-select"
-                value={formik.values.sex}
-                label="Sex"
-                onChange={handleChange}
-                {...getFieldProps('sex')}
-                error={Boolean(touched.sex && errors.sex)}
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
+          <TextField
+            fullWidth
+            name="applicant"
+            label="Applicant"
+            {...getFieldProps('applicant')}
+            error={Boolean(touched.applicant && errors.applicant)}
+            helperText={touched.applicant && errors.applicant}
+          />
+          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+            <InputLabel id="sex-select-label">Sex</InputLabel>
+            <Select
+              name="sex"
+              labelId="sex-select-label"
+              id="sex-select"
+              value={formik.values.sex}
+              label="Sex"
+              onChange={handleChange}
+              {...getFieldProps('sex')}
+              error={Boolean(touched.sex && errors.sex)}
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+            </Select>
+            {Boolean(errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
+          </FormControl>
+          {/* <TextField
               fullWidth
               name="address"
               label="Address"
               {...getFieldProps('address')}
               error={Boolean(touched.address && errors.address)}
               helperText={touched.address && errors.address}
-            />
-            <TextField
-              fullWidth
-              name="purpose"
-              label="Purpose"
-              {...getFieldProps('purpose')}
-              error={Boolean(touched.purpose && errors.purpose)}
-              helperText={touched.purpose && errors.purpose}
-            />
-          </>
+            /> */}
+
+          <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+            <InputLabel id="status-select-label">Purok</InputLabel>
+            <Select
+              name="purok"
+              labelId="purok"
+              id="purok"
+              value={formik.values.purok}
+              label="Select a purok"
+              onChange={handleChange}
+              {...getFieldProps('purok')}
+              error={Boolean(touched.purok && errors.purok)}
+              helperText={touched.purok && errors.purok}
+            >
+              <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+              <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+              <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+              <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+              <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+              <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+              <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+              <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+              <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+              <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+              <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+              <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+              <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+              <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+            </Select>
+            {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+          </FormControl>
+          <TextField
+            fullWidth
+            name="purpose"
+            label="Purpose"
+            {...getFieldProps('purpose')}
+            error={Boolean(touched.purpose && errors.purpose)}
+            helperText={touched.purpose && errors.purpose}
+          />
         </Stack>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <>

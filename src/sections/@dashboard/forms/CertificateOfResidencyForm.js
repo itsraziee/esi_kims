@@ -1,29 +1,34 @@
 import { uuidv4 } from '@firebase/util';
 import Close from '@mui/icons-material/Close';
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { LoadingButton } from '@mui/lab';
 import {
+  AppBar,
+  Box,
   Button,
-  Stack,
-  Grid,
   Chip,
   Dialog,
-  AppBar,
-  Toolbar,
-  IconButton,
-  DialogTitle,
-  DialogContentText,
-  Tooltip,
-  Link,
   DialogActions,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  FormHelperText,
+  Grid,
+  IconButton,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Stack,
   TextField,
+  Toolbar,
+  Tooltip,
   Typography,
-  Box,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { PropTypes } from 'prop-types';
 import { useState } from 'react';
+import * as Yup from 'yup';
 import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 
 export default function CertificateOfResidencyForm({ onSubmitForm }) {
@@ -108,14 +113,44 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
               error={Boolean(touched.name && errors.name)}
               helperText={touched.name && errors.name}
             />
-            <TextField
+            {/* <TextField
               fullWidth
               name="purok"
               label="Purok"
               {...getFieldProps('purok')}
               error={Boolean(touched.purok && errors.purok)}
               helperText={touched.purok && errors.purok}
-            />
+            /> */}
+            <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+              <InputLabel id="status-select-label">Purok</InputLabel>
+              <Select
+                name="purok"
+                labelId="purok"
+                id="purok"
+                value={formik.values.purok}
+                label="Select a purok"
+                onChange={handleChange}
+                {...getFieldProps('purok')}
+                error={Boolean(touched.purok && errors.purok)}
+                helperText={touched.purok && errors.purok}
+              >
+                <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+                <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+                <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+                <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+                <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+                <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+                <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+                <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+                <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+                <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+                <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+                <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+                <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+                <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+              </Select>
+              {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+            </FormControl>
             <TextField
               fullWidth
               name="citizenship"
