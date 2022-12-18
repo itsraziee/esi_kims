@@ -214,7 +214,7 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
                 labelId="civilStatus"
                 id="civilStatus"
                 value={formik.values.civilStatus}
-                label="Select a Civil Status"
+                label="Civil Status"
                 onChange={handleChange}
                 {...getFieldProps('civilStatus')}
                 error={Boolean(touched.civilStatus && errors.civilStatus)}

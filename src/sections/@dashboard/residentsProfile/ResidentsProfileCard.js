@@ -26,14 +26,15 @@ export default function ResidentsProfileCard() {
   const { enqueueSnackbar } = useSnackbar();
   const ResidentsProfileSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
+    suffix: Yup.string().max(3, 'Too Long!'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     civilStatus: Yup.string().required('Civil Status is required'),
     dateOfBirth: Yup.date().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
-    height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
+    height: Yup.string().required('Height is required'),
     weight: Yup.string().required('Weight is required'),
     phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
@@ -89,6 +90,7 @@ export default function ResidentsProfileCard() {
       firstName: '',
       middleName: '',
       lastName: '',
+      sufix: '',
       purok: '',
       sex: '',
       dateOfBirth: '',
@@ -182,6 +184,15 @@ export default function ResidentsProfileCard() {
                   error={Boolean(touched.lastName && errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
                 />
+
+                <TextField
+                  fullWidth
+                  name="suffix"
+                  label="Suffix"
+                  {...getFieldProps('suffix')}
+                  error={Boolean(touched.suffix && errors.suffix)}
+                  helperText={touched.suffix && errors.suffix}
+                />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -196,7 +207,7 @@ export default function ResidentsProfileCard() {
                     labelId="sex"
                     id="sex"
                     value={formik.values.sex}
-                    label="Select a Sex"
+                    label="Sex"
                     onChange={handleChange}
                     {...getFieldProps('sex')}
                     error={Boolean(touched.sex && errors.sex)}
@@ -335,6 +346,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="weight"
                   label="Weight"
+                  type="number"
                   {...getFieldProps('weight')}
                   error={Boolean(touched.weight && errors.weight)}
                   helperText={touched.weight && errors.weight}

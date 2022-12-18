@@ -161,7 +161,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               labelId="purok"
               id="purok"
               value={formik.values.purok}
-              label="Select a purok"
+              label="Purok"
               onChange={handleChange}
               {...getFieldProps('purok')}
               error={Boolean(touched.purok && errors.purok)}

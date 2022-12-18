@@ -40,7 +40,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
     deceasedname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Deceased Name is required'),
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     dateofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
-    age: Yup.number().min(0, 'Must be positive!').required('Age is required'),
+    age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
     purok: Yup.string().required('Purok is required'),
     causeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
     address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
@@ -192,6 +192,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             }}
           />
           <TextField
+            fullWidth
             name="age"
             label="Age"
             {...getFieldProps('age')}
@@ -225,7 +226,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               labelId="purok"
               id="purok"
               value={formik.values.purok}
-              label="Select a purok"
+              label="Purok"
               onChange={handleChange}
               {...getFieldProps('purok')}
               error={Boolean(touched.purok && errors.purok)}
@@ -262,7 +263,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               labelId="civilstatus"
               id="civilstatus"
               value={formik.values.civilstatus}
-              label="Select a Civil Status"
+              label="Civil Status"
               onChange={handleChange}
               {...getFieldProps('civilstatus')}
               error={Boolean(touched.civilstatus && errors.civilstatus)}
