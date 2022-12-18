@@ -32,6 +32,7 @@ import BarangayCertificateForm from './BarangayCertificationForm';
 import BarangayClearanceForm from './BarangayClearanceForm';
 import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
 import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
+import CedulaFormCard from './CedulaFormCard';
 import CertificateOfResidencyForm from './CertificateOfResidencyForm';
 // ----------------------------------------------------------------------
 
@@ -179,6 +180,13 @@ export default function RequestDocumentFormCard() {
                   formik.values.requestorname,
                   BARANGAY_BIRTH_CERTIFICATE_PRICE
                 );
+              }}
+            />
+          )}
+          {formik.values.typeOfDocument === 'cedula' && (
+            <CedulaFormCard
+              onSubmitForm={async (data) => {
+                return createRequest('Cedula', data, formik.values.requestorname);
               }}
             />
           )}

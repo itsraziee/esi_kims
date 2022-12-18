@@ -13,6 +13,7 @@ import {
   FormControl,
   FormHelperText,
   Grid,
+  InputAdornment,
   InputLabel,
   Link,
   MenuItem,
@@ -23,15 +24,15 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
+
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { PropTypes } from 'prop-types';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 import IconButton from '../../../theme/overrides/IconButton';
 
-export default function CedulaForm({ onSubmitForm }) {
+export default function CedulaFormCard({ onSubmitForm }) {
   const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
   const [previewSrc, setPreviewSrc] = useState();
   const [requirementsFile, setRequirementsFile] = useState([]);
@@ -58,8 +59,8 @@ export default function CedulaForm({ onSubmitForm }) {
     initialValues: {
       firstName: '',
       middleName: '',
-     lastName: '',
-     sex: '',
+      lastName: '',
+      sex: '',
       purok: '',
       civilStatus: '',
       citizenship: '',
@@ -145,7 +146,23 @@ export default function CedulaForm({ onSubmitForm }) {
               error={Boolean(touched.lastname && errors.lastnamename)}
               helperText={touched.lastname && errors.lastnamename}
             />
-            
+            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
+              <InputLabel id="sex-select-label">Sex</InputLabel>
+              <Select
+                name="sex"
+                labelId="sex-select-label"
+                id="sex-select"
+                value={formik.values.sex}
+                label="Sex"
+                onChange={handleChange}
+                {...getFieldProps('sex')}
+                error={Boolean(touched.sex && errors.sex)}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+              {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
+            </FormControl>
             <FormControl
               helperText={touched.purok && errors.purok}
               fullWidth
@@ -180,6 +197,31 @@ export default function CedulaForm({ onSubmitForm }) {
               </Select>
               {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
             </FormControl>
+            <FormControl
+              helperText={touched.civilStatus && errors.civilStatus}
+              fullWidth
+              error={Boolean(touched.civilStatus && errors.civilStatus)}
+            >
+              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <Select
+                name="civilStatus"
+                labelId="civilStatus"
+                id="civilStatus"
+                value={formik.values.civilStatus}
+                label="Civil Status"
+                onChange={handleChange}
+                {...getFieldProps('civilStatus')}
+                error={Boolean(touched.civilStatus && errors.civilStatus)}
+              >
+                <MenuItem value="single">Single</MenuItem>
+                <MenuItem value="married">Married</MenuItem>
+                <MenuItem value="separated">Separated</MenuItem>
+                <MenuItem value="widowed">Widowed</MenuItem>
+              </Select>
+              {Boolean(touched.civilStatus && errors.civilStatus) && (
+                <FormHelperText>Please select a Civil Status.</FormHelperText>
+              )}
+            </FormControl>
             <TextField
               fullWidth
               name="citizenship"
@@ -187,6 +229,52 @@ export default function CedulaForm({ onSubmitForm }) {
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
+            />
+            <TextField
+              fullWidth
+              name="dateofbirth"
+              id="dateofbirth"
+              label="Date of Birth"
+              type="date"
+              {...getFieldProps('dateofbirth')}
+              error={Boolean(touched.dateofbirth && errors.dateofbirth)}
+              helperText={touched.dateofbirth && errors.dateofbirth}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <TextField
+              sx={{ minWidth: 91, mt: 2 }}
+              fullWidth
+              name="placeofbirth"
+              label="Place of Birth"
+              {...getFieldProps('placeofbirth')}
+              error={Boolean(touched.placeofbirth && errors.placeofbirth)}
+              helperText={touched.placeofbirth && errors.placeofbirth}
+            />
+            <TextField
+              fullWidth
+              name="height"
+              label="Height"
+              type="number"
+              {...getFieldProps('height')}
+              error={Boolean(touched.height && errors.height)}
+              helperText={touched.height && errors.height}
+              InputProps={{
+                endAdornment: <InputAdornment position="start">in</InputAdornment>,
+              }}
+            />
+            <TextField
+              fullWidth
+              name="weight"
+              label="Weight"
+              type="number"
+              {...getFieldProps('weight')}
+              error={Boolean(touched.weight && errors.weight)}
+              helperText={touched.weight && errors.weight}
+              InputProps={{
+                endAdornment: <InputAdornment position="start">kg</InputAdornment>,
+              }}
             />
             {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
               <InputLabel id="sex-select-label">Sex</InputLabel>
@@ -204,31 +292,6 @@ export default function CedulaForm({ onSubmitForm }) {
                 <MenuItem value="female">Female</MenuItem>
               </Select>
             </FormControl> */}
-            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
-              <InputLabel id="sex-select-label">Sex</InputLabel>
-              <Select
-                name="sex"
-                labelId="sex-select-label"
-                id="sex-select"
-                value={formik.values.sex}
-                label="Sex"
-                onChange={handleChange}
-                {...getFieldProps('sex')}
-                error={Boolean(touched.sex && errors.sex)}
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-              </Select>
-              {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
-            </FormControl>
-            <TextField
-              fullWidth
-              name="age"
-              label="Age"
-              {...getFieldProps('age')}
-              error={Boolean(touched.age && errors.age)}
-              helperText={touched.age && errors.age}
-            />
           </>
         </Stack>
         <Box sx={{ color: 'gray', mb: 1 }}>
@@ -364,7 +427,7 @@ export default function CedulaForm({ onSubmitForm }) {
   );
 }
 
-BarangayTreePlantingCertificateForm.propTypes = {
-  // Function to call on submit
-  onSubmitForm: PropTypes.func.isRequired,
-};
+// BarangayTreePlantingCertificateForm.propTypes = {
+//   // Function to call on submit
+//   onSubmitForm: PropTypes.func.isRequired,
+// };
