@@ -121,7 +121,11 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
               error={Boolean(touched.purok && errors.purok)}
               helperText={touched.purok && errors.purok}
             /> */}
-            <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+            <FormControl
+              helperText={touched.purok && errors.purok}
+              fullWidth
+              error={Boolean(touched.purok && errors.purok)}
+            >
               <InputLabel id="status-select-label">Purok</InputLabel>
               <Select
                 name="purok"
@@ -149,7 +153,7 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
                 <MenuItem value="12">Purok 12 Siniloan</MenuItem>
                 <MenuItem value="13">Purok 13 Kiramong</MenuItem>
               </Select>
-              {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
             </FormControl>
             <TextField
               fullWidth

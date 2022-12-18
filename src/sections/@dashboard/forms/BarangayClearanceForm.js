@@ -175,7 +175,11 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               error={Boolean(touched.address && errors.address)}
               helperText={touched.address && errors.address}
             /> */}
-            <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+            <FormControl
+              helperText={touched.purok && errors.purok}
+              fullWidth
+              error={Boolean(touched.purok && errors.purok)}
+            >
               <InputLabel id="status-select-label">Purok</InputLabel>
               <Select
                 name="purok"
@@ -203,7 +207,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <MenuItem value="12">Purok 12 Siniloan</MenuItem>
                 <MenuItem value="13">Purok 13 Kiramong</MenuItem>
               </Select>
-              {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
             </FormControl>
             <TextField
               fullWidth
@@ -229,7 +233,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <MenuItem value="female">Female</MenuItem>
               </Select>
             </FormControl> */}
-            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
               <InputLabel id="status-select-label">Sex</InputLabel>
               <Select
                 name="sex"
@@ -245,7 +249,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <MenuItem value="male">Male</MenuItem>
                 <MenuItem value="female">Female</MenuItem>
               </Select>
-              {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+              {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
             </FormControl>
           </>
         </Stack>
@@ -270,7 +274,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <FormControl
               helperText={touched.civilStatus && errors.civilStatus}
               fullWidth
-              error={Boolean(errors.civilStatus)}
+              error={Boolean(touched.civilStatus && errors.civilStatus)}
             >
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
@@ -288,7 +292,9 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <MenuItem value="separated">Separated</MenuItem>
                 <MenuItem value="widowed">Widowed</MenuItem>
               </Select>
-              {Boolean(errors.civilStatus) && <FormHelperText>Please select a Civil Status.</FormHelperText>}
+              {Boolean(touched.civilStatus && errors.civilStatus) && (
+                <FormHelperText>Please select a Civil Status.</FormHelperText>
+              )}
             </FormControl>
             {/* <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>

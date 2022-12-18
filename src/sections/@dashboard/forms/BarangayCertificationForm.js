@@ -124,7 +124,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.applicant && errors.applicant)}
             helperText={touched.applicant && errors.applicant}
           />
-          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
             <InputLabel id="sex-select-label">Sex</InputLabel>
             <Select
               name="sex"
@@ -139,7 +139,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
-            {Boolean(errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
+            {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
           </FormControl>
           {/* <TextField
               fullWidth
@@ -150,7 +150,11 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               helperText={touched.address && errors.address}
             /> */}
 
-          <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+          <FormControl
+            helperText={touched.purok && errors.purok}
+            fullWidth
+            error={Boolean(touched.purok && errors.purok)}
+          >
             <InputLabel id="status-select-label">Purok</InputLabel>
             <Select
               name="purok"
@@ -178,7 +182,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               <MenuItem value="12">Purok 12 Siniloan</MenuItem>
               <MenuItem value="13">Purok 13 Kiramong</MenuItem>
             </Select>
-            {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+            {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
           </FormControl>
           <TextField
             fullWidth

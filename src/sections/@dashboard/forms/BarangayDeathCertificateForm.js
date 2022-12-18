@@ -214,7 +214,11 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.address && errors.address)}
             helperText={touched.address && errors.address}
           /> */}
-          <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+          <FormControl
+            helperText={touched.purok && errors.purok}
+            fullWidth
+            error={Boolean(touched.purok && errors.purok)}
+          >
             <InputLabel id="status-select-label">Purok</InputLabel>
             <Select
               name="purok"
@@ -242,7 +246,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               <MenuItem value="12">Purok 12 Siniloan</MenuItem>
               <MenuItem value="13">Purok 13 Kiramong</MenuItem>
             </Select>
-            {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+            {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
           </FormControl>
         </Stack>
 
@@ -250,7 +254,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <FormControl
             helperText={touched.civilstatus && errors.civilstatus}
             fullWidth
-            error={Boolean(errors.civilstatus)}
+            error={Boolean(touched.civilstatus && errors.civilstatus)}
           >
             <InputLabel id="status-select-label">Civil Status</InputLabel>
             <Select
@@ -268,7 +272,9 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               <MenuItem value="separated">Separated</MenuItem>
               <MenuItem value="widowed">Widowed</MenuItem>
             </Select>
-            {Boolean(errors.civilstatus) && <FormHelperText>Please select a Civil Status.</FormHelperText>}
+            {Boolean(touched.civilstatus && errors.civilstatus) && (
+              <FormHelperText>Please select a Civil Status.</FormHelperText>
+            )}
           </FormControl>
           {/* <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
             <InputLabel id="status-select-label">Civil Status</InputLabel>

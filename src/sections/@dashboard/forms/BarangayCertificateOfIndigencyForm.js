@@ -151,7 +151,11 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
               </Select>
               {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
             </FormControl> */}
-            <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+            <FormControl
+              helperText={touched.purok && errors.purok}
+              fullWidth
+              error={Boolean(touched.purok && errors.purok)}
+            >
               <InputLabel id="status-select-label">Purok</InputLabel>
               <Select
                 name="purok"
@@ -179,7 +183,7 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
                 <MenuItem value="12">Purok 12 Siniloan</MenuItem>
                 <MenuItem value="13">Purok 13 Kiramong</MenuItem>
               </Select>
-              {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
             </FormControl>
             {/* <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>
@@ -202,7 +206,7 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
             <FormControl
               helperText={touched.civilStatus && errors.civilStatus}
               fullWidth
-              error={Boolean(errors.civilStatus)}
+              error={Boolean(touched.civilStatus && errors.civilStatus)}
             >
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
@@ -220,7 +224,9 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
                 <MenuItem value="separated">Separated</MenuItem>
                 <MenuItem value="widowed">Widowed</MenuItem>
               </Select>
-              {Boolean(errors.civilStatus) && <FormHelperText>Please select a Civil Status.</FormHelperText>}
+              {Boolean(touched.civilStatus && errors.civilStatus) && (
+                <FormHelperText>Please select a Civil Status.</FormHelperText>
+              )}
             </FormControl>
 
             <TextField

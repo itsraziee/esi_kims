@@ -29,12 +29,12 @@ export default function ResidentsProfileCard() {
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
-    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
+    civilStatus: Yup.string().required('Civil Status is required'),
     dateOfBirth: Yup.date().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
+    weight: Yup.string().required('Weight is required'),
     phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
 
@@ -185,7 +185,11 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+                <FormControl
+                  helperText={touched.sex && errors.sex}
+                  fullWidth
+                  error={Boolean(touched.sex && errors.sex)}
+                >
                   <InputLabel id="status-select-label">Sex</InputLabel>
                   <Select
                     name="sex"
@@ -201,7 +205,7 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
                   </Select>
-                  {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+                  {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
                 </FormControl>
 
                 {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
@@ -256,7 +260,7 @@ export default function ResidentsProfileCard() {
                 <FormControl
                   helperText={touched.civilStatus && errors.civilStatus}
                   fullWidth
-                  error={Boolean(errors.civilStatus)}
+                  error={Boolean(touched.civilStatus && errors.civilStatus)}
                 >
                   <InputLabel id="status-select-label">Civil Status</InputLabel>
                   <Select
@@ -264,7 +268,7 @@ export default function ResidentsProfileCard() {
                     labelId="civilStatus"
                     id="civilStatus"
                     value={formik.values.civilStatus}
-                    label="Select a Civil Status"
+                    label="Civil Status"
                     onChange={handleChange}
                     {...getFieldProps('civilStatus')}
                     error={Boolean(touched.civilStatus && errors.civilStatus)}
@@ -274,7 +278,9 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="separated">Separated</MenuItem>
                     <MenuItem value="widowed">Widowed</MenuItem>
                   </Select>
-                  {Boolean(errors.civilStatus) && <FormHelperText>Please select a Civil Status.</FormHelperText>}
+                  {Boolean(touched.civilStatus && errors.civilStatus) && (
+                    <FormHelperText>Please select a Civil Status.</FormHelperText>
+                  )}
                 </FormControl>
 
                 <TextField
@@ -309,6 +315,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="height"
                   label="Height"
+                  type="number"
                   {...getFieldProps('height')}
                   error={Boolean(touched.height && errors.height)}
                   helperText={touched.height && errors.height}
@@ -360,7 +367,11 @@ export default function ResidentsProfileCard() {
                   helperText={touched.occupation && errors.occupation}
                 />
 
-                <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+                <FormControl
+                  helperText={touched.purok && errors.purok}
+                  fullWidth
+                  error={Boolean(touched.purok && errors.purok)}
+                >
                   <InputLabel id="status-select-label">Purok</InputLabel>
                   <Select
                     name="purok"
@@ -388,10 +399,14 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="12">Purok 12 Siniloan</MenuItem>
                     <MenuItem value="13">Purok 13 Kiramong</MenuItem>
                   </Select>
-                  {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+                  {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
                 </FormControl>
 
-                <FormControl helperText={touched.status && errors.status} fullWidth error={Boolean(errors.status)}>
+                <FormControl
+                  helperText={touched.status && errors.status}
+                  fullWidth
+                  error={Boolean(touched.status && errors.status)}
+                >
                   <InputLabel id="status-select-label">Status</InputLabel>
                   <Select
                     name="status"
@@ -406,7 +421,7 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="active">Active</MenuItem>
                     <MenuItem value="inactive">Inactive</MenuItem>
                   </Select>
-                  {Boolean(errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
+                  {Boolean(touched.status && errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
                 </FormControl>
 
                 <TextField

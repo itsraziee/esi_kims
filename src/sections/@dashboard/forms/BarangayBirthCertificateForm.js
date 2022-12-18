@@ -187,7 +187,11 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             helperText={touched.purok && errors.purok}
           /> */}
 
-          <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+          <FormControl
+            helperText={touched.purok && errors.purok}
+            fullWidth
+            error={Boolean(touched.purok && errors.purok)}
+          >
             <InputLabel id="status-select-label">Purok</InputLabel>
             <Select
               name="purok"
@@ -215,7 +219,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               <MenuItem value="12">Purok 12 Siniloan</MenuItem>
               <MenuItem value="13">Purok 13 Kiramong</MenuItem>
             </Select>
-            {Boolean(errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+            {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
           </FormControl>
 
           {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
@@ -234,7 +238,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               <MenuItem value="female">Female</MenuItem>
             </Select>
           </FormControl> */}
-          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
             <InputLabel id="status-select-label">Sex</InputLabel>
             <Select
               name="sex"
@@ -250,7 +254,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
-            {Boolean(errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
+            {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
           </FormControl>
           <TextField
             fullWidth
