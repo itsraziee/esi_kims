@@ -197,6 +197,26 @@ export default function CedulaFormCard({ onSubmitForm }) {
               </Select>
               {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
             </FormControl>
+            {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
+              <InputLabel id="sex-select-label">Sex</InputLabel>
+              <Select
+                name="sex"
+                labelId="sex-select-label"
+                id="sex-select"
+                value={formik.values.sex}
+                label="Sex"
+                onChange={handleChange}
+                {...getFieldProps('sex')}
+                error={Boolean(touched.sex && errors.sex)}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+            </FormControl> */}
+          </>
+        </Stack>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
+          <>
             <FormControl
               helperText={touched.civilStatus && errors.civilStatus}
               fullWidth
@@ -276,22 +296,6 @@ export default function CedulaFormCard({ onSubmitForm }) {
                 endAdornment: <InputAdornment position="start">kg</InputAdornment>,
               }}
             />
-            {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
-              <InputLabel id="sex-select-label">Sex</InputLabel>
-              <Select
-                name="sex"
-                labelId="sex-select-label"
-                id="sex-select"
-                value={formik.values.sex}
-                label="Sex"
-                onChange={handleChange}
-                {...getFieldProps('sex')}
-                error={Boolean(touched.sex && errors.sex)}
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-              </Select>
-            </FormControl> */}
           </>
         </Stack>
         <Box sx={{ color: 'gray', mb: 1 }}>
