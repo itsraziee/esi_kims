@@ -54,7 +54,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
     dateofbirth: Yup.string().required('Date of Birth is required'),
     purok: Yup.string().required('Purok is required'),
     timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
+    weight: Yup.string().required('Weight is required'),
     birthorder: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Birth Order is required'),
     death: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Death is required'),
     placeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
@@ -245,7 +245,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               labelId="sex"
               id="sex"
               value={formik.values.sex}
-              label="Select a Sex"
+              label="Sex"
               onChange={handleChange}
               {...getFieldProps('sex')}
               error={Boolean(touched.sex && errors.sex)}
@@ -294,6 +294,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="weight"
             label="Weight"
+            type="number"
             {...getFieldProps('weight')}
             error={Boolean(touched.weight && errors.weight)}
             helperText={touched.weight && errors.weight}

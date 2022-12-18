@@ -43,7 +43,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
 
   const RequestDocumentFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     suffix: Yup.string().max(3, 'Too Long!'),
     purok: Yup.string().required('Purok is required'),
@@ -54,8 +54,8 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     dateOfBirth: Yup.string().required('Date of Birth is required'),
     placeOfBirth: Yup.string().required('Place of Birth is required'),
-    height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
+    height: Yup.string().required('Height is required'),
+    weight: Yup.string().required('Weight is required'),
     purpose: Yup.string().required('Purpose is required'),
   });
 
@@ -240,7 +240,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 labelId="sex"
                 id="sex"
                 value={formik.values.sex}
-                label="Select a Sex"
+                label="Sex"
                 onChange={handleChange}
                 {...getFieldProps('sex')}
                 error={Boolean(touched.sex && errors.sex)}
@@ -282,7 +282,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 labelId="civilStatus"
                 id="civilStatus"
                 value={formik.values.civilStatus}
-                label="Select a Civil Status"
+                label="Civil Status"
                 onChange={handleChange}
                 {...getFieldProps('civilStatus')}
                 error={Boolean(touched.civilStatus && errors.civilStatus)}
@@ -351,6 +351,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="height"
               label="Height"
+              type="number"
               {...getFieldProps('height')}
               error={Boolean(touched.height && errors.height)}
               helperText={touched.height && errors.height}
@@ -362,6 +363,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="weight"
               label="Weight"
+              type="number"
               {...getFieldProps('weight')}
               error={Boolean(touched.weight && errors.weight)}
               helperText={touched.weight && errors.weight}

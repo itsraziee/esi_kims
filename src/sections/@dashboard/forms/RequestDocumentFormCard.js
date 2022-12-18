@@ -72,7 +72,7 @@ export default function RequestDocumentFormCard() {
           <FormControl
             helperText={touched.typeOfDocument && errors.typeOfDocument}
             fullWidth
-            error={Boolean(errors.typeOfDocument)}
+            error={Boolean(touched.requestorname && errors.typeOfDocument)}
           >
             <InputLabel id="status-select-label">Select Type of Document</InputLabel>
             <Tooltip title={!formik.values.requestorname ? 'Requestor Name is required' : ''}>
@@ -97,7 +97,9 @@ export default function RequestDocumentFormCard() {
                 <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
               </Select>
             </Tooltip>
-            {Boolean(errors.typeOfDocument) && <FormHelperText>Please select a type of document.</FormHelperText>}
+            {Boolean(touched.typeOfDocument && errors.typeOfDocument) && (
+              <FormHelperText>Please select a type of document.</FormHelperText>
+            )}
           </FormControl>
           {formik.values.typeOfDocument === 'certification' && (
             <BarangayCertificateForm

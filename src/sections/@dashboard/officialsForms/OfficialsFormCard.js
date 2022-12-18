@@ -34,19 +34,20 @@ export default function OfficialsFormCard() {
 
   const OfficialsFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
+    suffix: Yup.string().max(3, 'Too Long!'),
     sex: Yup.string().oneOf(['male', 'female']).required(),
     dateOfBirth: Yup.date().required('Date of Birth is required'),
     civilStatus: Yup.string().required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
-    height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
+    height: Yup.string().required('Height is required'),
+    weight: Yup.string().required('Weight is required'),
     phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone Number required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    purok: Yup.string().required('Purok is required'),
+    officialAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW', 'PL']).required('Position is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
@@ -97,6 +98,7 @@ export default function OfficialsFormCard() {
       middleName: '',
       lastName: '',
       age: '',
+      suffix: '',
       sex: '',
       title: '',
       dateOfBirth: '',
@@ -107,12 +109,13 @@ export default function OfficialsFormCard() {
       weight: '',
       phoneNumber: '',
       occupation: '',
-      purok: '',
+
       status: '',
       position: '',
       spouse: '',
       spouseAddress: '',
       numberOfChildren: '',
+      officialAddress: '',
       fathersName: '',
       fathersOccupation: '',
       fathersAddress: '',
@@ -164,7 +167,7 @@ export default function OfficialsFormCard() {
           navigate('/dashboard/app', { replace: true });
         })
         .catch((err) => {
-          console.log({ err });
+          console.log({ officialsError: err });
           enqueueSnackbar('Invalid input', { variant: 'error' });
         });
     },
@@ -211,12 +214,21 @@ export default function OfficialsFormCard() {
                   </Stack>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
                     <TextField
+                      name="suffix"
+                      label="Suffix"
+                      {...getFieldProps('suffix')}
+                      error={Boolean(touched.suffix && errors.suffix)}
+                      helperText={touched.suffix && errors.suffix}
+                    />
+
+                    <TextField
                       name="age"
                       label="Age"
                       {...getFieldProps('age')}
                       error={Boolean(touched.age && errors.age)}
                       helperText={touched.age && errors.age}
                     />
+
                     {/* <FormControl fullWidth>
                       <InputLabel id="sex-select-label">Sex</InputLabel>
                       <Select
@@ -231,14 +243,18 @@ export default function OfficialsFormCard() {
                         <MenuItem value="female">Female</MenuItem>
                       </Select>
                     </FormControl> */}
-                    <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(errors.sex)}>
+                    <FormControl
+                      helperText={touched.sex && errors.sex}
+                      fullWidth
+                      error={Boolean(touched.sex && errors.sex)}
+                    >
                       <InputLabel id="status-select-label">Sex</InputLabel>
                       <Select
                         name="sex"
                         labelId="sex"
                         id="sex"
                         value={formik.values.sex}
-                        label="Select a Sex"
+                        label="Sex"
                         onChange={handleChange}
                         {...getFieldProps('sex')}
                         error={Boolean(touched.sex && errors.sex)}
@@ -247,7 +263,7 @@ export default function OfficialsFormCard() {
                         <MenuItem value="male">Male</MenuItem>
                         <MenuItem value="female">Female</MenuItem>
                       </Select>
-                      {Boolean(errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+                      {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
                     </FormControl>
                     <TextField
                       fullWidth
@@ -285,7 +301,7 @@ export default function OfficialsFormCard() {
                     <FormControl
                       helperText={touched.civilStatus && errors.civilStatus}
                       fullWidth
-                      error={Boolean(errors.civilStatus)}
+                      error={Boolean(touched.civilStatus && errors.civilStatus)}
                     >
                       <InputLabel id="status-select-label">Civil Status</InputLabel>
                       <Select
@@ -303,7 +319,9 @@ export default function OfficialsFormCard() {
                         <MenuItem value="separated">Separated</MenuItem>
                         <MenuItem value="widowed">Widowed</MenuItem>
                       </Select>
-                      {Boolean(errors.civilStatus) && <FormHelperText>Please select a Civil Status.</FormHelperText>}
+                      {Boolean(touched.civilStatus && errors.civilStatus) && (
+                        <FormHelperText>Please select a Civil Status.</FormHelperText>
+                      )}
                     </FormControl>
 
                     <TextField
@@ -347,6 +365,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="height"
                       label="Height"
+                      type="number"
                       {...getFieldProps('height')}
                       error={Boolean(touched.height && errors.height)}
                       helperText={touched.height && errors.height}
@@ -358,6 +377,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="weight"
                       label="Weight"
+                      type="number"
                       {...getFieldProps('weight')}
                       error={Boolean(touched.weight && errors.weight)}
                       helperText={touched.weight && errors.weight}
@@ -418,46 +438,20 @@ export default function OfficialsFormCard() {
                   helperText={touched.occupation && errors.occupation}
                 />
 
-                {/* <TextField
+                <TextField
                   fullWidth
                   name="officialAddress"
                   label="Address"
                   {...getFieldProps('officialAddress')}
                   error={Boolean(touched.officialAddress && errors.officialAddress)}
                   helperText={touched.officialAddress && errors.officialAddress}
-                /> */}
-                <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
-                  <InputLabel id="status-select-label">Purok</InputLabel>
-                  <Select
-                    name="purok"
-                    labelId="purok"
-                    id="purok"
-                    value={formik.values.purok}
-                    label="Purok"
-                    onChange={handleChange}
-                    {...getFieldProps('purok')}
-                    error={Boolean(touched.purok && errors.purok)}
-                    helperText={touched.purok && errors.purok}
-                  >
-                    <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
-                    <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
-                    <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
-                    <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
-                    <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
-                    <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
-                    <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
-                    <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
-                    <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
-                    <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
-                    <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
-                    <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
-                    <MenuItem value="12">Purok 12 Siniloan</MenuItem>
-                    <MenuItem value="13">Purok 13 Kiramong</MenuItem>
-                  </Select>
-                  {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
-                </FormControl>
+                />
 
-                <FormControl helperText={touched.status && errors.status} fullWidth error={Boolean(errors.status)}>
+                <FormControl
+                  helperText={touched.status && errors.status}
+                  fullWidth
+                  error={Boolean(touched.status && errors.status)}
+                >
                   <InputLabel id="status-select-label">Status</InputLabel>
                   <Select
                     name="status"
@@ -472,13 +466,13 @@ export default function OfficialsFormCard() {
                     <MenuItem value="active">Active</MenuItem>
                     <MenuItem value="inactive">Inactive</MenuItem>
                   </Select>
-                  {Boolean(errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
+                  {Boolean(touched.status && errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
                 </FormControl>
 
                 <FormControl
                   helperText={touched.position && errors.position}
                   fullWidth
-                  error={Boolean(errors.position)}
+                  error={Boolean(touched.position && errors.position)}
                 >
                   <InputLabel id="position-select-label">Position</InputLabel>
                   <Select
@@ -498,7 +492,9 @@ export default function OfficialsFormCard() {
                     <MenuItem value="BHW">BHW</MenuItem>
                     <MenuItem value="PL">Purok Leader</MenuItem>
                   </Select>
-                  {Boolean(errors.position) && <FormHelperText>Please select a position</FormHelperText>}
+                  {Boolean(touched.position && errors.position) && (
+                    <FormHelperText>Please select a position</FormHelperText>
+                  )}
                 </FormControl>
                 <TextField
                   fullWidth
