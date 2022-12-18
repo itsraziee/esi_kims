@@ -22,6 +22,11 @@ const navConfig = [
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
+    title: 'full disclosure board',
+    path: '/dashboard/disclosureBoard',
+    icon: getIcon('mdi:file-document-multiple'),
+  },
+  {
     title: 'Document Request Forms',
     path: '/dashboard/RequestDocumentForm',
     icon: getIcon('ion:documents'),

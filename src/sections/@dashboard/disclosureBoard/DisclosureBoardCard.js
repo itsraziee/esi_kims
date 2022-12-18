@@ -1,7 +1,7 @@
 // @mui
-import PropTypes from 'prop-types';
-import { alpha, styled } from '@mui/material/styles';
 import { Card, Link, Typography } from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
+import PropTypes from 'prop-types';
 // utils
 // components
 import Iconify from '../../../components/Iconify';
@@ -21,7 +21,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-BlotterCard.propTypes = {
+DisclosureBoardCard.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string.isRequired,
@@ -29,13 +29,15 @@ BlotterCard.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function BlotterCard({ title, icon, color = 'primary', sx, url = null, ...other }) {
+export default function DisclosureBoardCard({ title, icon, color = 'primary', sx, url = null, ...other }) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
         sx={{
           py: 5,
+          px: 5,
           boxShadow: 0,
+          height: '100%',
           textAlign: 'center',
           color: (theme) => theme.palette[color].darker,
           bgcolor: (theme) => theme.palette[color].lighter,

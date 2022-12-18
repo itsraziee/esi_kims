@@ -11,11 +11,11 @@ const Template = (args) => <BarangayCertificateOfIndigencyComponent {...args} />
 export const BarangayCertificateOfIndigency = Template.bind({});
 BarangayCertificateOfIndigency.args = {
   name: 'Glenmark Pelarca',
-  civilstatus:'married',
+  civilstatus: 'married',
   day: 5,
   month: 'June',
   year: 2022,
-  purok: 'Purok 5',
+  purok: 5,
   bearer: 'Glen Lecaros',
   secretary: 'HAZEL JOY M. MANZAN',
   captain: 'JERRY P. PARADILLO',

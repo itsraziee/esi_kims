@@ -5,6 +5,7 @@ import PopulationPieChart from '../components/demographics/PopulationPieChart';
 // components
 import Page from '../components/Page';
 // sections
+
 // ----------------------------------------------------------------------
 
 export default function Demographics() {
