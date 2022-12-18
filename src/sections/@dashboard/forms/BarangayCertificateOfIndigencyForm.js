@@ -11,6 +11,7 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   Link,
@@ -39,17 +40,17 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
   const { enqueueSnackbar } = useSnackbar();
   const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
   const RequestDocumentFormSchema = Yup.object().shape({
-    civilstatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
+    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     fullName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Fullname is required'),
-    address: Yup.string().required('Address is required'),
+    purok: Yup.string().required('Address is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       fullName: '',
-      civilstatus: '',
-      address: '',
+      civilStatus: '',
+      purok: '',
       citizenship: '',
     },
     validationSchema: RequestDocumentFormSchema,
@@ -112,15 +113,79 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
               error={Boolean(touched.fullName && errors.fullName)}
               helperText={touched.fullName && errors.fullName}
             />
-            <TextField
+            {/* <TextField
               fullWidth
               name="address"
               label="Address"
               {...getFieldProps('address')}
               error={Boolean(touched.address && errors.address)}
               helperText={touched.address && errors.address}
-            />
-            <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
+            /> */}
+            {/* <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
+              <InputLabel id="status-select-label">Purok</InputLabel>
+              <Select
+                name="purok"
+                labelId="purok"
+                id="purok"
+                value={formik.values.purok}
+                label="Select a purok"
+                onChange={handleChange}
+                {...getFieldProps('purok')}
+                error={Boolean(touched.purok && errors.purok)}
+                helperText={touched.purok && errors.purok}
+              >
+                <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+                <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+                <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+                <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+                <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+                <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+                <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+                <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+                <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+                <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+                <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+                <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+                <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+                <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+              </Select>
+              {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+            </FormControl> */}
+            <FormControl
+              helperText={touched.purok && errors.purok}
+              fullWidth
+              error={Boolean(touched.purok && errors.purok)}
+            >
+              <InputLabel id="status-select-label">Purok</InputLabel>
+              <Select
+                name="purok"
+                labelId="purok"
+                id="purok"
+                value={formik.values.purok}
+                label="Purok"
+                onChange={handleChange}
+                {...getFieldProps('purok')}
+                error={Boolean(touched.purok && errors.purok)}
+                helperText={touched.purok && errors.purok}
+              >
+                <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+                <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+                <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+                <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+                <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+                <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+                <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+                <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+                <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+                <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+                <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+                <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+                <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+                <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+              </Select>
+              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+            </FormControl>
+            {/* <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
               <InputLabel id="status-select-label">Civil Status</InputLabel>
               <Select
                 name="civilstatus"
@@ -137,6 +202,31 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
                 <MenuItem value="separated">Separated</MenuItem>
                 <MenuItem value="widowed">Widowed</MenuItem>
               </Select>
+            </FormControl> */}
+            <FormControl
+              helperText={touched.civilStatus && errors.civilStatus}
+              fullWidth
+              error={Boolean(touched.civilStatus && errors.civilStatus)}
+            >
+              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <Select
+                name="civilStatus"
+                labelId="civilStatus"
+                id="civilStatus"
+                value={formik.values.civilStatus}
+                label="Select a Civil Status"
+                onChange={handleChange}
+                {...getFieldProps('civilStatus')}
+                error={Boolean(touched.civilStatus && errors.civilStatus)}
+              >
+                <MenuItem value="single">Single</MenuItem>
+                <MenuItem value="married">Married</MenuItem>
+                <MenuItem value="separated">Separated</MenuItem>
+                <MenuItem value="widowed">Widowed</MenuItem>
+              </Select>
+              {Boolean(touched.civilStatus && errors.civilStatus) && (
+                <FormHelperText>Please select a Civil Status.</FormHelperText>
+              )}
             </FormControl>
 
             <TextField

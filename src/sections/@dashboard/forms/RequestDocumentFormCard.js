@@ -39,7 +39,7 @@ export default function RequestDocumentFormCard() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const RequestDocumentFormSchema = Yup.object().shape({
-    typeOfDocument: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Type of Document is required.'),
+    typeOfDocument: Yup.string().required('Type of Document is required.'),
     requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
   });
 
@@ -57,7 +57,7 @@ export default function RequestDocumentFormCard() {
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
 
   return (
-    <Card>
+    <Card sx={{ width: '100%' }}>
       <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
       <CardContent>
         <Stack spacing={1}>

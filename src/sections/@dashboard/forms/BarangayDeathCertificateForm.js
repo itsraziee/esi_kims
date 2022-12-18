@@ -11,6 +11,7 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputLabel,
@@ -40,7 +41,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
     placeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     dateofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of Death is required'),
     age: Yup.number().min(0, 'Must be positive!').required('Age is required'),
-    purok: Yup.number().min(0, 'Must be positive!').required('Purok is required'),
+    purok: Yup.string().required('Purok is required'),
     causeofdeath: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Cause of Death is required'),
     address: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     civilstatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
@@ -145,14 +146,14 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.deceasedname && errors.deceasedname)}
             helperText={touched.deceasedname && errors.deceasedname}
           />
-          <TextField
+          {/* <TextField
             fullWidth
             name="purok"
             label="Purok"
             {...getFieldProps('purok')}
             error={Boolean(touched.purok && errors.purok)}
             helperText={touched.purok && errors.purok}
-          />
+          /> */}
           <TextField
             fullWidth
             name="placeofdeath"
@@ -205,18 +206,77 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.causeofdeath && errors.causeofdeath)}
             helperText={touched.causeofdeath && errors.causeofdeath}
           />
-          <TextField
+          {/* <TextField
             fullWidth
             name="address"
             label="Address"
             {...getFieldProps('address')}
             error={Boolean(touched.address && errors.address)}
             helperText={touched.address && errors.address}
-          />
+          /> */}
+          <FormControl
+            helperText={touched.purok && errors.purok}
+            fullWidth
+            error={Boolean(touched.purok && errors.purok)}
+          >
+            <InputLabel id="status-select-label">Purok</InputLabel>
+            <Select
+              name="purok"
+              labelId="purok"
+              id="purok"
+              value={formik.values.purok}
+              label="Select a purok"
+              onChange={handleChange}
+              {...getFieldProps('purok')}
+              error={Boolean(touched.purok && errors.purok)}
+              helperText={touched.purok && errors.purok}
+            >
+              <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+              <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+              <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+              <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+              <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+              <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+              <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+              <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+              <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+              <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+              <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+              <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+              <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+              <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+            </Select>
+            {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
+          </FormControl>
         </Stack>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
-          <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
+          <FormControl
+            helperText={touched.civilstatus && errors.civilstatus}
+            fullWidth
+            error={Boolean(touched.civilstatus && errors.civilstatus)}
+          >
+            <InputLabel id="status-select-label">Civil Status</InputLabel>
+            <Select
+              name="civilstatus"
+              labelId="civilstatus"
+              id="civilstatus"
+              value={formik.values.civilstatus}
+              label="Select a Civil Status"
+              onChange={handleChange}
+              {...getFieldProps('civilstatus')}
+              error={Boolean(touched.civilstatus && errors.civilstatus)}
+            >
+              <MenuItem value="single">Single</MenuItem>
+              <MenuItem value="married">Married</MenuItem>
+              <MenuItem value="separated">Separated</MenuItem>
+              <MenuItem value="widowed">Widowed</MenuItem>
+            </Select>
+            {Boolean(touched.civilstatus && errors.civilstatus) && (
+              <FormHelperText>Please select a Civil Status.</FormHelperText>
+            )}
+          </FormControl>
+          {/* <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
             <InputLabel id="status-select-label">Civil Status</InputLabel>
             <Select
               name="civilstatus"
@@ -233,7 +293,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               <MenuItem value="separated">Separated</MenuItem>
               <MenuItem value="widowed">Widowed</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
           <TextField
             fullWidth
             name="placeburried"

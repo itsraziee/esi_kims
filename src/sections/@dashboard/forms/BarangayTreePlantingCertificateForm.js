@@ -1,15 +1,35 @@
 import { uuidv4 } from '@firebase/util';
-import React, { useState } from 'react';
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box, FormControl, InputLabel, Select, MenuItem, Grid, Chip, Dialog, AppBar, Toolbar, DialogTitle, DialogContentText, Tooltip, DialogActions, Link } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import { PropTypes } from 'prop-types';
-import { useSnackbar } from 'notistack';
 import Close from '@mui/icons-material/Close';
+import { LoadingButton } from '@mui/lab';
+import {
+  AppBar,
+  Box,
+  Button,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
+import { PropTypes } from 'prop-types';
+import { useState } from 'react';
+import * as Yup from 'yup';
 import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 import IconButton from '../../../theme/overrides/IconButton';
-
 
 export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
   const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
@@ -19,7 +39,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
   const [referenceNumber, setReferenceNumber] = useState();
   const { enqueueSnackbar } = useSnackbar();
   const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
-  
+
   const RequestDocumentFormSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
     purok: Yup.string().required('Purok is required'),
@@ -39,9 +59,8 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      return (
-        onSubmitForm(data)
-          .then((res) => {
+      return onSubmitForm(data)
+        .then((res) => {
           const requestUid = res.id;
 
           return uploadRequirements(requirementsFile, requestUid).then((res) => {
@@ -63,9 +82,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
         .catch((err) => {
           console.log({ err });
           enqueueSnackbar('Request Failed.', { variant: 'error' });
-        })
-      );
-      
+        });
     },
   });
 
@@ -100,14 +117,48 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
               error={Boolean(touched.name && errors.name)}
               helperText={touched.name && errors.name}
             />
-            <TextField
+            {/* <TextField
               fullWidth
               name="purok"
               label="Purok"
               {...getFieldProps('purok')}
               error={Boolean(touched.purok && errors.purok)}
               helperText={touched.purok && errors.purok}
-            />
+            /> */}
+            <FormControl
+              helperText={touched.purok && errors.purok}
+              fullWidth
+              error={Boolean(touched.purok && errors.purok)}
+            >
+              <InputLabel id="status-select-label">Purok</InputLabel>
+              <Select
+                name="purok"
+                labelId="purok"
+                id="purok"
+                value={formik.values.purok}
+                label="Purok"
+                onChange={handleChange}
+                {...getFieldProps('purok')}
+                error={Boolean(touched.purok && errors.purok)}
+                helperText={touched.purok && errors.purok}
+              >
+                <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+                <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+                <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+                <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+                <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+                <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+                <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+                <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+                <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+                <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+                <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+                <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+                <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+                <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+              </Select>
+              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+            </FormControl>
             <TextField
               fullWidth
               name="citizenship"
@@ -116,7 +167,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
             />
-            <FormControl helperText={touched.sex && errors.sex} fullWidth>
+            {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
               <InputLabel id="sex-select-label">Sex</InputLabel>
               <Select
                 name="sex"
@@ -131,6 +182,23 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
                 <MenuItem value="male">Male</MenuItem>
                 <MenuItem value="female">Female</MenuItem>
               </Select>
+            </FormControl> */}
+            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
+              <InputLabel id="sex-select-label">Sex</InputLabel>
+              <Select
+                name="sex"
+                labelId="sex-select-label"
+                id="sex-select"
+                value={formik.values.sex}
+                label="Sex"
+                onChange={handleChange}
+                {...getFieldProps('sex')}
+                error={Boolean(touched.sex && errors.sex)}
+              >
+                <MenuItem value="male">Male</MenuItem>
+                <MenuItem value="female">Female</MenuItem>
+              </Select>
+              {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
             </FormControl>
             <TextField
               fullWidth
@@ -150,39 +218,39 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
             Upload Requirements
-            <input 
-            type="file" 
-            hidden
-            multiple
-            onChange={(e) => {
-              const files = [...e.target.files];
-              console.log({ e, files });
-              if (files) {
-                setRequirementObjectURLs((prev) => {
-                  const newFiles = files.map((file) => {
-                    console.log({ file });
-                    const id = uuidv4();
-                    return {
-                      fileName: file.name,
-                      link: URL.createObjectURL(file),
-                      id,
-                    };
+            <input
+              type="file"
+              hidden
+              multiple
+              onChange={(e) => {
+                const files = [...e.target.files];
+                console.log({ e, files });
+                if (files) {
+                  setRequirementObjectURLs((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      const id = uuidv4();
+                      return {
+                        fileName: file.name,
+                        link: URL.createObjectURL(file),
+                        id,
+                      };
+                    });
+
+                    return [...prev, ...newFiles];
                   });
 
-                  return [...prev, ...newFiles];
-                });
+                  setRequirementsFile((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      const id = uuidv4();
+                      return { file, id };
+                    });
 
-                setRequirementsFile((prev) => {
-                  const newFiles = files.map((file) => {
-                    console.log({ file });
-                    const id = uuidv4();
-                    return { file, id };
+                    return [...prev, ...newFiles];
                   });
-
-                  return [...prev, ...newFiles];
-                });
-              }
-            }}
+                }
+              }}
             />
           </Button>
           <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>

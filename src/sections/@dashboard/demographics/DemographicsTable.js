@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
 import merge from 'lodash/merge';
+import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
 // @mui
-import { Card, CardHeader, Box } from '@mui/material';
+import { Box, Card, CardHeader } from '@mui/material';
 // components
 import { PopulationChart } from '../../../components/chart';
 

@@ -1,22 +1,23 @@
-import * as Yup from 'yup';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
+import { LoadingButton } from '@mui/lab';
 import {
-  Stack,
-  TextField,
-  InputAdornment,
+  Button,
   Card,
   CardContent,
-  Button,
+  FormControl,
+  FormHelperText,
+  InputAdornment,
   InputLabel,
   MenuItem,
-  FormControl,
   Select,
+  Stack,
+  TextField,
   Typography,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import { createResident } from '../../../service/residents';
 // ----------------------------------------------------------------------
 
@@ -28,15 +29,15 @@ export default function ResidentsProfileCard() {
     middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
-    civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
+    civilStatus: Yup.string().required('Civil Status is required'),
     dateOfBirth: Yup.date().required('Date of Birth is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
+    weight: Yup.string().required('Weight is required'),
     phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    officialAddress: Yup.string().required('Address is required'),
+
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     tribe: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Tribe is required'),
@@ -88,7 +89,7 @@ export default function ResidentsProfileCard() {
       firstName: '',
       middleName: '',
       lastName: '',
-      officialAddress: '',
+      purok: '',
       sex: '',
       dateOfBirth: '',
       civilStatus: '',
@@ -103,7 +104,6 @@ export default function ResidentsProfileCard() {
       tribe: '',
       spouseAddress: '',
       numberOfChildren: '',
-      purok: '',
       fathersName: '',
       fathersOccupation: '',
       fathersAddress: '',
@@ -185,7 +185,30 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl helperText={touched.sex && errors.sex} fullWidth>
+                <FormControl
+                  helperText={touched.sex && errors.sex}
+                  fullWidth
+                  error={Boolean(touched.sex && errors.sex)}
+                >
+                  <InputLabel id="status-select-label">Sex</InputLabel>
+                  <Select
+                    name="sex"
+                    labelId="sex"
+                    id="sex"
+                    value={formik.values.sex}
+                    label="Select a Sex"
+                    onChange={handleChange}
+                    {...getFieldProps('sex')}
+                    error={Boolean(touched.sex && errors.sex)}
+                    helperText={touched.sex && errors.sex}
+                  >
+                    <MenuItem value="male">Male</MenuItem>
+                    <MenuItem value="female">Female</MenuItem>
+                  </Select>
+                  {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+                </FormControl>
+
+                {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
                   <InputLabel id="sex-select-label">Sex</InputLabel>
                   <Select
                     name="sex"
@@ -200,7 +223,7 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
 
                 <TextField
                   fullWidth
@@ -216,7 +239,7 @@ export default function ResidentsProfileCard() {
                   }}
                 />
 
-                <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
+                {/* <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
                   <InputLabel id="status-select-label">Civil Status</InputLabel>
                   <Select
                     name="civilStatus"
@@ -233,6 +256,31 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="separated">Separated</MenuItem>
                     <MenuItem value="widowed">Widowed</MenuItem>
                   </Select>
+                </FormControl> */}
+                <FormControl
+                  helperText={touched.civilStatus && errors.civilStatus}
+                  fullWidth
+                  error={Boolean(touched.civilStatus && errors.civilStatus)}
+                >
+                  <InputLabel id="status-select-label">Civil Status</InputLabel>
+                  <Select
+                    name="civilStatus"
+                    labelId="civilStatus"
+                    id="civilStatus"
+                    value={formik.values.civilStatus}
+                    label="Civil Status"
+                    onChange={handleChange}
+                    {...getFieldProps('civilStatus')}
+                    error={Boolean(touched.civilStatus && errors.civilStatus)}
+                  >
+                    <MenuItem value="single">Single</MenuItem>
+                    <MenuItem value="married">Married</MenuItem>
+                    <MenuItem value="separated">Separated</MenuItem>
+                    <MenuItem value="widowed">Widowed</MenuItem>
+                  </Select>
+                  {Boolean(touched.civilStatus && errors.civilStatus) && (
+                    <FormHelperText>Please select a Civil Status.</FormHelperText>
+                  )}
                 </FormControl>
 
                 <TextField
@@ -255,15 +303,34 @@ export default function ResidentsProfileCard() {
                   helperText={touched.religion && errors.religion}
                 />
 
-                <TextField
+                {/* <TextField
                   fullWidth
                   name="height"
                   label="Height"
                   {...getFieldProps('height')}
                   error={Boolean(touched.height && errors.height)}
                   helperText={touched.height && errors.height}
+                /> */}
+                <TextField
+                  fullWidth
+                  name="height"
+                  label="Height"
+                  type="number"
+                  {...getFieldProps('height')}
+                  error={Boolean(touched.height && errors.height)}
+                  helperText={touched.height && errors.height}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="start">in</InputAdornment>,
+                  }}
                 />
-
+                {/* <TextField
+                  fullWidth
+                  name="weight"
+                  label="Weight"
+                  {...getFieldProps('weight')}
+                  error={Boolean(touched.weight && errors.weight)}
+                  helperText={touched.weight && errors.weight}
+                /> */}
                 <TextField
                   fullWidth
                   name="weight"
@@ -271,6 +338,9 @@ export default function ResidentsProfileCard() {
                   {...getFieldProps('weight')}
                   error={Boolean(touched.weight && errors.weight)}
                   helperText={touched.weight && errors.weight}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="start">kg</InputAdornment>,
+                  }}
                 />
 
                 <TextField
@@ -297,16 +367,46 @@ export default function ResidentsProfileCard() {
                   helperText={touched.occupation && errors.occupation}
                 />
 
-                <TextField
+                <FormControl
+                  helperText={touched.purok && errors.purok}
                   fullWidth
-                  name="officialAddress"
-                  label="Address"
-                  {...getFieldProps('officialAddress')}
-                  error={Boolean(touched.officialAddress && errors.officialAddress)}
-                  helperText={touched.officialAddress && errors.officialAddress}
-                />
+                  error={Boolean(touched.purok && errors.purok)}
+                >
+                  <InputLabel id="status-select-label">Purok</InputLabel>
+                  <Select
+                    name="purok"
+                    labelId="purok"
+                    id="purok"
+                    value={formik.values.purok}
+                    label="Purok"
+                    onChange={handleChange}
+                    {...getFieldProps('purok')}
+                    error={Boolean(touched.purok && errors.purok)}
+                    helperText={touched.purok && errors.purok}
+                  >
+                    <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
+                    <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
+                    <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
+                    <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
+                    <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
+                    <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+                    <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
+                    <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
+                    <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
+                    <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
+                    <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
+                    <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
+                    <MenuItem value="12">Purok 12 Siniloan</MenuItem>
+                    <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+                  </Select>
+                  {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+                </FormControl>
 
-                <FormControl helperText={touched.status && errors.status} fullWidth>
+                <FormControl
+                  helperText={touched.status && errors.status}
+                  fullWidth
+                  error={Boolean(touched.status && errors.status)}
+                >
                   <InputLabel id="status-select-label">Status</InputLabel>
                   <Select
                     name="status"
@@ -321,6 +421,7 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="active">Active</MenuItem>
                     <MenuItem value="inactive">Inactive</MenuItem>
                   </Select>
+                  {Boolean(touched.status && errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
                 </FormControl>
 
                 <TextField
@@ -337,7 +438,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="spouse"
-                  label="Spouse"
+                  label="Spouse Name"
                   {...getFieldProps('spouse')}
                   error={Boolean(touched.spouse && errors.spouse)}
                   helperText={touched.spouse && errors.spouse}
@@ -361,7 +462,7 @@ export default function ResidentsProfileCard() {
                   helperText={touched.numberOfChildren && errors.numberOfChildren}
                 />
 
-                <FormControl helperText={touched.purok && errors.purok} fullWidth>
+                {/* <FormControl helperText={touched.purok && errors.purok} fullWidth>
                   <InputLabel id="purok-select-label">Purok</InputLabel>
                   <Select
                     name="purok"
@@ -388,7 +489,7 @@ export default function ResidentsProfileCard() {
                     <MenuItem value="12">Purok 12</MenuItem>
                     <MenuItem value="13">Purok 13</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
