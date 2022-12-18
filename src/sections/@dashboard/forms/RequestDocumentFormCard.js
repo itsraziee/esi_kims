@@ -95,6 +95,7 @@ export default function RequestDocumentFormCard() {
                 <MenuItem value="certificate-of-indigency">Certificate Of Indigency</MenuItem>
                 <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
                 <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
+                <MenuItem value="cedula">Cedula</MenuItem>
               </Select>
             </Tooltip>
             {Boolean(touched.typeOfDocument && errors.typeOfDocument) && (
