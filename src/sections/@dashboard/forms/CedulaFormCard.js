@@ -42,15 +42,15 @@ export default function CedulaFormCard({ onSubmitForm }) {
   const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
 
   const RequestDocumentFormSchema = Yup.object().shape({
-    firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First Name is required'),
-    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle Name is required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last Name is required'),
+    firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!'),
+    lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
     purok: Yup.string().required('Purok is required'),
     civilStatus: Yup.string().oneOf(['single', 'married', 'widowed', 'separated']).required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     dateOfBirth: Yup.string().required('Date of Birth is required'),
-    placeOfBirth: Yup.string().required('Place of Birth is required'),
+    placeOfBirth: Yup.string().min(5, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     height: Yup.string().required('Height is required'),
     weight: Yup.string().required('Weight is required'),
   });
@@ -124,27 +124,27 @@ export default function CedulaFormCard({ onSubmitForm }) {
           <>
             <TextField
               fullWidth
-              name="firstname"
-              label="First name"
-              {...getFieldProps('firstname')}
-              error={Boolean(touched.firstname && errors.firstname)}
-              helperText={touched.firstnamename && errors.firstnamename}
+              name="firstName"
+              label="First Name"
+              {...getFieldProps('firstName')}
+              error={Boolean(touched.firstName && errors.firstName)}
+              helperText={touched.firstName && errors.firstName}
             />
             <TextField
               fullWidth
-              name="middlename"
-              label="Middle name"
-              {...getFieldProps('middlename')}
-              error={Boolean(touched.middlename && errors.middlename)}
-              helperText={touched.middlename && errors.middlename}
+              name="middleName"
+              label="Middle Name"
+              {...getFieldProps('middleName')}
+              error={Boolean(touched.middleName && errors.middleName)}
+              helperText={touched.middleName && errors.middleName}
             />
             <TextField
               fullWidth
-              name="lastname"
-              label="Last name"
-              {...getFieldProps('lastname')}
-              error={Boolean(touched.lastname && errors.lastnamename)}
-              helperText={touched.lastname && errors.lastnamename}
+              name="lastName"
+              label="Last Name"
+              {...getFieldProps('lastName')}
+              error={Boolean(touched.lastName && errors.lastName)}
+              helperText={touched.lastName && errors.lastName}
             />
             <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
               <InputLabel id="sex-select-label">Sex</InputLabel>
@@ -252,13 +252,13 @@ export default function CedulaFormCard({ onSubmitForm }) {
             />
             <TextField
               fullWidth
-              name="dateofbirth"
-              id="dateofbirth"
+              name="dateOfBirth"
+              id="dateOfBirth"
               label="Date of Birth"
               type="date"
-              {...getFieldProps('dateofbirth')}
-              error={Boolean(touched.dateofbirth && errors.dateofbirth)}
-              helperText={touched.dateofbirth && errors.dateofbirth}
+              {...getFieldProps('dateOfBirth')}
+              error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
+              helperText={touched.dateOfBirth && errors.dateOfBirth}
               InputLabelProps={{
                 shrink: true,
               }}
@@ -266,11 +266,11 @@ export default function CedulaFormCard({ onSubmitForm }) {
             <TextField
               sx={{ minWidth: 91, mt: 2 }}
               fullWidth
-              name="placeofbirth"
+              name="placeOfBirth"
               label="Place of Birth"
-              {...getFieldProps('placeofbirth')}
-              error={Boolean(touched.placeofbirth && errors.placeofbirth)}
-              helperText={touched.placeofbirth && errors.placeofbirth}
+              {...getFieldProps('placeOfBirth')}
+              error={Boolean(touched.placeOfBirth && errors.placeOfBirth)}
+              helperText={touched.placeOfBirth && errors.placeOfBirth}
             />
             <TextField
               fullWidth
