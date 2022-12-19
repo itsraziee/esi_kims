@@ -76,7 +76,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             return getRequirementsUrl(filenames, requestUid).then((res) => {
               const requestUrls = res;
               return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                enqueueSnackbar('Barangay Certification Request Submitted Successfully.', {
                   variant: 'success',
                 });
 

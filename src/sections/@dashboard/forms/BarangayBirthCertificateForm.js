@@ -125,7 +125,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               return getRequirementsUrl(filenames, requestUid).then((res) => {
                 const requestUrls = res;
                 return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                  enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                  enqueueSnackbar('Barangay Birth Certificate Request Submitted Successfully.', {
                     variant: 'success',
                   });
 
