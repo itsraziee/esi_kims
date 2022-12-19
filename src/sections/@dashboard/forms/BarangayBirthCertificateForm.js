@@ -55,7 +55,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
     purok: Yup.string().required('Purok is required'),
     timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
     weight: Yup.string().required('Weight is required'),
-    birthorder: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Birth Order is required'),
+    birthorder: Yup.string().required('Birth Order is required'),
     death: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Death is required'),
     placeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     nameofmother: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of mother is required'),
@@ -391,10 +391,15 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="dateofmarriage"
+            id="dateofmarriage"
             label="Date of Marriage"
+            type="date"
             {...getFieldProps('dateofmarriage')}
             error={Boolean(touched.dateofmarriage && errors.dateofmarriage)}
             helperText={touched.dateofmarriage && errors.dateofmarriage}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
             fullWidth
