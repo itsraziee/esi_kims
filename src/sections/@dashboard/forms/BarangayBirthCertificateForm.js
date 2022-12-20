@@ -226,20 +226,6 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             </Select>
             {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex*</FormHelperText>}
           </FormControl>
-          <TextField
-            fullWidth
-            name="dateAndTimeOfBirth"
-            id="dateAndTimeOfBirth"
-            label="Date and Time of Birth*"
-            type="datetime-local"
-            defaultValue="1997-10-23 / 10:23"
-            {...getFieldProps('dateAndTimeOfBirth')}
-            error={Boolean(touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth)}
-            helperText={touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
         </Stack>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
@@ -280,6 +266,20 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
 
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
+        <TextField
+            fullWidth
+            name="dateAndTimeOfBirth"
+            id="dateAndTimeOfBirth"
+            label="Date and Time of Birth*"
+            type="datetime-local"
+            defaultValue="1997-10-23 / 10:23"
+            {...getFieldProps('dateAndTimeOfBirth')}
+            error={Boolean(touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth)}
+            helperText={touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
           <TextField
             fullWidth
             name="nameofattendant"
