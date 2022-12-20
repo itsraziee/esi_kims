@@ -94,7 +94,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               const requestUrls = res;
               console.log({ requestUrls });
               return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                enqueueSnackbar('Barangay Death Certificate Request Submitted Successfully.', {
                   variant: 'success',
                 });
 
@@ -141,23 +141,18 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="deceasedname"
-            label="Deceased Name"
+            label="Deceased Name*"
+            placeholder='Juan Dela Cruz'
             {...getFieldProps('deceasedname')}
             error={Boolean(touched.deceasedname && errors.deceasedname)}
             helperText={touched.deceasedname && errors.deceasedname}
           />
-          {/* <TextField
-            fullWidth
-            name="purok"
-            label="Purok"
-            {...getFieldProps('purok')}
-            error={Boolean(touched.purok && errors.purok)}
-            helperText={touched.purok && errors.purok}
-          /> */}
+          
           <TextField
             fullWidth
             name="placeofdeath"
-            label="Place of Death"
+            label="Place of Death*"
+            placeholder='Barangay/Municipality/Province'
             {...getFieldProps('placeofdeath')}
             error={Boolean(touched.placeofdeath && errors.placeofdeath)}
             helperText={touched.placeofdeath && errors.placeofdeath}
@@ -166,7 +161,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="dateofbirth"
             id="dateofbirth"
-            label="Date of Birth"
+            label="Date of Birth*"
             type="date"
             {...getFieldProps('dateofbirth')}
             error={Boolean(touched.dateofbirth && errors.dateofbirth)}
@@ -182,7 +177,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="dateofdeath"
             id="dateofdeath"
-            label="Date of Death"
+            label="Date of Death*"
             type="date"
             {...getFieldProps('dateofdeath')}
             error={Boolean(touched.dateofdeath && errors.dateofdeath)}
@@ -194,7 +189,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="age"
-            label="Age"
+            label="Age*"
             {...getFieldProps('age')}
             error={Boolean(touched.age && errors.age)}
             helperText={touched.age && errors.age}
@@ -202,25 +197,18 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="causeofdeath"
-            label="Cause of Death"
+            label="Cause of Death*"
             {...getFieldProps('causeofdeath')}
             error={Boolean(touched.causeofdeath && errors.causeofdeath)}
             helperText={touched.causeofdeath && errors.causeofdeath}
           />
-          {/* <TextField
-            fullWidth
-            name="address"
-            label="Address"
-            {...getFieldProps('address')}
-            error={Boolean(touched.address && errors.address)}
-            helperText={touched.address && errors.address}
-          /> */}
+          
           <FormControl
             helperText={touched.purok && errors.purok}
             fullWidth
             error={Boolean(touched.purok && errors.purok)}
           >
-            <InputLabel id="status-select-label">Purok</InputLabel>
+            <InputLabel id="status-select-label">Purok*</InputLabel>
             <Select
               name="purok"
               labelId="purok"
@@ -257,7 +245,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             error={Boolean(touched.civilstatus && errors.civilstatus)}
           >
-            <InputLabel id="status-select-label">Civil Status</InputLabel>
+            <InputLabel id="status-select-label">Civil Status*</InputLabel>
             <Select
               name="civilstatus"
               labelId="civilstatus"
@@ -277,11 +265,11 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               <FormHelperText>Please select a Civil Status.</FormHelperText>
             )}
           </FormControl>
-
           <TextField
             fullWidth
             name="placeburried"
-            label="Place Burried"
+            label="Place Burried*"
+            placeholder='Barangay/Municipality/Province'
             {...getFieldProps('placeburried')}
             error={Boolean(touched.placeburried && errors.placeburried)}
             helperText={touched.placeburried && errors.placeburried}
@@ -289,7 +277,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="religion"
-            label="Religion"
+            label="Religion*"
             {...getFieldProps('religion')}
             error={Boolean(touched.religion && errors.religion)}
             helperText={touched.religion && errors.religion}
@@ -297,7 +285,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="occupation"
-            label="Occupation"
+            label="Occupation*"
             {...getFieldProps('occupation')}
             error={Boolean(touched.occupation && errors.occupation)}
             helperText={touched.occupation && errors.occupation}
@@ -308,7 +296,8 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="nameoffather"
-            label="Name of Father"
+            label="Name of Father*"
+            placeholder='Juan Dela Cruz'
             {...getFieldProps('nameoffather')}
             error={Boolean(touched.nameoffather && errors.nameoffather)}
             helperText={touched.nameoffather && errors.nameoffather}
@@ -316,7 +305,8 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="maidennameofmother"
-            label="Maiden Name of Mother"
+            label="Maiden Name of Mother*"
+            placeholder='Juan Tan Dela'
             {...getFieldProps('maidennameofmother')}
             error={Boolean(touched.maidennameofmother && errors.maidennameofmother)}
             helperText={touched.maidennameofmother && errors.maidennameofmother}
@@ -325,6 +315,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="relationship"
             label="Relationship"
+            placeholder='Relationship with the deceased person'
             {...getFieldProps('relationship')}
             error={Boolean(touched.relationship && errors.relationship)}
             helperText={touched.relationship && errors.relationship}

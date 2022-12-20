@@ -76,7 +76,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             return getRequirementsUrl(filenames, requestUid).then((res) => {
               const requestUrls = res;
               return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                enqueueSnackbar('Barangay Certification Request Submitted Successfully.', {
                   variant: 'success',
                 });
 
@@ -119,13 +119,14 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="applicant"
-            label="Applicant"
+            label="Applicant*"
+            placeholder='Juan Dela Cruz'
             {...getFieldProps('applicant')}
             error={Boolean(touched.applicant && errors.applicant)}
             helperText={touched.applicant && errors.applicant}
           />
           <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
-            <InputLabel id="sex-select-label">Sex</InputLabel>
+            <InputLabel id="sex-select-label">Sex*</InputLabel>
             <Select
               name="sex"
               labelId="sex-select-label"
@@ -141,21 +142,13 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             </Select>
             {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
           </FormControl>
-          {/* <TextField
-              fullWidth
-              name="address"
-              label="Address"
-              {...getFieldProps('address')}
-              error={Boolean(touched.address && errors.address)}
-              helperText={touched.address && errors.address}
-            /> */}
 
           <FormControl
             helperText={touched.purok && errors.purok}
             fullWidth
             error={Boolean(touched.purok && errors.purok)}
           >
-            <InputLabel id="status-select-label">Purok</InputLabel>
+            <InputLabel id="status-select-label">Purok*</InputLabel>
             <Select
               name="purok"
               labelId="purok"
@@ -198,7 +191,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="layout"
-              label="Layout"
+              label="Layout*"
               {...getFieldProps('layout')}
               error={Boolean(touched.layout && errors.layout)}
               helperText={touched.layout && errors.layout}
@@ -206,7 +199,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="beam"
-              label="Beam"
+              label="Beam*"
               {...getFieldProps('beam')}
               error={Boolean(touched.beam && errors.beam)}
               helperText={touched.beam && errors.beam}
@@ -214,7 +207,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="gi"
-              label="GI"
+              label="GI*"
               {...getFieldProps('gi')}
               error={Boolean(touched.gi && errors.gi)}
               helperText={touched.gi && errors.gi}
@@ -222,7 +215,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="wall"
-              label="Wall"
+              label="Wall*"
               {...getFieldProps('wall')}
               error={Boolean(touched.wall && errors.wall)}
               helperText={touched.wall && errors.wall}
@@ -230,7 +223,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="estimatedcost"
-              label="Estimated Cost"
+              label="Estimated Cost*"
               {...getFieldProps('estimatedcost')}
               error={Boolean(touched.estimatedcost && errors.estimatedcost)}
               helperText={touched.estimatedcost && errors.estimatedcost}

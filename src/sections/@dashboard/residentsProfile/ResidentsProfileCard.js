@@ -161,7 +161,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="firstName"
-                  label="First name"
+                  label="First name*"
+                  placeholder="Juan"
                   {...getFieldProps('firstName')}
                   error={Boolean(touched.firstName && errors.firstName)}
                   helperText={touched.firstName && errors.firstName}
@@ -170,7 +171,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="middleName"
-                  label="Middle name"
+                  label="Middle name*"
+                  placeholder="Dela"
                   {...getFieldProps('middleName')}
                   error={Boolean(touched.middleName && errors.middleName)}
                   helperText={touched.middleName && errors.middleName}
@@ -179,7 +181,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="lastName"
-                  label="Last name"
+                  label="Last name*"
+                  placeholder="Cruz"
                   {...getFieldProps('lastName')}
                   error={Boolean(touched.lastName && errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
@@ -189,6 +192,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="suffix"
                   label="Suffix"
+                  placeholder="JR/SR/III"
                   {...getFieldProps('suffix')}
                   error={Boolean(touched.suffix && errors.suffix)}
                   helperText={touched.suffix && errors.suffix}
@@ -201,7 +205,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   error={Boolean(touched.sex && errors.sex)}
                 >
-                  <InputLabel id="status-select-label">Sex</InputLabel>
+                  <InputLabel id="status-select-label">Sex*</InputLabel>
                   <Select
                     name="sex"
                     labelId="sex"
@@ -219,28 +223,11 @@ export default function ResidentsProfileCard() {
                   {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
                 </FormControl>
 
-                {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
-                  <InputLabel id="sex-select-label">Sex</InputLabel>
-                  <Select
-                    name="sex"
-                    labelId="sex-select-label"
-                    id="sex-select"
-                    value={formik.values.sex}
-                    label="Sex"
-                    onChange={handleChange}
-                    {...getFieldProps('sex')}
-                    error={Boolean(touched.sex && errors.sex)}
-                  >
-                    <MenuItem value="male">Male</MenuItem>
-                    <MenuItem value="female">Female</MenuItem>
-                  </Select>
-                </FormControl> */}
-
                 <TextField
                   fullWidth
                   name="dateOfBirth"
                   id="dateOfBirth"
-                  label="Date of Birth"
+                  label="Date of Birth*"
                   type="date"
                   {...getFieldProps('dateOfBirth')}
                   error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
@@ -249,31 +236,12 @@ export default function ResidentsProfileCard() {
                     shrink: true,
                   }}
                 />
-
-                {/* <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
-                  <InputLabel id="status-select-label">Civil Status</InputLabel>
-                  <Select
-                    name="civilStatus"
-                    labelId="status-select-label"
-                    id="status-select"
-                    value={formik.values.civilStatus}
-                    label="civilStatus"
-                    onChange={handleChange}
-                    {...getFieldProps('civilStatus')}
-                    error={Boolean(touched.civilStatus && errors.civilStatus)}
-                  >
-                    <MenuItem value="single">Single</MenuItem>
-                    <MenuItem value="married">Married</MenuItem>
-                    <MenuItem value="separated">Separated</MenuItem>
-                    <MenuItem value="widowed">Widowed</MenuItem>
-                  </Select>
-                </FormControl> */}
                 <FormControl
                   helperText={touched.civilStatus && errors.civilStatus}
                   fullWidth
                   error={Boolean(touched.civilStatus && errors.civilStatus)}
                 >
-                  <InputLabel id="status-select-label">Civil Status</InputLabel>
+                  <InputLabel id="status-select-label">Civil Status*</InputLabel>
                   <Select
                     name="civilStatus"
                     labelId="civilStatus"
@@ -297,7 +265,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="citizenship"
-                  label="Citizenship"
+                  label="Citizenship*"
                   {...getFieldProps('citizenship')}
                   error={Boolean(touched.citizenship && errors.citizenship)}
                   helperText={touched.citizenship && errors.citizenship}
@@ -308,24 +276,16 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="religion"
-                  label="Religion"
+                  label="Religion*"
                   {...getFieldProps('religion')}
                   error={Boolean(touched.religion && errors.religion)}
                   helperText={touched.religion && errors.religion}
                 />
 
-                {/* <TextField
-                  fullWidth
-                  name="height"
-                  label="Height"
-                  {...getFieldProps('height')}
-                  error={Boolean(touched.height && errors.height)}
-                  helperText={touched.height && errors.height}
-                /> */}
                 <TextField
                   fullWidth
                   name="height"
-                  label="Height"
+                  label="Height*"
                   type="number"
                   {...getFieldProps('height')}
                   error={Boolean(touched.height && errors.height)}
@@ -334,18 +294,11 @@ export default function ResidentsProfileCard() {
                     endAdornment: <InputAdornment position="start">in</InputAdornment>,
                   }}
                 />
-                {/* <TextField
-                  fullWidth
-                  name="weight"
-                  label="Weight"
-                  {...getFieldProps('weight')}
-                  error={Boolean(touched.weight && errors.weight)}
-                  helperText={touched.weight && errors.weight}
-                /> */}
+
                 <TextField
                   fullWidth
                   name="weight"
-                  label="Weight"
+                  label="Weight*"
                   type="number"
                   {...getFieldProps('weight')}
                   error={Boolean(touched.weight && errors.weight)}
@@ -358,7 +311,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="phone_number"
-                  label="Phone Number"
+                  label="Phone Number*"
                   id="outlined-start-adornment"
                   {...getFieldProps('phoneNumber')}
                   error={Boolean(touched.phoneNumber && errors.phoneNumber)}
@@ -373,7 +326,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="occupation"
-                  label="Occupation"
+                  label="Occupation*"
                   {...getFieldProps('occupation')}
                   error={Boolean(touched.occupation && errors.occupation)}
                   helperText={touched.occupation && errors.occupation}
@@ -384,7 +337,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   error={Boolean(touched.purok && errors.purok)}
                 >
-                  <InputLabel id="status-select-label">Purok</InputLabel>
+                  <InputLabel id="status-select-label">Purok*</InputLabel>
                   <Select
                     name="purok"
                     labelId="purok"
@@ -419,7 +372,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   error={Boolean(touched.status && errors.status)}
                 >
-                  <InputLabel id="status-select-label">Status</InputLabel>
+                  <InputLabel id="status-select-label">Status*</InputLabel>
                   <Select
                     name="status"
                     labelId="status-select-label"
@@ -439,7 +392,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="tribe"
-                  label="Tribe"
+                  label="Tribe*"
+                  placeholder="ex. Manubo"
                   {...getFieldProps('tribe')}
                   error={Boolean(touched.tribe && errors.tribe)}
                   helperText={touched.tribe && errors.tribe}
@@ -450,7 +404,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="spouse"
-                  label="Spouse Name"
+                  label="Spouse Name*"
+                  placeholder="Juan Dela Cruz"
                   {...getFieldProps('spouse')}
                   error={Boolean(touched.spouse && errors.spouse)}
                   helperText={touched.spouse && errors.spouse}
@@ -459,7 +414,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="spouseAddress"
-                  label="Spouse Address"
+                  label="Spouse Address*"
+                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
                   {...getFieldProps('spouseAddress')}
                   error={Boolean(touched.spouseAddress && errors.spouseAddress)}
                   helperText={touched.spouseAddress && errors.spouseAddress}
@@ -468,47 +424,19 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="numberOfChildren"
-                  label="Number of Children"
+                  label="Number of Children*"
                   {...getFieldProps('numberOfChildren')}
                   error={Boolean(touched.numberOfChildren && errors.numberOfChildren)}
                   helperText={touched.numberOfChildren && errors.numberOfChildren}
                 />
-
-                {/* <FormControl helperText={touched.purok && errors.purok} fullWidth>
-                  <InputLabel id="purok-select-label">Purok</InputLabel>
-                  <Select
-                    name="purok"
-                    labelId="purok-select-label"
-                    id="purok-select"
-                    value={formik.values.purok}
-                    label="Purok"
-                    onChange={handleChange}
-                    {...getFieldProps('purok')}
-                    error={Boolean(touched.purok && errors.purok)}
-                  >
-                    <MenuItem value="1">Purok 1</MenuItem>
-                    <MenuItem value="2">Purok 2</MenuItem>
-                    <MenuItem value="3a">Purok 3A</MenuItem>
-                    <MenuItem value="3b">Purok 3B</MenuItem>
-                    <MenuItem value="4">Purok 4</MenuItem>
-                    <MenuItem value="5">Purok 5</MenuItem>
-                    <MenuItem value="6">Purok 6</MenuItem>
-                    <MenuItem value="7">Purok 7</MenuItem>
-                    <MenuItem value="8">Purok 8</MenuItem>
-                    <MenuItem value="9">Purok 9</MenuItem>
-                    <MenuItem value="10a">Purok 10A</MenuItem>
-                    <MenuItem value="11b">Purok 11B</MenuItem>
-                    <MenuItem value="12">Purok 12</MenuItem>
-                    <MenuItem value="13">Purok 13</MenuItem>
-                  </Select>
-                </FormControl> */}
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="fathersName"
-                  label="Father's Name"
+                  label="Father's Name*"
+                  placeholder="Juan Dela Cruz"
                   {...getFieldProps('fathersName')}
                   error={Boolean(touched.fathersName && errors.fathersName)}
                   helperText={touched.fathersName && errors.fathersName}
@@ -517,7 +445,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="fathersOccupation"
-                  label="Occupation"
+                  label="Occupation*"
                   {...getFieldProps('fathersOccupation')}
                   error={Boolean(touched.fathersOccupation && errors.fathersOccupation)}
                   helperText={touched.fathersOccupation && errors.fathersOccupation}
@@ -526,7 +454,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="fathersAddress"
-                  label="Address"
+                  label="Address*"
+                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
                   {...getFieldProps('fathersAddress')}
                   error={Boolean(touched.fathersAddress && errors.fathersAddress)}
                   helperText={touched.fathersAddress && errors.fathersAddress}
@@ -537,7 +466,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="mothersName"
-                  label="Mother's Name"
+                  label="Mother's Name*"
                   {...getFieldProps('mothersName')}
                   error={Boolean(touched.mothersName && errors.mothersName)}
                   helperText={touched.mothersName && errors.mothersName}
@@ -546,7 +475,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="mothersOccupation"
-                  label="Occupation"
+                  label="Occupation*"
                   {...getFieldProps('mothersOccupation')}
                   error={Boolean(touched.mothersOccupation && errors.mothersOccupation)}
                   helperText={touched.mothersOccupation && errors.mothersOccupation}
@@ -555,7 +484,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="mothersAddress"
-                  label="Address"
+                  label="Address*"
+                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
                   {...getFieldProps('mothersAddress')}
                   error={Boolean(touched.mothersAddress && errors.mothersAddress)}
                   helperText={touched.mothersAddress && errors.mothersAddress}
@@ -564,6 +494,8 @@ export default function ResidentsProfileCard() {
 
               <Typography variant="subtitle3" noWrap>
                 Educational Background
+                {/* <CardHeader subheader="Put N/A if not applicable " />
+                 */}
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -572,7 +504,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="elementarySchool"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('elementarySchool')}
                   error={Boolean(touched.elementarySchool && errors.elementarySchool)}
                   helperText={touched.elementarySchool && errors.elementarySchool}
@@ -581,7 +513,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="elementaryAddress"
-                  label="Address of School"
+                  label="Address of School*"
                   {...getFieldProps('elementaryAddress')}
                   error={Boolean(touched.elementaryAddress && errors.elementaryAddress)}
                   helperText={touched.elementaryAddress && errors.elementaryAddress}
@@ -590,7 +522,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="elementaryYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('elementaryYearGrad')}
                   error={Boolean(touched.elementaryYearGrad && errors.elementaryYearGrad)}
                   helperText={touched.year && errors.year}
@@ -602,7 +535,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="highschoolName"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('highschoolName')}
                   error={Boolean(touched.highschoolName && errors.highschoolName)}
                   helperText={touched.highschoolName && errors.highschoolName}
@@ -611,7 +544,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="highschoolAddress"
-                  label="Address of School"
+                  label="Address of School*"
                   {...getFieldProps('highschoolAddress')}
                   error={Boolean(touched.highschoolAddress && errors.highschoolAddress)}
                   helperText={touched.highschoolAddress && errors.highschoolAddress}
@@ -620,7 +553,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="highschoolYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('highschoolYearGrad')}
                   error={Boolean(touched.highschoolYearGrad && errors.highschoolYearGrad)}
                   helperText={touched.highschoolYearGrad && errors.highschoolYearGrad}
@@ -633,7 +567,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="collegeName"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('collegeSchool')}
                   error={Boolean(touched.collegeSchool && errors.collegeSchool)}
                   helperText={touched.collegeSchool && errors.collegeSchool}
@@ -642,7 +576,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="collegeAddress"
-                  label="Address of School"
+                  label="Address of School*"
                   {...getFieldProps('collegeAddress')}
                   error={Boolean(touched.collegeAddress && errors.collegeAddress)}
                   helperText={touched.collegeAddress && errors.collegeAddress}
@@ -651,7 +585,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="collegeYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('collegeYearGrad')}
                   error={Boolean(touched.collegeYearGrad && errors.collegeYearGrad)}
                   helperText={touched.collegeYearGrad && errors.collegeYearGrad}
@@ -664,7 +599,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="vocationalName"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('vocationalSchool')}
                   error={Boolean(touched.vocationalSchool && errors.vocationalSchool)}
                   helperText={touched.vocationalSchool && errors.vocationalSchool}
@@ -673,7 +608,7 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="vocationalAddress"
-                  label="Address of School"
+                  label="Address of School*"
                   {...getFieldProps('vocationalAddress')}
                   error={Boolean(touched.vocationalAddress && errors.vocationalAddress)}
                   helperText={touched.vocationalAddress && errors.vocationalAddress}
@@ -682,7 +617,8 @@ export default function ResidentsProfileCard() {
                 <TextField
                   fullWidth
                   name="vocationalYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('vocationalYearGrad')}
                   error={Boolean(touched.vocationalYearGrad && errors.vocationalYearGrad)}
                   helperText={touched.vocationalYearGrad && errors.vocationalYearGrad}

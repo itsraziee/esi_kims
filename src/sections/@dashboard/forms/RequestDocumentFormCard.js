@@ -32,6 +32,7 @@ import BarangayCertificateForm from './BarangayCertificationForm';
 import BarangayClearanceForm from './BarangayClearanceForm';
 import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
 import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
+import CedulaFormCard from './CedulaFormCard';
 import CertificateOfResidencyForm from './CertificateOfResidencyForm';
 // ----------------------------------------------------------------------
 
@@ -58,13 +59,14 @@ export default function RequestDocumentFormCard() {
 
   return (
     <Card sx={{ width: '100%' }}>
-      <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
+      <CardHeader title="Document Request Form" subheader="Fields marked with an asterisk (*) are required. " />
       <CardContent>
         <Stack spacing={1}>
           <TextField
-            label="Requestor Name"
+            label="Requestor Name*"
             name="requestorname"
             fullWidth
+            placeholder="Juan Dela Cruz"
             {...getFieldProps('requestorname')}
             error={Boolean(touched.requestorname && errors.requestorname)}
             helperText={touched.requestorname && errors.requestorname}
@@ -74,7 +76,7 @@ export default function RequestDocumentFormCard() {
             fullWidth
             error={Boolean(touched.requestorname && errors.typeOfDocument)}
           >
-            <InputLabel id="status-select-label">Select Type of Document</InputLabel>
+            <InputLabel id="status-select-label">Select Type of Document*</InputLabel>
             <Tooltip title={!formik.values.requestorname ? 'Requestor Name is required' : ''}>
               <Select
                 name="typeOfDocument"
@@ -95,6 +97,7 @@ export default function RequestDocumentFormCard() {
                 <MenuItem value="certificate-of-indigency">Certificate Of Indigency</MenuItem>
                 <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
                 <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
+                <MenuItem value="cedula">Cedula</MenuItem>
               </Select>
             </Tooltip>
             {Boolean(touched.typeOfDocument && errors.typeOfDocument) && (
@@ -178,6 +181,13 @@ export default function RequestDocumentFormCard() {
                   formik.values.requestorname,
                   BARANGAY_BIRTH_CERTIFICATE_PRICE
                 );
+              }}
+            />
+          )}
+          {formik.values.typeOfDocument === 'cedula' && (
+            <CedulaFormCard
+              onSubmitForm={async (data) => {
+                return createRequest('Cedula', data, formik.values.requestorname);
               }}
             />
           )}

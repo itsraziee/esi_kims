@@ -10,28 +10,23 @@ import {
   DialogActions,
   DialogContentText,
   DialogTitle,
-  FormControl,
-  FormHelperText,
   Grid,
-  InputLabel,
   Link,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   Toolbar,
   Tooltip,
   Typography,
 } from '@mui/material';
+
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
-import { PropTypes } from 'prop-types';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 import IconButton from '../../../theme/overrides/IconButton';
 
-export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
+export default function CedulaFormCard({ onSubmitForm }) {
   const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
   const [previewSrc, setPreviewSrc] = useState();
   const [requirementsFile, setRequirementsFile] = useState([]);
@@ -41,18 +36,16 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
   const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
 
   const RequestDocumentFormSchema = Yup.object().shape({
-    name: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
-    purok: Yup.string().required('Purok is required'),
-    citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
-    age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
+    firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!'),
+    lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
   });
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      purok: '',
-      citizenship: '',
-      age: '',
+      firstName: '',
+      middleName: '',
+      lastName: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -66,7 +59,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
             return getRequirementsUrl(filenames, requestUid).then((res) => {
               const requestUrls = res;
               return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                enqueueSnackbar('Barangay Tree Planting Certificate Request Submitted Successfully.', {
+                enqueueSnackbar('Cedula Request Submitted Successfully.', {
                   variant: 'success',
                 });
 
@@ -109,87 +102,38 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
           <>
             <TextField
               fullWidth
-              name="name"
-              label="Full name*"
-              placeholder='Juan Dela Cruz'
-              {...getFieldProps('name')}
-              error={Boolean(touched.name && errors.name)}
-              helperText={touched.name && errors.name}
+              name="firstName"
+              label="First Name"
+              {...getFieldProps('firstName')}
+              error={Boolean(touched.firstName && errors.firstName)}
+              helperText={touched.firstName && errors.firstName}
             />
-            
-            <FormControl
-              helperText={touched.purok && errors.purok}
-              fullWidth
-              error={Boolean(touched.purok && errors.purok)}
-            >
-              <InputLabel id="status-select-label">Purok*</InputLabel>
-              <Select
-                name="purok"
-                labelId="purok"
-                id="purok"
-                value={formik.values.purok}
-                label="Purok"
-                onChange={handleChange}
-                {...getFieldProps('purok')}
-                error={Boolean(touched.purok && errors.purok)}
-                helperText={touched.purok && errors.purok}
-              >
-                <MenuItem value="Purok 1 Brgy. Proper">Purok 1 Brgy. Proper</MenuItem>
-                <MenuItem value="Purok 2 Brgy. Proper">Purok 2 Brgy. Proper</MenuItem>
-                <MenuItem value="Purok 3A Brgy. Proper">Purok 3A Brgy. Proper</MenuItem>
-                <MenuItem value="Purok 3B Brgy. Proper">Purok 3B Brgy. Proper</MenuItem>
-                <MenuItem value="Purok 4 Brgy. Proper">Purok 4 Brgy. Proper</MenuItem>
-                <MenuItem value="Purok 5 Sitio Malapinggan">Purok 5 Sitio Malapinggan</MenuItem>
-                <MenuItem value="Purok 6 Sitio Balangcao">Purok 6 Sitio Balangcao</MenuItem>
-                <MenuItem value="Purok 7 Sitio Balangcao">Purok 7 Sitio Balangcao</MenuItem>
-                <MenuItem value="Purok 8 Sitio Balangcao">Purok 8 Sitio Balangcao</MenuItem>
-                <MenuItem value="Purok 9 Sitio Balangcao">Purok 9 Sitio Balangcao</MenuItem>
-                <MenuItem value="Purok 10 Sitio Palo">Purok 10 Sitio Palo</MenuItem>
-                <MenuItem value="Purok 11 Sitio Palo">Purok 11 Sitio Palo</MenuItem>
-                <MenuItem value="Purok 12 Siniloan">Purok 12 Siniloan</MenuItem>
-                <MenuItem value="Purok 13 Kiramong">Purok 13 Kiramong</MenuItem>
-              </Select>
-              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
-            </FormControl>
             <TextField
               fullWidth
-              name="citizenship"
-              label="Citizenship*"
-              {...getFieldProps('citizenship')}
-              error={Boolean(touched.citizenship && errors.citizenship)}
-              helperText={touched.citizenship && errors.citizenship}
+              name="middleName"
+              label="Middle Name"
+              {...getFieldProps('middleName')}
+              error={Boolean(touched.middleName && errors.middleName)}
+              helperText={touched.middleName && errors.middleName}
             />
-           
-            <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
-              <InputLabel id="sex-select-label">Sex*</InputLabel>
-              <Select
-                name="sex"
-                labelId="sex-select-label"
-                id="sex-select"
-                value={formik.values.sex}
-                label="Sex"
-                onChange={handleChange}
-                {...getFieldProps('sex')}
-                error={Boolean(touched.sex && errors.sex)}
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-              </Select>
-              {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
-            </FormControl>
             <TextField
               fullWidth
-              name="age"
-              label="Age*"
-              {...getFieldProps('age')}
-              error={Boolean(touched.age && errors.age)}
-              helperText={touched.age && errors.age}
+              name="lastName"
+              label="Last Name"
+              {...getFieldProps('lastName')}
+              error={Boolean(touched.lastName && errors.lastName)}
+              helperText={touched.lastName && errors.lastName}
             />
           </>
         </Stack>
+
         <Box sx={{ color: 'gray', mb: 1 }}>
-          <Typography variant="subtitle4">Certificate Of Tree Planting Requirements</Typography>
-          <Typography>1. Purok Cerification (that certify that he/she has already planted a tree)</Typography>
+          <Typography variant="subtitle4">Note to the requestor:</Typography>
+          <Typography>
+            The Name of the requestor is hereby ask for the billing transaction pursposes only. All other personal
+            information required for this document shall only be done in the office of the barangay physically prior to
+            obtain the cedula.{' '}
+          </Typography>
         </Box>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -320,7 +264,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
   );
 }
 
-BarangayTreePlantingCertificateForm.propTypes = {
-  // Function to call on submit
-  onSubmitForm: PropTypes.func.isRequired,
-};
+// BarangayTreePlantingCertificateForm.propTypes = {
+//   // Function to call on submit
+//   onSubmitForm: PropTypes.func.isRequired,
+// };

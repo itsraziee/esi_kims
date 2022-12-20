@@ -10,6 +10,7 @@ const Template = (args) => <BarangayCertificateOfResidencyComponent {...args} />
 
 export const BarangayCertificateOfResidency = Template.bind({});
 BarangayCertificateOfResidency.args = {
+  citizenship: 'Filipino',
   name: 'Lance Luy',
   day: 23,
   month: 'October',
