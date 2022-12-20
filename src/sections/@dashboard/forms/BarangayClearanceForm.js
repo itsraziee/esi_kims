@@ -134,7 +134,8 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="firstName"
-              label="First Name"
+              label="First Name*"
+              placeholder="Juan"
               {...getFieldProps('firstName')}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
@@ -142,7 +143,8 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="middleName"
-              label="Middle Name"
+              label="Middle Name*"
+              placeholder="Dela"
               {...getFieldProps('middleName')}
               error={Boolean(touched.middleName && errors.middleName)}
               helperText={touched.middleName && errors.middleName}
@@ -150,7 +152,8 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="lastName"
-              label="Last Name"
+              label="Last Name*"
+              placeholder="Cruz"
               {...getFieldProps('lastName')}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
@@ -159,6 +162,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="suffix"
               label="Suffix"
+              placeholder="JR/SR/II"
               {...getFieldProps('suffix')}
               error={Boolean(touched.suffix && errors.suffix)}
               helperText={touched.suffix && errors.suffix}
@@ -180,7 +184,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               error={Boolean(touched.purok && errors.purok)}
             >
-              <InputLabel id="status-select-label">Purok</InputLabel>
+              <InputLabel id="status-select-label">Purok*</InputLabel>
               <Select
                 name="purok"
                 labelId="purok"
@@ -212,7 +216,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="citizenship"
-              label="Citizenship"
+              label="Citizenship*"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
@@ -234,7 +238,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               </Select>
             </FormControl> */}
             <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
-              <InputLabel id="status-select-label">Sex</InputLabel>
+              <InputLabel id="status-select-label">Sex*</InputLabel>
               <Select
                 name="sex"
                 labelId="sex"
@@ -258,7 +262,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="age"
-              label="Age"
+              label="Age*"
               {...getFieldProps('age')}
               error={Boolean(touched.age && errors.age)}
               helperText={touched.age && errors.age}
@@ -266,7 +270,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="religion"
-              label="Religion"
+              label="Religion*"
               {...getFieldProps('religion')}
               error={Boolean(touched.religion && errors.religion)}
               helperText={touched.religion && errors.religion}
@@ -276,7 +280,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               error={Boolean(touched.civilStatus && errors.civilStatus)}
             >
-              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <InputLabel id="status-select-label">Civil Status*</InputLabel>
               <Select
                 name="civilStatus"
                 labelId="civilStatus"
@@ -318,7 +322,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="dateOfBirth"
               id="dateOfBirth"
-              label="Date of Birth"
+              label="Date of Birth*"
               type="date"
               {...getFieldProps('dateOfBirth')}
               error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
@@ -334,7 +338,8 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="placeOfBirth"
-              label="Place of Birth"
+              label="Place of Birth*"
+              placeholder="Barangay/Municipality/Province"
               {...getFieldProps('placeOfBirth')}
               error={Boolean(touched.placeOfBirth && errors.placeOfBirth)}
               helperText={touched.placeOfBirth && errors.placeOfBirth}
@@ -350,7 +355,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="height"
-              label="Height"
+              label="Height*"
               type="number"
               {...getFieldProps('height')}
               error={Boolean(touched.height && errors.height)}
@@ -362,7 +367,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="weight"
-              label="Weight"
+              label="Weight*"
               type="number"
               {...getFieldProps('weight')}
               error={Boolean(touched.weight && errors.weight)}
@@ -382,7 +387,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="purpose"
-              label="Purpose"
+              label="Purpose*"
               {...getFieldProps('purpose')}
               error={Boolean(touched.purpose && errors.purpose)}
               helperText={touched.purpose && errors.purpose}

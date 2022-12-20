@@ -112,25 +112,19 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="name"
-              label="Full name"
+              label="Full name*"
+              placeholder='Juan Dela Cruz'
               {...getFieldProps('name')}
               error={Boolean(touched.name && errors.name)}
               helperText={touched.name && errors.name}
             />
-            {/* <TextField
-              fullWidth
-              name="purok"
-              label="Purok"
-              {...getFieldProps('purok')}
-              error={Boolean(touched.purok && errors.purok)}
-              helperText={touched.purok && errors.purok}
-            /> */}
+            
             <FormControl
               helperText={touched.purok && errors.purok}
               fullWidth
               error={Boolean(touched.purok && errors.purok)}
             >
-              <InputLabel id="status-select-label">Purok</InputLabel>
+              <InputLabel id="status-select-label">Purok*</InputLabel>
               <Select
                 name="purok"
                 labelId="purok"
@@ -162,29 +156,14 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="citizenship"
-              label="Citizenship"
+              label="Citizenship*"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
             />
-            {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
-              <InputLabel id="sex-select-label">Sex</InputLabel>
-              <Select
-                name="sex"
-                labelId="sex-select-label"
-                id="sex-select"
-                value={formik.values.sex}
-                label="Sex"
-                onChange={handleChange}
-                {...getFieldProps('sex')}
-                error={Boolean(touched.sex && errors.sex)}
-              >
-                <MenuItem value="male">Male</MenuItem>
-                <MenuItem value="female">Female</MenuItem>
-              </Select>
-            </FormControl> */}
+           
             <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
-              <InputLabel id="sex-select-label">Sex</InputLabel>
+              <InputLabel id="sex-select-label">Sex*</InputLabel>
               <Select
                 name="sex"
                 labelId="sex-select-label"
@@ -203,7 +182,7 @@ export default function BarangayTreePlantingCertificateForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="age"
-              label="Age"
+              label="Age*"
               {...getFieldProps('age')}
               error={Boolean(touched.age && errors.age)}
               helperText={touched.age && errors.age}

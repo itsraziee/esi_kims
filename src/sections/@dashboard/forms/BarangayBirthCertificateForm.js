@@ -76,8 +76,8 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Fathers Occupation is required'),
-    dateofmarriage: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of marriage is required'),
-    placeofmarriage: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Marriage is required'),
+    dateofmarriage: Yup.string(),
+    placeofmarriage: Yup.string(),
     nameofattendant: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Attendant is required'),
     addressofattendant: Yup.string()
       .min(2, 'Too Short!')
@@ -172,27 +172,97 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="nameofchild"
-            label="Name of Child"
+            label="Name of Child*"
+            placeholder="Juan Dela Cruz"
             {...getFieldProps('nameofchild')}
             error={Boolean(touched.nameofchild && errors.nameofchild)}
             helperText={touched.nameofchild && errors.nameofchild}
           />
 
-          {/* <TextField
+          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
+            <InputLabel id="status-select-label">Sex*</InputLabel>
+            <Select
+              name="sex"
+              labelId="sex"
+              id="sex"
+              value={formik.values.sex}
+              label="Sex"
+              onChange={handleChange}
+              {...getFieldProps('sex')}
+              error={Boolean(touched.sex && errors.sex)}
+              helperText={touched.sex && errors.sex}
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+            </Select>
+            {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
+          </FormControl>
+          <TextField
             fullWidth
-            name="purok"
-            label="Purok"
-            {...getFieldProps('purok')}
-            error={Boolean(touched.purok && errors.purok)}
-            helperText={touched.purok && errors.purok}
-          /> */}
+            name="dateofbirth"
+            id="dateofbirth"
+            label="Date of Birth*"
+            type="date"
+            {...getFieldProps('dateofbirth')}
+            error={Boolean(touched.dateofbirth && errors.dateofbirth)}
+            helperText={touched.dateofbirth && errors.dateofbirth}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+
+          <TextField
+            // sx={{ minWidth: 91, mt: 2 }}
+            fullWidth
+            name="timeofbirth"
+            label="Time of Birth*"
+            {...getFieldProps('timeofbirth')}
+            error={Boolean(touched.timeofbirth && errors.timeofbirth)}
+            helperText={touched.timeofbirth && errors.timeofbirth}
+          />
+        </Stack>
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
+          <TextField
+            fullWidth
+            name="weight"
+            label="Weight*"
+            type="number"
+            {...getFieldProps('weight')}
+            error={Boolean(touched.weight && errors.weight)}
+            helperText={touched.weight && errors.weight}
+            InputProps={{
+              endAdornment: <InputAdornment position="start">kg</InputAdornment>,
+            }}
+          />
+          <TextField
+            // sx={{ minWidth: 91, mt: 2 }}
+            fullWidth
+            name="birthorder"
+            label="Birth Order*"
+            placeholder="First"
+            {...getFieldProps('birthorder')}
+            error={Boolean(touched.birthorder && errors.birthorder)}
+            helperText={touched.birthorder && errors.birthorder}
+          />
+
+          <TextField
+            sx={{ minWidth: 91, mt: 2 }}
+            fullWidth
+            name="placeofbirth"
+            label="Place of Birth*"
+            placeholder="Barangay/Municipality/Province"
+            {...getFieldProps('placeofbirth')}
+            error={Boolean(touched.placeofbirth && errors.placeofbirth)}
+            helperText={touched.placeofbirth && errors.placeofbirth}
+          />
 
           <FormControl
             helperText={touched.purok && errors.purok}
             fullWidth
             error={Boolean(touched.purok && errors.purok)}
           >
-            <InputLabel id="status-select-label">Purok</InputLabel>
+            <InputLabel id="status-select-label">Purok*</InputLabel>
             <Select
               name="purok"
               labelId="purok"
@@ -221,122 +291,33 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             </Select>
             {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
           </FormControl>
-
-          {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
-            <InputLabel id="sex-select-label">Sex</InputLabel>
-            <Select
-              name="sex"
-              labelId="sex-select-label"
-              id="sex-select"
-              value={formik.values.sex}
-              label="Sex"
-              onChange={handleChange}
-              {...getFieldProps('sex')}
-              error={Boolean(touched.sex && errors.sex)}
-            >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-            </Select>
-          </FormControl> */}
-          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
-            <InputLabel id="status-select-label">Sex</InputLabel>
-            <Select
-              name="sex"
-              labelId="sex"
-              id="sex"
-              value={formik.values.sex}
-              label="Sex"
-              onChange={handleChange}
-              {...getFieldProps('sex')}
-              error={Boolean(touched.sex && errors.sex)}
-              helperText={touched.sex && errors.sex}
-            >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-            </Select>
-            {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex</FormHelperText>}
-          </FormControl>
-          <TextField
-            fullWidth
-            name="dateofbirth"
-            id="dateofbirth"
-            label="Date of Birth"
-            type="date"
-            {...getFieldProps('dateofbirth')}
-            error={Boolean(touched.dateofbirth && errors.dateofbirth)}
-            helperText={touched.dateofbirth && errors.dateofbirth}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-
-          <TextField
-            // sx={{ minWidth: 91, mt: 2 }}
-            fullWidth
-            name="timeofbirth"
-            label="Time of Birth"
-            {...getFieldProps('timeofbirth')}
-            error={Boolean(touched.timeofbirth && errors.timeofbirth)}
-            helperText={touched.timeofbirth && errors.timeofbirth}
-          />
         </Stack>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
-          {/* <TextField
-            fullWidth
-            name="weight"
-            label="Weight"
-            {...getFieldProps('weight')}
-            error={Boolean(touched.weight && errors.weight)}
-            helperText={touched.weight && errors.weight}
-          /> */}
           <TextField
             fullWidth
-            name="weight"
-            label="Weight"
-            type="number"
-            {...getFieldProps('weight')}
-            error={Boolean(touched.weight && errors.weight)}
-            helperText={touched.weight && errors.weight}
-            InputProps={{
-              endAdornment: <InputAdornment position="start">kg</InputAdornment>,
-            }}
+            name="nameofattendant"
+            label="Name of Attendant"
+            {...getFieldProps('nameofattendant')}
+            error={Boolean(touched.nameofattendant && errors.nameofattendant)}
+            helperText={touched.nameofattendant && errors.nameofattendant}
           />
           <TextField
-            // sx={{ minWidth: 91, mt: 2 }}
             fullWidth
-            name="birthorder"
-            label="Birth Order"
-            {...getFieldProps('birthorder')}
-            error={Boolean(touched.birthorder && errors.birthorder)}
-            helperText={touched.birthorder && errors.birthorder}
-          />
-          <TextField
-            // sx={{ minWidth: 91, mt: 2 }}
-            fullWidth
-            name="death"
-            label="Death"
-            {...getFieldProps('death')}
-            error={Boolean(touched.death && errors.death)}
-            helperText={touched.death && errors.death}
-          />
-
-          <TextField
-            sx={{ minWidth: 91, mt: 2 }}
-            fullWidth
-            name="placeofbirth"
-            label="Place of Birth"
-            {...getFieldProps('placeofbirth')}
-            error={Boolean(touched.placeofbirth && errors.placeofbirth)}
-            helperText={touched.placeofbirth && errors.placeofbirth}
+            name="addressofattendant"
+            label="Address Of Attendant"
+            placeholder="Barangay/Municipality/Province"
+            {...getFieldProps('addressofattendant')}
+            error={Boolean(touched.addressofattendant && errors.addressofattendant)}
+            helperText={touched.addressofattendant && errors.addressofattendant}
           />
         </Stack>
-
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <TextField
             fullWidth
             name="nameofmother"
-            label="Name of Mother"
+            label="Name of Mother*"
+            placeholder="Juan Dela Cruz"
             {...getFieldProps('nameofmother')}
             error={Boolean(touched.nameofmother && errors.nameofmother)}
             helperText={touched.nameofmother && errors.nameofmother}
@@ -344,7 +325,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="mothercitizenship"
-            label="Mothers Citizenship"
+            label="Mothers Citizenship*"
             {...getFieldProps('mothercitizenship')}
             error={Boolean(touched.mothercitizenship && errors.mothercitizenship)}
             helperText={touched.mothercitizenship && errors.mothercitizenship}
@@ -352,7 +333,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="motheroccupation"
-            label="Mothers Occupation"
+            label="Mothers Occupation*"
             {...getFieldProps('motheroccupation')}
             error={Boolean(touched.motheroccupation && errors.motheroccupation)}
             helperText={touched.motheroccupation && errors.motheroccupation}
@@ -363,7 +344,8 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="nameoffather"
-            label="Name of Father"
+            label="Name of Father*"
+            placeholder="Juan Dela Cruz"
             {...getFieldProps('nameoffather')}
             error={Boolean(touched.nameoffather && errors.nameoffather)}
             helperText={touched.nameoffather && errors.nameoffather}
@@ -371,16 +353,15 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="fathercitizenship"
-            label="Fathers Citizenship"
+            label="Fathers Citizenship*"
             {...getFieldProps('fathercitizenship')}
             error={Boolean(touched.fathercitizenship && errors.fathercitizenship)}
             helperText={touched.fathercitizenship && errors.fathercitizenship}
           />
           <TextField
-            sx={{ minWidth: 91, mt: 2 }}
             fullWidth
             name="fatheroccupation"
-            label="Fathers Occupation"
+            label="Fathers Occupation*"
             {...getFieldProps('fatheroccupation')}
             error={Boolean(touched.fatheroccupation && errors.fatheroccupation)}
             helperText={touched.fatheroccupation && errors.fatheroccupation}
@@ -405,33 +386,16 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="placeofmarriage"
             label="Place of Marriage"
+            placeholder="Barangay/Municipality/Province"
             {...getFieldProps('placeofmarriage')}
             error={Boolean(touched.placeofmarriage && errors.placeofmarriage)}
             helperText={touched.placeofmarriage && errors.placeofmarriage}
           />
           <TextField
             fullWidth
-            name="nameofattendant"
-            label="Name of Attendant"
-            {...getFieldProps('nameofattendant')}
-            error={Boolean(touched.nameofattendant && errors.nameofattendant)}
-            helperText={touched.nameofattendant && errors.nameofattendant}
-          />
-          <TextField
-            fullWidth
-            name="addressofattendant"
-            label="Address Of Attendant"
-            {...getFieldProps('addressofattendant')}
-            error={Boolean(touched.addressofattendant && errors.addressofattendant)}
-            helperText={touched.addressofattendant && errors.addressofattendant}
-          />
-        </Stack>
-
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
-          <TextField
-            fullWidth
             name="yearofresidency"
-            label="Since when have you resided in this barangay?"
+            label="Year of Residency*"
+            placeholder="Parents became active resident of the barangay"
             {...getFieldProps('yearofresidency')}
             error={Boolean(touched.yearofresidency && errors.yearofresidency)}
             helperText={touched.yearofresidency && errors.yearofresidency}

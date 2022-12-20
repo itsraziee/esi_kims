@@ -108,55 +108,19 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="fullName"
-              label="Full Name"
+              label="Full Name*"
+              placeholder='Juan Dela Cruz'
               {...getFieldProps('fullName')}
               error={Boolean(touched.fullName && errors.fullName)}
               helperText={touched.fullName && errors.fullName}
             />
-            {/* <TextField
-              fullWidth
-              name="address"
-              label="Address"
-              {...getFieldProps('address')}
-              error={Boolean(touched.address && errors.address)}
-              helperText={touched.address && errors.address}
-            /> */}
-            {/* <FormControl helperText={touched.purok && errors.purok} fullWidth error={Boolean(errors.purok)}>
-              <InputLabel id="status-select-label">Purok</InputLabel>
-              <Select
-                name="purok"
-                labelId="purok"
-                id="purok"
-                value={formik.values.purok}
-                label="Select a purok"
-                onChange={handleChange}
-                {...getFieldProps('purok')}
-                error={Boolean(touched.purok && errors.purok)}
-                helperText={touched.purok && errors.purok}
-              >
-                <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
-                <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
-                <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
-                <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
-                <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
-                <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
-                <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
-                <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
-                <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
-                <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
-                <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
-                <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
-                <MenuItem value="12">Purok 12 Siniloan</MenuItem>
-                <MenuItem value="13">Purok 13 Kiramong</MenuItem>
-              </Select>
-              {Boolean(errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
-            </FormControl> */}
+           
             <FormControl
               helperText={touched.purok && errors.purok}
               fullWidth
               error={Boolean(touched.purok && errors.purok)}
             >
-              <InputLabel id="status-select-label">Purok</InputLabel>
+              <InputLabel id="status-select-label">Purok*</InputLabel>
               <Select
                 name="purok"
                 labelId="purok"
@@ -185,30 +149,13 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
               </Select>
               {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
             </FormControl>
-            {/* <FormControl helperText={touched.civilstatus && errors.civilstatus} fullWidth>
-              <InputLabel id="status-select-label">Civil Status</InputLabel>
-              <Select
-                name="civilstatus"
-                labelId="status-select-label"
-                id="status-select"
-                value={formik.values.civilstatus}
-                label="Civil Status"
-                onChange={handleChange}
-                {...getFieldProps('civilstatus')}
-                error={Boolean(touched.civilstatus && errors.civilstatus)}
-              >
-                <MenuItem value="single">Single</MenuItem>
-                <MenuItem value="married">Married</MenuItem>
-                <MenuItem value="separated">Separated</MenuItem>
-                <MenuItem value="widowed">Widowed</MenuItem>
-              </Select>
-            </FormControl> */}
+            
             <FormControl
               helperText={touched.civilStatus && errors.civilStatus}
               fullWidth
               error={Boolean(touched.civilStatus && errors.civilStatus)}
             >
-              <InputLabel id="status-select-label">Civil Status</InputLabel>
+              <InputLabel id="status-select-label">Civil Status*</InputLabel>
               <Select
                 name="civilStatus"
                 labelId="civilStatus"
@@ -232,7 +179,7 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="citizenship"
-              label="Citizenship"
+              label="Citizenship*"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
