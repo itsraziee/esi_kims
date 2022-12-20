@@ -276,6 +276,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.placeofbirth && errors.placeofbirth)}
             helperText={touched.placeofbirth && errors.placeofbirth}
           />
+        </Stack>
 
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
