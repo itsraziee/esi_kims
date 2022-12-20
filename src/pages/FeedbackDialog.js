@@ -45,7 +45,10 @@ export default function FeedbackDialog() {
                 />
               </Stack>
             </Box>
-            <TextField fullWidth label="What could we do better?" id="fullWidth" ant="standard" />
+            <Stack direction={{ xs: 'row', sm: 'column' }} spacing={2}>
+              <TextField fullWidth name="fullName" label="Fullname" placeholder="Optional" />
+              <TextField fullWidth label="What could we do better?" id="fullWidth" ant="standard" />
+            </Stack>
             <DialogActions>
               <Button variant="contained" onClick={handleClose} size="large" fullWidth>
                 Submit
