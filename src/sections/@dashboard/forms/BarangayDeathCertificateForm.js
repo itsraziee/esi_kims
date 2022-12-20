@@ -94,7 +94,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               const requestUrls = res;
               console.log({ requestUrls });
               return updateRequestRequirements(requestUid, requestUrls).then((res) => {
-                enqueueSnackbar('Barangay Clearance Request Submitted Successfully.', {
+                enqueueSnackbar('Barangay Death Certificate Request Submitted Successfully.', {
                   variant: 'success',
                 });
 
@@ -207,14 +207,14 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             error={Boolean(touched.causeofdeath && errors.causeofdeath)}
             helperText={touched.causeofdeath && errors.causeofdeath}
           />
-          {/* <TextField
+          <TextField
             fullWidth
             name="address"
             label="Address"
             {...getFieldProps('address')}
             error={Boolean(touched.address && errors.address)}
             helperText={touched.address && errors.address}
-          /> */}
+          />
           <FormControl
             helperText={touched.purok && errors.purok}
             fullWidth

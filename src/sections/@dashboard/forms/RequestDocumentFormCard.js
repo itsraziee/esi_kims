@@ -32,6 +32,7 @@ import BarangayCertificateForm from './BarangayCertificationForm';
 import BarangayClearanceForm from './BarangayClearanceForm';
 import BarangayDeathCertificateForm from './BarangayDeathCertificateForm';
 import BarangayTreePlantingCertificateForm from './BarangayTreePlantingCertificateForm';
+import CedulaFormCard from './CedulaFormCard';
 import CertificateOfResidencyForm from './CertificateOfResidencyForm';
 // ----------------------------------------------------------------------
 
@@ -95,6 +96,7 @@ export default function RequestDocumentFormCard() {
                 <MenuItem value="certificate-of-indigency">Certificate Of Indigency</MenuItem>
                 <MenuItem value="certificate-of-residency">Certificate of Residency</MenuItem>
                 <MenuItem value="tree-planting-certificate">Tree Planting Certificate</MenuItem>
+                <MenuItem value="cedula">Cedula</MenuItem>
               </Select>
             </Tooltip>
             {Boolean(touched.typeOfDocument && errors.typeOfDocument) && (
@@ -178,6 +180,13 @@ export default function RequestDocumentFormCard() {
                   formik.values.requestorname,
                   BARANGAY_BIRTH_CERTIFICATE_PRICE
                 );
+              }}
+            />
+          )}
+          {formik.values.typeOfDocument === 'cedula' && (
+            <CedulaFormCard
+              onSubmitForm={async (data) => {
+                return createRequest('Cedula', data, formik.values.requestorname);
               }}
             />
           )}
