@@ -10,16 +10,16 @@ const Template = (args) => <BarangayTreePlantingCertificateComponent {...args} /
 
 export const BarangayTreePlantingCertificate = Template.bind({});
 BarangayTreePlantingCertificate.args = {
-  name: 'Glenmark Pelarca',
-  day: 5,
-  month: 'June',
+  name: 'Lance Luy',
+  day: 23,
+  month: 'October',
   year: 2022,
-  age: 21,
-  citizenship: 'Filipino',
+  age: 25,
+  citizenship: 'Chinese',
   purok: 'Purok 5',
   ctc: '89329273',
   date: '05/03/2021',
-  bearer: 'Glen Jessel',
+  bearer: 'Lance Luy',
   secretary: 'HAZEL JOY M. MANZAN',
   captain: 'JERRY P. PARADILLO',
 };

@@ -9,10 +9,10 @@ const Template = (args) => <BarangayCertificationComponent {...args} />;
 
 export const BarangayCertification = Template.bind({});
 BarangayCertification.args = {
-  name: 'Glenmark Pelarca',
+  name: 'Lance Luy',
   purok: 'Purok 5',
-  day: 29,
-  month: 'August',
+  day: 23,
+  month: 'October',
   year: 2022,
   or: 2900260,
   ordateissued: '1-17-2022',

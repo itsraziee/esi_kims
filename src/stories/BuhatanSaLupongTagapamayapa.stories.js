@@ -9,8 +9,8 @@ const Template = (args) => <BuhatanSaLupongTagapamayapaComponent {...args} />;
 
 export const BuhatansaLupongTagapamayapa = Template.bind({});
 BuhatansaLupongTagapamayapa.args = {
-  complainant: 'Glenmark',
-  defendant: 'Jessel Marie Pelarca',
+  complainant: 'Stuart Ling',
+  defendant: 'Jessica Smith',
   consequence: 'Ma priso',
   caseNumber: '101',
   about: 'Theft',
