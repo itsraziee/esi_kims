@@ -108,25 +108,19 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="name"
-              label="Full Name"
+              label="Full Name*"
+              placeholder='Juan Dela Cruz'
               {...getFieldProps('name')}
               error={Boolean(touched.name && errors.name)}
               helperText={touched.name && errors.name}
             />
-            {/* <TextField
-              fullWidth
-              name="purok"
-              label="Purok"
-              {...getFieldProps('purok')}
-              error={Boolean(touched.purok && errors.purok)}
-              helperText={touched.purok && errors.purok}
-            /> */}
+           
             <FormControl
               helperText={touched.purok && errors.purok}
               fullWidth
               error={Boolean(touched.purok && errors.purok)}
             >
-              <InputLabel id="status-select-label">Purok</InputLabel>
+              <InputLabel id="status-select-label">Purok*</InputLabel>
               <Select
                 name="purok"
                 labelId="purok"
@@ -158,7 +152,7 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="citizenship"
-              label="Citizenship"
+              label="Citizenship*"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}

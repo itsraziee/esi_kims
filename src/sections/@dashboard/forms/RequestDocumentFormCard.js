@@ -59,13 +59,14 @@ export default function RequestDocumentFormCard() {
 
   return (
     <Card sx={{ width: '100%' }}>
-      <CardHeader title="Document Request Form" subheader="Please provide all the information required below" />
+      <CardHeader title="Document Request Form" subheader="Fields marked with an asterisk (*) are required. " />
       <CardContent>
         <Stack spacing={1}>
           <TextField
-            label="Requestor Name"
+            label="Requestor Name*"
             name="requestorname"
             fullWidth
+            placeholder="Juan Dela Cruz"
             {...getFieldProps('requestorname')}
             error={Boolean(touched.requestorname && errors.requestorname)}
             helperText={touched.requestorname && errors.requestorname}
@@ -75,7 +76,7 @@ export default function RequestDocumentFormCard() {
             fullWidth
             error={Boolean(touched.requestorname && errors.typeOfDocument)}
           >
-            <InputLabel id="status-select-label">Select Type of Document</InputLabel>
+            <InputLabel id="status-select-label">Select Type of Document*</InputLabel>
             <Tooltip title={!formik.values.requestorname ? 'Requestor Name is required' : ''}>
               <Select
                 name="typeOfDocument"

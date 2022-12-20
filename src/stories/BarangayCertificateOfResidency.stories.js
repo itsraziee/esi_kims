@@ -10,13 +10,13 @@ const Template = (args) => <BarangayCertificateOfResidencyComponent {...args} />
 
 export const BarangayCertificateOfResidency = Template.bind({});
 BarangayCertificateOfResidency.args = {
-  name: 'Glenmark Pelarca',
-  day: 5,
   citizenship: 'Filipino',
-  month: 'June',
+  name: 'Lance Luy',
+  day: 23,
+  month: 'October',
   year: 2022,
   purok: 'Purok 5',
-  bearer: 'Glen Lecaros',
+  bearer: 'Lance Luy',
   secretary: 'HAZEL JOY M. MANZAN',
   captain: 'JERRY P. PARADILLO',
 };

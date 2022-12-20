@@ -12,6 +12,6 @@ RequestStatus.args = {
   referenceNumber: '721tUNSDhCBFzub0jOcM',
   status: 'Pending',
   remarks: 'To Be Delivered',
-  requestorName: 'Jessel Pelarca',
+  requestorName: 'Lance Luy',
   typeOfDocument: 'Barangay Death Certificate',
 };

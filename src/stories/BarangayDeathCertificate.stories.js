@@ -10,15 +10,15 @@ const Template = (args) => <BarangayDeathCertificateComponent {...args} />;
 
 export const BarangayDeathCertificate = Template.bind({});
 BarangayDeathCertificate.args = {
-  name: 'Glenmark Pelarca',
+  name: 'Lance Luy',
   relationship: 'Cousin',
   residence: 'Balangcao',
   day: 29,
   month: 'August',
   year: 2022,
   punongbarangay: 'JERRY P. PARADILLO',
-  deceasedname: 'Tampulano Tampulana',
-  placeofdeath: '45 St. Fallen',
+  deceasedname: 'Juan Dela Cruz',
+  placeofdeath: 'Cagayan De Oro City',
   dateofbirth: 'July 05, 1320',
   dateofdeath: 'June 20, 2000',
   age: '90',
@@ -28,10 +28,10 @@ BarangayDeathCertificate.args = {
   placeburried: 'London',
   religion: 'Catholic',
   occupation: 'Instructor',
-  nameoffather: 'Shello',
-  maidennameofmother: 'Indian',
+  nameoffather: 'Sean Luy',
+  maidennameofmother: 'Jessica Luy',
   captain: 'JERRY P. PARADILLO',
   secretary: 'HAZEL JOY M. MANZAN',
   purok: 5,
-  requestorName: 'Glenmark Lecaros',
+  requestorName: 'John Doe',
 };

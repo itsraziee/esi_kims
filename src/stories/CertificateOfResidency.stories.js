@@ -10,12 +10,12 @@ const Template = (args) => <CertificateOfResidencyComponent {...args} />;
 
 export const CertificateOfResidency = Template.bind({});
 CertificateOfResidency.args = {
-  fullName: 'Glenmark Pelarca',
-  day: 5,
-  month: 'June',
+  fullName: 'Lance Luy',
+  day: 23,
+  month: 'October',
   year: 2022,
   purok: 'Purok 5',
-  bearer: 'Glen Lecaros',
+  bearer: 'Lance Luy',
   secretary: 'HAZEL JOY P. MANZAN',
   captain: 'JERRY P. PARADILLO',
 };
