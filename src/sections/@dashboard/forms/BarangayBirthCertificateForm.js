@@ -223,23 +223,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             </Select>
             {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
           </FormControl>
-
-          {/* <FormControl helperText={touched.sex && errors.sex} fullWidth>
-            <InputLabel id="sex-select-label">Sex</InputLabel>
-            <Select
-              name="sex"
-              labelId="sex-select-label"
-              id="sex-select"
-              value={formik.values.sex}
-              label="Sex"
-              onChange={handleChange}
-              {...getFieldProps('sex')}
-              error={Boolean(touched.sex && errors.sex)}
-            >
-              <MenuItem value="male">Male</MenuItem>
-              <MenuItem value="female">Female</MenuItem>
-            </Select>
-          </FormControl> */}
+          
           <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
             <InputLabel id="status-select-label">Sex</InputLabel>
             <Select
