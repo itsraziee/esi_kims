@@ -220,20 +220,20 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               error={Boolean(touched.purok && errors.purok)}
               helperText={touched.purok && errors.purok}
             >
-              <MenuItem value="1">Purok 1 Brgy. Proper</MenuItem>
-              <MenuItem value="2">Purok 2 Brgy. Proper</MenuItem>
-              <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
-              <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
-              <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
-              <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
-              <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
-              <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
-              <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>
-              <MenuItem value="9">Purok 9 Sitio Balangcao</MenuItem>
-              <MenuItem value="10a">Purok 10 Sitio Palo</MenuItem>
-              <MenuItem value="11b">Purok 11 Sitio Palo</MenuItem>
-              <MenuItem value="12">Purok 12 Siniloan</MenuItem>
-              <MenuItem value="13">Purok 13 Kiramong</MenuItem>
+              <MenuItem value="Purok 1 Brgy. Proper">Purok 1 Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 2 Brgy. Proper">Purok 2 Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 3A Brgy. Proper">Purok 3A Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 3B Brgy. Proper">Purok 3B Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 4 Brgy. PropSer">Purok 4 Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 5 Sitio Malapinggan">Purok 5 Sitio Malapinggan</MenuItem>
+              <MenuItem value="Purok 6 Sitio Balangcao">Purok 6 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 7 Sitio Balangcao">Purok 7 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 8 Sitio Balangcao">Purok 8 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 9 Sitio Balangcao">Purok 9 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 10 Sitio Palo">Purok 10 Sitio Palo</MenuItem>
+              <MenuItem value="Purok 11 Sitio Palo">Purok 11 Sitio Palo</MenuItem>
+              <MenuItem value="Purok 12 Siniloan">Purok 12 Siniloan</MenuItem>
+              <MenuItem value="Purok 13 Kiramong">Purok 13 Kiramong</MenuItem>
             </Select>
             {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok.</FormHelperText>}
           </FormControl>
@@ -265,7 +265,6 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
               <FormHelperText>Please select a Civil Status.</FormHelperText>
             )}
           </FormControl>
-          
           <TextField
             fullWidth
             name="placeburried"

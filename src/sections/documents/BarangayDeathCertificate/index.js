@@ -130,7 +130,7 @@ const BarangayDeathCertificate = React.forwardRef((props, ref) => {
         <span className={styles.c3}>{requestorName}</span>
         <span className={styles.c5}>
           {' '}
-          &nbsp;Filipino citizen married and resident of Purok <span className={styles.c3}>{purok}</span>, Kimanait,
+          &nbsp;Filipino citizen married and resident of <span className={styles.c3}>{purok}</span>, Kimanait,
           Pangantucan, Bukidnon,
         </span>
         <span className={styles.c3}> {relationship}</span>

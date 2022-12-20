@@ -1,4 +1,3 @@
-import React from 'react';
 import { default as BarangayCertificationComponent } from '../sections/documents/BarangayCertification';
 
 export default {
@@ -10,10 +9,10 @@ const Template = (args) => <BarangayCertificationComponent {...args} />;
 
 export const BarangayCertification = Template.bind({});
 BarangayCertification.args = {
-  name: 'Glenmark Pelarca',
-  address: 'Purok 5, Malapinggan, Kimanait, Pangantucan, Bukidnon',
-  day: 29,
-  month: 'August',
+  name: 'Lance Luy',
+  purok: 'Purok 5',
+  day: 23,
+  month: 'October',
   year: 2022,
   or: 2900260,
   ordateissued: '1-17-2022',

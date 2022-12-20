@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './BarangayTreePlantingCertificate.module.css';
 
 const BarangayTreePlantingCertificate = React.forwardRef((props, ref) => {
-  const { name, day, month, year, age, purok, ctc, date, bearer, secretary, captain } = props;
+  const { name, day, month, year, age, purok, citizenship, ctc, date, bearer, secretary, captain } = props;
 
   return (
     <Box className={styles.c7} ref={ref}>
@@ -123,7 +123,8 @@ const BarangayTreePlantingCertificate = React.forwardRef((props, ref) => {
           </strong>
         </span>
         <span className={styles.c0}>
-          , Filipino citizen, single and bonafide resident of Purok{' '}
+            {' '}
+            <span className={styles.underline}>{citizenship}</span> citizen, single and bonafide resident of Purok{' '}
           <strong>
             <span className={styles.underline}>{purok}</span>
           </strong>
