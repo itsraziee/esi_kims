@@ -43,7 +43,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
     applicant: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Applicant is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
-    purok: Yup.string().required('Address is required'),
+    purok: Yup.string().required('Purok is required'),
     purpose: Yup.string().required('Purpose is required'),
     layout: Yup.string().required('Layout is required'),
     beam: Yup.string().required('Beam is required'),
@@ -172,7 +172,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               <MenuItem value="3a">Purok 3A Brgy. Proper</MenuItem>
               <MenuItem value="3b">Purok 3B Brgy. Proper</MenuItem>
               <MenuItem value="4">Purok 4 Brgy. Proper</MenuItem>
-              <MenuItem value="5">Purok 5 Sitio Malapinggan</MenuItem>
+              <MenuItem value="Purok 5 Sitio Malapinggan">Purok 5 Sitio Malapinggan</MenuItem>
               <MenuItem value="6">Purok 6 Sitio Balangcao</MenuItem>
               <MenuItem value="7">Purok 7 Sitio Balangcao</MenuItem>
               <MenuItem value="8">Purok 8 Sitio Balangcao</MenuItem>

@@ -9,7 +9,8 @@ const BarangayBirthCertificate = React.forwardRef((props, ref) => {
     purok,
     nameofchild,
     sex,
-    dateofbirth,
+    dateAndTimeOfBirth,
+    // dateofbirth,
     weight,
     birthorder,
     death,
@@ -198,7 +199,7 @@ const BarangayBirthCertificate = React.forwardRef((props, ref) => {
             :{' '}
             <span className={styles.c0}>
               <strong>
-                <span className={styles.underline}>{dateofbirth}</span>
+                <span className={styles.underline}>{dateAndTimeOfBirth}</span>
               </strong>
             </span>
           </td>

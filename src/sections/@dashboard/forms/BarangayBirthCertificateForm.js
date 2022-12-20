@@ -51,9 +51,10 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
   const RequestDocumentFormSchema = Yup.object().shape({
     nameofchild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
-    dateofbirth: Yup.string().required('Date of Birth is required'),
+    // dateofbirth: Yup.string().required('Date of Birth is required'),
+    dateAndTimeOfBirth: Yup.string().required('Date and Time of Birth is required'),
     purok: Yup.string().required('Purok is required'),
-    timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
+    // timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
     weight: Yup.string().required('Weight is required'),
     birthorder: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Birth Order is required'),
     death: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Death is required'),
@@ -93,8 +94,9 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
       nameofchild: '',
       sex: '',
       purok: '',
-      dateofbirth: '',
-      timeofbirth: '',
+      dateAndTimeOfBirth: '',
+      // dateofbirth: '',
+      // timeofbirth: '',
       weight: '',
       birthorder: '',
       death: '',
@@ -258,6 +260,20 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           </FormControl>
           <TextField
             fullWidth
+            name="dateAndTimeOfBirth"
+            id="dateAndTimeOfBirth"
+            label="Date and Time of Birth"
+            type="datetime-local"
+            defaultValue="1997-10-23T10:23"
+            {...getFieldProps('dateAndTimeOfBirth')}
+            error={Boolean(touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth)}
+            helperText={touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          {/* <TextField
+            fullWidth
             name="dateofbirth"
             id="dateofbirth"
             label="Date of Birth"
@@ -269,16 +285,24 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
               shrink: true,
             }}
           />
-
           <TextField
             // sx={{ minWidth: 91, mt: 2 }}
+            id="time"
             fullWidth
             name="timeofbirth"
             label="Time of Birth"
+            type="time"
+            defaultValue="00:00"
             {...getFieldProps('timeofbirth')}
             error={Boolean(touched.timeofbirth && errors.timeofbirth)}
             helperText={touched.timeofbirth && errors.timeofbirth}
-          />
+            InputLabelProps={{
+              shrink: true,
+            }}
+            inputProps={{
+              step: 300, // 5 min
+            }}
+          /> */}
         </Stack>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
