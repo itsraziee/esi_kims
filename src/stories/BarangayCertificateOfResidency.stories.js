@@ -12,6 +12,7 @@ export const BarangayCertificateOfResidency = Template.bind({});
 BarangayCertificateOfResidency.args = {
   name: 'Glenmark Pelarca',
   day: 5,
+  citizenship: 'Filipino',
   month: 'June',
   year: 2022,
   purok: 'Purok 5',
