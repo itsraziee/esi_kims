@@ -15,10 +15,11 @@ BarangayTreePlantingCertificate.args = {
   month: 'June',
   year: 2022,
   age: 21,
+  citizenship: 'Filipino',
   purok: 'Purok 5',
   ctc: '89329273',
   date: '05/03/2021',
-  bearer: 'Glen Lecaros',
+  bearer: 'Glen Jessel',
   secretary: 'HAZEL JOY M. MANZAN',
   captain: 'JERRY P. PARADILLO',
 };
