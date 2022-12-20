@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './BarangayCertificateOfResidency.module.css';
 
 const CertificateOfResidency = React.forwardRef((props, ref) => {
-  const { name, purok, day, month, year, bearer, secretary, captain } = props;
+  const { name, purok, day, month, year, bearer, citizenship, secretary, captain } = props;
 
   return (
     <Box className={styles.c13} ref={ref}>
@@ -124,8 +124,9 @@ const CertificateOfResidency = React.forwardRef((props, ref) => {
       <p className={styles.c7}>
         <span className={styles.c1}>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify{' '}
-          <span className={styles.fillup}>{name}</span>, Filipino citizen is a bonified resident of Purok{' '}
-          <span className={styles.fillup}>{purok}</span>, Kimanait, Pangantucan, Bukidnon.
+          <span className={styles.fillup}>{name}</span>, <span className={styles.fillup}>{citizenship}</span>
+          &nbsp;citizen is a bonified resident of <span className={styles.fillup}>{purok}</span>, Kimanait, Pangantucan,
+          Bukidnon.
         </span>
       </p>
       <p className={styles.c5}>
