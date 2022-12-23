@@ -73,6 +73,16 @@ export default function LegislativeFormCard() {
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <TextField
                       fullWidth
+                      name="series"
+                      label="Series*"
+                      {...getFieldProps('series')}
+                      error={Boolean(touched.series && errors.series)}
+                      helperText={touched.series && errors.series}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
                       name="title"
                       label="Title*"
                       {...getFieldProps('title')}
