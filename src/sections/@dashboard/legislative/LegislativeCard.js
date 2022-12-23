@@ -29,7 +29,17 @@ LegislativeCard.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function LegislativeCard({ title, icon, color = 'primary', sx, url = null, ...other }) {
+export default function LegislativeCard({
+  series,
+  ordinanceNumber,
+  authors,
+  title,
+  icon,
+  color = 'primary',
+  sx,
+  url = null,
+  ...other
+}) {
   return (
     <Link sx={{ textDecoration: 'none' }} href={url} color="#100720">
       <Card
@@ -57,8 +67,17 @@ export default function LegislativeCard({ title, icon, color = 'primary', sx, ur
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle>
-        <Typography variant="subtitle4" sx={{ opacity: 0.72 }}>
+        <Typography variant="subtitle8" sx={{ opacity: 0.72 }}>
+          Ordinance No. {ordinanceNumber}
+        </Typography>
+        <Typography variant="subtitle8" sx={{ opacity: 0.72 }}>
+          , Series of {series}
+        </Typography>
+        <Typography variant="subtitle4" sx={{ opacity: 0.72, display: 'block' }}>
           {title}
+        </Typography>
+        <Typography variant="subtitle7" sx={{ opacity: 0.72, display: 'block' }}>
+          {authors}
         </Typography>
       </Card>
     </Link>
