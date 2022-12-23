@@ -67,16 +67,13 @@ export default function LegislativeCard({
         >
           <Iconify icon={icon} width={24} height={24} />
         </IconWrapperStyle>
-        <Typography variant="subtitle8" sx={{ opacity: 0.72 }}>
+        <Typography variant="subtitle4" sx={{ opacity: 0.72 }}>
           Ordinance No. {ordinanceNumber}
         </Typography>
-        <Typography variant="subtitle8" sx={{ opacity: 0.72 }}>
-          , Series of {series}
+        <Typography variant="subtitle4" sx={{ opacity: 0.72 }}>
+          , Series of {series}: {title}
         </Typography>
-        <Typography variant="subtitle4" sx={{ opacity: 0.72, display: 'block' }}>
-          {title}
-        </Typography>
-        <Typography variant="subtitle7" sx={{ opacity: 0.72, display: 'block' }}>
+        <Typography variant="subtitle8" sx={{ opacity: 0.72, display: 'flex' }}>
           {authors}
         </Typography>
       </Card>

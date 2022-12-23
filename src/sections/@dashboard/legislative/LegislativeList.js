@@ -9,13 +9,18 @@ export default function LegislativeList({ series, ordinanceNumber, authors, titl
           <Iconify icon={'clarity:document-solid'} width={24} height={24} />
         </ListItemIcon>
         <ListItemText
-          sx={{ opacity: 0.72 }}
-          primary={title}
+          
+          primary={
+            <>
+              <Typography variant="subtitle4">
+                {`Ordinance No. ${ordinanceNumber}, Series of ${series}`}: {title}
+              </Typography>
+            </>
+          }
           secondary={
             <>
-              {`Ordinance No. ${ordinanceNumber}, Series of ${series} `}
-              <Typography sx={{ display: 'inline' }} component="span" variant="body2" color="text.primary">
-                - {authors}
+              <Typography sx={{ display: 'flex', opacity: 0.72 }} component="span" variant="subtitle8">
+                {authors}
               </Typography>
             </>
           }
