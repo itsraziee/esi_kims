@@ -14,12 +14,16 @@ export default function LegislativeFormCard() {
   const [pdfFile, setPdfFile] = useState();
 
   const LegislativeFormSchema = Yup.object().shape({
+    ordinanceNumber: Yup.string().required('Ordinanace No. is required'),
     title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
+    authors: Yup.string().required('Authors is required'),
   });
 
   const formik = useFormik({
     initialValues: {
+      ordinanceNumber: '',
       title: '',
+      authors: '',
     },
     validationSchema: LegislativeFormSchema,
     onSubmit: (data) => {
@@ -54,16 +58,36 @@ export default function LegislativeFormCard() {
               <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Stack spacing={3}>
                   <Typography variant="subtitle3" noWrap>
-                    Upload Legislative
+                    Upload Ordinance
                   </Typography>
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      name="ordinanceNumber"
+                      label="Ordinance No.*"
+                      {...getFieldProps('ordinanceNumber')}
+                      error={Boolean(touched.ordinanceNumber && errors.ordinanceNumber)}
+                      helperText={touched.ordinanceNumber && errors.ordinanceNumber}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <TextField
                       fullWidth
                       name="title"
-                      label="Title"
+                      label="Title*"
                       {...getFieldProps('title')}
                       error={Boolean(touched.title && errors.title)}
                       helperText={touched.title && errors.title}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      name="authors"
+                      label="Authors*"
+                      {...getFieldProps('authors')}
+                      error={Boolean(touched.authors && errors.authors)}
+                      helperText={touched.authors && errors.authors}
                     />
                   </Stack>
 
