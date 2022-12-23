@@ -4,9 +4,9 @@ import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolt
 import Iconify from '../../../components/Iconify';
 import { useAuth } from '../../../hooks/useAuth';
 
-export default function LegislativeList({ series, ordinanceNumber, authors, color = 'primary', title, url, ...props }) {
-  const user = useAuth();
-  return (
+export default function DisclosureBoardList({ title, color = 'primary', url, ...props }) {
+    const user = useAuth();
+    return (
     <ListItem disablePadding sx={{ my: 1 }} {...props}>
       <ListItemButton
         href={url}
@@ -23,20 +23,11 @@ export default function LegislativeList({ series, ordinanceNumber, authors, colo
         <ListItemText
           primary={
             <>
-              <Typography variant="subtitle4">
-                {`Ordinance No. ${ordinanceNumber}, Series of ${series}`}: {title}
-              </Typography>
-            </>
-          }
-          secondary={
-            <>
-              <Typography sx={{ display: 'flex', opacity: 0.72 }} component="span" variant="subtitle8">
-                {authors}
-              </Typography>
+              <Typography variant="subtitle4">{title}</Typography>
             </>
           }
         />
-        {user && (
+         {user && (
           <>
             <Tooltip title="Edit">
               <IconButton>

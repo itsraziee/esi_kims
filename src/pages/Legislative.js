@@ -19,7 +19,7 @@ export default function Legislative() {
   const user = useAuth();
 
   const legislatives = useLegislatives();
-  const [tileViewMode, setTileViewMode] = useState(false);
+  // const [tileViewMode, setTileViewMode] = useState(false);
 
   useEffect(() => {
     console.log({ legislatives });
@@ -56,7 +56,7 @@ export default function Legislative() {
           </Stack>
         </Stack>
         <Grid container spacing={3}>
-          {tileViewMode &&
+          {/* {tileViewMode &&
             legislatives?.map((legislative) => (
               <Grid item xs={12} sm={8} md={3} key={legislative.id}>
                 <LegislativeCard
@@ -68,8 +68,8 @@ export default function Legislative() {
                   series={legislative?.series}
                 />
               </Grid>
-            ))}
-          {!tileViewMode && (
+            ))} */}
+          {/* {!tileViewMode && ( */}
             <Grid item xs={12}>
               <List dense>
                 {legislatives?.map((legislative) => (
@@ -84,7 +84,7 @@ export default function Legislative() {
                 ))}
               </List>
             </Grid>
-          )}
+          {/* )} */}
         </Grid>
       </Container>
     </Page>
