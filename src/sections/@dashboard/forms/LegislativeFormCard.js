@@ -69,8 +69,7 @@ export default function LegislativeFormCard() {
                       error={Boolean(touched.ordinanceNumber && errors.ordinanceNumber)}
                       helperText={touched.ordinanceNumber && errors.ordinanceNumber}
                     />
-                  </Stack>
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+
                     <TextField
                       fullWidth
                       name="series"
@@ -80,6 +79,7 @@ export default function LegislativeFormCard() {
                       helperText={touched.series && errors.series}
                     />
                   </Stack>
+
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <TextField
                       fullWidth
