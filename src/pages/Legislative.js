@@ -34,7 +34,7 @@ export default function Legislative() {
           </Typography>
 
           <Stack direction="row" spacing={1}>
-            <IconButton
+            {/* <IconButton
               onClick={() => {
                 setTileViewMode(!tileViewMode);
               }}
@@ -42,7 +42,7 @@ export default function Legislative() {
               {tileViewMode && <GridViewIcon />}
 
               {!tileViewMode && <ListIcon />}
-            </IconButton>
+            </IconButton> */}
             {user && (
               <Button
                 variant="contained"

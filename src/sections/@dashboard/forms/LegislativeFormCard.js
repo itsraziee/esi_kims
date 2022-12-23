@@ -52,7 +52,7 @@ export default function LegislativeFormCard() {
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} sm={6}>
-        <Card sx={{ minWidth: 400 }}>
+        <Card sx={{ width: '100%' }}>
           <CardContent>
             <FormikProvider value={formik}>
               <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
