@@ -1,12 +1,12 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Button, Container, Grid, Stack, Typography } from '@mui/material';
+import { Button, Container, Grid, List, Stack, Typography } from '@mui/material';
 // components
 import { useEffect } from 'react';
 import Page from '../components/Page';
 
 import Iconify from '../components/Iconify';
-import { DisclosureBoardCard } from '../sections/@dashboard/disclosureBoard';
+import { DisclosureBoardList } from '../sections/@dashboard/disclosureBoard';
 
 import { useAuth } from '../hooks/useAuth';
 import { useDisclosureBoards } from '../hooks/useDisclosureBoards';
@@ -40,7 +40,18 @@ export default function DisclosureBoard() {
           )}
         </Stack>
         <Grid container spacing={3}>
-          {disclosureBoards?.map((disclosureBoard) => {
+        <Grid item xs={12}>
+              <List dense>
+                {disclosureBoards?.map((disclosureBoard) => (
+                  <DisclosureBoardList
+                    title={disclosureBoard.title}
+                    url={`/dashboard/viewDisclosureBoard/?uid=${disclosureBoard.id}`}
+                    icon={'clarity:document-solid'}
+                  />
+                ))}
+              </List>
+            </Grid>
+          {/* {disclosureBoards?.map((disclosureBoard) => {
             return (
               <Grid item xs={12} sm={8} md={3}>
                 <DisclosureBoardCard
@@ -50,7 +61,7 @@ export default function DisclosureBoard() {
                 />
               </Grid>
             );
-          })}
+          })} */}
         </Grid>
       </Container>
     </Page>

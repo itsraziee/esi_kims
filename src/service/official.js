@@ -290,8 +290,11 @@ export async function deleteOfficial(officialUid) {
     console.log({ officialData });
 
     const imageRef = ref(storage, officialData.uploadImage);
-    return deleteObject(imageRef).then(() => {
+    try {
+      return deleteObject(imageRef).then(() => deleteDoc(officialRef));
+    } catch (err) {
+      console.error({ err });
       return deleteDoc(officialRef);
-    });
+    }
   });
 }

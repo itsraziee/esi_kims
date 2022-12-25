@@ -1,10 +1,24 @@
 import Close from '@mui/icons-material/Close';
-import { AppBar, Button, Chip, Container, Dialog, Grid, IconButton, Slide, Toolbar, Typography } from '@mui/material';
+import {
+  AppBar,
+  Button,
+  Chip,
+  Container,
+  Dialog,
+  Grid,
+  IconButton,
+  Slide,
+  Stack,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+
 import moment from 'moment';
 import * as React from 'react';
 import { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
+// import Twilio from 'twilio';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import AuthRequired from '../layouts/auth/AuthRequired';
@@ -16,6 +30,22 @@ import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
 import { updateRemarks, updateStatus } from '../service/documentRequest';
+
+const accountSid = 'AC1723ddff52489c0cb0ecbcd973fac96d';
+const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
+// const client = new require('twilio')(accountSid, authToken);
+// const client = new Twilio(accountSid, authToken);
+
+// function sendMessage(number, message) {
+//   client.messages
+//     .create({
+//       body: message,
+//       messagingServiceSid: 'MG1f9927e9193377907f98fd658cb76c87',
+//       to: number,
+//     })
+//     .then((message) => console.log(message.sid))
+//     .done();
+// }
 
 export default function BillingTransaction() {
   const rows = useDocumentRequests() ?? [];
@@ -42,8 +72,8 @@ export default function BillingTransaction() {
   }, [rows]);
 
   const columns = [
-    { field: 'id', headerName: 'Reference Number', flex: 1 },
-    { field: 'requestorName', headerName: 'Name', flex: 1 },
+    { field: 'id', headerName: 'Reference Number', flex: 1.5 },
+    { field: 'requestorName', headerName: 'Name', flex: 1.5 },
     {
       field: 'datetime',
       headerName: 'Datetime',
@@ -55,7 +85,7 @@ export default function BillingTransaction() {
         return moment(params.value).format('L');
       },
     },
-    { field: 'type', headerName: 'Type', flex: 1 },
+    { field: 'type', headerName: 'Type', flex: 1.5 },
     { field: 'amount', headerName: 'Amount' },
     {
       field: 'status',
@@ -73,6 +103,7 @@ export default function BillingTransaction() {
         return { ...params.row, status: params.value };
       },
     }, // pending, inprogress, completed, declined
+
     {
       field: 'remarks',
       headerName: 'Remarks',
@@ -86,24 +117,42 @@ export default function BillingTransaction() {
         return { ...params.row, remarks: params.value ?? '' };
       },
     },
+
     {
       field: 'none',
       headerName: 'Actions',
+      flex: 1.5,
       sortable: false,
       disableColumnMenu: true,
       renderCell: (params) => (
-        <Button
-          variant="text"
-          size="small"
-          onClick={() => {
-            console.log({ params });
-            setDocumentType(params.row.type);
-            setCurrentRow(params.row);
-            handlePrintOpen();
-          }}
-        >
-          Print
-        </Button>
+        <Stack direction="row" spacing={1}>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => {
+              console.log({ params });
+              setDocumentType(params.row.type);
+              setCurrentRow(params.row);
+              handlePrintOpen();
+            }}
+          >
+            Print
+          </Button>
+
+          <Button
+            disabled={params.row.status !== 'completed'}
+            variant="contained"
+            size="small"
+            // onClick={() => {
+            //   sendMessage(
+            //     '+639169235853',
+            //     'Maayong Adlaw! Kini nga mensahe gikan sa ESI-KIMS buot mupahibalo nga andam na ug pwede ng makuha ang imong gikinihanglan nga dokumento. Atol sa imong pagkuha sa maong dokumento palihog sa pagdala sa imong kompleto nga bayad. Daghang Salamat'
+            //   );
+            // }}
+          >
+            SMS
+          </Button>
+        </Stack>
       ),
     },
   ];
