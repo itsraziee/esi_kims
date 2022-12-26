@@ -1,6 +1,7 @@
 import Close from '@mui/icons-material/Close';
 import {
   AppBar,
+  Box,
   Button,
   Chip,
   Container,
@@ -9,16 +10,16 @@ import {
   IconButton,
   Slide,
   Stack,
+  TextField,
   Toolbar,
   Typography,
 } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-// import Twilio from 'twilio';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import AuthRequired from '../layouts/auth/AuthRequired';
@@ -29,7 +30,7 @@ import BarangayCertification from '../sections/documents/BarangayCertification';
 import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
-import { updateRemarks, updateStatus } from '../service/documentRequest';
+import { updateAmount, updateRemarks, updateStatus } from '../service/documentRequest';
 
 const accountSid = 'AC1723ddff52489c0cb0ecbcd973fac96d';
 const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
@@ -47,12 +48,135 @@ const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
 //     .done();
 // }
 
+function RatingInputValue(props) {
+  const { item, applyValue, focusElementRef } = props;
+  const [from, setFrom] = useState(typeof item.value?.from === 'object' ? item.value.from : Date.now());
+  const [to, setTo] = useState(typeof item.value?.to === 'object' ? item.value.to : from);
+  // const [from, setFrom] = useState(Date.now());
+  // const [to, setTo] = useState(from);
+
+  console.log({ item });
+  console.log({ from: typeof item.value?.from, to: typeof item.value?.to });
+
+  // const ratingRef = React.useRef(null);
+  // React.useImperativeHandle(focusElementRef, () => ({
+  //   focus: () => {
+  //     ratingRef.current.querySelector(`input[value="${Number(item.value) || ''}"]`).focus();
+  //   },
+  // }));
+
+  React.useEffect(() => {
+    applyValue({ ...item, value: { from, to } });
+
+    console.table({ from, to });
+  }, [from, to]);
+
+  return (
+    <Box>
+      <TextField
+        type="date"
+        variant="standard"
+        label="from"
+        fullWidth
+        value={moment(from).format('yyyy-MM-DD')}
+        onChange={(event) => {
+          const newValue = new Date(event.target.value);
+          console.log("value to set 'from': ", newValue, typeof newValue);
+          setFrom((previews) => {
+            if (newValue > to) {
+              return previews;
+            }
+            return newValue;
+          });
+        }}
+      />
+      <TextField
+        type="date"
+        variant="standard"
+        label="to"
+        fullWidth
+        value={moment(to).format('yyyy-MM-DD')}
+        onChange={(event) => {
+          const newValue = new Date(event.target.value);
+          console.log("value to set 'to': ", newValue, typeof newValue);
+          setTo((previews) => {
+            if (newValue < from) {
+              return previews;
+            }
+            return newValue;
+          });
+        }}
+      />
+    </Box>
+  );
+}
+
+RatingInputValue.propTypes = {
+  applyValue: PropTypes.func.isRequired,
+  focusElementRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any.isRequired,
+    }),
+  ]),
+  item: PropTypes.shape({
+    /**
+     * The column from which we want to filter the rows.
+     */
+    field: PropTypes.string,
+    /**
+     * Must be unique.
+     * Only useful when the model contains several items.
+     */
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    /**
+     * The name of the operator we want to apply.
+     */
+    operator: PropTypes.string,
+    /**
+     * The filtering value.
+     * The operator filtering function will decide for each row if the row values is correct compared to this value.
+     */
+    value: PropTypes.any,
+  }).isRequired,
+};
+
 export default function BillingTransaction() {
+  // const apiRef = useGridApiContext();
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [filteredRows, setFilteredRows] = useState([]);
   const rows = useDocumentRequests() ?? [];
   const [printOpen, setPrintOpen] = React.useState(false);
   const [documentType, setDocumentType] = React.useState();
   const [currentRow, setCurrentRow] = React.useState();
   const [previewSrc, setPreviewSrc] = React.useState();
+
+  React.useEffect(() => {
+    let newTotalRevenue = 0;
+    console.log('filteredRows changed');
+
+    if (filteredRows.length === 0) {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (row.status === 'completed') {
+          newTotalRevenue += Number(row.amount);
+        }
+      }
+
+      setTotalRevenue(newTotalRevenue);
+    } else {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < filteredRows.length; i++) {
+        const row = filteredRows[i];
+        if (row.status === 'completed') {
+          newTotalRevenue += Number(row.amount);
+        }
+      }
+
+      setTotalRevenue(newTotalRevenue);
+    }
+  }, [filteredRows, rows]);
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -84,9 +208,40 @@ export default function BillingTransaction() {
 
         return moment(params.value).format('L');
       },
+      filterOperators: [
+        {
+          label: 'Range',
+          value: 'range',
+          getApplyFilterFn: (filterItem) => {
+            console.log({ filterItem });
+            if (!filterItem.value) {
+              return null;
+            }
+            return (params) =>
+              // return Number(params.value) >= Number(filterItem.value);
+              moment(new Date(params.value)).isSameOrAfter(filterItem.value.from, 'day') &&
+              moment(new Date(params.value)).isSameOrBefore(filterItem.value.to, 'day');
+          },
+          InputComponent: RatingInputValue,
+          InputComponentProps: { type: 'date' },
+        },
+      ],
     },
     { field: 'type', headerName: 'Type', flex: 1.5 },
-    { field: 'amount', headerName: 'Amount' },
+    {
+      headerName: 'Amount',
+      field: 'amount',
+      flex: 1,
+      editable: true,
+      valueSetter: (params) => {
+        console.log({ params });
+        updateAmount(params.row.id, params.value ?? '').then((res) => {
+          console.log({ res });
+        });
+        return { ...params.row, amount: params.value ?? '' };
+      },
+      type: 'number',
+    },
     {
       field: 'status',
       headerName: 'Status',
@@ -140,7 +295,7 @@ export default function BillingTransaction() {
           </Button>
 
           <Button
-            disabled={params.row.status !== 'completed'}
+            disabled={params.row.status !== 'inprogress'}
             variant="contained"
             size="small"
             // onClick={() => {
@@ -168,12 +323,36 @@ export default function BillingTransaction() {
           Billing Transaction
         </Typography>
         <Container sx={{ mt: 5, mb: 5 }}>
+          <Typography>Overall Revenue: {totalRevenue}</Typography>
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
             components={{ Toolbar: GridToolbar }}
             rows={rows}
             columns={columns}
             autoHeight
+            onStateChange={(state, event, details) => {
+              console.log({ state, event, details });
+              const rowIds = state.filter.filteredRowsLookup;
+              console.log({ rowIds });
+              // eslint-d1;
+              const newFilteredRows = [];
+
+              // NOTE: GETTING ALL FILTERED ROWS
+              // eslint-disable-next-line no-restricted-syntax
+              for (const rowId in rowIds) {
+                if (rowIds[rowId]) {
+                  // eslint-disable-next-line no-plusplus
+                  const row = rows.find((row) => row.id === rowId);
+                  newFilteredRows.push(row);
+                }
+              }
+              // END_NOTE: GETTING ALL FILTERED ROWS
+
+              console.log({ newFilteredRows });
+              if (JSON.stringify(newFilteredRows) !== JSON.stringify(filteredRows)) {
+                setFilteredRows(newFilteredRows);
+              }
+            }}
           />
           {printOpen && ( // Note: Important, button disables after closing dialog
             <Dialog fullScreen open={printOpen} onClose={handlePrintClose} TransitionComponent={Transition}>

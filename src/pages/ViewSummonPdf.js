@@ -1,11 +1,16 @@
-import { Container, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { Container, IconButton, Stack, Typography } from '@mui/material';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import Page from '../components/Page';
+import EditSummonDialog from '../components/editDialog/EditSummonDialog';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
-import { solveSummon } from '../service/summon';
+import { deleteSummon } from '../service/summon';
 
 export default function ViewSummonPdf() {
   const user = useAuth();
@@ -13,6 +18,10 @@ export default function ViewSummonPdf() {
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
   const [solved, setSolved] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const [summon, setSummon] = useState();
 
@@ -25,7 +34,8 @@ export default function ViewSummonPdf() {
     // });
     const unsub = onSnapshot(doc(firestore, `summon/${uid}`), (doc) => {
       console.log('Current data: ', doc.data());
-      setSummon(doc.data());
+      const data = doc.data();
+      setSummon({ ...data, id: doc.ref.id });
     });
     return () => unsub;
   }, []);
@@ -39,30 +49,53 @@ export default function ViewSummonPdf() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">Case number: {summon?.caseNumber}</Typography>
+
+          <Stack direction="row" spacing={1}>
+            <IconButton
+              onClick={() => {
+                setOpenEditDialog(true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenDeleteDialog(true);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
         </Stack>
         {summon && (
-          <>
-            <FormControlLabel
-              sx={{ float: 'right' }}
-              control={
-                <Switch
-                  defaultChecked={summon?.caseType === 'solved'}
-                  onChange={(e, checked) => {
-                    solveSummon(uid, checked);
-                  }}
-                />
-              }
-              label={summon?.caseType === 'solved' ? 'Solved' : 'Unsolved'}
-            />
-            <iframe
-              title={summon?.caseNumber}
-              src={summon?.pdfURL}
-              id="iframe"
-              style={{ width: '100%', height: '60vh' }}
-            />
-          </>
+          <iframe
+            title={summon?.caseNumber}
+            src={summon?.pdfURL}
+            id="iframe"
+            style={{ width: '100%', height: '60vh' }}
+          />
         )}
       </Container>
+      {summon && (
+        <EditSummonDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} summon={summon} />
+      )}
+      <DeleteConfirmationDialog
+        open={openDeleteDialog}
+        handleClose={() => setOpenDeleteDialog(false)}
+        title="Delete Summon?"
+        onProceed={() => {
+          deleteSummon(uid)
+            .then(() => {
+              setOpenDeleteDialog(false);
+              navigate('/dashboard/summon');
+              enqueueSnackbar('Summon deleted successfully', { variant: 'success' });
+            })
+            .catch((err) => {
+              console.error(err);
+              enqueueSnackbar('Summon deletion failed', { variant: 'error' });
+            });
+        }}
+      />
     </Page>
   );
 }
