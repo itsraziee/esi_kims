@@ -1,6 +1,7 @@
 import Close from '@mui/icons-material/Close';
 import {
   AppBar,
+  Box,
   Button,
   Chip,
   Container,
@@ -9,16 +10,16 @@ import {
   IconButton,
   Slide,
   Stack,
+  TextField,
   Toolbar,
   Typography,
 } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { _, data } from 'lodash';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-// import Twilio from 'twilio';
 import Page from '../components/Page';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import AuthRequired from '../layouts/auth/AuthRequired';
@@ -29,7 +30,7 @@ import BarangayCertification from '../sections/documents/BarangayCertification';
 import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
-import { updateRemarks, updateStatus, updateAmount } from '../service/documentRequest';
+import { updateAmount, updateRemarks, updateStatus } from '../service/documentRequest';
 
 const accountSid = 'AC1723ddff52489c0cb0ecbcd973fac96d';
 const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
@@ -46,6 +47,99 @@ const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
 //     .then((message) => console.log(message.sid))
 //     .done();
 // }
+
+function RatingInputValue(props) {
+  const { item, applyValue, focusElementRef } = props;
+  const [from, setFrom] = useState(typeof item.value?.from === 'object' ? item.value.from : Date.now());
+  const [to, setTo] = useState(typeof item.value?.to === 'object' ? item.value.to : from);
+  // const [from, setFrom] = useState(Date.now());
+  // const [to, setTo] = useState(from);
+
+  console.log({ item });
+  console.log({ from: typeof item.value?.from, to: typeof item.value?.to });
+
+  // const ratingRef = React.useRef(null);
+  // React.useImperativeHandle(focusElementRef, () => ({
+  //   focus: () => {
+  //     ratingRef.current.querySelector(`input[value="${Number(item.value) || ''}"]`).focus();
+  //   },
+  // }));
+
+  React.useEffect(() => {
+    applyValue({ ...item, value: { from, to } });
+
+    console.table({ from, to });
+  }, [from, to]);
+
+  return (
+    <Box>
+      <TextField
+        type="date"
+        variant="standard"
+        label="from"
+        fullWidth
+        value={moment(from).format('yyyy-MM-DD')}
+        onChange={(event) => {
+          const newValue = new Date(event.target.value);
+          console.log("value to set 'from': ", newValue, typeof newValue);
+          setFrom((previews) => {
+            if (newValue > to) {
+              return previews;
+            }
+            return newValue;
+          });
+        }}
+      />
+      <TextField
+        type="date"
+        variant="standard"
+        label="to"
+        fullWidth
+        value={moment(to).format('yyyy-MM-DD')}
+        onChange={(event) => {
+          const newValue = new Date(event.target.value);
+          console.log("value to set 'to': ", newValue, typeof newValue);
+          setTo((previews) => {
+            if (newValue < from) {
+              return previews;
+            }
+            return newValue;
+          });
+        }}
+      />
+    </Box>
+  );
+}
+
+RatingInputValue.propTypes = {
+  applyValue: PropTypes.func.isRequired,
+  focusElementRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({
+      current: PropTypes.any.isRequired,
+    }),
+  ]),
+  item: PropTypes.shape({
+    /**
+     * The column from which we want to filter the rows.
+     */
+    field: PropTypes.string,
+    /**
+     * Must be unique.
+     * Only useful when the model contains several items.
+     */
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    /**
+     * The name of the operator we want to apply.
+     */
+    operator: PropTypes.string,
+    /**
+     * The filtering value.
+     * The operator filtering function will decide for each row if the row values is correct compared to this value.
+     */
+    value: PropTypes.any,
+  }).isRequired,
+};
 
 export default function BillingTransaction() {
   const rows = useDocumentRequests() ?? [];
@@ -84,9 +178,28 @@ export default function BillingTransaction() {
 
         return moment(params.value).format('L');
       },
+      filterOperators: [
+        {
+          label: 'Range',
+          value: 'range',
+          getApplyFilterFn: (filterItem) => {
+            console.log({ filterItem });
+            if (!filterItem.value) {
+              return null;
+            }
+            return (params) =>
+              // return Number(params.value) >= Number(filterItem.value);
+              moment(new Date(params.value)).isSameOrAfter(filterItem.value.from, 'day') &&
+              moment(new Date(params.value)).isSameOrBefore(filterItem.value.to, 'day');
+          },
+          InputComponent: RatingInputValue,
+          InputComponentProps: { type: 'date' },
+        },
+      ],
     },
     { field: 'type', headerName: 'Type', flex: 1.5 },
-    { headerName: 'Amount', 
+    {
+      headerName: 'Amount',
       field: 'amount',
       flex: 1,
       editable: true,
@@ -320,9 +433,7 @@ export default function BillingTransaction() {
             </AppBar>
             <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
           </Dialog>
-          
         </Container>
-        
       </Page>
     </AuthRequired>
   );
