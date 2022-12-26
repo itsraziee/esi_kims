@@ -5,6 +5,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import Page from '../components/Page';
 import EditSummonDialog from '../components/editDialog/EditSummonDialog';
 import { firestore } from '../firebase-init';
@@ -20,6 +21,7 @@ export default function ViewSummonPdf() {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const [summon, setSummon] = useState();
 
@@ -58,15 +60,7 @@ export default function ViewSummonPdf() {
             </IconButton>
             <IconButton
               onClick={() => {
-                deleteSummon(uid)
-                  .then(() => {
-                    enqueueSnackbar('Summon deleted successfully', { variant: 'success' });
-                    navigate('/dashboard/summon');
-                  })
-                  .catch((err) => {
-                    console.error(err);
-                    enqueueSnackbar('Summon deletion failed', { variant: 'error' });
-                  });
+                setOpenDeleteDialog(true);
               }}
             >
               <DeleteIcon />
@@ -85,6 +79,23 @@ export default function ViewSummonPdf() {
       {summon && (
         <EditSummonDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} summon={summon} />
       )}
+      <DeleteConfirmationDialog
+        open={openDeleteDialog}
+        handleClose={() => setOpenDeleteDialog(false)}
+        title="Delete Summon?"
+        onProceed={() => {
+          deleteSummon(uid)
+            .then(() => {
+              setOpenDeleteDialog(false);
+              navigate('/dashboard/summon');
+              enqueueSnackbar('Summon deleted successfully', { variant: 'success' });
+            })
+            .catch((err) => {
+              console.error(err);
+              enqueueSnackbar('Summon deletion failed', { variant: 'error' });
+            });
+        }}
+      />
     </Page>
   );
 }
