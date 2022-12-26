@@ -142,11 +142,41 @@ RatingInputValue.propTypes = {
 };
 
 export default function BillingTransaction() {
+  // const apiRef = useGridApiContext();
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [filteredRows, setFilteredRows] = useState([]);
   const rows = useDocumentRequests() ?? [];
   const [printOpen, setPrintOpen] = React.useState(false);
   const [documentType, setDocumentType] = React.useState();
   const [currentRow, setCurrentRow] = React.useState();
   const [previewSrc, setPreviewSrc] = React.useState();
+
+  React.useEffect(() => {
+    let newTotalRevenue = 0;
+    console.log('filteredRows changed');
+
+    if (filteredRows.length === 0) {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (row.status === 'completed') {
+          newTotalRevenue += Number(row.amount);
+        }
+      }
+
+      setTotalRevenue(newTotalRevenue);
+    } else {
+      // eslint-disable-next-line no-plusplus
+      for (let i = 0; i < filteredRows.length; i++) {
+        const row = filteredRows[i];
+        if (row.status === 'completed') {
+          newTotalRevenue += Number(row.amount);
+        }
+      }
+
+      setTotalRevenue(newTotalRevenue);
+    }
+  }, [filteredRows, rows]);
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -210,6 +240,7 @@ export default function BillingTransaction() {
         });
         return { ...params.row, amount: params.value ?? '' };
       },
+      type: 'number',
     },
     {
       field: 'status',
@@ -264,7 +295,7 @@ export default function BillingTransaction() {
           </Button>
 
           <Button
-            disabled={params.row.status !== 'completed'}
+            disabled={params.row.status !== 'inprogress'}
             variant="contained"
             size="small"
             // onClick={() => {
@@ -292,12 +323,36 @@ export default function BillingTransaction() {
           Billing Transaction
         </Typography>
         <Container sx={{ mt: 5, mb: 5 }}>
+          <Typography>Overall Revenue: {totalRevenue}</Typography>
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
             components={{ Toolbar: GridToolbar }}
             rows={rows}
             columns={columns}
             autoHeight
+            onStateChange={(state, event, details) => {
+              console.log({ state, event, details });
+              const rowIds = state.filter.filteredRowsLookup;
+              console.log({ rowIds });
+              // eslint-d1;
+              const newFilteredRows = [];
+
+              // NOTE: GETTING ALL FILTERED ROWS
+              // eslint-disable-next-line no-restricted-syntax
+              for (const rowId in rowIds) {
+                if (rowIds[rowId]) {
+                  // eslint-disable-next-line no-plusplus
+                  const row = rows.find((row) => row.id === rowId);
+                  newFilteredRows.push(row);
+                }
+              }
+              // END_NOTE: GETTING ALL FILTERED ROWS
+
+              console.log({ newFilteredRows });
+              if (JSON.stringify(newFilteredRows) !== JSON.stringify(filteredRows)) {
+                setFilteredRows(newFilteredRows);
+              }
+            }}
           />
           {printOpen && ( // Note: Important, button disables after closing dialog
             <Dialog fullScreen open={printOpen} onClose={handlePrintClose} TransitionComponent={Transition}>
