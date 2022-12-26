@@ -1,5 +1,5 @@
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
 export async function createSummon(caseNumber, caseType) {
@@ -30,4 +30,18 @@ export function solveSummon(uid, checked) {
     return updateDoc(summonRef, { caseType: 'solved' });
   }
   return updateDoc(summonRef, { caseType: 'unsolved' });
+}
+
+export async function deleteSummon(summonUid) {
+  const summonRef = doc(firestore, `summon/${summonUid}`);
+
+  return getDoc(summonRef).then((res) => {
+    const summonData = res.data();
+    console.log({ summonData });
+
+    const pdfRef = ref(storage, summonData.pdfURL);
+    return deleteObject(pdfRef).then(() => {
+      return deleteDoc(summonRef);
+    });
+  });
 }

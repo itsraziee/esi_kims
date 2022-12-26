@@ -1,11 +1,14 @@
-import { Container, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { Container, FormControlLabel, IconButton, Stack, Switch, Typography } from '@mui/material';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Page from '../components/Page';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
-import { solveSummon } from '../service/summon';
+import { deleteSummon, solveSummon } from '../service/summon';
 
 export default function ViewSummonPdf() {
   const user = useAuth();
@@ -13,6 +16,8 @@ export default function ViewSummonPdf() {
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
   const [solved, setSolved] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const [summon, setSummon] = useState();
 
@@ -39,6 +44,27 @@ export default function ViewSummonPdf() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">Case number: {summon?.caseNumber}</Typography>
+
+          <Stack direction="row" spacing={1}>
+            <IconButton>
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                deleteSummon(uid)
+                  .then(() => {
+                    enqueueSnackbar('Summon deleted successfully', { variant: 'success' });
+                    navigate('/dashboard/summon');
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                    enqueueSnackbar('Summon deletion failed', { variant: 'error' });
+                  });
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
         </Stack>
         {summon && (
           <>
