@@ -1,14 +1,15 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Container, FormControlLabel, IconButton, Stack, Switch, Typography } from '@mui/material';
+import { Container, IconButton, Stack, Typography } from '@mui/material';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Page from '../components/Page';
+import EditSummonDialog from '../components/editDialog/EditSummonDialog';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
-import { deleteSummon, solveSummon } from '../service/summon';
+import { deleteSummon } from '../service/summon';
 
 export default function ViewSummonPdf() {
   const user = useAuth();
@@ -18,6 +19,7 @@ export default function ViewSummonPdf() {
   const [solved, setSolved] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [openEditDialog, setOpenEditDialog] = useState(false);
 
   const [summon, setSummon] = useState();
 
@@ -30,7 +32,8 @@ export default function ViewSummonPdf() {
     // });
     const unsub = onSnapshot(doc(firestore, `summon/${uid}`), (doc) => {
       console.log('Current data: ', doc.data());
-      setSummon(doc.data());
+      const data = doc.data();
+      setSummon({ ...data, id: doc.ref.id });
     });
     return () => unsub;
   }, []);
@@ -46,7 +49,11 @@ export default function ViewSummonPdf() {
           <Typography variant="h4">Case number: {summon?.caseNumber}</Typography>
 
           <Stack direction="row" spacing={1}>
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenEditDialog(true);
+              }}
+            >
               <EditIcon />
             </IconButton>
             <IconButton
@@ -67,28 +74,17 @@ export default function ViewSummonPdf() {
           </Stack>
         </Stack>
         {summon && (
-          <>
-            <FormControlLabel
-              sx={{ float: 'right' }}
-              control={
-                <Switch
-                  defaultChecked={summon?.caseType === 'solved'}
-                  onChange={(e, checked) => {
-                    solveSummon(uid, checked);
-                  }}
-                />
-              }
-              label={summon?.caseType === 'solved' ? 'Solved' : 'Unsolved'}
-            />
-            <iframe
-              title={summon?.caseNumber}
-              src={summon?.pdfURL}
-              id="iframe"
-              style={{ width: '100%', height: '60vh' }}
-            />
-          </>
+          <iframe
+            title={summon?.caseNumber}
+            src={summon?.pdfURL}
+            id="iframe"
+            style={{ width: '100%', height: '60vh' }}
+          />
         )}
       </Container>
+      {summon && (
+        <EditSummonDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} summon={summon} />
+      )}
     </Page>
   );
 }

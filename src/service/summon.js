@@ -45,3 +45,8 @@ export async function deleteSummon(summonUid) {
     });
   });
 }
+
+export async function updateSummon(uid, { caseNumber, caseType }) {
+  console.log({ uid, caseNumber, caseType });
+  return updateDoc(doc(firestore, `summon/${uid}`), { caseNumber, caseType });
+}
