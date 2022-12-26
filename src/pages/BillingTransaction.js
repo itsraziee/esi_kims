@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
+import { _, data } from 'lodash';
 import moment from 'moment';
 import * as React from 'react';
 import { useRef } from 'react';
@@ -29,7 +29,7 @@ import BarangayCertification from '../sections/documents/BarangayCertification';
 import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
-import { updateRemarks, updateStatus } from '../service/documentRequest';
+import { updateRemarks, updateStatus, updateAmount } from '../service/documentRequest';
 
 const accountSid = 'AC1723ddff52489c0cb0ecbcd973fac96d';
 const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
@@ -86,7 +86,18 @@ export default function BillingTransaction() {
       },
     },
     { field: 'type', headerName: 'Type', flex: 1.5 },
-    { field: 'amount', headerName: 'Amount' },
+    { headerName: 'Amount', 
+      field: 'amount',
+      flex: 1,
+      editable: true,
+      valueSetter: (params) => {
+        console.log({ params });
+        updateAmount(params.row.id, params.value ?? '').then((res) => {
+          console.log({ res });
+        });
+        return { ...params.row, amount: params.value ?? '' };
+      },
+    },
     {
       field: 'status',
       headerName: 'Status',
@@ -309,7 +320,9 @@ export default function BillingTransaction() {
             </AppBar>
             <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
           </Dialog>
+          
         </Container>
+        
       </Page>
     </AuthRequired>
   );

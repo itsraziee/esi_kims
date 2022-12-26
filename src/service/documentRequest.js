@@ -17,6 +17,10 @@ export function updateRemarks(uid, remarks) {
   return updateDoc(doc(firestore, `documentRequest/${uid}`), { remarks });
 }
 
+export function updateAmount(uid, amount) {
+  return updateDoc(doc(firestore, `documentRequest/${uid}`), { amount });
+}
+
 export function updateStatus(uid, status) {
   return updateDoc(doc(firestore, `documentRequest/${uid}`), { status });
 }
