@@ -5,15 +5,18 @@ import { signOut } from 'firebase/auth';
 import { useSnackbar } from 'notistack';
 import { IdleTimerProvider } from 'react-idle-timer';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
 import { auth } from '../firebase-init';
 
 export default function IdleChecker({ children }) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const user = useAuth();
 
   const onPrompt = () => {
     // Fire a Modal Prompt
-    signOut(auth).then((res) => {
+    if (user) { 
+      signOut(auth).then((res) => {
       enqueueSnackbar('Logged out due to inactivity', {
         variant: 'warning',
         persist: true,
@@ -41,7 +44,7 @@ export default function IdleChecker({ children }) {
           </>
         ),
       });
-    });
+    });}
   };
 
   const onIdle = () => {

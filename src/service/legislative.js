@@ -1,5 +1,5 @@
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
 export async function createLegislative(data) {
@@ -20,4 +20,23 @@ export async function updateLegislativePdf(uid) {
 
 export function getLegislative(uid) {
   return getDoc(doc(firestore, `legislative/${uid}`));
+}
+
+export async function deleteLegislative(uid) {
+  const legislativeRef = doc(firestore, `legislative/${uid}`);
+
+  return getDoc(legislativeRef).then((res) => {
+    const legislativeData = res.data();
+    console.log({ legislativeData });
+
+    const pdfRef = ref(storage, legislativeData.pdfUrl);
+    return deleteObject(pdfRef).then(() => {
+      return deleteDoc(legislativeRef);
+    });
+  });
+}
+
+export async function updateLegislative(uid, { ordinanceNumber, series, title, authors }) {
+  console.log({ uid, ordinanceNumber, series, title, authors });
+  return updateDoc(doc(firestore, `legislative/${uid}`), { ordinanceNumber, series, title, authors });
 }
