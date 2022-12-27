@@ -404,6 +404,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             Upload Requirements
             <input
               type="file"
+              accept="application/pdf"
               hidden
               multiple
               onChange={(e) => {
