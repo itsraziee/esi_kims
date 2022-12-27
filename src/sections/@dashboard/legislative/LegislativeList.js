@@ -36,20 +36,6 @@ export default function LegislativeList({ series, ordinanceNumber, authors, colo
             </>
           }
         />
-        {user && (
-          <>
-            <Tooltip title="Edit">
-              <IconButton>
-                <EditIcon sx={{ width: 20, height: 22 }} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton>
-                <DeleteIcon sx={{ width: 20, height: 22 }} />
-              </IconButton>
-            </Tooltip>
-          </>
-        )}
       </ListItemButton>
     </ListItem>
   );

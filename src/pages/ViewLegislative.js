@@ -1,12 +1,21 @@
-import { useLocation } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useLocation, useNavigate } from 'react-router-dom';
 // material
-import { Container, Stack, Typography } from '@mui/material';
+import { Container, IconButton, Stack, Typography } from '@mui/material';
 // components
+import { doc, onSnapshot } from 'firebase/firestore';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import Page from '../components/Page';
 
 import { useAuth } from '../hooks/useAuth';
-import { getLegislative } from '../service/legislative';
+import { deleteLegislative, getLegislative } from '../service/legislative';
+
+
+import { firestore } from '../firebase-init';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
+import EditLegislativeDialog from '../components/editDialog/EditLegislativeDialog';
 // ----------------------------------------------------------------------
 
 export default function ViewLegislative() {
@@ -15,16 +24,27 @@ export default function ViewLegislative() {
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
   console.log({ uid });
+  const [solved, setSolved] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const [legislative, setLegislative] = useState();
 
   useEffect(() => {
-    getLegislative(uid).then((res) => {
-      console.log({ legislativeResult: res });
-      const legislativeData = res.data();
-      console.log({ legislativeData });
-      setLegislative(legislativeData);
+    // getLegislative(uid).then((res) => {
+    //   console.log({ legislativeResult: res });
+    //   const legislativeData = res.data();
+    //   console.log({ legislativeData });
+    //   setLegislative(legislativeData);
+    // });
+    const unsub = onSnapshot(doc(firestore, `summon/${uid}`), (doc) => {
+      console.log('Current data: ', doc.data());
+      const data = doc.data();
+      setLegislative({ ...data, id: doc.ref.id });
     });
+    return () => unsub;
   }, []);
 
   useEffect(() =>   {
@@ -36,6 +56,23 @@ export default function ViewLegislative() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">{legislative?.title}</Typography>
+        
+          <Stack direction="row" spacing={1}>
+            <IconButton
+              onClick={() => {
+                setOpenEditDialog(true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenDeleteDialog(true);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
         </Stack>
         {legislative && (
           <iframe
@@ -46,6 +83,27 @@ export default function ViewLegislative() {
           />
         )}
       </Container>
+      {legislative && (
+        <EditLegislativeDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} legislative={legislative} />
+      )}
+      
+      <DeleteConfirmationDialog
+        open={openDeleteDialog}
+        handleClose={() => setOpenDeleteDialog(false)}
+        title="Delete Legislative?"
+        onProceed={() => {
+          deleteLegislative(uid)
+            .then(() => {
+              setOpenDeleteDialog(false);
+              navigate('/dashboard/legislative');
+              enqueueSnackbar('Legislative deleted successfully', { variant: 'success' });
+            })
+            .catch((err) => {
+              console.error(err);
+              enqueueSnackbar('Legislative deletion failed', { variant: 'error' });
+            });
+        }}
+      />
     </Page>
   );
 }
