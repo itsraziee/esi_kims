@@ -1,6 +1,17 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
-import { Box, Button, Card, CardHeader, Divider, Link, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Divider,
+  Link,
+  ListItem,
+  ListItemButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 // utils
 import NewspaperIcon from '@mui/icons-material/Newspaper';
@@ -19,6 +30,7 @@ NewsUpdateCard.propTypes = {
 
 export default function NewsUpdateCard({ title, subheader, list, ...other }) {
   const user = useAuth();
+  const navigate = useNavigate();
   return (
     <Card {...other}>
       <Stack direction="row" justifyContent="space-between">
@@ -46,7 +58,14 @@ export default function NewsUpdateCard({ title, subheader, list, ...other }) {
       <Divider />
 
       <Box sx={{ p: 2, textAlign: 'right' }}>
-        <Button size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}>
+        <Button
+          size="small"
+          color="inherit"
+          endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}
+          onClick={() => {
+            navigate(`/dashboard/news`);
+          }}
+        >
           View all
         </Button>
       </Box>
@@ -65,36 +84,44 @@ NewsItem.propTypes = {
   }),
 };
 
-function NewsItem({ news }) {
+export function NewsItem({ news }) {
   const { imageUrl, title, description, updatedAt } = news;
 
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      {imageUrl && (
-        <Box
-          component="img"
-          alt={title}
-          src={imageUrl}
-          sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
-        />
-      )}
-      {!imageUrl && (
-        <NewspaperIcon color="primary" alt={title} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
-      )}
+    <ListItem disablePadding>
+      <ListItemButton href={`/dashboard/viewNews/?uid=${news.id}`}>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          {imageUrl && (
+            <Box
+              component="img"
+              alt={title}
+              src={imageUrl}
+              sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
+            />
+          )}
+          {!imageUrl && (
+            <NewspaperIcon
+              color="primary"
+              alt={title}
+              sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
+            />
+          )}
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Link color="inherit" variant="subtitle2" noWrap>
-          {title}
-        </Link>
+          <Box sx={{ flexGrow: 1 }}>
+            <Link color="inherit" variant="subtitle2" noWrap>
+              {title}
+            </Link>
 
-        <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-          {description}
-        </Typography>
-      </Box>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+              {description}
+            </Typography>
+          </Box>
 
-      <Typography variant="caption" sx={{ pr: 3, color: 'text.secondary' }}>
-        {fToNow(updatedAt.toDate())}
-      </Typography>
-    </Stack>
+          <Typography variant="caption" sx={{ pr: 3, color: 'text.secondary' }}>
+            {fToNow(updatedAt.toDate())}
+          </Typography>
+        </Stack>
+      </ListItemButton>
+    </ListItem>
   );
 }

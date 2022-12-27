@@ -14,7 +14,7 @@ import { AppTrafficBySite, AppWidgetSummary, NewsUpdateCard } from '../sections/
 
 export default function DashboardApp() {
   const user = useAuth();
-  const news = useNews();
+  const news = useNews(5);
 
   useEffect(() => {
     console.log({ news });

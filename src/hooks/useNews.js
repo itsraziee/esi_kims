@@ -2,7 +2,7 @@ import { collection, limit, onSnapshot, query } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { firestore } from '../firebase-init';
 
-export function useNews(newsLimit = 5) {
+export function useNews(newsLimit) {
   const [news, setNews] = useState(null);
 
   useEffect(() => {

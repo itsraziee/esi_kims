@@ -24,6 +24,7 @@ import Legislative from './pages/Legislative';
 import LegislativeForm from './pages/LegislativeForm';
 import ListOfPurok from './pages/ListOfPurok';
 import Login from './pages/Login';
+import News from './pages/News';
 import NewsUpdateForm from './pages/NewsUpdateForm';
 import Officials from './pages/Officials';
 import OfficialsProfile from './pages/OfficialsProfile';
@@ -56,6 +57,7 @@ export default function Router() {
         { path: 'about', element: <About /> },
         { path: 'residentsProfile', element: <ResidentsProfile /> },
         { path: 'legislative', element: <Legislative /> },
+        { path: 'news', element: <News /> },
         { path: 'viewLegislative', element: <ViewLegislative /> },
         { path: 'viewNews', element: <ViewNews /> },
         { path: 'viewSummonPdf', element: <ViewSummonPdf /> },
