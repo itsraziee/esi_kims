@@ -1,11 +1,16 @@
-import { Container, FormControlLabel, Stack, Switch, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { Container, IconButton, Stack, Typography } from '@mui/material';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
+import EditBlotterDialog from '../components/editDialog/EditBlotterDialog';
 import Page from '../components/Page';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
-import { solveBlotter } from '../service/blotter';
+import { deleteBlotter } from '../service/blotter';
 
 export default function ViewBlotterPdf() {
   const user = useAuth();
@@ -13,6 +18,10 @@ export default function ViewBlotterPdf() {
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
   const [solved, setSolved] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [openEditDialog, setOpenEditDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const [blotter, setBlotter] = useState();
 
@@ -25,7 +34,8 @@ export default function ViewBlotterPdf() {
     // });
     const unsub = onSnapshot(doc(firestore, `blotter/${uid}`), (doc) => {
       console.log('Current data: ', doc.data());
-      setBlotter(doc.data());
+      const data = doc.data();
+      setBlotter({ ...data, id: doc.ref.id });
     });
     return () => unsub;
   }, []);
@@ -39,30 +49,52 @@ export default function ViewBlotterPdf() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">Case number: {blotter?.caseNumber}</Typography>
+          <Stack direction="row" spacing={1}>
+            <IconButton
+              onClick={() => {
+                setOpenEditDialog(true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenDeleteDialog(true);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
         </Stack>
         {blotter && (
-          <>
-            <FormControlLabel
-              sx={{ float: 'right' }}
-              control={
-                <Switch
-                  defaultChecked={blotter?.caseType === 'solved'}
-                  onChange={(e, checked) => {
-                    solveBlotter(uid, checked);
-                  }}
-                />
-              }
-              label={blotter?.caseType === 'solved' ? 'Solved' : 'Unsolved'}
-            />
-            <iframe
-              title={blotter?.caseNumber}
-              src={blotter?.pdfURL}
-              id="iframe"
-              style={{ width: '100%', height: '60vh' }}
-            />
-          </>
+          <iframe
+            title={blotter?.caseNumber}
+            src={blotter?.pdfURL}
+            id="iframe"
+            style={{ width: '100%', height: '60vh' }}
+          />
         )}
       </Container>
+      {blotter && (
+        <EditBlotterDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} blotter={blotter} />
+      )}
+      <DeleteConfirmationDialog
+        open={openDeleteDialog}
+        handleClose={() => setOpenDeleteDialog(false)}
+        title="Delete Blotter?"
+        onProceed={() => {
+          deleteBlotter(uid)
+            .then(() => {
+              setOpenDeleteDialog(false);
+              navigate('/dashboard/blotter');
+              enqueueSnackbar('Blotter deleted successfully', { variant: 'success' });
+            })
+            .catch((err) => {
+              console.error(err);
+              enqueueSnackbar('Blotter deletion failed', { variant: 'error' });
+            });
+        }}
+      />
     </Page>
   );
 }

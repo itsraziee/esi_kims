@@ -1,5 +1,5 @@
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
 export async function createBlotter(caseNumber, caseType) {
@@ -30,4 +30,23 @@ export function solveBlotter(uid, checked) {
     return updateDoc(blotterRef, { caseType: 'solved' });
   }
   return updateDoc(blotterRef, { caseType: 'unsolved' });
+}
+
+export async function deleteBlotter(blotterUid) {
+  const blotterRef = doc(firestore, `blotter/${blotterUid}`);
+
+  return getDoc(blotterRef).then((res) => {
+    const blotterData = res.data();
+    console.log({ blotterData });
+
+    const pdfRef = ref(storage, blotterData.pdfURL);
+    return deleteObject(pdfRef).then(() => {
+      return deleteDoc(blotterRef);
+    });
+  });
+}
+
+export async function updateBlotter(uid, { caseNumber, caseType }) {
+  console.log({ uid, caseNumber, caseType });
+  return updateDoc(doc(firestore, `blotter/${uid}`), { caseNumber, caseType });
 }
