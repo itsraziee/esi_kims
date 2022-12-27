@@ -1,8 +1,9 @@
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
+import { Box, Button, Card, CardHeader, Divider, Link, Stack, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Box, Stack, Link, Card, Button, Divider, Typography, CardHeader } from '@mui/material';
 // utils
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { fToNow } from '../../../utils/formatTime';
 // components
 import Iconify from '../../../components/Iconify';
@@ -36,7 +37,7 @@ export default function NewsUpdateCard({ title, subheader, list, ...other }) {
       </Stack>
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
-          {list.map((news) => (
+          {list?.map((news) => (
             <NewsItem key={news.id} news={news} />
           ))}
         </Stack>
@@ -65,13 +66,23 @@ NewsItem.propTypes = {
 };
 
 function NewsItem({ news }) {
-  const { image, title, description, postedAt } = news;
+  const { imageUrl, title, description, updatedAt } = news;
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
-      <Box component="img" alt={title} src={image} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
+      {imageUrl && (
+        <Box
+          component="img"
+          alt={title}
+          src={imageUrl}
+          sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
+        />
+      )}
+      {!imageUrl && (
+        <NewspaperIcon color="primary" alt={title} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
+      )}
 
-      <Box sx={{ minWidth: 240, flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1 }}>
         <Link color="inherit" variant="subtitle2" noWrap>
           {title}
         </Link>
@@ -81,8 +92,8 @@ function NewsItem({ news }) {
         </Typography>
       </Box>
 
-      <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
-        {fToNow(postedAt)}
+      <Typography variant="caption" sx={{ pr: 3, color: 'text.secondary' }}>
+        {fToNow(updatedAt.toDate())}
       </Typography>
     </Stack>
   );

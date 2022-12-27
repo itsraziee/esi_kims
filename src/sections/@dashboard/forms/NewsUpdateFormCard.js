@@ -5,7 +5,17 @@ import * as Yup from 'yup';
 import CloseIcon from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
 import { Button, Card, CardContent, IconButton, Stack, TextField, Typography } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
+import {
+  createNews,
+  getNewsImageUrl,
+  getNewsPdfUrl,
+  updateNewsImageUrl,
+  updateNewsPdfUrl,
+  uploadNewsImage,
+  uploadNewsPdf,
+} from '../../../service/news';
 // ----------------------------------------------------------------------
 
 export default function NewsUpdateFormCard() {
@@ -14,6 +24,7 @@ export default function NewsUpdateFormCard() {
   const [newsPdfPreview, setNewsPdfPreview] = useState();
   const [newsImage, setNewsImage] = useState();
   const [newsImagePreview, setNewsImagePreview] = useState();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (newsPdf) {
@@ -38,12 +49,38 @@ export default function NewsUpdateFormCard() {
       description: '',
     },
     validationSchema: NewsUpdateFormSchema,
-    onSubmit: (data) => {
-      console
-        .log({ data })
-        .then((res) => console.log({ res }))
-        .catch((err) => console.log({ err }));
-      navigate('/dashboard/app', { replace: true });
+    onSubmit: async (data) => {
+      console.log({ data });
+      return createNews(data)
+        .then(async (res) => {
+          const newsRef = res;
+          console.log({ newsRef });
+          if (newsPdf) {
+            await uploadNewsPdf(newsPdf, newsRef.id).then((res) =>
+              getNewsPdfUrl(res.ref).then((res) => {
+                console.log({ pdfUrlRes: res });
+                const pdfUrl = res;
+                return updateNewsPdfUrl(newsRef, pdfUrl);
+              })
+            );
+          }
+          if (newsImage) {
+            await uploadNewsImage(newsImage, newsRef.id).then((res) =>
+              getNewsImageUrl(res.ref).then((res) => {
+                console.log({ pdfImageRes: res });
+                const imageUrl = res;
+                return updateNewsImageUrl(newsRef, imageUrl);
+              })
+            );
+          }
+
+          enqueueSnackbar('News update created successfully', { variant: 'success' });
+          navigate('/dashboard/app', { replace: true });
+        })
+        .catch((err) => {
+          console.error(err);
+          enqueueSnackbar('News update creation failed', { variant: 'error' });
+        });
     },
   });
 
