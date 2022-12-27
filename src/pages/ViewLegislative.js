@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import Page from '../components/Page';
 
 import { useAuth } from '../hooks/useAuth';
-import { deleteLegislative, getLegislative } from '../service/legislative';
+import { deleteLegislative } from '../service/legislative';
 
 
 import { firestore } from '../firebase-init';
@@ -24,7 +24,6 @@ export default function ViewLegislative() {
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
   console.log({ uid });
-  const [solved, setSolved] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [openEditDialog, setOpenEditDialog] = useState(false);
