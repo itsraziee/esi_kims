@@ -19,9 +19,9 @@ export default function AboutCard() {
             image="/static/about/barangayhall.jpg"
             alt="Live from space album cover"
           />
-          <Typography component="div" variant="h5" sx={{ mb: 2 , mt: 3 }} >
+          {/* <Typography component="div" variant="h5" sx={{ mb: 2 , mt: 3 }} >
             The History of Barangay Kimanait
-          </Typography>
+          </Typography> */}
           <Typography color="text.secondary" component="div" align="justify">
             Sultan Salong Lumbatan—real name called this place "KIMANAIT" in memory of the first inhabitants/dwellers of
             this place. Due to the unfaithfulness to God, they were punished. The first inhabitants made a great mistake

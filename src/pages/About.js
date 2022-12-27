@@ -12,7 +12,7 @@ export default function About() {
     <Page title="About">
       <Container sx={{ mt: 5, mb: 5 }}>
         <Typography variant="h4" sx={{ mb: 5, mt: 4 }}>
-          About
+          The History of Barangay Kimanait
         </Typography>
         <AboutCard />
       </Container>
