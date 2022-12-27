@@ -2,14 +2,22 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Container, IconButton, Stack, Typography } from '@mui/material';
 import { doc, onSnapshot } from 'firebase/firestore';
+import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
+import EditNewsDialog from '../components/editDialog/EditNewsDialog';
 import { firestore } from '../firebase-init';
+import { deleteNews } from '../service/news';
 
 export default function ViewNews() {
   const location = useLocation();
   const uid = new URLSearchParams(location.search).get('uid');
   const [news, setNews] = useState();
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openEditDialog, setOpenEditDialog] = useState(false);
 
   useEffect(() => {
     const unsub = onSnapshot(doc(firestore, `news/${uid}`), (doc) => {
@@ -31,20 +39,50 @@ export default function ViewNews() {
           {news?.title}
         </Typography>
         <Stack direction="row" alignItems="center" justifyContent="center">
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              setOpenEditDialog(true);
+            }}
+          >
             <EditIcon />
           </IconButton>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              setOpenDeleteDialog(true);
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         </Stack>
       </Stack>
-      <img alt={news?.title} src={news?.imageUrl} />
+      {news?.imageUrl && <img alt={news?.title} src={news?.imageUrl} />}
       <Typography>{news?.description}</Typography>
 
-      <Stack>
-        <iframe title="preview" src={news?.pdfUrl} style={{ height: '100vh' }} />
-      </Stack>
+      {news?.pdfUrl && (
+        <Stack>
+          <iframe title="preview" src={news?.pdfUrl} style={{ height: '100vh' }} />
+        </Stack>
+      )}
+
+      {news && <EditNewsDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} news={news} />}
+
+      <DeleteConfirmationDialog
+        open={openDeleteDialog}
+        handleClose={() => setOpenDeleteDialog(false)}
+        title="Delete News?"
+        onProceed={() => {
+          deleteNews(uid)
+            .then(() => {
+              setOpenDeleteDialog(false);
+              navigate('/dashboard/app');
+              enqueueSnackbar('News deleted successfully', { variant: 'success' });
+            })
+            .catch((err) => {
+              console.error(err);
+              enqueueSnackbar('News deletion failed', { variant: 'error' });
+            });
+        }}
+      />
     </Container>
   );
 }
