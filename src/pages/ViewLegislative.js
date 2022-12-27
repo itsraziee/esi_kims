@@ -10,12 +10,11 @@ import { useEffect, useState } from 'react';
 import Page from '../components/Page';
 
 import { useAuth } from '../hooks/useAuth';
-import { deleteLegislative, getLegislative } from '../service/legislative';
+import { deleteLegislative } from '../service/legislative';
 
-
-import { firestore } from '../firebase-init';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import EditLegislativeDialog from '../components/editDialog/EditLegislativeDialog';
+import { firestore } from '../firebase-init';
 // ----------------------------------------------------------------------
 
 export default function ViewLegislative() {
@@ -45,9 +44,9 @@ export default function ViewLegislative() {
       setLegislative({ ...data, id: doc.ref.id });
     });
     return () => unsub;
-  }, []);
+  }, [uid]);
 
-  useEffect(() =>   {
+  useEffect(() => {
     console.log({ legislative });
   }, [legislative]);
 
@@ -56,24 +55,25 @@ export default function ViewLegislative() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">{legislative?.title}</Typography>
-        
-          { user&& <Stack direction="row" spacing={1}>
-            <IconButton
-              onClick={() => {
-                setOpenEditDialog(true);
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setOpenDeleteDialog(true);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </Stack>}
 
+          {user && (
+            <Stack direction="row" spacing={1}>
+              <IconButton
+                onClick={() => {
+                  setOpenEditDialog(true);
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDeleteDialog(true);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
+          )}
         </Stack>
         {legislative && (
           <iframe
@@ -85,9 +85,13 @@ export default function ViewLegislative() {
         )}
       </Container>
       {legislative && (
-        <EditLegislativeDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} legislative={legislative} />
+        <EditLegislativeDialog
+          open={openEditDialog}
+          handleClose={() => setOpenEditDialog(false)}
+          legislative={legislative}
+        />
       )}
-      
+
       <DeleteConfirmationDialog
         open={openDeleteDialog}
         handleClose={() => setOpenDeleteDialog(false)}

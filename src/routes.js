@@ -1,17 +1,17 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
-import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
+import DashboardLayout from './layouts/dashboard';
 //
 import About from './pages/About';
 import BHW from './pages/BHW';
+import BNS from './pages/BNS';
+import BO from './pages/BO';
+import BSPO from './pages/BSPO';
 import BillingTransaction from './pages/BillingTransaction';
 import Blog from './pages/Blog';
 import Blotter from './pages/Blotter';
 import BlotterForm from './pages/BlotterForm';
-import BNS from './pages/BNS';
-import BO from './pages/BO';
-import BSPO from './pages/BSPO';
 import CVO from './pages/CVO';
 import DashboardApp from './pages/DashboardApp';
 import Demographics from './pages/Demographics';
@@ -19,6 +19,7 @@ import DisclosureBoard from './pages/DisclosureBoard';
 import DisclosureBoardForm from './pages/DisclosureBoardForm';
 import DocumentServices from './pages/DocumentServices';
 import EditOfficialsProfile from './pages/EditOfficialsProfile';
+import FeedbackDialog from './pages/FeedbackDialog';
 import Legislative from './pages/Legislative';
 import LegislativeForm from './pages/LegislativeForm';
 import ListOfPurok from './pages/ListOfPurok';
@@ -26,8 +27,8 @@ import Login from './pages/Login';
 import NewsUpdateForm from './pages/NewsUpdateForm';
 import Officials from './pages/Officials';
 import OfficialsProfile from './pages/OfficialsProfile';
-import NotFound from './pages/Page404';
 import PL from './pages/PL';
+import NotFound from './pages/Page404';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import RequestDocumentForm from './pages/RequestDocumentForm';
@@ -36,10 +37,10 @@ import Summon from './pages/Summon';
 import SummonForm from './pages/SummonForm';
 import User from './pages/User';
 import ViewBlotterPdf from './pages/ViewBlotterPdf';
-import ViewDisclosureBoard from './pages/viewDisclosureBoard';
 import ViewLegislative from './pages/ViewLegislative';
+import ViewNews from './pages/ViewNews';
 import ViewSummonPdf from './pages/ViewSummonPdf';
-import FeedbackDialog from './pages/FeedbackDialog';
+import ViewDisclosureBoard from './pages/viewDisclosureBoard';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -56,6 +57,7 @@ export default function Router() {
         { path: 'residentsProfile', element: <ResidentsProfile /> },
         { path: 'legislative', element: <Legislative /> },
         { path: 'viewLegislative', element: <ViewLegislative /> },
+        { path: 'viewNews', element: <ViewNews /> },
         { path: 'viewSummonPdf', element: <ViewSummonPdf /> },
         { path: 'viewBlotterPdf', element: <ViewBlotterPdf /> },
         { path: 'viewDisclosureBoard', element: <ViewDisclosureBoard /> },
