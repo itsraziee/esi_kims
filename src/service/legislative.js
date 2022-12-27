@@ -22,15 +22,6 @@ export function getLegislative(uid) {
   return getDoc(doc(firestore, `legislative/${uid}`));
 }
 
-export function solveLegislative(uid, checked) {
-  const LegislativeRef = doc(firestore, `legislative/${uid}`);
-
-  if (checked) {
-    return updateDoc(LegislativeRef, { caseType: 'solved' });
-  }
-  return updateDoc(LegislativeRef, { caseType: 'unsolved' });
-}
-
 export async function deleteLegislative(uid) {
   const legislativeRef = doc(firestore, `legislative/${uid}`);
 
@@ -38,14 +29,14 @@ export async function deleteLegislative(uid) {
     const legislativeData = res.data();
     console.log({ legislativeData });
 
-    const pdfRef = ref(storage, legislativeData.pdfURL);
+    const pdfRef = ref(storage, legislativeData.pdfUrl);
     return deleteObject(pdfRef).then(() => {
       return deleteDoc(legislativeRef);
     });
   });
 }
 
-export async function updateLegislative(uid, { caseNumber, caseType }) {
-  console.log({ uid, caseNumber, caseType });
-  return updateDoc(doc(firestore, `legislative/${uid}`), { caseNumber, caseType });
+export async function updateLegislative(uid, { ordinanceNumber, series, title, authors }) {
+  console.log({ uid, ordinanceNumber, series, title, authors });
+  return updateDoc(doc(firestore, `legislative/${uid}`), { ordinanceNumber, series, title, authors });
 }

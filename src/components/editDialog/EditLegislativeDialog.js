@@ -17,17 +17,20 @@ export default function EditLegislativeDialog({ open, handleClose, legislative }
   const { enqueueSnackbar } = useSnackbar();
   const formik = useFormik({
     initialValues: {
-      caseNumber: 0,
-      solved: false,
+      ordinanceNumber: 0,
+      series: 0,
+      title: "",
+      authors: "",
     },
     validationSchema: Yup.object({
-      caseNumber: Yup.number().min(1).required('Case No. is required'),
-      solved: Yup.boolean().required(),
+      ordinanceNumber: Yup.number().min(1).required('Ordinance Number is required'),
+      series: Yup.number().min(1).required('Series is required'),
+      title: Yup.string().min(1).required('Title is required'),
+      authors: Yup.string().min(1).required('Authors is required'),
     }),
     onSubmit: (values) => {
-      const newValue = { caseNumber: values.caseNumber, caseType: values.solved ? 'solved' : 'unsolved' };
-      console.log({ newValue });
-      updateLegislative(legislative.id, newValue)
+      
+      updateLegislative(legislative.id, values)
         .then((res) => {
           console.log(res);
           enqueueSnackbar('Legislative updated successfully', { variant: 'success' });
@@ -43,8 +46,10 @@ export default function EditLegislativeDialog({ open, handleClose, legislative }
   useEffect(() => {
     formik.setValues(
       {
-        caseNumber: legislative.caseNumber,
-        solved: legislative.caseType === 'solved',
+        ordinanceNumber: legislative.ordinanceNumber,
+        series: legislative.series,
+        title: legislative.title,
+        authors: legislative.authors,
       },
       true
     );
@@ -56,27 +61,45 @@ export default function EditLegislativeDialog({ open, handleClose, legislative }
       <form noValidate onSubmit={formik.handleSubmit}>
         <DialogContent>
           <DialogContentText>This will change the state of this Legislative in real time.</DialogContentText>
-          <FormControlLabel
-            sx={{ float: 'right' }}
-            control={
-              <Switch
-                checked={formik.values.solved}
-                onChange={(e, checked) => {
-                  console.log({ checked });
-                  formik.setFieldValue('solved', checked);
-                }}
-              />
-            }
-            label={formik.values.solved ? 'Solved' : 'Unsolved'}
-          />
+      
           <TextField
-            label="Case No."
+            label="Ordinance No."
             fullWidth
             variant="standard"
             type="number"
-            {...formik.getFieldProps('caseNumber')}
-            error={formik.touched.caseNumber && formik.errors.caseNumber}
-            helperText={formik.touched.caseNumber && formik.errors.caseNumber}
+            {...formik.getFieldProps('ordinanceNumber')}
+            error={formik.touched.ordinanceNumber && formik.errors.ordinanceNumber}
+            helperText={formik.touched.ordinanceNumber && formik.errors.ordinanceNumber}
+          />
+
+          <TextField
+            label="Series"
+            fullWidth
+            variant="standard"
+            type="number"
+            {...formik.getFieldProps('series')}
+            error={formik.touched.series && formik.errors.series}
+            helperText={formik.touched.series && formik.errors.series}
+          />
+
+          <TextField
+            label="Title"
+            fullWidth
+            variant="standard"
+            type="text"
+            {...formik.getFieldProps('title')}
+            error={formik.touched.title && formik.errors.title}
+            helperText={formik.touched.title && formik.errors.title}
+          />
+
+          <TextField
+            label="Authors"
+            fullWidth
+            variant="standard"
+            type="text"
+            {...formik.getFieldProps('authors')}
+            error={formik.touched.authors && formik.errors.authors}
+            helperText={formik.touched.authors && formik.errors.authors}
           />
         </DialogContent>
         <DialogActions>

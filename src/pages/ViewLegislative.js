@@ -39,7 +39,7 @@ export default function ViewLegislative() {
     //   console.log({ legislativeData });
     //   setLegislative(legislativeData);
     // });
-    const unsub = onSnapshot(doc(firestore, `summon/${uid}`), (doc) => {
+    const unsub = onSnapshot(doc(firestore, `legislative/${uid}`), (doc) => {
       console.log('Current data: ', doc.data());
       const data = doc.data();
       setLegislative({ ...data, id: doc.ref.id });
@@ -57,7 +57,7 @@ export default function ViewLegislative() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">{legislative?.title}</Typography>
         
-          <Stack direction="row" spacing={1}>
+          { user&& <Stack direction="row" spacing={1}>
             <IconButton
               onClick={() => {
                 setOpenEditDialog(true);
@@ -72,7 +72,8 @@ export default function ViewLegislative() {
             >
               <DeleteIcon />
             </IconButton>
-          </Stack>
+          </Stack>}
+
         </Stack>
         {legislative && (
           <iframe
