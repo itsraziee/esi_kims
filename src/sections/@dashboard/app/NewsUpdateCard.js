@@ -113,7 +113,8 @@ export function NewsItem({ news }) {
             </Link>
 
             <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-              {description}
+              {description?.substring(0, 50)}
+              {description?.length > 50 && '...'}
             </Typography>
           </Box>
 

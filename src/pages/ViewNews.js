@@ -8,9 +8,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import EditNewsDialog from '../components/editDialog/EditNewsDialog';
 import { firestore } from '../firebase-init';
+import { useAuth } from '../hooks/useAuth';
 import { deleteNews } from '../service/news';
 
 export default function ViewNews() {
+  const user = useAuth();
+
   const location = useLocation();
   const uid = new URLSearchParams(location.search).get('uid');
   const [news, setNews] = useState();
@@ -38,25 +41,27 @@ export default function ViewNews() {
         <Typography variant="h4" sx={{ flex: 1 }}>
           {news?.title}
         </Typography>
-        <Stack direction="row" alignItems="center" justifyContent="center">
-          <IconButton
-            onClick={() => {
-              setOpenEditDialog(true);
-            }}
-          >
-            <EditIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              setOpenDeleteDialog(true);
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </Stack>
+        {user && (
+          <Stack direction="row" alignItems="center" justifyContent="center">
+            <IconButton
+              onClick={() => {
+                setOpenEditDialog(true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenDeleteDialog(true);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>
+        )}
       </Stack>
       {news?.imageUrl && <img alt={news?.title} src={news?.imageUrl} />}
-      <Typography>{news?.description}</Typography>
+      <Typography sx={{ whiteSpace: 'pre-wrap' }}>{news?.description}</Typography>
 
       {news?.pdfUrl && (
         <Stack>

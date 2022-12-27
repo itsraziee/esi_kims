@@ -67,6 +67,7 @@ export default function EditNewsDialog({ open, handleClose, news }) {
             label="Description"
             fullWidth
             variant="standard"
+            multiline
             type="text"
             {...formik.getFieldProps('description')}
             error={formik.touched.description && formik.errors.description}
