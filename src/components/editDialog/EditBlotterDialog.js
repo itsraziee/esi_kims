@@ -13,9 +13,9 @@ import { useFormik } from 'formik';
 import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
 import * as Yup from 'yup';
-import { updateSummon } from '../../service/summon';
+import { updateBlotter } from '../../service/blotter';
 
-export default function EditSummonDialog({ open, handleClose, summon }) {
+export default function EditBlotterDialog({ open, handleClose, blotter }) {
   const { enqueueSnackbar } = useSnackbar();
   const formik = useFormik({
     initialValues: {
@@ -29,14 +29,14 @@ export default function EditSummonDialog({ open, handleClose, summon }) {
     onSubmit: (values) => {
       const newValue = { caseNumber: values.caseNumber, caseType: values.solved ? 'solved' : 'unsolved' };
       console.log({ newValue });
-      updateSummon(summon.id, newValue)
+      updateBlotter(blotter.id, newValue)
         .then((res) => {
           console.log(res);
-          enqueueSnackbar('Summon updated successfully', { variant: 'success' });
+          enqueueSnackbar('Blotter updated successfully', { variant: 'success' });
           handleClose();
         })
         .catch((err) => {
-          enqueueSnackbar('Summon update failed', { variant: 'error' });
+          enqueueSnackbar('Blotter update failed', { variant: 'error' });
           console.error(err);
         });
     },
@@ -45,19 +45,19 @@ export default function EditSummonDialog({ open, handleClose, summon }) {
   useEffect(() => {
     formik.setValues(
       {
-        caseNumber: summon.caseNumber,
-        solved: summon.caseType === 'solved',
+        caseNumber: blotter.caseNumber,
+        solved: blotter.caseType === 'solved',
       },
       true
     );
-  }, [summon]);
+  }, [blotter]);
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Update Summon</DialogTitle>
+      <DialogTitle>Update Blotter</DialogTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
         <DialogContent>
-          <DialogContentText>This will change the state of this summon in real time.</DialogContentText>
+          <DialogContentText>This will change the state of this blotter in real time.</DialogContentText>
           <FormControlLabel
             sx={{ float: 'right' }}
             control={

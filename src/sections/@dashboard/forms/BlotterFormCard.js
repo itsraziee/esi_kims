@@ -7,12 +7,14 @@ import {
   Button,
   Card,
   CardContent,
-  FormControl, Grid, InputLabel,
+  FormControl,
+  Grid,
+  InputLabel,
   MenuItem,
   Select,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { createBlotter, updatePdfURL, uploadBlotterPdf } from '../../../service/blotter';
@@ -90,28 +92,28 @@ export default function BlotterFormCard() {
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
                       Upload PDF
-                        <input
-                          type="file"
-                          hidden
-                          multiple={false}
-                          onChange={(e) => {
-                            const pdf = e.target.files[0];
-                            const objectUrl = URL.createObjectURL(pdf);
+                      <input
+                        type="file"
+                        hidden
+                        multiple={false}
+                        onChange={(e) => {
+                          const pdf = e.target.files[0];
+                          const objectUrl = URL.createObjectURL(pdf);
 
-                            setPdfPreviewUrl(objectUrl);
-                            setPdfFile(pdf);
-                          }}
-                        />
+                          setPdfPreviewUrl(objectUrl);
+                          setPdfFile(pdf);
+                        }}
+                      />
                     </Button>
 
-                      <LoadingButton
-                        fullWidth
-                        size="large"
-                        type="submit"
-                        variant="contained"
-                        loading={isSubmitting}
-                        disabled={!pdfFile}
-                      >
+                    <LoadingButton
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                      loading={isSubmitting}
+                      disabled={!pdfFile}
+                    >
                       Submit
                     </LoadingButton>
                   </Stack>
@@ -119,13 +121,13 @@ export default function BlotterFormCard() {
               </Form>
             </FormikProvider>
           </CardContent>
-          </Card>
-        </Grid>
-        {pdfPreviewUrl && (
-          <Grid item xs={12}>
-            <iframe title="pdf_preview" src={pdfPreviewUrl} style={{ width: '100%', height: '100vh' }} />
-          </Grid>
-        )}
+        </Card>
       </Grid>
+      {pdfPreviewUrl && (
+        <Grid item xs={12}>
+          <iframe title="pdf_preview" src={pdfPreviewUrl} style={{ width: '100%', height: '100vh' }} />
+        </Grid>
+      )}
+    </Grid>
   );
 }
