@@ -1,5 +1,3 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import { IconButton, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, Typography } from '@mui/material';
 import Iconify from '../../../components/Iconify';
 import { useAuth } from '../../../hooks/useAuth';
@@ -27,20 +25,6 @@ export default function DisclosureBoardList({ title, color = 'primary', url, ...
             </>
           }
         />
-         {user && (
-          <>
-            <Tooltip title="Edit">
-              <IconButton>
-                <EditIcon sx={{ width: 20, height: 22 }} />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton>
-                <DeleteIcon sx={{ width: 20, height: 22 }} />
-              </IconButton>
-            </Tooltip>
-          </>
-        )}
       </ListItemButton>
     </ListItem>
   );
