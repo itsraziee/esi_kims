@@ -1,18 +1,24 @@
 // @mui
 import { Container, Grid, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import PopulationLineGraph from '../components/demographics/PopulationLineGraph';
 import PopulationPieChart from '../components/demographics/PopulationPieChart';
 // components
 import Page from '../components/Page';
 // sections
 import { useAuth } from '../hooks/useAuth';
+import { useNews } from '../hooks/useNews';
 import { AppTrafficBySite, AppWidgetSummary, NewsUpdateCard } from '../sections/@dashboard/app';
-import NEWSUPDATES from '../_mock/newsUpdate';
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
   const user = useAuth();
+  const news = useNews(5);
+
+  useEffect(() => {
+    console.log({ news });
+  }, [news]);
 
   return (
     <Page title="Dashboard">
@@ -68,7 +74,7 @@ export default function DashboardApp() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={8}>
-            <NewsUpdateCard title="News Update" list={NEWSUPDATES} />
+            <NewsUpdateCard title="News Update" list={news} />
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>

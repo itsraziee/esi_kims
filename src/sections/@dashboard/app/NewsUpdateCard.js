@@ -1,8 +1,20 @@
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // @mui
+import {
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Divider,
+  Link,
+  ListItem,
+  ListItemButton,
+  Stack,
+  Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
-import { Box, Stack, Link, Card, Button, Divider, Typography, CardHeader } from '@mui/material';
 // utils
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { fToNow } from '../../../utils/formatTime';
 // components
 import Iconify from '../../../components/Iconify';
@@ -18,6 +30,7 @@ NewsUpdateCard.propTypes = {
 
 export default function NewsUpdateCard({ title, subheader, list, ...other }) {
   const user = useAuth();
+  const navigate = useNavigate();
   return (
     <Card {...other}>
       <Stack direction="row" justifyContent="space-between">
@@ -36,7 +49,7 @@ export default function NewsUpdateCard({ title, subheader, list, ...other }) {
       </Stack>
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
-          {list.map((news) => (
+          {list?.map((news) => (
             <NewsItem key={news.id} news={news} />
           ))}
         </Stack>
@@ -45,7 +58,14 @@ export default function NewsUpdateCard({ title, subheader, list, ...other }) {
       <Divider />
 
       <Box sx={{ p: 2, textAlign: 'right' }}>
-        <Button size="small" color="inherit" endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}>
+        <Button
+          size="small"
+          color="inherit"
+          endIcon={<Iconify icon={'eva:arrow-ios-forward-fill'} />}
+          onClick={() => {
+            navigate(`/dashboard/news`);
+          }}
+        >
           View all
         </Button>
       </Box>
@@ -64,26 +84,45 @@ NewsItem.propTypes = {
   }),
 };
 
-function NewsItem({ news }) {
-  const { image, title, description, postedAt } = news;
+export function NewsItem({ news }) {
+  const { imageUrl, title, description, updatedAt } = news;
 
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <Box component="img" alt={title} src={image} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
+    <ListItem disablePadding>
+      <ListItemButton href={`/dashboard/viewNews/?uid=${news.id}`}>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          {imageUrl && (
+            <Box
+              component="img"
+              alt={title}
+              src={imageUrl}
+              sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
+            />
+          )}
+          {!imageUrl && (
+            <NewspaperIcon
+              color="primary"
+              alt={title}
+              sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }}
+            />
+          )}
 
-      <Box sx={{ minWidth: 240, flexGrow: 1 }}>
-        <Link color="inherit" variant="subtitle2" noWrap>
-          {title}
-        </Link>
+          <Box sx={{ flexGrow: 1 }}>
+            <Link color="inherit" variant="subtitle2" noWrap>
+              {title}
+            </Link>
 
-        <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-          {description}
-        </Typography>
-      </Box>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
+              {description?.substring(0, 50)}
+              {description?.length > 50 && '...'}
+            </Typography>
+          </Box>
 
-      <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
-        {fToNow(postedAt)}
-      </Typography>
-    </Stack>
+          <Typography variant="caption" sx={{ pr: 3, color: 'text.secondary' }}>
+            {fToNow(updatedAt.toDate())}
+          </Typography>
+        </Stack>
+      </ListItemButton>
+    </ListItem>
   );
 }
