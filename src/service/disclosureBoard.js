@@ -1,5 +1,5 @@
-import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
 export async function createDisclosureBoard(data) {
@@ -20,4 +20,23 @@ export async function updateDisclosureBoardPdf(uid) {
 
 export function getDisclosureBoard(uid) {
   return getDoc(doc(firestore, `disclosureBoard/${uid}`));
+}
+
+export async function deleteDisclosureBoard(uid) {
+  const disclosureBoardRef = doc(firestore, `disclosureBoard/${uid}`);
+
+  return getDoc(disclosureBoardRef).then((res) => {
+    const disclosureBoardData = res.data();
+    console.log({ disclosureBoardData });
+
+    const pdfRef = ref(storage, disclosureBoardData.pdfUrl);
+    return deleteObject(pdfRef).then(() => {
+      return deleteDoc(disclosureBoardRef);
+    });
+  });
+}
+
+export async function updateDisclosureBoard(uid, { title }) {
+  console.log({ uid, title });
+  return updateDoc(doc(firestore, `disclosureBoard/${uid}`), { title });
 }
