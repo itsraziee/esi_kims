@@ -39,21 +39,22 @@ export default function BlotterFormCard() {
     },
     validationSchema: BlotterFormCardSchema,
     onSubmit: async (data) => {
-      return createBlotter(data.caseNumber, data.caseType).then((res) => {
-        console.log({ createdBlotter: res });
-        const blotterUid = res.id;
-        return uploadBlotterPdf(res.id, pdfFile).then((res) => {
-          console.log({ res });
-          return updatePdfURL(blotterUid, res.ref).then((res) => {
-            enqueueSnackbar('Blotter report added successfully.', { variant: 'success'});
-            navigate('/dashboard/app', { replace: true });
+      return createBlotter(data.caseNumber, data.caseType)
+        .then((res) => {
+          console.log({ createdBlotter: res });
+          const blotterUid = res.id;
+          return uploadBlotterPdf(res.id, pdfFile).then((res) => {
+            console.log({ res });
+            return updatePdfURL(blotterUid, res.ref).then((res) => {
+              enqueueSnackbar('Blotter report added successfully.', { variant: 'success' });
+              navigate('/dashboard/blotter', { replace: true });
+            });
           });
+        })
+        .catch((err) => {
+          enqueueSnackbar('Blotter report creation failed.', { variant: 'error' });
+          console.log({ err });
         });
-      })
-      .catch((err) => {
-        enqueueSnackbar('Blotter report creation failed.', { variant: 'error' });
-        console.log({ err });
-      });
     },
   });
 

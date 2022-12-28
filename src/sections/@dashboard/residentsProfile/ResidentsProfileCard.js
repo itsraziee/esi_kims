@@ -135,14 +135,13 @@ export default function ResidentsProfileCard() {
             enqueueSnackbar('Resident Added successfully', {
               variant: 'success',
             });
-            navigate('/dashboard/app', { replace: true });
+            navigate('/dashboard/listOfPurok', { replace: true });
           }
         })
         .catch((err) => {
           console.log({ err });
-          enqueueSnackbar('Invalid input', { variant: 'error' });
+          enqueueSnackbar('Resident Added failed.', { variant: 'error' });
         });
-      navigate('/dashboard/app', { replace: true });
     },
   });
 
@@ -162,7 +161,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="firstName"
                   label="First name*"
-                  placeholder="Juan"
+                  placeholder="ex. Juan"
                   {...getFieldProps('firstName')}
                   error={Boolean(touched.firstName && errors.firstName)}
                   helperText={touched.firstName && errors.firstName}
@@ -172,7 +171,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="middleName"
                   label="Middle name*"
-                  placeholder="Dela"
+                  placeholder="ex. Santos"
                   {...getFieldProps('middleName')}
                   error={Boolean(touched.middleName && errors.middleName)}
                   helperText={touched.middleName && errors.middleName}
@@ -182,7 +181,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="lastName"
                   label="Last name*"
-                  placeholder="Cruz"
+                  placeholder="ex. Dela Cruz"
                   {...getFieldProps('lastName')}
                   error={Boolean(touched.lastName && errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
@@ -266,6 +265,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="citizenship"
                   label="Citizenship*"
+                  placeholder="ex. Filipino"
                   {...getFieldProps('citizenship')}
                   error={Boolean(touched.citizenship && errors.citizenship)}
                   helperText={touched.citizenship && errors.citizenship}
@@ -405,7 +405,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="spouse"
                   label="Spouse Name*"
-                  placeholder="Juan Dela Cruz"
+                  placeholder="ex. Juan Dela Cruz"
                   {...getFieldProps('spouse')}
                   error={Boolean(touched.spouse && errors.spouse)}
                   helperText={touched.spouse && errors.spouse}
@@ -436,7 +436,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="fathersName"
                   label="Father's Name*"
-                  placeholder="Juan Dela Cruz"
+                  placeholder="ex. Juan Dela Cruz"
                   {...getFieldProps('fathersName')}
                   error={Boolean(touched.fathersName && errors.fathersName)}
                   helperText={touched.fathersName && errors.fathersName}
@@ -467,6 +467,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="mothersName"
                   label="Mother's Name*"
+                  placeholder="ex. Jessica Dela Cruz"
                   {...getFieldProps('mothersName')}
                   error={Boolean(touched.mothersName && errors.mothersName)}
                   helperText={touched.mothersName && errors.mothersName}

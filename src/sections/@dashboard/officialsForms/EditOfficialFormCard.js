@@ -148,6 +148,7 @@ export default function EditOfficialsFormCard({ initialValues, uid }) {
                     enqueueSnackbar('Updated successfully.', {
                       variant: 'success',
                     });
+                    navigate('/dashboard/official', { replace: true });
                   });
                 });
               })
@@ -158,6 +159,7 @@ export default function EditOfficialsFormCard({ initialValues, uid }) {
           enqueueSnackbar('Updated successfully.', {
             variant: 'success',
           });
+          navigate('/dashboard/official', { replace: true });
         })
         .catch((err) => {
           console.log({ err });
