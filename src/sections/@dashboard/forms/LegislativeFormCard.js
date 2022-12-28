@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 // material
 import { LoadingButton } from '@mui/lab';
 import { Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { createLegislative, updateLegislativePdf, uploadLegislativePdf } from '../../../service/legislative';
 // ----------------------------------------------------------------------
@@ -12,6 +13,7 @@ export default function LegislativeFormCard() {
   const navigate = useNavigate();
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState();
   const [pdfFile, setPdfFile] = useState();
+  const { enqueueSnackbar } = useSnackbar();
 
   const LegislativeFormSchema = Yup.object().shape({
     ordinanceNumber: Yup.string().required('Ordinanace No. is required'),
@@ -37,12 +39,14 @@ export default function LegislativeFormCard() {
             console.log(res);
 
             return updateLegislativePdf(legislativeUid).then((res) => {
+              enqueueSnackbar('Ordinance added successfully.', { variant: 'success' });
               navigate('/dashboard/legislative/', { replace: true });
             });
           });
         })
         .catch((err) => {
           console.log({ err });
+          enqueueSnackbar('Ordinance creation failed.', { variant: 'error' });
         });
     },
   });
