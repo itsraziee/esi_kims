@@ -7,12 +7,15 @@ import { Container, IconButton, Stack, Typography } from '@mui/material';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
-import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
-import EditDisclosureBoardDialog from '../components/editDialog/EditDisclosureBoardDialog';
 import Page from '../components/Page';
-import { firestore } from '../firebase-init';
+
 import { useAuth } from '../hooks/useAuth';
 import { deleteDisclosureBoard } from '../service/disclosureBoard';
+
+
+import { firestore } from '../firebase-init';
+import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
+import EditDisclosureBoardDialog from '../components/editDialog/EditDisclosureBoardDialog';
 // ----------------------------------------------------------------------
 
 export default function ViewDisclosureBoard() {
@@ -29,12 +32,6 @@ export default function ViewDisclosureBoard() {
   const [disclosureBoard, setDisclosureBoard] = useState();
 
   useEffect(() => {
-    // getDisclosureBoard(uid).then((res) => {
-    //   console.log({ disclosureBoardResult: res });
-    //   const disclosureBoardData = res.data();
-    //   console.log({ disclosureBoardData });
-    //   setDisclosureBoard(disclosureBoardData);
-    // });
     const unsub = onSnapshot(doc(firestore, `disclosureBoard/${uid}`), (doc) => {
       console.log('Current data: ', doc.data());
       const data = doc.data();
@@ -43,7 +40,7 @@ export default function ViewDisclosureBoard() {
     return () => unsub;
   }, []);
 
-  useEffect(() => {
+  useEffect(() =>   {
     console.log({ disclosureBoard });
   }, [disclosureBoard]);
 
@@ -52,24 +49,24 @@ export default function ViewDisclosureBoard() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">{disclosureBoard?.title}</Typography>
-          {user && (
-            <Stack direction="row" spacing={1}>
-              <IconButton
-                onClick={() => {
-                  setOpenEditDialog(true);
-                }}
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                onClick={() => {
-                  setOpenDeleteDialog(true);
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Stack>
-          )}
+        
+          { user&& <Stack direction="row" spacing={1}>
+            <IconButton
+              onClick={() => {
+                setOpenEditDialog(true);
+              }}
+            >
+              <EditIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                setOpenDeleteDialog(true);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Stack>}
+
         </Stack>
         {disclosureBoard && (
           <iframe
@@ -81,13 +78,9 @@ export default function ViewDisclosureBoard() {
         )}
       </Container>
       {disclosureBoard && (
-        <EditDisclosureBoardDialog
-          open={openEditDialog}
-          handleClose={() => setOpenEditDialog(false)}
-          disclosureBoard={disclosureBoard}
-        />
+        <EditDisclosureBoardDialog open={openEditDialog} handleClose={() => setOpenEditDialog(false)} disclosureBoard={disclosureBoard} />
       )}
-
+      
       <DeleteConfirmationDialog
         open={openDeleteDialog}
         handleClose={() => setOpenDeleteDialog(false)}

@@ -1,3 +1,4 @@
+import { FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -39,7 +40,7 @@ export default function EditDisclosureBoardDialog({ open, handleClose, disclosur
   useEffect(() => {
     formik.setValues(
       {
-        title: legislative.title,
+        title: disclosureBoard.title,
       },
       true
     );
@@ -50,8 +51,8 @@ export default function EditDisclosureBoardDialog({ open, handleClose, disclosur
       <DialogTitle>Update Disclosure Board</DialogTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
         <DialogContent>
-          <DialogContentText>This will change the state of this disclosure board in real time.</DialogContentText>
-    
+          <DialogContentText>This will change the state of this Disclosure Board in real time.</DialogContentText>
+
           <TextField
             label="Title"
             fullWidth
@@ -61,7 +62,6 @@ export default function EditDisclosureBoardDialog({ open, handleClose, disclosur
             error={formik.touched.title && formik.errors.title}
             helperText={formik.touched.title && formik.errors.title}
           />
-
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
