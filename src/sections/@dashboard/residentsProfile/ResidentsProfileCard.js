@@ -161,7 +161,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="firstName"
                   label="First name*"
-                  placeholder="ex. Juan"
+                  placeholder="e.g. Juan"
                   {...getFieldProps('firstName')}
                   error={Boolean(touched.firstName && errors.firstName)}
                   helperText={touched.firstName && errors.firstName}
@@ -171,7 +171,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="middleName"
                   label="Middle name*"
-                  placeholder="ex. Santos"
+                  placeholder="e.g. Santos"
                   {...getFieldProps('middleName')}
                   error={Boolean(touched.middleName && errors.middleName)}
                   helperText={touched.middleName && errors.middleName}
@@ -181,7 +181,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="lastName"
                   label="Last name*"
-                  placeholder="ex. Dela Cruz"
+                  placeholder="e.g. Dela Cruz"
                   {...getFieldProps('lastName')}
                   error={Boolean(touched.lastName && errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
@@ -191,7 +191,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="suffix"
                   label="Suffix"
-                  placeholder="JR/SR/III"
+                  placeholder="e.g. JR/SR/III"
                   {...getFieldProps('suffix')}
                   error={Boolean(touched.suffix && errors.suffix)}
                   helperText={touched.suffix && errors.suffix}
@@ -265,7 +265,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="citizenship"
                   label="Citizenship*"
-                  placeholder="ex. Filipino"
+                  placeholder="e.g. Filipino"
                   {...getFieldProps('citizenship')}
                   error={Boolean(touched.citizenship && errors.citizenship)}
                   helperText={touched.citizenship && errors.citizenship}
@@ -277,6 +277,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="religion"
                   label="Religion*"
+                placeholder="e.g. Roman Catholic"
                   {...getFieldProps('religion')}
                   error={Boolean(touched.religion && errors.religion)}
                   helperText={touched.religion && errors.religion}
@@ -327,6 +328,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="occupation"
                   label="Occupation*"
+                placeholder="e.g. Doctor"
                   {...getFieldProps('occupation')}
                   error={Boolean(touched.occupation && errors.occupation)}
                   helperText={touched.occupation && errors.occupation}
@@ -393,7 +395,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="tribe"
                   label="Tribe*"
-                  placeholder="ex. Manubo"
+                  placeholder="e.g. Manubo"
                   {...getFieldProps('tribe')}
                   error={Boolean(touched.tribe && errors.tribe)}
                   helperText={touched.tribe && errors.tribe}
@@ -405,7 +407,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="spouse"
                   label="Spouse Name*"
-                  placeholder="ex. Juan Dela Cruz"
+                  placeholder="e.g. Juan Dela Cruz"
                   {...getFieldProps('spouse')}
                   error={Boolean(touched.spouse && errors.spouse)}
                   helperText={touched.spouse && errors.spouse}
@@ -415,7 +417,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="spouseAddress"
                   label="Spouse Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('spouseAddress')}
                   error={Boolean(touched.spouseAddress && errors.spouseAddress)}
                   helperText={touched.spouseAddress && errors.spouseAddress}
@@ -436,7 +438,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="fathersName"
                   label="Father's Name*"
-                  placeholder="ex. Juan Dela Cruz"
+                  placeholder="e.g. Juan Dela Cruz"
                   {...getFieldProps('fathersName')}
                   error={Boolean(touched.fathersName && errors.fathersName)}
                   helperText={touched.fathersName && errors.fathersName}
@@ -446,6 +448,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="fathersOccupation"
                   label="Occupation*"
+                placeholder="e.g. Engineer"
                   {...getFieldProps('fathersOccupation')}
                   error={Boolean(touched.fathersOccupation && errors.fathersOccupation)}
                   helperText={touched.fathersOccupation && errors.fathersOccupation}
@@ -455,7 +458,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="fathersAddress"
                   label="Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('fathersAddress')}
                   error={Boolean(touched.fathersAddress && errors.fathersAddress)}
                   helperText={touched.fathersAddress && errors.fathersAddress}
@@ -467,7 +470,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="mothersName"
                   label="Mother's Name*"
-                  placeholder="ex. Jessica Dela Cruz"
+                  placeholder="e.g. Jessica Dela Cruz"
                   {...getFieldProps('mothersName')}
                   error={Boolean(touched.mothersName && errors.mothersName)}
                   helperText={touched.mothersName && errors.mothersName}
@@ -477,6 +480,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="mothersOccupation"
                   label="Occupation*"
+                placeholder="e.g. Nurse"
                   {...getFieldProps('mothersOccupation')}
                   error={Boolean(touched.mothersOccupation && errors.mothersOccupation)}
                   helperText={touched.mothersOccupation && errors.mothersOccupation}
@@ -486,7 +490,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="mothersAddress"
                   label="Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('mothersAddress')}
                   error={Boolean(touched.mothersAddress && errors.mothersAddress)}
                   helperText={touched.mothersAddress && errors.mothersAddress}
@@ -515,6 +519,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="elementaryAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('elementaryAddress')}
                   error={Boolean(touched.elementaryAddress && errors.elementaryAddress)}
                   helperText={touched.elementaryAddress && errors.elementaryAddress}
@@ -546,6 +551,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="highschoolAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('highschoolAddress')}
                   error={Boolean(touched.highschoolAddress && errors.highschoolAddress)}
                   helperText={touched.highschoolAddress && errors.highschoolAddress}
@@ -578,6 +584,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="collegeAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('collegeAddress')}
                   error={Boolean(touched.collegeAddress && errors.collegeAddress)}
                   helperText={touched.collegeAddress && errors.collegeAddress}
@@ -610,6 +617,7 @@ export default function ResidentsProfileCard() {
                   fullWidth
                   name="vocationalAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('vocationalAddress')}
                   error={Boolean(touched.vocationalAddress && errors.vocationalAddress)}
                   helperText={touched.vocationalAddress && errors.vocationalAddress}

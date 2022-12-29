@@ -142,7 +142,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="deceasedname"
             label="Deceased Name*"
-            placeholder='Juan Dela Cruz'
+            placeholder='e.g. Juan Dela Cruz'
             {...getFieldProps('deceasedname')}
             error={Boolean(touched.deceasedname && errors.deceasedname)}
             helperText={touched.deceasedname && errors.deceasedname}
@@ -152,7 +152,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="placeofdeath"
             label="Place of Death*"
-            placeholder='Barangay/Municipality/Province'
+            placeholder='Barangay,Municipality,Province'
             {...getFieldProps('placeofdeath')}
             error={Boolean(touched.placeofdeath && errors.placeofdeath)}
             helperText={touched.placeofdeath && errors.placeofdeath}
@@ -198,6 +198,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="causeofdeath"
             label="Cause of Death*"
+          placeholder="e.g. Diabetes mellitus"
             {...getFieldProps('causeofdeath')}
             error={Boolean(touched.causeofdeath && errors.causeofdeath)}
             helperText={touched.causeofdeath && errors.causeofdeath}
@@ -269,7 +270,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="placeburried"
             label="Place Burried*"
-            placeholder='Barangay/Municipality/Province'
+            placeholder='Barangay,Municipality,Province'
             {...getFieldProps('placeburried')}
             error={Boolean(touched.placeburried && errors.placeburried)}
             helperText={touched.placeburried && errors.placeburried}
@@ -278,6 +279,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="religion"
             label="Religion*"
+          placeholder="e.g. Roman Catholic"
             {...getFieldProps('religion')}
             error={Boolean(touched.religion && errors.religion)}
             helperText={touched.religion && errors.religion}
@@ -286,6 +288,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="occupation"
             label="Occupation*"
+          placeholder="e.g. Engineer"
             {...getFieldProps('occupation')}
             error={Boolean(touched.occupation && errors.occupation)}
             helperText={touched.occupation && errors.occupation}
@@ -297,7 +300,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="nameoffather"
             label="Name of Father*"
-            placeholder='Juan Dela Cruz'
+            placeholder='e.g. Juan Dela Cruz'
             {...getFieldProps('nameoffather')}
             error={Boolean(touched.nameoffather && errors.nameoffather)}
             helperText={touched.nameoffather && errors.nameoffather}
@@ -306,7 +309,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
             fullWidth
             name="maidennameofmother"
             label="Maiden Name of Mother*"
-            placeholder='Juan Tan Dela'
+            placeholder='e.g. Jessica Dela Cruz'
             {...getFieldProps('maidennameofmother')}
             error={Boolean(touched.maidennameofmother && errors.maidennameofmother)}
             helperText={touched.maidennameofmother && errors.maidennameofmother}

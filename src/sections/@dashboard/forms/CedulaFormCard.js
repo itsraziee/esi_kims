@@ -104,6 +104,7 @@ export default function CedulaFormCard({ onSubmitForm }) {
               fullWidth
               name="firstName"
               label="First Name"
+            placeholder="e.g. Juan"
               {...getFieldProps('firstName')}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
@@ -112,6 +113,7 @@ export default function CedulaFormCard({ onSubmitForm }) {
               fullWidth
               name="middleName"
               label="Middle Name"
+            placeholder="e.g. Santos"
               {...getFieldProps('middleName')}
               error={Boolean(touched.middleName && errors.middleName)}
               helperText={touched.middleName && errors.middleName}
@@ -120,6 +122,7 @@ export default function CedulaFormCard({ onSubmitForm }) {
               fullWidth
               name="lastName"
               label="Last Name"
+            placeholder="e.g. Dela Cruz"
               {...getFieldProps('lastName')}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}

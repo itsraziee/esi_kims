@@ -135,7 +135,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="firstName"
               label="First Name*"
-              placeholder="Juan"
+              placeholder="e.g. Juan"
               {...getFieldProps('firstName')}
               error={Boolean(touched.firstName && errors.firstName)}
               helperText={touched.firstName && errors.firstName}
@@ -144,7 +144,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="middleName"
               label="Middle Name*"
-              placeholder="Dela"
+              placeholder="e.g. Santos"
               {...getFieldProps('middleName')}
               error={Boolean(touched.middleName && errors.middleName)}
               helperText={touched.middleName && errors.middleName}
@@ -153,7 +153,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="lastName"
               label="Last Name*"
-              placeholder="Cruz"
+              placeholder="e.g. Dela Cruz"
               {...getFieldProps('lastName')}
               error={Boolean(touched.lastName && errors.lastName)}
               helperText={touched.lastName && errors.lastName}
@@ -162,7 +162,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="suffix"
               label="Suffix"
-              placeholder="JR/SR/II"
+              placeholder="e.g. JR/SR/II"
               {...getFieldProps('suffix')}
               error={Boolean(touched.suffix && errors.suffix)}
               helperText={touched.suffix && errors.suffix}
@@ -217,6 +217,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="citizenship"
               label="Citizenship*"
+            placeholder='e.g. Filipino'
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
@@ -271,6 +272,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="religion"
               label="Religion*"
+            placeholder="e.g. Roman Catholic"
               {...getFieldProps('religion')}
               error={Boolean(touched.religion && errors.religion)}
               helperText={touched.religion && errors.religion}
@@ -339,7 +341,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="placeOfBirth"
               label="Place of Birth*"
-              placeholder="Barangay/Municipality/Province"
+              placeholder="Barangay,Municipality,Province"
               {...getFieldProps('placeOfBirth')}
               error={Boolean(touched.placeOfBirth && errors.placeOfBirth)}
               helperText={touched.placeOfBirth && errors.placeOfBirth}
@@ -388,6 +390,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
               fullWidth
               name="purpose"
               label="Purpose*"
+            placeholder="e.g. Scholarship"
               {...getFieldProps('purpose')}
               error={Boolean(touched.purpose && errors.purpose)}
               helperText={touched.purpose && errors.purpose}

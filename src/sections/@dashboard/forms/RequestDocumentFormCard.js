@@ -66,7 +66,7 @@ export default function RequestDocumentFormCard() {
             label="Requestor Name*"
             name="requestorname"
             fullWidth
-            placeholder="Juan Dela Cruz"
+            placeholder="e.g. Juan Dela Cruz"
             {...getFieldProps('requestorname')}
             error={Boolean(touched.requestorname && errors.requestorname)}
             helperText={touched.requestorname && errors.requestorname}

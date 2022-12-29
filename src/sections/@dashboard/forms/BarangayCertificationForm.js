@@ -120,7 +120,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             fullWidth
             name="applicant"
             label="Applicant*"
-            placeholder='Juan Dela Cruz'
+            placeholder='e.g. Juan Dela Cruz'
             {...getFieldProps('applicant')}
             error={Boolean(touched.applicant && errors.applicant)}
             helperText={touched.applicant && errors.applicant}
@@ -181,6 +181,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
             fullWidth
             name="purpose"
             label="Purpose"
+          placeholder="e.g. Scholarship"
             {...getFieldProps('purpose')}
             error={Boolean(touched.purpose && errors.purpose)}
             helperText={touched.purpose && errors.purpose}
@@ -192,6 +193,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               fullWidth
               name="layout"
               label="Layout*"
+            placeholder="e.g. 16x18 sqm."
               {...getFieldProps('layout')}
               error={Boolean(touched.layout && errors.layout)}
               helperText={touched.layout && errors.layout}
@@ -200,6 +202,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               fullWidth
               name="beam"
               label="Beam*"
+            placeholder="e.g. Bayog"
               {...getFieldProps('beam')}
               error={Boolean(touched.beam && errors.beam)}
               helperText={touched.beam && errors.beam}
@@ -208,6 +211,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               fullWidth
               name="gi"
               label="GI*"
+            placeholder="e.g. 18 lengths"
               {...getFieldProps('gi')}
               error={Boolean(touched.gi && errors.gi)}
               helperText={touched.gi && errors.gi}
@@ -216,6 +220,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               fullWidth
               name="wall"
               label="Wall*"
+            placeholder="e.g. Hollow Blocks"
               {...getFieldProps('wall')}
               error={Boolean(touched.wall && errors.wall)}
               helperText={touched.wall && errors.wall}
@@ -224,6 +229,7 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
               fullWidth
               name="estimatedcost"
               label="Estimated Cost*"
+            placeholder="Amount"
               {...getFieldProps('estimatedcost')}
               error={Boolean(touched.estimatedcost && errors.estimatedcost)}
               helperText={touched.estimatedcost && errors.estimatedcost}

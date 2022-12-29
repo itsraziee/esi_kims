@@ -192,7 +192,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="firstName"
                       label="First name*"
-                      placeholder="ex. Juan"
+                      placeholder="e.g. Juan"
                       {...getFieldProps('firstName')}
                       error={Boolean(touched.firstName && errors.firstName)}
                       helperText={touched.firstName && errors.firstName}
@@ -201,7 +201,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="middleName"
                       label="Middle name*"
-                      placeholder="ex. Santos"
+                      placeholder="e.g. Santos"
                       {...getFieldProps('middleName')}
                       error={Boolean(touched.middleName && errors.middleName)}
                       helperText={touched.middleName && errors.middleName}
@@ -210,7 +210,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="lastName"
                       label="Last name*"
-                      placeholder="ex. Dela Cruz"
+                      placeholder="e.g. Dela Cruz"
                       {...getFieldProps('lastName')}
                       error={Boolean(touched.lastName && errors.lastName)}
                       helperText={touched.lastName && errors.lastName}
@@ -220,7 +220,7 @@ export default function OfficialsFormCard() {
                     <TextField
                       name="suffix"
                       label="Suffix"
-                      placeholder="JR/SR/III"
+                      placeholder="e.g. JR/SR/III"
                       {...getFieldProps('suffix')}
                       error={Boolean(touched.suffix && errors.suffix)}
                       helperText={touched.suffix && errors.suffix}
@@ -301,7 +301,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="citizenship"
                       label="Citizenship*"
-                      placeholder="ex. Filipino"
+                      placeholder="e.g. Filipino"
                       {...getFieldProps('citizenship')}
                       error={Boolean(touched.citizenship && errors.citizenship)}
                       helperText={touched.citizenship && errors.citizenship}
@@ -311,6 +311,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="religion"
                       label="Religion*"
+                    placeholder="e.g. Roman Catholic"
                       {...getFieldProps('religion')}
                       error={Boolean(touched.religion && errors.religion)}
                       helperText={touched.religion && errors.religion}
@@ -391,6 +392,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="occupation"
                   label="Occupation*"
+                placeholder="e.g. Public Servant"
                   {...getFieldProps('occupation')}
                   error={Boolean(touched.occupation && errors.occupation)}
                   helperText={touched.occupation && errors.occupation}
@@ -400,7 +402,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="officialAddress"
                   label="Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('officialAddress')}
                   error={Boolean(touched.officialAddress && errors.officialAddress)}
                   helperText={touched.officialAddress && errors.officialAddress}
@@ -459,7 +461,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="title"
                   label="Title*"
-                  placeholder="ex. Barangay Captain"
+                  placeholder="e.g. Barangay Captain"
                   {...getFieldProps('title')}
                   error={Boolean(touched.title && errors.title)}
                   helperText={touched.title && errors.title}
@@ -471,7 +473,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="spouse"
                   label="Spouse*"
-                  placeholder="ex. Jessica Dela Cruz"
+                  placeholder="e.g. Jessica Dela Cruz"
                   {...getFieldProps('spouse')}
                   error={Boolean(touched.spouse && errors.spouse)}
                   helperText={touched.spouse && errors.spouse}
@@ -481,7 +483,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="spouseAddress"
                   label="Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('spouseAddress')}
                   error={Boolean(touched.spouseAddress && errors.spouseAddress)}
                   helperText={touched.spouseAddress && errors.spouseAddress}
@@ -502,7 +504,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="fathersName"
                   label="Father's Name*"
-                  placeholder="ex. Juan Dela Cruz"
+                  placeholder="e.g. Juan Dela Cruz"
                   {...getFieldProps('fathersName')}
                   error={Boolean(touched.fathersName && errors.fathersName)}
                   helperText={touched.fathersName && errors.fathersName}
@@ -512,6 +514,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="fathersOccupation"
                   label="Occupation*"
+                placeholder="e.g. Engineer"
                   {...getFieldProps('fathersOccupation')}
                   error={Boolean(touched.fathersOccupation && errors.fathersOccupation)}
                   helperText={touched.fathersOccupation && errors.fathersOccupation}
@@ -521,7 +524,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="fathersAddress"
                   label="Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('fathersAddress')}
                   error={Boolean(touched.fathersAddress && errors.fathersAddress)}
                   helperText={touched.fathersAddress && errors.fathersAddress}
@@ -533,7 +536,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="mothersName"
                   label="Mother's Name*"
-                  placeholder='ex. Jessica Dela Cruz'
+                  placeholder='e.g. Jessica Dela Cruz'
                   {...getFieldProps('mothersName')}
                   error={Boolean(touched.mothersName && errors.mothersName)}
                   helperText={touched.mothersName && errors.mothersName}
@@ -543,6 +546,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="mothersOccupation"
                   label="Occupation*"
+                placeholder="e.g. Nurse"
                   {...getFieldProps('mothersOccupation')}
                   error={Boolean(touched.mothersOccupation && errors.mothersOccupation)}
                   helperText={touched.mothersOccupation && errors.mothersOccupation}
@@ -552,7 +556,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="mothersAddress"
                   label="Address*"
-                  placeholder="PUROK/BRGY/MUNICIPALITY/PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('mothersAddress')}
                   error={Boolean(touched.mothersAddress && errors.mothersAddress)}
                   helperText={touched.mothersAddress && errors.mothersAddress}
@@ -581,6 +585,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="elementaryAddress"
                   label="Address of School*"
+                placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('elementaryAddress')}
                   error={Boolean(touched.elementaryAddress && errors.elementaryAddress)}
                   helperText={touched.elementaryAddress && errors.elementaryAddress}
@@ -612,6 +617,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="highschoolAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('highschoolAddress')}
                   error={Boolean(touched.highschoolAddress && errors.highschoolAddress)}
                   helperText={touched.highschoolAddress && errors.highschoolAddress}
@@ -644,6 +650,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="collegeAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('collegeAddress')}
                   error={Boolean(touched.collegeAddress && errors.collegeAddress)}
                   helperText={touched.collegeAddress && errors.collegeAddress}
@@ -676,6 +683,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="vocationalAddress"
                   label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('vocationalAddress')}
                   error={Boolean(touched.vocationalAddress && errors.vocationalAddress)}
                   helperText={touched.vocationalAddress && errors.vocationalAddress}

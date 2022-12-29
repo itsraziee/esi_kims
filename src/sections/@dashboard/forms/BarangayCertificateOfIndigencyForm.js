@@ -109,7 +109,7 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
               fullWidth
               name="fullName"
               label="Full Name*"
-              placeholder='Juan Dela Cruz'
+              placeholder='e.g. Juan Dela Cruz'
               {...getFieldProps('fullName')}
               error={Boolean(touched.fullName && errors.fullName)}
               helperText={touched.fullName && errors.fullName}
@@ -180,6 +180,7 @@ export default function BarangayCertificateOfIndigencyForm({ onSubmitForm }) {
               fullWidth
               name="citizenship"
               label="Citizenship*"
+            placeholder="e.g. Filipino"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
