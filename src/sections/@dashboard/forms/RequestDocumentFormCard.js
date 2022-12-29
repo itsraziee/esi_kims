@@ -24,6 +24,7 @@ import {
   CERTIFICATE_OF_INDIGENCY_PRICE,
   CERTIFICATE_OF_RESIDENCY_PRICE,
   TREE_PLANTING_CERTIFICATE_PRICE,
+  CEDULA_PRICE,
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import BarangayBirthCertificateForm from './BarangayBirthCertificateForm';
@@ -187,7 +188,7 @@ export default function RequestDocumentFormCard() {
           {formik.values.typeOfDocument === 'cedula' && (
             <CedulaFormCard
               onSubmitForm={async (data) => {
-                return createRequest('Cedula', data, formik.values.requestorname);
+                return createRequest('Cedula', data, formik.values.requestorname, CEDULA_PRICE);
               }}
             />
           )}

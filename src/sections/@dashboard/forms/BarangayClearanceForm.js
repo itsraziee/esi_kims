@@ -143,7 +143,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
             <TextField
               fullWidth
               name="middleName"
-              label="Middle Name*"
+              label="Middle Name"
               placeholder="e.g. Santos"
               {...getFieldProps('middleName')}
               error={Boolean(touched.middleName && errors.middleName)}
@@ -302,24 +302,7 @@ export default function BarangayClearanceForm({ onSubmitForm }) {
                 <FormHelperText>Please select a Civil Status.</FormHelperText>
               )}
             </FormControl>
-            {/* <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
-              <InputLabel id="status-select-label">Civil Status</InputLabel>
-              <Select
-                name="civilStatus"
-                labelId="status-select-label"
-                id="status-select"
-                value={formik.values.civilStatus}
-                label="civilStatus"
-                onChange={handleChange}
-                {...getFieldProps('civilStatus')}
-                error={Boolean(touched.civilStatus && errors.civilStatus)}
-              >
-                <MenuItem value="single">Single</MenuItem>
-                <MenuItem value="married">Married</MenuItem>
-                <MenuItem value="separated">Separated</MenuItem>
-                <MenuItem value="widowed">Widowed</MenuItem>
-              </Select>
-            </FormControl> */}
+            
             <TextField
               fullWidth
               name="dateOfBirth"

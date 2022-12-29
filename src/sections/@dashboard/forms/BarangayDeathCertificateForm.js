@@ -317,7 +317,7 @@ export default function BarangayDeathCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="relationship"
-            label="Relationship"
+            label="Relationship*"
             placeholder='Relationship with the deceased person'
             {...getFieldProps('relationship')}
             error={Boolean(touched.relationship && errors.relationship)}

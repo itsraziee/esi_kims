@@ -180,8 +180,8 @@ export default function BarangayCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="purpose"
-            label="Purpose"
-          placeholder="e.g. Scholarship"
+            label="Purpose*"
+          placeholder="e.g. Electrification"
             {...getFieldProps('purpose')}
             error={Boolean(touched.purpose && errors.purpose)}
             helperText={touched.purpose && errors.purpose}
