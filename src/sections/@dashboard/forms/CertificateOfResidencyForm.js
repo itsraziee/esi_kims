@@ -109,7 +109,7 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
               fullWidth
               name="name"
               label="Full Name*"
-              placeholder='Juan Dela Cruz'
+              placeholder='e.g. Juan Dela Cruz'
               {...getFieldProps('name')}
               error={Boolean(touched.name && errors.name)}
               helperText={touched.name && errors.name}
@@ -153,6 +153,7 @@ export default function CertificateOfResidencyForm({ onSubmitForm }) {
               fullWidth
               name="citizenship"
               label="Citizenship*"
+            placeholder="e.g. Filipino"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}

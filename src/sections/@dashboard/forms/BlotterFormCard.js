@@ -16,6 +16,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import { createBlotter, updatePdfURL, uploadBlotterPdf } from '../../../service/blotter';
 // ----------------------------------------------------------------------
@@ -24,6 +25,7 @@ export default function BlotterFormCard() {
   const navigate = useNavigate();
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState();
   const [pdfFile, setPdfFile] = useState();
+  const { enqueueSnackbar } = useSnackbar();
 
   const BlotterFormCardSchema = Yup.object().shape({
     caseType: Yup.string().oneOf(['unsolved', 'solved']).required('Case Type is required'),
@@ -37,16 +39,22 @@ export default function BlotterFormCard() {
     },
     validationSchema: BlotterFormCardSchema,
     onSubmit: async (data) => {
-      return createBlotter(data.caseNumber, data.caseType).then((res) => {
-        console.log({ createdBlotter: res });
-        const blotterUid = res.id;
-        return uploadBlotterPdf(res.id, pdfFile).then((res) => {
-          console.log({ res });
-          return updatePdfURL(blotterUid, res.ref).then((res) => {
-            navigate('/dashboard/app', { replace: true });
+      return createBlotter(data.caseNumber, data.caseType)
+        .then((res) => {
+          console.log({ createdBlotter: res });
+          const blotterUid = res.id;
+          return uploadBlotterPdf(res.id, pdfFile).then((res) => {
+            console.log({ res });
+            return updatePdfURL(blotterUid, res.ref).then((res) => {
+              enqueueSnackbar('Blotter report added successfully.', { variant: 'success' });
+              navigate('/dashboard/blotter', { replace: true });
+            });
           });
+        })
+        .catch((err) => {
+          enqueueSnackbar('Blotter report creation failed.', { variant: 'error' });
+          console.log({ err });
         });
-      });
     },
   });
 

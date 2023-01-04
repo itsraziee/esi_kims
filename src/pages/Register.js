@@ -68,14 +68,14 @@ export default function Register() {
         <RootStyle>
           <HeaderStyle>
             <Logo />
-            {smUp && (
+            {/* {smUp && (
               <Typography variant="body2" sx={{ mt: { md: -2 } }}>
                 Already have an account? {''}
                 <Link variant="subtitle2" component={RouterLink} to="/login">
                   Login
                 </Link>
               </Typography>
-            )}
+            )} */}
           </HeaderStyle>
 
           {mdUp && (
@@ -89,14 +89,14 @@ export default function Register() {
 
           <Container>
             <ContentStyle>
-              <Typography variant="h4" gutterBottom>
-                Get started absolutely free.
+              <Typography variant="h4" align="center" gutterBottom>
+                Sign up
               </Typography>
 
-              <Typography sx={{ color: 'text.secondary', mb: 5 }}>More convenient..</Typography>
+              <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
               <RegisterForm />
 
-              <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
+              {/* <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
                 By registering, I agree to KIMS&nbsp;
                 <Link underline="always" color="text.primary" href="#">
                   Terms of Service
@@ -106,7 +106,7 @@ export default function Register() {
                   Privacy Policy
                 </Link>
                 .
-              </Typography>
+              </Typography> */}
 
               {!smUp && (
                 <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>

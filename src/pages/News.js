@@ -35,7 +35,6 @@ export default function News() {
               ))}
             </List>
           </Grid>
-          {/* )} */}
         </Grid>
       </Container>
     </Page>

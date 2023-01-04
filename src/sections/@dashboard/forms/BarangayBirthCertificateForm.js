@@ -169,7 +169,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="nameofchild"
             label="Name of Child*"
-            placeholder="Juan Dela Cruz"
+            placeholder="e.g. Juan Dela Cruz"
             {...getFieldProps('nameofchild')}
             error={Boolean(touched.nameofchild && errors.nameofchild)}
             helperText={touched.nameofchild && errors.nameofchild}
@@ -246,7 +246,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="birthorder"
             label="Birth Order*"
-            placeholder="First"
+            placeholder="e.g. First"
             {...getFieldProps('birthorder')}
             error={Boolean(touched.birthorder && errors.birthorder)}
             helperText={touched.birthorder && errors.birthorder}
@@ -257,7 +257,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="placeofbirth"
             label="Place of Birth*"
-            placeholder="Barangay/Municipality/Province"
+            placeholder="Barangay,Municipality,Province"
             {...getFieldProps('placeofbirth')}
             error={Boolean(touched.placeofbirth && errors.placeofbirth)}
             helperText={touched.placeofbirth && errors.placeofbirth}
@@ -284,6 +284,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="nameofattendant"
             label="Name of Attendant*"
+          placeholder="e.g. Jessica Dela Cruz"
             {...getFieldProps('nameofattendant')}
             error={Boolean(touched.nameofattendant && errors.nameofattendant)}
             helperText={touched.nameofattendant && errors.nameofattendant}
@@ -292,7 +293,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="addressofattendant"
             label="Address Of Attendant*"
-            placeholder="Barangay/Municipality/Province"
+            placeholder="Barangay,Municipality,Province"
             {...getFieldProps('addressofattendant')}
             error={Boolean(touched.addressofattendant && errors.addressofattendant)}
             helperText={touched.addressofattendant && errors.addressofattendant}
@@ -303,7 +304,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="nameofmother"
             label="Name of Mother*"
-            placeholder="Juan Dela Cruz"
+            placeholder="e.g. Jessica Dela Cruz"
             {...getFieldProps('nameofmother')}
             error={Boolean(touched.nameofmother && errors.nameofmother)}
             helperText={touched.nameofmother && errors.nameofmother}
@@ -312,6 +313,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="mothercitizenship"
             label="Mothers Citizenship*"
+          placeholder="e.g. Filipino"
             {...getFieldProps('mothercitizenship')}
             error={Boolean(touched.mothercitizenship && errors.mothercitizenship)}
             helperText={touched.mothercitizenship && errors.mothercitizenship}
@@ -320,6 +322,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="motheroccupation"
             label="Mothers Occupation*"
+          placeholder="e.g. Nurse"
             {...getFieldProps('motheroccupation')}
             error={Boolean(touched.motheroccupation && errors.motheroccupation)}
             helperText={touched.motheroccupation && errors.motheroccupation}
@@ -331,7 +334,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="nameoffather"
             label="Name of Father*"
-            placeholder="Juan Dela Cruz"
+            placeholder="e.g. Juan Dela Cruz"
             {...getFieldProps('nameoffather')}
             error={Boolean(touched.nameoffather && errors.nameoffather)}
             helperText={touched.nameoffather && errors.nameoffather}
@@ -340,6 +343,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="fathercitizenship"
             label="Fathers Citizenship*"
+          placeholder="e.g. Filipino"
             {...getFieldProps('fathercitizenship')}
             error={Boolean(touched.fathercitizenship && errors.fathercitizenship)}
             helperText={touched.fathercitizenship && errors.fathercitizenship}
@@ -348,6 +352,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="fatheroccupation"
             label="Fathers Occupation*"
+          placeholder="e.g. Doctor"
             {...getFieldProps('fatheroccupation')}
             error={Boolean(touched.fatheroccupation && errors.fatheroccupation)}
             helperText={touched.fatheroccupation && errors.fatheroccupation}
@@ -372,7 +377,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="placeofmarriage"
             label="Place of Marriage"
-            placeholder="Barangay/Municipality/Province"
+            placeholder="Barangay,Municipality,Province"
             {...getFieldProps('placeofmarriage')}
             error={Boolean(touched.placeofmarriage && errors.placeofmarriage)}
             helperText={touched.placeofmarriage && errors.placeofmarriage}
@@ -381,7 +386,7 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
             fullWidth
             name="yearofresidency"
             label="Year of Residency*"
-            placeholder="Parents became active resident of the barangay"
+            placeholder="Year started residing in the barangay."
             {...getFieldProps('yearofresidency')}
             error={Boolean(touched.yearofresidency && errors.yearofresidency)}
             helperText={touched.yearofresidency && errors.yearofresidency}

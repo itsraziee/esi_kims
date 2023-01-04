@@ -88,7 +88,7 @@ export function NewsItem({ news }) {
   const { imageUrl, title, description, updatedAt } = news;
 
   return (
-    <ListItem disablePadding>
+    <ListItem disablePadding sx={{ my: 1 }}>
       <ListItemButton href={`/dashboard/viewNews/?uid=${news.id}`}>
         <Stack direction="row" alignItems="center" spacing={2}>
           {imageUrl && (

@@ -4,14 +4,20 @@ import * as Yup from 'yup';
 // material
 import { LoadingButton } from '@mui/lab';
 import { Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
+import { useSnackbar } from 'notistack';
 import { useState } from 'react';
-import { createDisclosureBoard, updateDisclosureBoardPdf, uploadDisclosureBoardPdf } from '../../../service/disclosureBoard';
+import {
+  createDisclosureBoard,
+  updateDisclosureBoardPdf,
+  uploadDisclosureBoardPdf,
+} from '../../../service/disclosureBoard';
 // ----------------------------------------------------------------------
 
 export default function DisclosureBoardFormCard() {
   const navigate = useNavigate();
   const [pdfPreviewUrl, setPdfPreviewUrl] = useState();
   const [pdfFile, setPdfFile] = useState();
+  const { enqueueSnackbar } = useSnackbar();
 
   const DisclosureBoardFormSchema = Yup.object().shape({
     title: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
@@ -33,11 +39,13 @@ export default function DisclosureBoardFormCard() {
             console.log(res);
 
             return updateDisclosureBoardPdf(disclosureBoardUid).then((res) => {
+              enqueueSnackbar('Disclosure Board added successfully.', { variant: 'success' });
               navigate('/dashboard/disclosureBoard/', { replace: true });
             });
           });
         })
         .catch((err) => {
+          enqueueSnackbar('Disclosure Board creation failed.', { variant: 'error' });
           console.log({ err });
         });
     },
