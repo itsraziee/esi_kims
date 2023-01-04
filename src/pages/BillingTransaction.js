@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
+import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useRef, useState } from 'react';
@@ -31,6 +32,7 @@ import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
 import { updateAmount, updateRemarks, updateStatus } from '../service/documentRequest';
+import { sendSMS } from '../service/sms';
 
 const accountSid = 'AC1723ddff52489c0cb0ecbcd973fac96d';
 const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
@@ -150,6 +152,7 @@ export default function BillingTransaction() {
   const [documentType, setDocumentType] = React.useState();
   const [currentRow, setCurrentRow] = React.useState();
   const [previewSrc, setPreviewSrc] = React.useState();
+  const { enqueueSnackbar } = useSnackbar();
 
   React.useEffect(() => {
     let newTotalRevenue = 0;
@@ -305,6 +308,23 @@ export default function BillingTransaction() {
             //     'Maayong Adlaw! Kini nga mensahe gikan sa ESI-KIMS buot mupahibalo nga andam na ug pwede ng makuha ang imong gikinihanglan nga dokumento. Atol sa imong pagkuha sa maong dokumento palihog sa pagdala sa imong kompleto nga bayad. Daghang Salamat'
             //   );
             // }}
+            onClick={() => {
+              sendSMS({
+                number: '639169235853',
+                /* TODO REPLACE WITH NUMBER FROM BILLING TRANSACTION
+                MIGHT BE: params.row.number, GIVEN THAT "number" IS THE FIREBASE PROPERTY NAME.
+                */
+                message: `The ${params.row.type} you requested was ready to be claimed.`,
+              })
+                .then(() => {
+                  enqueueSnackbar('SMS sent successfully', { variant: 'success' });
+                })
+                .catch((err) => {
+                  enqueueSnackbar('SMS failed sending', { variant: 'error' });
+                  console.log({ err });
+                });
+              console.log({ params });
+            }}
           >
             SMS
           </Button>
