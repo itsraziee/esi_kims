@@ -2,12 +2,13 @@ import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
-export function createRequest(type, data, requestorName, amount) {
+export function createRequest(type, data, requestorName, phoneNumber, amount) {
   return addDoc(collection(firestore, 'documentRequest'), {
     type,
     data,
     status: 'pending',
     requestorName,
+    phoneNumber,
     datetime: new Date(),
     amount,
   });

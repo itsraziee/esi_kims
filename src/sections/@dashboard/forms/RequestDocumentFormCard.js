@@ -15,16 +15,17 @@ import {
   Stack,
   TextField,
   Tooltip,
+  InputAdornment,
 } from '@mui/material';
 import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
   BARANGAY_CERTIFICATION_PRICE,
   BARANGAY_CLEARANCE_PRICE,
   BARANGAY_DEATH_CERTIFICATE_PRICE,
+  CEDULA_PRICE,
   CERTIFICATE_OF_INDIGENCY_PRICE,
   CERTIFICATE_OF_RESIDENCY_PRICE,
   TREE_PLANTING_CERTIFICATE_PRICE,
-  CEDULA_PRICE,
 } from '../../../prices';
 import { createRequest } from '../../../service/documentRequest';
 import BarangayBirthCertificateForm from './BarangayBirthCertificateForm';
@@ -43,12 +44,14 @@ export default function RequestDocumentFormCard() {
   const RequestDocumentFormSchema = Yup.object().shape({
     typeOfDocument: Yup.string().required('Type of Document is required.'),
     requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
+    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone number is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       typeOfDocument: '',
       requestorname: '',
+      phoneNumber: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -71,6 +74,18 @@ export default function RequestDocumentFormCard() {
             {...getFieldProps('requestorname')}
             error={Boolean(touched.requestorname && errors.requestorname)}
             helperText={touched.requestorname && errors.requestorname}
+          />
+          <TextField
+            fullWidth
+            name="phone_number"
+            label="Phone Number*"
+            id="outlined-start-adornment"
+            {...getFieldProps('phoneNumber')}
+            error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+            helperText={touched.phoneNumber && errors.phoneNumber}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">+63</InputAdornment>,
+            }}
           />
           <FormControl
             helperText={touched.typeOfDocument && errors.typeOfDocument}
