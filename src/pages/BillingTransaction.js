@@ -198,6 +198,7 @@ export default function BillingTransaction() {
   const columns = [
     { field: 'id', headerName: 'Reference Number', flex: 1.5 },
     { field: 'requestorName', headerName: 'Name', flex: 1.5 },
+    { field: 'phoneNumber', headerName: 'Phone Number', flex: 1.5 },
     {
       field: 'datetime',
       headerName: 'Datetime',
