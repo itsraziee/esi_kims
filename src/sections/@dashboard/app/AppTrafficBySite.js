@@ -1,30 +1,26 @@
 import * as Yup from 'yup';
 // @mui
-import PropTypes from 'prop-types';
-import { useFormik, Form, FormikProvider } from 'formik';
 import {
   Box,
-  Card,
-  Paper,
-  Stack,
-  Typography,
-  TextField,
-  CardHeader,
-  CardContent,
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
   Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Stack,
+  TextField,
 } from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import PropTypes from 'prop-types';
 
 import { LoadingButton } from '@mui/lab';
-import { useState } from 'react';
 import { useSnackbar } from 'notistack';
-import RequestStatus from '../request/status/RequestStatus';
+import { useState } from 'react';
 import { getDocumentRequest } from '../../../service/documentRequest';
+import RequestStatus from '../request/status/RequestStatus';
 // utils
 
 // ----------------------------------------------------------------------
@@ -75,7 +71,7 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
   return (
     <>
-      <Card {...other}>
+      <Card sx={{ boxShadow: 4 }} {...other}>
         <CardHeader title={title} subheader={subheader} />
 
         <CardContent>

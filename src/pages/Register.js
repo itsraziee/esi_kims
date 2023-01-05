@@ -1,16 +1,15 @@
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
+import { Card, Container, Link, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Card, Link, Container, Typography } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
-import Page from '../components/Page';
 import Logo from '../components/Logo';
+import Page from '../components/Page';
 // sections
-import { RegisterForm } from '../sections/auth/register';
-import AuthSocial from '../sections/auth/AuthSocial';
 import AuthRequired from '../layouts/auth/AuthRequired';
+import { RegisterForm } from '../sections/auth/register';
 
 // ----------------------------------------------------------------------
 
@@ -80,8 +79,8 @@ export default function Register() {
 
           {mdUp && (
             <SectionStyle>
-              <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-                Manage your job with us
+              <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }} align="left">
+                Welcome to KIMS
               </Typography>
               <img alt="register" src="/static/illustrations/Sign-up.png" />
             </SectionStyle>
