@@ -1,6 +1,12 @@
-import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { initializeApp } from '@firebase/app';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, firestore } from '../firebase-init';
+import { auth, firebaseConfig, firestore } from '../firebase-init';
 
 export async function login(email, password) {
   console.log({ email, password });
@@ -12,7 +18,16 @@ export async function resetUserPassword(email) {
 }
 
 export function createAccount(email, password) {
-  return createUserWithEmailAndPassword(auth, email, password);
+  const secondaryApp = initializeApp(firebaseConfig, 'Secondary');
+  const secondaryAuth = getAuth(secondaryApp);
+
+  return createUserWithEmailAndPassword(secondaryAuth, email, password);
+  // .then(function (firebaseUser) {
+  //   console.log('User ' + firebaseUser.uid + ' created successfully!');
+  //   //I don't know if the next statement is necessary
+  //   secondaryApp.auth().signOut();
+  // });
+  // return createUserWithEmailAndPassword(auth, email, password);
 }
 
 export function setProfile(uid, firstName, lastName) {

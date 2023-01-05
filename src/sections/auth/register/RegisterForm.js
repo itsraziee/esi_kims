@@ -6,8 +6,10 @@ import * as Yup from 'yup';
 import { LoadingButton } from '@mui/lab';
 import { FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 // component
-import {useSnackbar} from "notistack";
+import { doc, setDoc } from '@firebase/firestore';
+import { useSnackbar } from 'notistack';
 import Iconify from '../../../components/Iconify';
+import { firestore } from '../../../firebase-init';
 import { createAccount, setProfile } from '../../../service/auth';
 
 // ----------------------------------------------------------------------
@@ -18,7 +20,7 @@ export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
   const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
   const ROLES = ['Secretary', 'Treasurer'];
-  const {enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
@@ -43,15 +45,30 @@ export default function RegisterForm() {
     onSubmit: async (values) => {
       console.log({ values });
       const { email, password, firstName, lastName } = values;
-      return createAccount(email, password).then((accountRes) => {
-        const uid = accountRes.user.uid;
-        setProfile(uid, firstName, lastName);
-        navigate('/dashboard/app', { replace: true });
-        enqueueSnackbar("Account has been created", {variant: "success"})
-      }).catch(err => {
-        console.error({err});
-        enqueueSnackbar("Account creation failed", {variant: "error"})
-      });
+      return createAccount(email, password)
+        .then((accountRes) => {
+          const uid = accountRes.user.uid;
+          const email = accountRes.user.email;
+          setProfile(uid, firstName, lastName);
+          // navigate('/dashboard/app', { replace: true });
+          const userRef = doc(firestore, 'users', values.accountRole);
+          setDoc(userRef, { email }).then((res) => {
+            enqueueSnackbar('Account has been created', { variant: 'success' });
+            formik.resetForm();
+          });
+        })
+        .catch((err) => {
+          if (err.code === 'auth/email-already-in-use') {
+            const userRef = doc(firestore, 'users', values.accountRole);
+            setDoc(userRef, { email: values.email }).then((res) => {
+              enqueueSnackbar('Account already exist and has been set', { variant: 'success' });
+              formik.resetForm();
+            });
+            return;
+          }
+          console.error({ err });
+          enqueueSnackbar('Account creation failed', { variant: 'error' });
+        });
     },
   });
 
@@ -64,7 +81,9 @@ export default function RegisterForm() {
           <FormControl fullWidth>
             <InputLabel>Role</InputLabel>
             <Select value={formik.values.accountRole} label="Role" {...getFieldProps('accountRole')}>
-              {ROLES.map(role => (<MenuItem value={role}>{role}</MenuItem>))}
+              {ROLES.map((role) => (
+                <MenuItem value={role}>{role}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
