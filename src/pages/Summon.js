@@ -9,11 +9,13 @@ import Iconify from '../components/Iconify';
 import { SummonCard } from '../sections/@dashboard/summon';
 
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 import { useSummons } from '../hooks/useSummons';
 // ----------------------------------------------------------------------
 
 export default function Summon() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   const [solved, setSolved] = useState(false);
   const summons = useSummons(solved);
 
@@ -41,7 +43,7 @@ export default function Summon() {
                 <MenuItem value>Solved</MenuItem>
               </Select>
             </Grid>
-            {user && (
+            {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
               <Grid item>
                 <Button
                   variant="contained"

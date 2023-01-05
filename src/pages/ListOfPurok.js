@@ -1,24 +1,26 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Container, Typography, Grid, Stack, Button } from '@mui/material';
+import { Button, Container, Grid, Stack, Typography } from '@mui/material';
 // components
-import Page from '../components/Page';
 import Iconify from '../components/Iconify';
-import { ListOfPurokWidget } from '../sections/@dashboard/listOfPurok';
+import Page from '../components/Page';
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
+import { ListOfPurokWidget } from '../sections/@dashboard/listOfPurok';
 // ----------------------------------------------------------------------
 
 export default function PurokList() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   return (
     <Page title="List Of Purok">
       <Container>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4" sx={{ mb: 3 }}>
-          List of Purok
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h4" sx={{ mb: 3 }}>
+            List of Purok
           </Typography>
-          {user && (
-        <Button
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+            <Button
               variant="contained"
               component={RouterLink}
               to="/dashboard/residentsProfile"
@@ -26,10 +28,10 @@ export default function PurokList() {
             >
               New Residents
             </Button>
-            )}
-          </Stack>
+          )}
+        </Stack>
         <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={3}>
             <ListOfPurokWidget
               title="All Purok"
               description="All Residents"

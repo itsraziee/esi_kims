@@ -1,22 +1,21 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Button, Container, Grid, IconButton, List, Stack, Typography } from '@mui/material';
+import { Button, Container, Grid, List, Stack, Typography } from '@mui/material';
 // components
-import GridViewIcon from '@mui/icons-material/GridView';
-import ListIcon from '@mui/icons-material/List';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Page from '../components/Page';
 
 import Iconify from '../components/Iconify';
-import { LegislativeCard } from '../sections/@dashboard/legislative';
 
 import { useAuth } from '../hooks/useAuth';
 import { useLegislatives } from '../hooks/useLegislatives';
+import { useProfile } from '../hooks/useProfile';
 import LegislativeList from '../sections/@dashboard/legislative/LegislativeList';
 // ----------------------------------------------------------------------
 
 export default function Legislative() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const legislatives = useLegislatives();
   // const [tileViewMode, setTileViewMode] = useState(false);
@@ -43,7 +42,7 @@ export default function Legislative() {
 
               {!tileViewMode && <ListIcon />}
             </IconButton> */}
-            {user && (
+            {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
               <Button
                 variant="contained"
                 component={RouterLink}
@@ -70,20 +69,20 @@ export default function Legislative() {
               </Grid>
             ))} */}
           {/* {!tileViewMode && ( */}
-            <Grid item xs={12}>
-              <List dense>
-                {legislatives?.map((legislative) => (
-                  <LegislativeList
-                    title={legislative.title}
-                    ordinanceNumber={legislative?.ordinanceNumber}
-                    series={legislative?.series}
-                    authors={legislative?.authors}
-                    url={`/dashboard/viewlegislative/?uid=${legislative.id}`}
-                    key={legislative.id}
-                  />
-                ))}
-              </List>
-            </Grid>
+          <Grid item xs={12}>
+            <List dense>
+              {legislatives?.map((legislative) => (
+                <LegislativeList
+                  title={legislative.title}
+                  ordinanceNumber={legislative?.ordinanceNumber}
+                  series={legislative?.series}
+                  authors={legislative?.authors}
+                  url={`/dashboard/viewlegislative/?uid=${legislative.id}`}
+                  key={legislative.id}
+                />
+              ))}
+            </List>
+          </Grid>
           {/* )} */}
         </Grid>
       </Container>

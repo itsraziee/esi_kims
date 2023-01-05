@@ -9,10 +9,12 @@ import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import EditNewsDialog from '../components/editDialog/EditNewsDialog';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 import { deleteNews } from '../service/news';
 
 export default function ViewNews() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const location = useLocation();
   const uid = new URLSearchParams(location.search).get('uid');
@@ -41,7 +43,7 @@ export default function ViewNews() {
         <Typography variant="h4" sx={{ flex: 1 }}>
           {news?.title}
         </Typography>
-        {user && (
+        {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
           <Stack direction="row" alignItems="center" justifyContent="center">
             <IconButton
               onClick={() => {

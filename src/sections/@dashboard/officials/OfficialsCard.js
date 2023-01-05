@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import SvgIconStyle from '../../../components/SvgIconStyle';
 import { useAuth } from '../../../hooks/useAuth';
+import { useProfile } from '../../../hooks/useProfile';
 import { deleteOfficial } from '../../../service/official';
 
 // ----------------------------------------------------------------------
@@ -63,6 +64,7 @@ export default function OfficialsCard({ official, index }) {
   const latestPost = index;
   const navigate = useNavigate();
   const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const DELETE = [{ icon: 'fluent:delete-16-filled' }];
   return (
@@ -145,7 +147,7 @@ export default function OfficialsCard({ official, index }) {
             {title}
           </Typography>
 
-          {user && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
             <InfoStyle>
               <Box
                 key={index}

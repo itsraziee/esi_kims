@@ -6,14 +6,16 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
-import Page from '../components/Page';
 import EditSummonDialog from '../components/editDialog/EditSummonDialog';
+import Page from '../components/Page';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 import { deleteSummon } from '../service/summon';
 
 export default function ViewSummonPdf() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   const location = useLocation();
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
@@ -50,22 +52,24 @@ export default function ViewSummonPdf() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">Case number: {summon?.caseNumber}</Typography>
 
-          <Stack direction="row" spacing={1}>
-            <IconButton
-              onClick={() => {
-                setOpenEditDialog(true);
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setOpenDeleteDialog(true);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </Stack>
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+            <Stack direction="row" spacing={1}>
+              <IconButton
+                onClick={() => {
+                  setOpenEditDialog(true);
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDeleteDialog(true);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
+          )}
         </Stack>
         {summon && (
           <iframe

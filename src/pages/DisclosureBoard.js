@@ -10,10 +10,12 @@ import { DisclosureBoardList } from '../sections/@dashboard/disclosureBoard';
 
 import { useAuth } from '../hooks/useAuth';
 import { useDisclosureBoards } from '../hooks/useDisclosureBoards';
+import { useProfile } from '../hooks/useProfile';
 // ----------------------------------------------------------------------
 
 export default function DisclosureBoard() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const disclosureBoards = useDisclosureBoards();
 
@@ -28,7 +30,7 @@ export default function DisclosureBoard() {
           <Typography variant="h4" sx={{ mb: 5 }}>
             Disclosure Board
           </Typography>
-          {user && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
             <Button
               variant="contained"
               component={RouterLink}
@@ -40,17 +42,17 @@ export default function DisclosureBoard() {
           )}
         </Stack>
         <Grid container spacing={3}>
-        <Grid item xs={12}>
-              <List dense>
-                {disclosureBoards?.map((disclosureBoard) => (
-                  <DisclosureBoardList
-                    title={disclosureBoard.title}
-                    url={`/dashboard/viewDisclosureBoard/?uid=${disclosureBoard.id}`}
-                    icon={'clarity:document-solid'}
-                  />
-                ))}
-              </List>
-            </Grid>
+          <Grid item xs={12}>
+            <List dense>
+              {disclosureBoards?.map((disclosureBoard) => (
+                <DisclosureBoardList
+                  title={disclosureBoard.title}
+                  url={`/dashboard/viewDisclosureBoard/?uid=${disclosureBoard.id}`}
+                  icon={'clarity:document-solid'}
+                />
+              ))}
+            </List>
+          </Grid>
           {/* {disclosureBoards?.map((disclosureBoard) => {
             return (
               <Grid item xs={12} sm={8} md={3}>

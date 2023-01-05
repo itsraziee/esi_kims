@@ -1,7 +1,10 @@
 import { Typography } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import moment from 'moment';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 import { useResidents } from '../hooks/useResidents';
 import AuthRequired from '../layouts/auth/AuthRequired';
 import { updateResident } from '../service/residents';
@@ -13,6 +16,12 @@ export default function User() {
   console.log({ purok });
   const rows = useResidents(purok);
   const purokList = ['1', '2', '3a', '3b', '4', '5', '6', '7', '8', '9', '10A', '11B', '12', '13'];
+  const user = useAuth();
+  const profile = useProfile(user?.uid);
+
+  useEffect(() => {
+    console.log({ user, profile, allowEdit: user && profile?.accountRole && profile?.accountRole !== 'Captain' });
+  }, [user, profile]);
 
   const columns = [
     { field: 'id', headerName: 'ID', flex: 1, minWidth: 100 },
@@ -21,7 +30,7 @@ export default function User() {
       headerName: 'First Name',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -37,7 +46,7 @@ export default function User() {
       headerName: 'Middle Name',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -53,7 +62,7 @@ export default function User() {
       headerName: 'Last Name',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -70,7 +79,7 @@ export default function User() {
       flex: 1,
       minWidth: 150,
       type: 'singleSelect',
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueOptions: ['1', '2', '3a', '3b', '4', '5', '6', '7', '8', '9', '10a', '11b', '12', '13'],
       valueSetter: (params) => {
         console.log({ params });
@@ -94,7 +103,7 @@ export default function User() {
       headerName: 'Citizenship',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -110,7 +119,7 @@ export default function User() {
       headerName: 'College Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -126,7 +135,7 @@ export default function User() {
       headerName: 'College School',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -142,7 +151,7 @@ export default function User() {
       headerName: 'College Year Graduated',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -158,7 +167,7 @@ export default function User() {
       headerName: 'Date of Birth',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       type: 'date',
       valueSetter: (params) => {
         console.log({ params });
@@ -176,7 +185,7 @@ export default function User() {
       headerName: 'Elementary Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -192,7 +201,7 @@ export default function User() {
       headerName: 'Elementary School',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -208,7 +217,7 @@ export default function User() {
       headerName: 'Fathers Name',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -224,7 +233,7 @@ export default function User() {
       headerName: 'Fathers Occupation',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -241,7 +250,7 @@ export default function User() {
       headerName: 'Height',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -257,7 +266,7 @@ export default function User() {
       headerName: 'Highschool Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -273,7 +282,7 @@ export default function User() {
       headerName: 'Highschool Name',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -289,7 +298,7 @@ export default function User() {
       headerName: 'Highschool Year Grad',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -306,7 +315,7 @@ export default function User() {
       headerName: 'Mothers Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -322,7 +331,7 @@ export default function User() {
       headerName: 'Mothers Name',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -338,7 +347,7 @@ export default function User() {
       headerName: 'Mothers Occupation',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -354,7 +363,7 @@ export default function User() {
       headerName: 'Number Of Children',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -370,7 +379,7 @@ export default function User() {
       headerName: 'Occupation',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -386,7 +395,7 @@ export default function User() {
       headerName: 'Official Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -402,7 +411,7 @@ export default function User() {
       headerName: 'Phone Number',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -418,7 +427,7 @@ export default function User() {
       headerName: 'Religion',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -434,7 +443,7 @@ export default function User() {
       headerName: 'Sex',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -450,7 +459,7 @@ export default function User() {
       headerName: 'Spouse',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -466,7 +475,7 @@ export default function User() {
       headerName: 'Spouse Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -482,7 +491,7 @@ export default function User() {
       headerName: 'Status',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -498,7 +507,7 @@ export default function User() {
       headerName: 'Upload Image',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -514,7 +523,7 @@ export default function User() {
       headerName: 'Vocational Address',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -530,7 +539,7 @@ export default function User() {
       headerName: 'Vocational School',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -546,7 +555,7 @@ export default function User() {
       headerName: 'Vocational Year Grad',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
@@ -562,7 +571,7 @@ export default function User() {
       headerName: 'Weight',
       flex: 1,
       minWidth: 150,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {

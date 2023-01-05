@@ -15,10 +15,12 @@ import { deleteLegislative } from '../service/legislative';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
 import EditLegislativeDialog from '../components/editDialog/EditLegislativeDialog';
 import { firestore } from '../firebase-init';
+import { useProfile } from '../hooks/useProfile';
 // ----------------------------------------------------------------------
 
 export default function ViewLegislative() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   const location = useLocation();
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
@@ -55,7 +57,7 @@ export default function ViewLegislative() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">{legislative?.title}</Typography>
 
-          {user && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
             <Stack direction="row" spacing={1}>
               <IconButton
                 onClick={() => {

@@ -10,10 +10,12 @@ import { BlotterCard } from '../sections/@dashboard/blotter';
 
 import { useAuth } from '../hooks/useAuth';
 import { useBlotters } from '../hooks/useBlotters';
+import { useProfile } from '../hooks/useProfile';
 // ----------------------------------------------------------------------
 
 export default function Blotter() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   const [solved, setSolved] = useState(false);
   const blotters = useBlotters(solved);
 
@@ -41,7 +43,7 @@ export default function Blotter() {
                 <MenuItem value>Solved</MenuItem>
               </Select>
             </Grid>
-            {user && (
+            {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
               <Grid item>
                 <Button
                   variant="contained"

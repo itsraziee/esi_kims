@@ -22,7 +22,9 @@ import * as React from 'react';
 import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import Page from '../components/Page';
+import { useAuth } from '../hooks/useAuth';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
+import { useProfile } from '../hooks/useProfile';
 import AuthRequired from '../layouts/auth/AuthRequired';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 import BarangayCertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
@@ -153,6 +155,8 @@ export default function BillingTransaction() {
   const [currentRow, setCurrentRow] = React.useState();
   const [previewSrc, setPreviewSrc] = React.useState();
   const { enqueueSnackbar } = useSnackbar();
+  const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   React.useEffect(() => {
     let newTotalRevenue = 0;
@@ -236,7 +240,7 @@ export default function BillingTransaction() {
       headerName: 'Amount',
       field: 'amount',
       flex: 1,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateAmount(params.row.id, params.value ?? '').then((res) => {
@@ -249,7 +253,7 @@ export default function BillingTransaction() {
     {
       field: 'status',
       headerName: 'Status',
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueOptions: ['pending', 'inprogress', 'completed', 'declined'],
       type: 'singleSelect',
       description: 'Double click to edit',
@@ -267,7 +271,7 @@ export default function BillingTransaction() {
       field: 'remarks',
       headerName: 'Remarks',
       flex: 1,
-      editable: true,
+      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateRemarks(params.row.id, params.value ?? '').then((res) => {
@@ -276,8 +280,10 @@ export default function BillingTransaction() {
         return { ...params.row, remarks: params.value ?? '' };
       },
     },
+  ];
 
-    {
+  if (user && profile?.accountRole && profile?.accountRole !== 'Captain') {
+    columns.push({
       field: 'none',
       headerName: 'Actions',
       flex: 1.5,
@@ -330,9 +336,8 @@ export default function BillingTransaction() {
           </Button>
         </Stack>
       ),
-    },
-  ];
-
+    });
+  }
   const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
   });

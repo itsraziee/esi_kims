@@ -10,10 +10,12 @@ import EditBlotterDialog from '../components/editDialog/EditBlotterDialog';
 import Page from '../components/Page';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 import { deleteBlotter } from '../service/blotter';
 
 export default function ViewBlotterPdf() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   const location = useLocation();
   console.log({ location });
   const uid = new URLSearchParams(location.search).get('uid');
@@ -49,23 +51,26 @@ export default function ViewBlotterPdf() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">Case number: {blotter?.caseNumber}</Typography>
-          <Stack direction="row" spacing={1}>
-            <IconButton
-              onClick={() => {
-                setOpenEditDialog(true);
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              onClick={() => {
-                setOpenDeleteDialog(true);
-              }}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </Stack>
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+            <Stack direction="row" spacing={1}>
+              <IconButton
+                onClick={() => {
+                  setOpenEditDialog(true);
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenDeleteDialog(true);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
+          )}
         </Stack>
+
         {blotter && (
           <iframe
             title={blotter?.caseNumber}
