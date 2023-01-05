@@ -1,16 +1,14 @@
-import { Link as RouterLink } from 'react-router-dom';
 // @mui
+import { Card, Container, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Card, Link, Container, Typography } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
-import Page from '../components/Page';
 import Logo from '../components/Logo';
+import Page from '../components/Page';
 // sections
-import { LoginForm } from '../sections/auth/login';
-import AuthSocial from '../sections/auth/AuthSocial';
 import NonAuthRequired from '../layouts/auth/NonAuthRequired';
+import { LoginForm } from '../sections/auth/login';
 
 // ----------------------------------------------------------------------
 
@@ -72,7 +70,7 @@ export default function Login() {
 
           {mdUp && (
             <SectionStyle>
-              <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+              <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }} align="left">
                 Hi, Welcome Back
               </Typography>
               <img src="/static/illustrations/Authentication.png" alt="login" />

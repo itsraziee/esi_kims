@@ -71,7 +71,7 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
   return (
     <>
-      <Card {...other}>
+      <Card sx={{ boxShadow: 4 }} {...other}>
         <CardHeader title={title} subheader={subheader} />
 
         <CardContent>

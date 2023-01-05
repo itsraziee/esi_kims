@@ -2,7 +2,15 @@ import { ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from
 import Iconify from '../../../components/Iconify';
 import { useAuth } from '../../../hooks/useAuth';
 
-export default function LegislativeList({ series, ordinanceNumber, authors, color = 'primary', title, url, ...props }) {
+export default function CommitteeReportList({
+  subject,
+  from,
+  date,
+  committeeReportNumber,
+  color = 'primary',
+  url,
+  ...props
+}) {
   const user = useAuth();
   return (
     <ListItem disablePadding sx={{ my: 1 }} {...props}>
@@ -22,14 +30,14 @@ export default function LegislativeList({ series, ordinanceNumber, authors, colo
           primary={
             <>
               <Typography variant="subtitle4">
-                {`Ordinance No. ${ordinanceNumber}, Series of ${series}`}: {title}
+                {`Committee Report No. ${committeeReportNumber}, Date: ${date}`}: {subject}
               </Typography>
             </>
           }
           secondary={
             <>
               <Typography sx={{ display: 'flex', opacity: 0.72 }} component="span" variant="subtitle8">
-                {authors}
+                {from}
               </Typography>
             </>
           }

@@ -6,3 +6,4 @@ export { default as SummonDocumentForm } from './SummonDocumentForm';
 export { default as SummonFormCard } from './SummonFormCard';
 export { default as DisclosureBoardFormCard } from './DisclosureBoardFormCard';
 export { default as CedulaFormCard } from './CedulaFormCard';
+export { default as CommitteeReportFormCard } from './CommitteeReportFormCard';
