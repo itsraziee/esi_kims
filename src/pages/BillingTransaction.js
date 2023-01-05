@@ -14,7 +14,14 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+} from '@mui/x-data-grid';
 import moment from 'moment';
 import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
@@ -202,6 +209,17 @@ export default function BillingTransaction() {
     console.log({ rows });
   }, [rows]);
 
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && <GridToolbarExport />}
+      </GridToolbarContainer>
+    );
+  }
+
   const columns = [
     { field: 'id', headerName: 'Reference Number', flex: 1.5 },
     { field: 'requestorName', headerName: 'Name', flex: 1.5 },
@@ -240,7 +258,8 @@ export default function BillingTransaction() {
       headerName: 'Amount',
       field: 'amount',
       flex: 1,
-      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Secretary',
       valueSetter: (params) => {
         console.log({ params });
         updateAmount(params.row.id, params.value ?? '').then((res) => {
@@ -352,7 +371,9 @@ export default function BillingTransaction() {
           <Typography>Overall Revenue: {totalRevenue}</Typography>
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
-            components={{ Toolbar: GridToolbar }}
+            components={{
+              Toolbar: CustomToolbar,
+            }}
             rows={rows}
             columns={columns}
             autoHeight
