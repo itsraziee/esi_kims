@@ -1,16 +1,15 @@
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
+import { Card, Container, Link, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Card, Link, Container, Typography } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
-import Page from '../components/Page';
 import Logo from '../components/Logo';
+import Page from '../components/Page';
 // sections
-import { RegisterForm } from '../sections/auth/register';
-import AuthSocial from '../sections/auth/AuthSocial';
 import AuthRequired from '../layouts/auth/AuthRequired';
+import { RegisterForm } from '../sections/auth/register';
 
 // ----------------------------------------------------------------------
 
@@ -94,6 +93,24 @@ export default function Register() {
               </Typography>
 
               <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
+              {/* <Stack spacing={1}>
+                <Account
+                  accountRole="Secretary"
+                  firstName="Jessel Marie"
+                  lastName="Pelarca"
+                  email="pelarcajessel@gmail.com"
+                  password="Pass_W0rd!"
+                  image="https://firebasestorage.googleapis.com/v0/b/kimanait-ims.appspot.com/o/profiles%2F3jnegTMD64fZRx8uftGobjlCXn02.png?alt=media&token=58199144-aacc-47eb-b557-93d224ceec2d"
+                />
+                <Account
+                  accountRole="Treasurer"
+                  firstName="Glen I Love U"
+                  lastName="Lecaros"
+                  email="artiagaglenmar@gmail.com"
+                  password="Raul_143!"
+                  image="https://firebasestorage.googleapis.com/v0/b/kimanait-ims.appspot.com/o/profiles%2F3jnegTMD64fZRx8uftGobjlCXn02.png?alt=media&token=58199144-aacc-47eb-b557-93d224ceec2d"
+                />
+              </Stack> */}
               <RegisterForm />
 
               {/* <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
