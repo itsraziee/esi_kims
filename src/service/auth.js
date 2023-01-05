@@ -30,6 +30,6 @@ export function createAccount(email, password) {
   // return createUserWithEmailAndPassword(auth, email, password);
 }
 
-export function setProfile(uid, firstName, lastName) {
-  return setDoc(doc(firestore, `profile/${uid}`), { firstName, lastName });
+export function setProfile(uid, firstName, lastName, accountRole) {
+  return setDoc(doc(firestore, `profile/${uid}`), { firstName, lastName, accountRole });
 }

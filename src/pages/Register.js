@@ -8,6 +8,7 @@ import useResponsive from '../hooks/useResponsive';
 import Logo from '../components/Logo';
 import Page from '../components/Page';
 // sections
+import CaptainRequired from '../components/auth/CaptainRequired';
 import AuthRequired from '../layouts/auth/AuthRequired';
 import { RegisterForm } from '../sections/auth/register';
 
@@ -63,11 +64,12 @@ export default function Register() {
 
   return (
     <AuthRequired>
-      <Page title="Register">
-        <RootStyle>
-          <HeaderStyle>
-            <Logo />
-            {/* {smUp && (
+      <CaptainRequired>
+        <Page title="Register">
+          <RootStyle>
+            <HeaderStyle>
+              <Logo />
+              {/* {smUp && (
               <Typography variant="body2" sx={{ mt: { md: -2 } }}>
                 Already have an account? {''}
                 <Link variant="subtitle2" component={RouterLink} to="/login">
@@ -75,25 +77,25 @@ export default function Register() {
                 </Link>
               </Typography>
             )} */}
-          </HeaderStyle>
+            </HeaderStyle>
 
-          {mdUp && (
-            <SectionStyle>
-              <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-                Manage your job with us
-              </Typography>
-              <img alt="register" src="/static/illustrations/Sign-up.png" />
-            </SectionStyle>
-          )}
+            {mdUp && (
+              <SectionStyle>
+                <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
+                  Manage your job with us
+                </Typography>
+                <img alt="register" src="/static/illustrations/Sign-up.png" />
+              </SectionStyle>
+            )}
 
-          <Container>
-            <ContentStyle>
-              <Typography variant="h4" align="center" gutterBottom>
-                Sign up
-              </Typography>
+            <Container>
+              <ContentStyle>
+                <Typography variant="h4" align="center" gutterBottom>
+                  Sign up
+                </Typography>
 
-              <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
-              {/* <Stack spacing={1}>
+                <Typography sx={{ color: 'text.secondary', mb: 5 }}>Enter your details below.</Typography>
+                {/* <Stack spacing={1}>
                 <Account
                   accountRole="Secretary"
                   firstName="Jessel Marie"
@@ -111,9 +113,9 @@ export default function Register() {
                   image="https://firebasestorage.googleapis.com/v0/b/kimanait-ims.appspot.com/o/profiles%2F3jnegTMD64fZRx8uftGobjlCXn02.png?alt=media&token=58199144-aacc-47eb-b557-93d224ceec2d"
                 />
               </Stack> */}
-              <RegisterForm />
+                <RegisterForm />
 
-              {/* <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
+                {/* <Typography variant="body2" align="center" sx={{ color: 'text.secondary', mt: 3 }}>
                 By registering, I agree to KIMS&nbsp;
                 <Link underline="always" color="text.primary" href="#">
                   Terms of Service
@@ -125,18 +127,19 @@ export default function Register() {
                 .
               </Typography> */}
 
-              {!smUp && (
-                <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
-                  Already have an account?{' '}
-                  <Link variant="subtitle2" to="/login" component={RouterLink}>
-                    Login
-                  </Link>
-                </Typography>
-              )}
-            </ContentStyle>
-          </Container>
-        </RootStyle>
-      </Page>
+                {!smUp && (
+                  <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
+                    Already have an account?{' '}
+                    <Link variant="subtitle2" to="/login" component={RouterLink}>
+                      Login
+                    </Link>
+                  </Typography>
+                )}
+              </ContentStyle>
+            </Container>
+          </RootStyle>
+        </Page>
+      </CaptainRequired>
     </AuthRequired>
   );
 }

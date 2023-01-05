@@ -73,6 +73,7 @@ const navConfig = [
   },
   {
     auth_required: true,
+    captain_required: true,
     title: 'register',
     path: '/register',
     icon: getIcon('eva:person-add-fill'),

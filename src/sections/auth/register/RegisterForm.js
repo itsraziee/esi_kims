@@ -44,12 +44,12 @@ export default function RegisterForm() {
     validationSchema: RegisterSchema,
     onSubmit: async (values) => {
       console.log({ values });
-      const { email, password, firstName, lastName } = values;
+      const { email, password, firstName, lastName, accountRole } = values;
       return createAccount(email, password)
         .then((accountRes) => {
           const uid = accountRes.user.uid;
           const email = accountRes.user.email;
-          setProfile(uid, firstName, lastName);
+          setProfile(uid, firstName, lastName, accountRole);
           // navigate('/dashboard/app', { replace: true });
           const userRef = doc(firestore, 'users', values.accountRole);
           setDoc(userRef, { email }).then((res) => {
