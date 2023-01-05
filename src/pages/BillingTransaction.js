@@ -201,7 +201,7 @@ export default function BillingTransaction() {
   const columns = [
     { field: 'id', headerName: 'Reference Number', flex: 1.5 },
     { field: 'requestorName', headerName: 'Name', flex: 1.5 },
-    { field: 'phoneNumber', headerName: 'Phone Number', flex: 1.5 },
+    { field: 'number', headerName: 'Phone Number', flex: 1.5 },
     {
       field: 'datetime',
       headerName: 'Datetime',
@@ -310,7 +310,7 @@ export default function BillingTransaction() {
             // }}
             onClick={() => {
               sendSMS({
-                number: '639169235853',
+                number: `63${params.row.number}`,
                 /* TODO REPLACE WITH NUMBER FROM BILLING TRANSACTION
                 MIGHT BE: params.row.number, GIVEN THAT "number" IS THE FIREBASE PROPERTY NAME.
                 */
