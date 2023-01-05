@@ -9,13 +9,13 @@ import {
   CardHeader,
   FormControl,
   FormHelperText,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
   Stack,
   TextField,
   Tooltip,
-  InputAdornment,
 } from '@mui/material';
 import {
   BARANGAY_BIRTH_CERTIFICATE_PRICE,
@@ -44,14 +44,17 @@ export default function RequestDocumentFormCard() {
   const RequestDocumentFormSchema = Yup.object().shape({
     typeOfDocument: Yup.string().required('Type of Document is required.'),
     requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
-    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone number is required'),
+    number: Yup.string()
+      .matches(/\d{9}/, 'Must match the format +639*********')
+      .typeError('Phone number must be a number')
+      .required('Phone number is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       typeOfDocument: '',
       requestorname: '',
-      phoneNumber: '',
+      number: '',
     },
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
@@ -77,12 +80,12 @@ export default function RequestDocumentFormCard() {
           />
           <TextField
             fullWidth
-            name="phone_number"
+            name="number"
             label="Phone Number*"
             id="outlined-start-adornment"
-            {...getFieldProps('phoneNumber')}
-            error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-            helperText={touched.phoneNumber && errors.phoneNumber}
+            {...getFieldProps('number')}
+            error={Boolean(touched.number && errors.number)}
+            helperText={touched.number && errors.number}
             InputProps={{
               startAdornment: <InputAdornment position="start">+63</InputAdornment>,
             }}
@@ -127,6 +130,7 @@ export default function RequestDocumentFormCard() {
                   'Barangay Certificate',
                   data,
                   formik.values.requestorname,
+                  formik.values.number,
                   BARANGAY_CERTIFICATION_PRICE
                 );
               }}
@@ -139,6 +143,7 @@ export default function RequestDocumentFormCard() {
                   'Barangay Death Certificate',
                   data,
                   formik.values.requestorname,
+                  formik.values.number,
                   BARANGAY_DEATH_CERTIFICATE_PRICE
                 );
               }}
@@ -148,7 +153,13 @@ export default function RequestDocumentFormCard() {
             <BarangayClearanceForm
               // TODO duplicate on other document forms, remove then and catch
               onSubmitForm={async (data) => {
-                return createRequest('Barangay Clearance', data, formik.values.requestorname, BARANGAY_CLEARANCE_PRICE);
+                return createRequest(
+                  'Barangay Clearance',
+                  data,
+                  formik.values.requestorname,
+                  formik.values.number,
+                  BARANGAY_CLEARANCE_PRICE
+                );
               }}
             />
           )}
@@ -159,6 +170,7 @@ export default function RequestDocumentFormCard() {
                   'Certificate of Residency',
                   data,
                   formik.values.requestorname,
+                  formik.values.number,
                   CERTIFICATE_OF_RESIDENCY_PRICE
                 );
               }}
@@ -171,6 +183,7 @@ export default function RequestDocumentFormCard() {
                   'Tree Planting Certificate',
                   data,
                   formik.values.requestorname,
+                  formik.values.number,
                   TREE_PLANTING_CERTIFICATE_PRICE
                 );
               }}
@@ -183,6 +196,7 @@ export default function RequestDocumentFormCard() {
                   'Certificate of Indigency',
                   data,
                   formik.values.requestorname,
+                  formik.values.number,
                   CERTIFICATE_OF_INDIGENCY_PRICE
                 );
               }}
@@ -195,6 +209,7 @@ export default function RequestDocumentFormCard() {
                   'Barangay Birth Certificate',
                   data,
                   formik.values.requestorname,
+                  formik.values.number,
                   BARANGAY_BIRTH_CERTIFICATE_PRICE
                 );
               }}
@@ -203,7 +218,7 @@ export default function RequestDocumentFormCard() {
           {formik.values.typeOfDocument === 'cedula' && (
             <CedulaFormCard
               onSubmitForm={async (data) => {
-                return createRequest('Cedula', data, formik.values.requestorname, CEDULA_PRICE);
+                return createRequest('Cedula', data, formik.values.requestorname, formik.values.number, CEDULA_PRICE);
               }}
             />
           )}

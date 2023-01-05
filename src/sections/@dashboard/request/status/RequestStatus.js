@@ -1,13 +1,6 @@
 import styles from './RequestStatus.module.css';
 
-export default function RequestStatus({
-  referenceNumber,
-  status,
-  remarks,
-  requestorName,
-  phoneNumber,
-  typeOfDocument,
-}) {
+export default function RequestStatus({ referenceNumber, status, remarks, requestorName, number, typeOfDocument }) {
   return (
     <div>
       <p className={styles.c1}>
@@ -22,7 +15,7 @@ export default function RequestStatus({
       </p>
       <p className={styles.c1}>
         <span>
-          Phone Number: <strong>{phoneNumber}</strong>
+          Phone Number: <strong>{number}</strong>
         </span>
       </p>
       <p className={styles.c1}>
