@@ -57,7 +57,7 @@ export default function ViewLegislative() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4">{legislative?.title}</Typography>
 
-          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
             <Stack direction="row" spacing={1}>
               <IconButton
                 onClick={() => {

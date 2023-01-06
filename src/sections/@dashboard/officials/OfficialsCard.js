@@ -147,7 +147,7 @@ export default function OfficialsCard({ official, index }) {
             {title}
           </Typography>
 
-          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
             <InfoStyle>
               <Box
                 key={index}

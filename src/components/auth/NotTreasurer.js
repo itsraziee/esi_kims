@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useAuth } from '../../hooks/useAuth';
 import { useProfile } from '../../hooks/useProfile';
 
-export default function CaptainRequired({ children }) {
+export default function NotTreasurer({ children }) {
   const navigate = useNavigate();
   const user = useAuth();
   const profile = useProfile(user?.uid);
@@ -15,7 +15,7 @@ export default function CaptainRequired({ children }) {
   useEffect(() => {
     console.log({ profile });
 
-    if (profile?.accountRole && profile?.accountRole !== 'Captain') {
+    if (profile?.accountRole === 'Treasurer') {
       navigate('/dashboard/app', { replace: true });
     }
   }, [profile]);

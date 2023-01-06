@@ -21,7 +21,7 @@ export default function Officials() {
           <Typography variant="h4" sx={{ mb: 5 }}>
             Officials
           </Typography>
-          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
             <Button
               variant="contained"
               component={RouterLink}

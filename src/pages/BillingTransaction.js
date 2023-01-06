@@ -272,7 +272,8 @@ export default function BillingTransaction() {
     {
       field: 'status',
       headerName: 'Status',
-      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer',
       valueOptions: ['pending', 'inprogress', 'completed', 'declined'],
       type: 'singleSelect',
       description: 'Double click to edit',
@@ -290,7 +291,8 @@ export default function BillingTransaction() {
       field: 'remarks',
       headerName: 'Remarks',
       flex: 1,
-      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer',
       valueSetter: (params) => {
         console.log({ params });
         updateRemarks(params.row.id, params.value ?? '').then((res) => {
@@ -301,7 +303,7 @@ export default function BillingTransaction() {
     },
   ];
 
-  if (user && profile?.accountRole && profile?.accountRole !== 'Captain') {
+  if (user && profile?.accountRole && profile?.accountRole === 'Secretary') {
     columns.push({
       field: 'none',
       headerName: 'Actions',

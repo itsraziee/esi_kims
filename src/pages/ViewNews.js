@@ -43,7 +43,7 @@ export default function ViewNews() {
         <Typography variant="h4" sx={{ flex: 1 }}>
           {news?.title}
         </Typography>
-        {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+        {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
           <Stack direction="row" alignItems="center" justifyContent="center">
             <IconButton
               onClick={() => {

@@ -155,7 +155,8 @@ export default function NavSection({ navConfig, ...other }) {
           if (
             (item?.auth_required && !user) ||
             (item?.non_auth_required && user) ||
-            (item?.captain_required && profile?.accountRole !== 'Captain')
+            (item?.captain_required && profile?.accountRole !== 'Captain') ||
+            (item?.treasurer_not_allowed && profile?.accountRole === 'Treasurer')
           )
             return;
 

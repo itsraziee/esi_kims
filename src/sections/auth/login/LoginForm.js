@@ -22,6 +22,7 @@ import { useSnackbar } from 'notistack';
 import Iconify from '../../../components/Iconify';
 import { useUser } from '../../../hooks/useRole';
 import { login } from '../../../service/auth';
+import { updateProfile } from '../../../service/profile';
 import EmailDialog from '../../@dashboard/dialog/EmailDialog';
 
 // ----------------------------------------------------------------------
@@ -56,6 +57,7 @@ export default function LoginForm() {
         .then((res) => {
           console.log({ res });
           if (res) {
+            updateProfile(res.user.uid, { accountRole: role });
             enqueueSnackbar('Logged in successfully.', {
               variant: 'success',
             });

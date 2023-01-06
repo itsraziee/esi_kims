@@ -42,16 +42,19 @@ export default function Legislative() {
 
               {!tileViewMode && <ListIcon />}
             </IconButton> */}
-            {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
-              <Button
-                variant="contained"
-                component={RouterLink}
-                to="/dashboard/legislativeForm"
-                startIcon={<Iconify icon="eva:plus-fill" />}
-              >
-                Add Ordinance
-              </Button>
-            )}
+            {user &&
+              profile?.accountRole &&
+              profile?.accountRole !== 'Captain' &&
+              profile?.accountRole !== 'Treasurer' && (
+                <Button
+                  variant="contained"
+                  component={RouterLink}
+                  to="/dashboard/legislativeForm"
+                  startIcon={<Iconify icon="eva:plus-fill" />}
+                >
+                  Add Ordinance
+                </Button>
+              )}
           </Stack>
         </Stack>
         <Grid container spacing={3}>

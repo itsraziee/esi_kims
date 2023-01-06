@@ -38,7 +38,7 @@ export default function NewsUpdateCard({ title, subheader, list, ...other }) {
     <Card {...other}>
       <Stack direction="row" justifyContent="space-between">
         <CardHeader title={title} subheader={subheader} />
-        {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+        {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
           <Button
             sx={{ margin: 3 }}
             variant="contained"

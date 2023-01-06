@@ -6,12 +6,21 @@ import * as Yup from 'yup';
 import { LoadingButton } from '@mui/lab';
 import { FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 // component
-import { doc, setDoc } from '@firebase/firestore';
+import { doc, getDocs, limit, setDoc } from '@firebase/firestore';
+import { collection, query, where } from 'firebase/firestore';
 import { useSnackbar } from 'notistack';
 import Iconify from '../../../components/Iconify';
 import { firestore } from '../../../firebase-init';
 import { createAccount, setProfile } from '../../../service/auth';
 
+async function validateEmail(email) {
+  const citiesRef = collection(firestore, 'users');
+
+  // Create a query against the collection.
+  const q = query(citiesRef, where('email', '==', email), limit(1));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.size < 1;
+}
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -57,14 +66,18 @@ export default function RegisterForm() {
             formik.resetForm();
           });
         })
-        .catch((err) => {
+        .catch(async (err) => {
           if (err.code === 'auth/email-already-in-use') {
             const userRef = doc(firestore, 'users', values.accountRole);
-            setDoc(userRef, { email: values.email }).then((res) => {
-              enqueueSnackbar('Account already exist and has been set', { variant: 'success' });
-              formik.resetForm();
-            });
-            return;
+            const emailValid = await validateEmail(values.email);
+            console.log({ emailValid });
+            if (emailValid) {
+              return setDoc(userRef, { email: values.email }).then(async (res) => {
+                enqueueSnackbar('Account already exist and has been set', { variant: 'success' });
+                formik.resetForm();
+              });
+            }
+            enqueueSnackbar('Account already have existing role', { variant: 'error' });
           }
           console.error({ err });
           enqueueSnackbar('Account creation failed', { variant: 'error' });

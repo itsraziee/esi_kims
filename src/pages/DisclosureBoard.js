@@ -30,7 +30,7 @@ export default function DisclosureBoard() {
           <Typography variant="h4" sx={{ mb: 5 }}>
             Disclosure Board
           </Typography>
-          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
             <Button
               variant="contained"
               component={RouterLink}
