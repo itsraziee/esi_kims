@@ -68,7 +68,7 @@ export default function RequestDocumentFormCard() {
     <Card sx={{ width: '100%' }}>
       <CardHeader title="Document Request Form" subheader="Fields marked with an asterisk (*) are required. " />
       <CardContent>
-        <Stack spacing={1}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <TextField
             label="Requestor Name*"
             name="requestorname"
@@ -90,6 +90,8 @@ export default function RequestDocumentFormCard() {
               startAdornment: <InputAdornment position="start">+63</InputAdornment>,
             }}
           />
+        </Stack>
+        <Stack spacing={1}>
           <FormControl
             helperText={touched.typeOfDocument && errors.typeOfDocument}
             fullWidth

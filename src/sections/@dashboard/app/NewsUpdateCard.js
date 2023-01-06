@@ -35,7 +35,7 @@ export default function NewsUpdateCard({ title, subheader, list, ...other }) {
 
   const navigate = useNavigate();
   return (
-    <Card {...other}>
+    <Card sx={{ boxShadow: 4}}{...other}>
       <Stack direction="row" justifyContent="space-between">
         <CardHeader title={title} subheader={subheader} />
         {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
@@ -110,8 +110,8 @@ export function NewsItem({ news }) {
             />
           )}
 
-          <Box sx={{ flexGrow: 1 }}>
-            <Link color="inherit" variant="subtitle2" noWrap>
+          <Box sx={{ minWidth: 550, flexGrow: 1 }}>
+            <Link color="inherit" variant="subtitle2" underline="hover" noWrap>
               {title}
             </Link>
 
@@ -121,7 +121,7 @@ export function NewsItem({ news }) {
             </Typography>
           </Box>
 
-          <Typography variant="caption" sx={{ pr: 3, color: 'text.secondary' }}>
+          <Typography variant="caption" sx={{ flexShrink: 0, color: 'text.secondary' }}>
             {fToNow(updatedAt.toDate())}
           </Typography>
         </Stack>

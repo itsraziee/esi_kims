@@ -1,17 +1,19 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
-import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import DashboardLayout from './layouts/dashboard';
+import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import About from './pages/About';
 import BHW from './pages/BHW';
-import BNS from './pages/BNS';
-import BO from './pages/BO';
-import BSPO from './pages/BSPO';
 import BillingTransaction from './pages/BillingTransaction';
 import Blog from './pages/Blog';
 import Blotter from './pages/Blotter';
 import BlotterForm from './pages/BlotterForm';
+import BNS from './pages/BNS';
+import BO from './pages/BO';
+import BSPO from './pages/BSPO';
+import CommitteeReport from './pages/CommitteeReport';
+import CommitteeReportForm from './pages/CommitteeReportForm';
 import CVO from './pages/CVO';
 import DashboardApp from './pages/DashboardApp';
 import Demographics from './pages/Demographics';
@@ -28,8 +30,9 @@ import News from './pages/News';
 import NewsUpdateForm from './pages/NewsUpdateForm';
 import Officials from './pages/Officials';
 import OfficialsProfile from './pages/OfficialsProfile';
-import PL from './pages/PL';
+import Ordinances from './pages/Ordinances';
 import NotFound from './pages/Page404';
+import PL from './pages/PL';
 import Profile from './pages/Profile';
 import Register from './pages/Register';
 import RequestDocumentForm from './pages/RequestDocumentForm';
@@ -38,10 +41,11 @@ import Summon from './pages/Summon';
 import SummonForm from './pages/SummonForm';
 import User from './pages/User';
 import ViewBlotterPdf from './pages/ViewBlotterPdf';
+import ViewCommitteeReport from './pages/ViewCommitteeReport';
+import ViewDisclosureBoard from './pages/viewDisclosureBoard';
 import ViewLegislative from './pages/ViewLegislative';
 import ViewNews from './pages/ViewNews';
 import ViewSummonPdf from './pages/ViewSummonPdf';
-import ViewDisclosureBoard from './pages/viewDisclosureBoard';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -86,6 +90,10 @@ export default function Router() {
         { path: 'pl', element: <PL /> },
         { path: 'newsUpdateForm', element: <NewsUpdateForm /> },
         { path: 'feedbackDialog', element: <FeedbackDialog /> },
+        { path: 'ordinances', element: <Ordinances /> },
+        { path: 'committeeReport', element: <CommitteeReport /> },
+        { path: 'committeeReportForm', element: <CommitteeReportForm /> },
+        { path: 'viewCommitteeReport', element: <ViewCommitteeReport /> },
       ],
     },
 
