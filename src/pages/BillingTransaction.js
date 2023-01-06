@@ -14,7 +14,14 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+} from '@mui/x-data-grid';
 import moment from 'moment';
 import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
@@ -22,7 +29,9 @@ import * as React from 'react';
 import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import Page from '../components/Page';
+import { useAuth } from '../hooks/useAuth';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
+import { useProfile } from '../hooks/useProfile';
 import AuthRequired from '../layouts/auth/AuthRequired';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 import BarangayCertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
@@ -153,6 +162,8 @@ export default function BillingTransaction() {
   const [currentRow, setCurrentRow] = React.useState();
   const [previewSrc, setPreviewSrc] = React.useState();
   const { enqueueSnackbar } = useSnackbar();
+  const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   React.useEffect(() => {
     let newTotalRevenue = 0;
@@ -198,6 +209,17 @@ export default function BillingTransaction() {
     console.log({ rows });
   }, [rows]);
 
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && <GridToolbarExport />}
+      </GridToolbarContainer>
+    );
+  }
+
   const columns = [
     { field: 'id', headerName: 'Reference Number', flex: 1.5 },
     { field: 'requestorName', headerName: 'Name', flex: 1.5 },
@@ -236,7 +258,8 @@ export default function BillingTransaction() {
       headerName: 'Amount',
       field: 'amount',
       flex: 1,
-      editable: true,
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Secretary',
       valueSetter: (params) => {
         console.log({ params });
         updateAmount(params.row.id, params.value ?? '').then((res) => {
@@ -249,7 +272,8 @@ export default function BillingTransaction() {
     {
       field: 'status',
       headerName: 'Status',
-      editable: true,
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer',
       valueOptions: ['pending', 'inprogress', 'completed', 'declined'],
       type: 'singleSelect',
       description: 'Double click to edit',
@@ -267,7 +291,8 @@ export default function BillingTransaction() {
       field: 'remarks',
       headerName: 'Remarks',
       flex: 1,
-      editable: true,
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer',
       valueSetter: (params) => {
         console.log({ params });
         updateRemarks(params.row.id, params.value ?? '').then((res) => {
@@ -276,8 +301,10 @@ export default function BillingTransaction() {
         return { ...params.row, remarks: params.value ?? '' };
       },
     },
+  ];
 
-    {
+  if (user && profile?.accountRole && profile?.accountRole === 'Secretary') {
+    columns.push({
       field: 'none',
       headerName: 'Actions',
       flex: 1.5,
@@ -330,9 +357,8 @@ export default function BillingTransaction() {
           </Button>
         </Stack>
       ),
-    },
-  ];
-
+    });
+  }
   const Transition = React.forwardRef((props, ref) => {
     return <Slide direction="up" ref={ref} {...props} />;
   });
@@ -347,7 +373,9 @@ export default function BillingTransaction() {
           <Typography>Overall Revenue: {totalRevenue}</Typography>
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
-            components={{ Toolbar: GridToolbar }}
+            components={{
+              Toolbar: CustomToolbar,
+            }}
             rows={rows}
             columns={columns}
             autoHeight

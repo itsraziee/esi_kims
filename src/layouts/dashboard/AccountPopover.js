@@ -48,7 +48,7 @@ export default function AccountPopover() {
 
   const logout = () => {
     signOut(auth).then((res) => {
-      enqueueSnackbar('Logged out successfully', { variant: 'success', persist: true });
+      enqueueSnackbar('Logged out successfully', { variant: 'success' });
     });
     handleClose();
   };

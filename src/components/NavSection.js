@@ -1,12 +1,13 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { matchPath, NavLink as RouterLink, useLocation } from 'react-router-dom';
 // material
-import { alpha, useTheme, styled } from '@mui/material/styles';
-import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
+import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { alpha, styled, useTheme } from '@mui/material/styles';
 //
-import Iconify from './Iconify';
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
+import Iconify from './Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -143,6 +144,7 @@ NavSection.propTypes = {
 export default function NavSection({ navConfig, ...other }) {
   const { pathname } = useLocation();
   const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const match = (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 
@@ -150,7 +152,13 @@ export default function NavSection({ navConfig, ...other }) {
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
         {navConfig.map((item) => {
-          if ((item?.auth_required && !user) || (item?.non_auth_required && user)) return;
+          if (
+            (item?.auth_required && !user) ||
+            (item?.non_auth_required && user) ||
+            (item?.captain_required && profile?.accountRole !== 'Captain') ||
+            (item?.treasurer_not_allowed && profile?.accountRole === 'Treasurer')
+          )
+            return;
 
           return <NavItem key={item.title} item={item} active={match} />;
         })}

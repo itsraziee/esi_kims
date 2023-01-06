@@ -33,11 +33,13 @@ const navConfig = [
   },
   {
     auth_required: true,
+    treasurer_not_allowed: true,
     title: 'blotter',
     path: '/dashboard/blotter',
     icon: getIcon('icon-park-solid:image-files'),
   },
   {
+    treasurer_not_allowed: true,
     auth_required: true,
     title: 'summon',
     path: '/dashboard/summon',
@@ -56,6 +58,7 @@ const navConfig = [
   {
     auth_required: true,
     title: 'list of purok',
+    treasurer_not_allowed: true,
     path: '/dashboard/listOfPurok',
     icon: getIcon('ri:building-2-fill'),
   },
@@ -73,6 +76,7 @@ const navConfig = [
   },
   {
     auth_required: true,
+    captain_required: true,
     title: 'register',
     path: '/register',
     icon: getIcon('eva:person-add-fill'),

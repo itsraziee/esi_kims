@@ -20,6 +20,7 @@ import { fToNow } from '../../../utils/formatTime';
 import Iconify from '../../../components/Iconify';
 import Scrollbar from '../../../components/Scrollbar';
 import { useAuth } from '../../../hooks/useAuth';
+import { useProfile } from '../../../hooks/useProfile';
 // ----------------------------------------------------------------------
 
 NewsUpdateCard.propTypes = {
@@ -30,12 +31,14 @@ NewsUpdateCard.propTypes = {
 
 export default function NewsUpdateCard({ title, subheader, list, ...other }) {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
+
   const navigate = useNavigate();
   return (
     <Card sx={{ boxShadow: 4}}{...other}>
       <Stack direction="row" justifyContent="space-between">
         <CardHeader title={title} subheader={subheader} />
-        {user && (
+        {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
           <Button
             sx={{ margin: 3 }}
             variant="contained"

@@ -3,6 +3,7 @@ import { Container, Grid, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import PopulationLineGraph from '../components/demographics/PopulationLineGraph';
 import PopulationPieChart from '../components/demographics/PopulationPieChart';
+import { useProfile } from '../hooks/useProfile';
 // components
 import Page from '../components/Page';
 // sections
@@ -14,6 +15,7 @@ import { AppTrafficBySite, AppWidgetSummary, NewsUpdateCard } from '../sections/
 
 export default function DashboardApp() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   const news = useNews(5);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function DashboardApp() {
         </Typography>
 
         <Grid container spacing={3}>
-          {user && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Treasurer' && (
             <>
               <Grid item xs={12} sm={6} md={3}>
                 <AppWidgetSummary
