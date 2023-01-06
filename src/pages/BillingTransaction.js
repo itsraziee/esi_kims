@@ -59,6 +59,16 @@ const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
 //     .done();
 // }
 
+function CustomFooterRevenueComponent(props) {
+  return <Box sx={{ p: 1, display: 'flex' }}>Total Revenue {props.totalRevenue}</Box>;
+}
+
+CustomFooterRevenueComponent.propTypes = {
+  totalRevenue: PropTypes.oneOf(['completed']).isRequired,
+};
+
+export { CustomFooterRevenueComponent };
+
 function RatingInputValue(props) {
   const { item, applyValue, focusElementRef } = props;
   const [from, setFrom] = useState(typeof item.value?.from === 'object' ? item.value.from : Date.now());
@@ -370,11 +380,15 @@ export default function BillingTransaction() {
           Billing Transaction
         </Typography>
         <Container sx={{ mt: 5, mb: 5 }}>
-          <Typography>Overall Revenue: {totalRevenue}</Typography>
+          {/* <Typography>Overall Revenue: {totalRevenue}</Typography> */}
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
             components={{
               Toolbar: CustomToolbar,
+              Footer: CustomFooterRevenueComponent,
+            }}
+            componentsProps={{
+              footer: { totalRevenue },
             }}
             rows={rows}
             columns={columns}

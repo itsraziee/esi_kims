@@ -45,7 +45,7 @@ export default function RequestDocumentFormCard() {
     typeOfDocument: Yup.string().required('Type of Document is required.'),
     requestorname: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Requestor name is required.'),
     number: Yup.string()
-      .matches(/\d{9}/, 'Must match the format +639*********')
+      .matches(/^9\d{9}$/, 'Must match the format +639*********')
       .typeError('Phone number must be a number')
       .required('Phone number is required'),
   });
