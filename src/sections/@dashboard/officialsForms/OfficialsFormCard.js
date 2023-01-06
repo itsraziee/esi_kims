@@ -45,7 +45,10 @@ export default function OfficialsFormCard() {
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
     height: Yup.string().required('Height is required'),
     weight: Yup.string().required('Weight is required'),
-    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone Number required'),
+    phoneNumber: Yup.string()
+      .matches(/^9\d{9}$/, 'Must match the format +639*********')
+      .typeError('Phone number must be a number')
+      .required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
     officialAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
@@ -311,7 +314,7 @@ export default function OfficialsFormCard() {
                       fullWidth
                       name="religion"
                       label="Religion*"
-                    placeholder="e.g. Roman Catholic"
+                      placeholder="e.g. Roman Catholic"
                       {...getFieldProps('religion')}
                       error={Boolean(touched.religion && errors.religion)}
                       helperText={touched.religion && errors.religion}
@@ -392,7 +395,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="occupation"
                   label="Occupation*"
-                placeholder="e.g. Public Servant"
+                  placeholder="e.g. Public Servant"
                   {...getFieldProps('occupation')}
                   error={Boolean(touched.occupation && errors.occupation)}
                   helperText={touched.occupation && errors.occupation}
@@ -514,7 +517,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="fathersOccupation"
                   label="Occupation*"
-                placeholder="e.g. Engineer"
+                  placeholder="e.g. Engineer"
                   {...getFieldProps('fathersOccupation')}
                   error={Boolean(touched.fathersOccupation && errors.fathersOccupation)}
                   helperText={touched.fathersOccupation && errors.fathersOccupation}
@@ -536,7 +539,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="mothersName"
                   label="Mother's Name*"
-                  placeholder='e.g. Jessica Dela Cruz'
+                  placeholder="e.g. Jessica Dela Cruz"
                   {...getFieldProps('mothersName')}
                   error={Boolean(touched.mothersName && errors.mothersName)}
                   helperText={touched.mothersName && errors.mothersName}
@@ -546,7 +549,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="mothersOccupation"
                   label="Occupation*"
-                placeholder="e.g. Nurse"
+                  placeholder="e.g. Nurse"
                   {...getFieldProps('mothersOccupation')}
                   error={Boolean(touched.mothersOccupation && errors.mothersOccupation)}
                   helperText={touched.mothersOccupation && errors.mothersOccupation}
@@ -585,7 +588,7 @@ export default function OfficialsFormCard() {
                   fullWidth
                   name="elementaryAddress"
                   label="Address of School*"
-                placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('elementaryAddress')}
                   error={Boolean(touched.elementaryAddress && errors.elementaryAddress)}
                   helperText={touched.elementaryAddress && errors.elementaryAddress}
