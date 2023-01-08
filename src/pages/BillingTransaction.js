@@ -59,15 +59,15 @@ const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
 //     .done();
 // }
 
-function CustomFooterRevenueComponent(props) {
-  return <Box sx={{ p: 1, display: 'flex' }}>Total Revenue {props.totalRevenue}</Box>;
-}
+// function CustomFooterRevenueComponent(props) {
+//   return <Box sx={{ p: 1, display: 'flex' }}>Total Revenue {props.totalRevenue}</Box>;
+// }
 
-CustomFooterRevenueComponent.propTypes = {
-  totalRevenue: PropTypes.oneOf(['completed']).isRequired,
-};
+// CustomFooterRevenueComponent.propTypes = {
+//   totalRevenue: PropTypes.oneOf(['completed']).isRequired,
+// };
 
-export { CustomFooterRevenueComponent };
+// export { CustomFooterRevenueComponent };
 
 function RatingInputValue(props) {
   const { item, applyValue, focusElementRef } = props;
@@ -226,6 +226,24 @@ export default function BillingTransaction() {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && <GridToolbarExport />}
+        <Container sx={{ mt: 5, mb: 5 }}>
+          <Typography variant="body2" align="center">
+            Republic of the Bukidnon
+          </Typography>
+          <Typography variant="body2" align="center">
+            Province of Bukidnon
+          </Typography>
+          <Typography variant="body2" align="center">
+            Municipality of Pangantucan
+          </Typography>
+          <Typography variant="body2" align="center">
+            BARANGAY KIMANAIT
+          </Typography>
+          <Typography variant="body2" align="center">
+            OFFICE OF THE BARANGAY TREASURER
+          </Typography>
+        </Container>
+        <Typography variant="body3">Overall Revenue: {totalRevenue}</Typography>
       </GridToolbarContainer>
     );
   }
@@ -385,10 +403,6 @@ export default function BillingTransaction() {
             experimentalFeatures={{ newEditingApi: true }}
             components={{
               Toolbar: CustomToolbar,
-              Footer: CustomFooterRevenueComponent,
-            }}
-            componentsProps={{
-              footer: { totalRevenue },
             }}
             rows={rows}
             columns={columns}
