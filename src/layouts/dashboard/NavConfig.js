@@ -88,6 +88,13 @@ const navConfig = [
     path: '/register',
     icon: getIcon('eva:person-add-fill'),
   },
+  {
+    treasurer_not_allowed: true,
+    auth_required: true,
+    title: 'feedback ',
+    path: '/dashboard/feedback',
+    icon: getIcon('fa6-solid:file-pen'),
+  },
 ];
 
 export default navConfig;

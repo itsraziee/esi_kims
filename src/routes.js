@@ -21,6 +21,7 @@ import DisclosureBoard from './pages/DisclosureBoard';
 import DisclosureBoardForm from './pages/DisclosureBoardForm';
 import DocumentServices from './pages/DocumentServices';
 import EditOfficialsProfile from './pages/EditOfficialsProfile';
+import Feedback from './pages/Feedback';
 import FeedbackDialog from './pages/FeedbackDialog';
 import Legislative from './pages/Legislative';
 import LegislativeForm from './pages/LegislativeForm';
@@ -94,6 +95,7 @@ export default function Router() {
         { path: 'committeeReport', element: <CommitteeReport /> },
         { path: 'committeeReportForm', element: <CommitteeReportForm /> },
         { path: 'viewCommitteeReport', element: <ViewCommitteeReport /> },
+        { path: 'feedback', element: <Feedback /> },
       ],
     },
 
