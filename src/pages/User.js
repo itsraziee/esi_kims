@@ -391,19 +391,19 @@ export default function User() {
       },
     },
     {
-      field: 'officialAddress',
-      headerName: 'Official Address',
+      field: 'permanentAddress',
+      headerName: 'Permanent Address',
       flex: 1,
       minWidth: 150,
       editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
       valueSetter: (params) => {
         console.log({ params });
         updateResident(params.row.id, {
-          officialAddress: params.value,
+          permanentAddress: params.value,
         }).then((res) => {
           console.log({ res });
         });
-        return { ...params.row, officialAddress: params.value };
+        return { ...params.row, permanentAddress: params.value };
       },
     },
     {
@@ -502,22 +502,22 @@ export default function User() {
         return { ...params.row, status: params.value };
       },
     },
-    {
-      field: 'uploadImage',
-      headerName: 'Upload Image',
-      flex: 1,
-      minWidth: 150,
-      editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
-      valueSetter: (params) => {
-        console.log({ params });
-        updateResident(params.row.id, {
-          uploadImage: params.value,
-        }).then((res) => {
-          console.log({ res });
-        });
-        return { ...params.row, uploadImage: params.value };
-      },
-    },
+    // {
+    //   field: 'uploadImage',
+    //   headerName: 'Upload Image',
+    //   flex: 1,
+    //   minWidth: 150,
+    //   editable: user && profile?.accountRole && profile?.accountRole !== 'Captain',
+    //   valueSetter: (params) => {
+    //     console.log({ params });
+    //     updateResident(params.row.id, {
+    //       uploadImage: params.value,
+    //     }).then((res) => {
+    //       console.log({ res });
+    //     });
+    //     return { ...params.row, uploadImage: params.value };
+    //   },
+    // },
     {
       field: 'vocationalAddress',
       headerName: 'Vocational Address',

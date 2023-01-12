@@ -41,7 +41,7 @@ export default function ResidentsProfileCard() {
       .typeError('Phone number must be a number')
       .required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-
+    permanentAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Permanent Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
     tribe: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Tribe is required'),
@@ -104,6 +104,7 @@ export default function ResidentsProfileCard() {
       weight: '',
       phoneNumber: '',
       occupation: '',
+      permanentAddress: '',
       status: '',
       spouse: '',
       tribe: '',
@@ -199,9 +200,7 @@ export default function ResidentsProfileCard() {
                   error={Boolean(touched.suffix && errors.suffix)}
                   helperText={touched.suffix && errors.suffix}
                 />
-              </Stack>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <FormControl
                   helperText={touched.sex && errors.sex}
                   fullWidth
@@ -224,7 +223,9 @@ export default function ResidentsProfileCard() {
                   </Select>
                   {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
                 </FormControl>
+              </Stack>
 
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="dateOfBirth"
@@ -273,9 +274,7 @@ export default function ResidentsProfileCard() {
                   error={Boolean(touched.citizenship && errors.citizenship)}
                   helperText={touched.citizenship && errors.citizenship}
                 />
-              </Stack>
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="religion"
@@ -285,7 +284,9 @@ export default function ResidentsProfileCard() {
                   error={Boolean(touched.religion && errors.religion)}
                   helperText={touched.religion && errors.religion}
                 />
+              </Stack>
 
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="height"
@@ -312,6 +313,28 @@ export default function ResidentsProfileCard() {
                   }}
                 />
 
+                <FormControl
+                  helperText={touched.status && errors.status}
+                  fullWidth
+                  error={Boolean(touched.status && errors.status)}
+                >
+                  <InputLabel id="status-select-label">Status*</InputLabel>
+                  <Select
+                    name="status"
+                    labelId="status-select-label"
+                    id="status-select"
+                    value={formik.values.status}
+                    label="Status"
+                    onChange={handleChange}
+                    {...getFieldProps('status')}
+                    error={Boolean(touched.status && errors.status)}
+                  >
+                    <MenuItem value="active">Active</MenuItem>
+                    <MenuItem value="inactive">Inactive</MenuItem>
+                  </Select>
+                  {Boolean(touched.status && errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
+                </FormControl>
+
                 <TextField
                   fullWidth
                   name="phone_number"
@@ -324,6 +347,16 @@ export default function ResidentsProfileCard() {
                     startAdornment: <InputAdornment position="start">+63</InputAdornment>,
                   }}
                 />
+
+                <TextField
+                  fullWidth
+                  name="tribe"
+                  label="Tribe*"
+                  placeholder="e.g. Manubo"
+                  {...getFieldProps('tribe')}
+                  error={Boolean(touched.tribe && errors.tribe)}
+                  helperText={touched.tribe && errors.tribe}
+                />      
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -372,36 +405,14 @@ export default function ResidentsProfileCard() {
                   {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
                 </FormControl>
 
-                <FormControl
-                  helperText={touched.status && errors.status}
-                  fullWidth
-                  error={Boolean(touched.status && errors.status)}
-                >
-                  <InputLabel id="status-select-label">Status*</InputLabel>
-                  <Select
-                    name="status"
-                    labelId="status-select-label"
-                    id="status-select"
-                    value={formik.values.status}
-                    label="Status"
-                    onChange={handleChange}
-                    {...getFieldProps('status')}
-                    error={Boolean(touched.status && errors.status)}
-                  >
-                    <MenuItem value="active">Active</MenuItem>
-                    <MenuItem value="inactive">Inactive</MenuItem>
-                  </Select>
-                  {Boolean(touched.status && errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
-                </FormControl>
-
                 <TextField
                   fullWidth
-                  name="tribe"
-                  label="Tribe*"
-                  placeholder="e.g. Manubo"
-                  {...getFieldProps('tribe')}
-                  error={Boolean(touched.tribe && errors.tribe)}
-                  helperText={touched.tribe && errors.tribe}
+                  name="permanentAddress"
+                  label="Permanent Address*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
+                  {...getFieldProps('permanentAddress')}
+                  error={Boolean(touched.permanentAddress && errors.permanentAddress)}
+                  helperText={touched.permanentAddress && errors.permanentAddress }
                 />
               </Stack>
 
@@ -638,10 +649,10 @@ export default function ResidentsProfileCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
+                {/* <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
                   Upload Image
                   <input type="file" hidden />
-                </Button>
+                </Button> */}
 
                 <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                   Submit

@@ -40,7 +40,7 @@ import BarangayCertification from '../sections/documents/BarangayCertification';
 import BarangayClearance from '../sections/documents/BarangayClearance';
 import BarangayDeathCertificate from '../sections/documents/BarangayDeathCertificate';
 import BarangayTreePlantingCertificate from '../sections/documents/BarangayTreePlantingCertificate';
-import { updateAmount, updateRemarks, updateStatus } from '../service/documentRequest';
+import { updateAmount, updateSecretaryRemarks, updateStatus, updateTreasurerRemarks } from '../service/documentRequest';
 import { sendSMS } from '../service/sms';
 
 const accountSid = 'AC1723ddff52489c0cb0ecbcd973fac96d';
@@ -226,8 +226,8 @@ export default function BillingTransaction() {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && <GridToolbarExport />}
-        <Container sx={{ mt: 5, mb: 5 }}>
-          <Typography variant="body2" align="center">
+        <Container sx={{ mt: 2 }}>
+          {/* <Typography variant="body2" align="center">
             Republic of the Bukidnon
           </Typography>
           <Typography variant="body2" align="center">
@@ -241,9 +241,9 @@ export default function BillingTransaction() {
           </Typography>
           <Typography variant="body2" align="center">
             OFFICE OF THE BARANGAY TREASURER
-          </Typography>
+          </Typography> */}
+          <Typography variant="body3">Overall Revenue: {totalRevenue}</Typography>
         </Container>
-        <Typography variant="body3">Overall Revenue: {totalRevenue}</Typography>
       </GridToolbarContainer>
     );
   }
@@ -316,17 +316,32 @@ export default function BillingTransaction() {
     }, // pending, inprogress, completed, declined
 
     {
-      field: 'remarks',
-      headerName: 'Remarks',
+      field: 'secretaryRemarks',
+      headerName: 'Secretary Remarks',
       flex: 1,
       editable:
         user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer',
       valueSetter: (params) => {
         console.log({ params });
-        updateRemarks(params.row.id, params.value ?? '').then((res) => {
+        updateSecretaryRemarks(params.row.id, params.value ?? '').then((res) => {
           console.log({ res });
         });
-        return { ...params.row, remarks: params.value ?? '' };
+        return { ...params.row, secretaryRemarks: params.value ?? '' };
+      },
+    },
+
+    {
+      field: 'treasurerRemarks',
+      headerName: 'Treasurer Remarks',
+      flex: 1,
+      editable:
+        user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Secretary',
+      valueSetter: (params) => {
+        console.log({ params });
+        updateTreasurerRemarks(params.row.id, params.value ?? '').then((res) => {
+          console.log({ res });
+        });
+        return { ...params.row, treasurerRemarks: params.value ?? '' };
       },
     },
   ];

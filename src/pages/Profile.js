@@ -55,7 +55,7 @@ export default function Profile() {
           .then(() => {
             // Update successful.
             console.log('password updated');
-            enqueueSnackbar('Password updated successfully', { variant: 'success' });
+            enqueueSnackbar('Password changed successfully', { variant: 'success' });
             signOut(auth).then((res) => {
               enqueueSnackbar('Logged out successfully', { variant: 'success' });
             });
@@ -63,7 +63,7 @@ export default function Profile() {
           .catch((error) => {
             // An error ocurred
             console.log('password update failed:', error);
-            enqueueSnackbar('Password update failed', { variant: 'error' });
+            enqueueSnackbar('Password change failed', { variant: 'error' });
             // ...
           });
       }
@@ -110,7 +110,7 @@ export default function Profile() {
 
                           <Grid item>
                             <LoadingButton
-                              sx={{ width: 200, mt: 1 }}
+                              sx={{ width: 200, mt: 1, mb: 3 }}
                               variant="contained"
                               component="label"
                               fullWidth
@@ -167,7 +167,7 @@ export default function Profile() {
                               fullWidth
                               autoComplete="current-password"
                               type={showPassword ? 'text' : 'password'}
-                              label="Password"
+                              label="Change Password"
                               {...getFieldProps('password')}
                               InputProps={{
                                 endAdornment: (

@@ -16,7 +16,7 @@ export default function AboutCard() {
           <CardMedia
             component="img"
             sx={{ display: matches ? undefined : 'none' }}
-            image="/static/about/barangayhall2.jpg"
+            image="/static/about/barangayHall.jpg"
             alt="Barangay Hall"
           />
           <Typography component="div" variant="h5" sx={{ mb: 2, mt: 3 }}>
@@ -40,7 +40,7 @@ export default function AboutCard() {
       <CardMedia
         component="img"
         sx={{ width: 451, display: matches ? 'none' : undefined }}
-        image="/static/about/barangayhall2.jpg"
+        image="/static/about/barangayHall.jpg"
         alt="Barangay Hall"
       />
     </Card>

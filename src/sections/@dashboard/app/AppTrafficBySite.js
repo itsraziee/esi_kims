@@ -107,7 +107,8 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
           <DialogContent>
             <RequestStatus
               referenceNumber={documentRequest.referenceNumber}
-              remarks={documentRequest?.remarks ?? 'N/A'}
+              secretaryRemarks={documentRequest?.secretaryRemarks ?? 'N/A'}
+              treasurerRemarks={documentRequest?.treasurerRemarks ?? 'N/A'}
               requestorName={documentRequest?.requestorName}
               status={documentRequest?.status}
               typeOfDocument={documentRequest?.type}

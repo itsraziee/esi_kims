@@ -14,8 +14,12 @@ export function createRequest(type, data, requestorName, number, amount) {
   });
 }
 
-export function updateRemarks(uid, remarks) {
-  return updateDoc(doc(firestore, `documentRequest/${uid}`), { remarks });
+export function updateSecretaryRemarks(uid, secretaryRemarks) {
+  return updateDoc(doc(firestore, `documentRequest/${uid}`), { secretaryRemarks });
+}
+
+export function updateTreasurerRemarks(uid, treasurerRemarks) {
+  return updateDoc(doc(firestore, `documentRequest/${uid}`), { treasurerRemarks });
 }
 
 export function updateAmount(uid, amount) {
