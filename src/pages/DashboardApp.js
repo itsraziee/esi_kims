@@ -9,7 +9,7 @@ import Page from '../components/Page';
 // sections
 import { useAuth } from '../hooks/useAuth';
 import { useNews } from '../hooks/useNews';
-import { AppTrafficBySite, AppWidgetSummary, NewsUpdateCard } from '../sections/@dashboard/app';
+import { AppWidgetSummary, DocumentRequestStatus, NewsUpdateCard } from '../sections/@dashboard/app';
 
 // ----------------------------------------------------------------------
 
@@ -80,15 +80,7 @@ export default function DashboardApp() {
           </Grid>
 
           <Grid item xs={12} md={6} lg={4}>
-            <AppTrafficBySite title="Reference Number" />
-
-            <AppWidgetSummary
-              title="Document Request Forms"
-              total={0}
-              color="info"
-              url="/dashboard/RequestDocumentForm"
-              icon={'icon-park-solid:image-files'}
-            />
+            <DocumentRequestStatus title="Reference Number" />
 
             <AppWidgetSummary
               title="Feedback"

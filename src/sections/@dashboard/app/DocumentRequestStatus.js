@@ -25,12 +25,12 @@ import RequestStatus from '../request/status/RequestStatus';
 
 // ----------------------------------------------------------------------
 
-AppTrafficBySite.propTypes = {
+DocumentRequestStatus.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
 };
 
-export default function AppTrafficBySite({ title, subheader, list, url = null, ...other }) {
+export default function DocumentRequestStatus({ title, subheader, list, url = null, ...other }) {
   const ReferenceNumber = Yup.object().shape({
     referenceNumber: Yup.string().min(2, 'Too Short!').required('Reference Number is required'),
   });
