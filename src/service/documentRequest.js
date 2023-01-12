@@ -77,3 +77,7 @@ export function updateRequestRequirements(uid, urls) {
 
   return updateDoc(requestRef, { urls });
 }
+
+export async function readDocumentNotification(id) {
+  return updateDoc(doc(firestore, 'requestNotifications', id), { read: true });
+}
