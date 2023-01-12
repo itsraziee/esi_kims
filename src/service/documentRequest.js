@@ -2,7 +2,7 @@ import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
-export function createRequest(type, data, requestorName, number, amount) {
+export async function createRequest(type, data, requestorName, number, amount) {
   return addDoc(collection(firestore, 'documentRequest'), {
     type,
     data,
@@ -11,6 +11,15 @@ export function createRequest(type, data, requestorName, number, amount) {
     number,
     datetime: new Date(),
     amount,
+  }).then(async (res) => {
+    await addDoc(collection(firestore, 'requestNotifications'), {
+      description: `${requestorName} requests for ${type}`,
+      read: false,
+      requestNumber: res.id,
+      datetime: new Date(),
+    });
+
+    return res;
   });
 }
 
@@ -71,4 +80,8 @@ export function updateRequestRequirements(uid, urls) {
   const requestRef = doc(firestore, `documentRequest/${uid}`);
 
   return updateDoc(requestRef, { urls });
+}
+
+export async function readDocumentNotification(id) {
+  return updateDoc(doc(firestore, 'requestNotifications', id), { read: true });
 }

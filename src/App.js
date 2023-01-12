@@ -3,9 +3,10 @@ import Router from './routes';
 // theme
 import ThemeProvider from './theme';
 // components
+import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
+import DocumentRequestNotification from './components/DocumentRequestNotification';
 import IdleChecker from './components/IdleChecker';
 import ScrollToTop from './components/ScrollToTop';
-import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 import './firebase-init';
 
 // ----------------------------------------------------------------------
@@ -15,9 +16,11 @@ export default function App() {
     <SnackbarProvider preventDuplicate>
       <IdleChecker>
         <ThemeProvider>
-          <ScrollToTop />
-          <BaseOptionChartStyle />
-          <Router />
+          <DocumentRequestNotification>
+            <ScrollToTop />
+            <BaseOptionChartStyle />
+            <Router />
+          </DocumentRequestNotification>
         </ThemeProvider>
       </IdleChecker>
     </SnackbarProvider>
