@@ -193,15 +193,15 @@ export default function RequestDocumentFormCard() {
           )}
           {formik.values.typeOfDocument === 'certificate-of-indigency' && (
             <BarangayCertificateOfIndigencyForm
-              onSubmitForm={async (data) => {
-                return createRequest(
+              onSubmitForm={async (data) =>
+                createRequest(
                   'Certificate of Indigency',
                   data,
                   formik.values.requestorname,
                   formik.values.number,
                   CERTIFICATE_OF_INDIGENCY_PRICE
-                );
-              }}
+                )
+              }
             />
           )}
           {formik.values.typeOfDocument === 'birth-certificate' && (
