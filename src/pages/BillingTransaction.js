@@ -6,6 +6,9 @@ import {
   Chip,
   Container,
   Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
   IconButton,
   Slide,
@@ -33,6 +36,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
 import { useProfile } from '../hooks/useProfile';
 import AuthRequired from '../layouts/auth/AuthRequired';
+import RequestStatus from '../sections/@dashboard/request/status/RequestStatus';
 import BarangayBirthCertificate from '../sections/documents/BarangayBirthCertificate';
 import BarangayCertificateOfIndigency from '../sections/documents/BarangayCertificateOfIndigency';
 import BarangayCertificateOfResidency from '../sections/documents/BarangayCertificateOfResidency';
@@ -174,6 +178,9 @@ export default function BillingTransaction() {
   const { enqueueSnackbar } = useSnackbar();
   const user = useAuth();
   const profile = useProfile(user?.uid);
+
+  const [openCedulaView, setOpenCedulaView] = useState(false);
+  const [cedulaData, setCedulaData] = useState();
 
   React.useEffect(() => {
     let newTotalRevenue = 0;
@@ -353,53 +360,101 @@ export default function BillingTransaction() {
       flex: 1.5,
       sortable: false,
       disableColumnMenu: true,
-      renderCell: (params) => (
-        <Stack direction="row" spacing={1}>
-          <Button
-            variant="contained"
-            size="small"
-            onClick={() => {
-              console.log({ params });
-              setDocumentType(params.row.type);
-              setCurrentRow(params.row);
-              handlePrintOpen();
-            }}
-          >
-            Print
-          </Button>
+      renderCell: (params) =>
+        params.row.type !== 'Cedula' ? (
+          <Stack direction="row" spacing={1}>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => {
+                console.log({ params });
+                setDocumentType(params.row.type);
+                setCurrentRow(params.row);
+                handlePrintOpen();
+              }}
+            >
+              Print
+            </Button>
 
-          <Button
-            disabled={params.row.status !== 'inprogress'}
-            variant="contained"
-            size="small"
-            // onClick={() => {
-            //   sendMessage(
-            //     '+639169235853',
-            //     'Maayong Adlaw! Kini nga mensahe gikan sa ESI-KIMS buot mupahibalo nga andam na ug pwede ng makuha ang imong gikinihanglan nga dokumento. Atol sa imong pagkuha sa maong dokumento palihog sa pagdala sa imong kompleto nga bayad. Daghang Salamat'
-            //   );
-            // }}
-            onClick={() => {
-              sendSMS({
-                number: `63${params.row.number}`,
-                /* TODO REPLACE WITH NUMBER FROM BILLING TRANSACTION
+            <Button
+              disabled={params.row.status !== 'inprogress'}
+              variant="contained"
+              size="small"
+              // onClick={() => {
+              //   sendMessage(
+              //     '+639169235853',
+              //     'Maayong Adlaw! Kini nga mensahe gikan sa ESI-KIMS buot mupahibalo nga andam na ug pwede ng makuha ang imong gikinihanglan nga dokumento. Atol sa imong pagkuha sa maong dokumento palihog sa pagdala sa imong kompleto nga bayad. Daghang Salamat'
+              //   );
+              // }}
+              onClick={() => {
+                sendSMS({
+                  number: `63${params.row.number}`,
+                  /* TODO REPLACE WITH NUMBER FROM BILLING TRANSACTION
                 MIGHT BE: params.row.number, GIVEN THAT "number" IS THE FIREBASE PROPERTY NAME.
                 */
-                message: `The ${params.row.type} you requested was ready to be claimed.`,
-              })
-                .then(() => {
-                  enqueueSnackbar('SMS sent successfully', { variant: 'success' });
+                  message: `The ${params.row.type} you requested was ready to be claimed.`,
                 })
-                .catch((err) => {
-                  enqueueSnackbar('SMS failed sending', { variant: 'error' });
-                  console.log({ err });
-                });
-              console.log({ params });
-            }}
-          >
-            SMS
-          </Button>
-        </Stack>
-      ),
+                  .then(() => {
+                    enqueueSnackbar('SMS sent successfully', { variant: 'success' });
+                  })
+                  .catch((err) => {
+                    enqueueSnackbar('SMS failed sending', { variant: 'error' });
+                    console.log({ err });
+                  });
+                console.log({ params });
+              }}
+            >
+              SMS
+            </Button>
+          </Stack>
+        ) : (
+          <Stack direction="row" spacing={1} alignItems="center" justifyContent="center">
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => {
+                console.log({ params });
+                // setDocumentType(params.row.type);
+                // setCurrentRow(params.row);
+                // handlePrintOpen();
+                setCedulaData({ ...params.row, referenceNumber: params.row.id });
+                setOpenCedulaView(true);
+              }}
+            >
+              View
+            </Button>
+            <Button
+              disabled={params.row.status !== 'inprogress'}
+              variant="contained"
+              size="small"
+              // onClick={() => {
+              //   sendMessage(
+              //     '+639169235853',
+              //     'Maayong Adlaw! Kini nga mensahe gikan sa ESI-KIMS buot mupahibalo nga andam na ug pwede ng makuha ang imong gikinihanglan nga dokumento. Atol sa imong pagkuha sa maong dokumento palihog sa pagdala sa imong kompleto nga bayad. Daghang Salamat'
+              //   );
+              // }}
+              onClick={() => {
+                sendSMS({
+                  number: `63${params.row.number}`,
+                  /* TODO REPLACE WITH NUMBER FROM BILLING TRANSACTION
+                MIGHT BE: params.row.number, GIVEN THAT "number" IS THE FIREBASE PROPERTY NAME.
+                */
+                  message: `The ${params.row.type} you requested was ready to be claimed.`,
+                })
+                  .then(() => {
+                    enqueueSnackbar('SMS sent successfully', { variant: 'success' });
+                  })
+                  .catch((err) => {
+                    enqueueSnackbar('SMS failed sending', { variant: 'error' });
+                    console.log({ err });
+                  });
+                console.log({ params });
+              }}
+            >
+              SMS
+            </Button>
+          </Stack>
+        ),
     });
   }
   const Transition = React.forwardRef((props, ref) => {
@@ -579,6 +634,28 @@ export default function BillingTransaction() {
               </Toolbar>
             </AppBar>
             <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
+          </Dialog>
+
+          <Dialog
+            open={openCedulaView}
+            onClose={() => setOpenCedulaView(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">Cedula View</DialogTitle>
+            <DialogContent>
+              <RequestStatus
+                referenceNumber={cedulaData?.referenceNumber}
+                remarks={cedulaData?.remarks ?? 'N/A'}
+                requestorName={cedulaData?.requestorName}
+                status={cedulaData?.status}
+                typeOfDocument={cedulaData?.type}
+                number={cedulaData?.number}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOpenCedulaView(false)}>Close</Button>
+            </DialogActions>
           </Dialog>
         </Container>
       </Page>
