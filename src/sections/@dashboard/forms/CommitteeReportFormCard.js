@@ -22,16 +22,18 @@ export default function CommitteeReportFormCard() {
 
   const CommitteeReportFormSchema = Yup.object().shape({
     committeeReportNumber: Yup.string().required('Committee Report No. is required'),
+    series: Yup.string().required('Series is required'),
     subject: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
-    from: Yup.string().required('Where the report from is required'),
+    submittedBy: Yup.string().required('Submitted by is required'),
     date: Yup.date().required('Date of Committee Report is required'),
   });
 
   const formik = useFormik({
     initialValues: {
       committeeReportNumber: '',
+      series: '',
       subject: '',
-      from: '',
+      submittedBy: '',
       date: '',
     },
     validationSchema: CommitteeReportFormSchema,
@@ -81,6 +83,15 @@ export default function CommitteeReportFormCard() {
                       helperText={touched.committeeReportNumber && errors.committeeReportNumber}
                     />
 
+<TextField
+                      fullWidth
+                      name="series"
+                      label="Series*"
+                      {...getFieldProps('series')}
+                      error={Boolean(touched.series && errors.series)}
+                      helperText={touched.series && errors.series}
+                    />
+
                     <TextField
                       fullWidth
                       name="date"
@@ -109,11 +120,11 @@ export default function CommitteeReportFormCard() {
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                     <TextField
                       fullWidth
-                      name="from"
-                      label="From*"
-                      {...getFieldProps('from')}
-                      error={Boolean(touched.from && errors.from)}
-                      helperText={touched.from && errors.from}
+                      name="submittedBy"
+                      label="Submitted by*"
+                      {...getFieldProps('submittedBy')}
+                      error={Boolean(touched.submittedBy && errors.submittedBy)}
+                      helperText={touched.submittedBy && errors.submittedBy}
                     />
                   </Stack>
 

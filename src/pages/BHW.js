@@ -6,8 +6,7 @@ import { useEffect } from 'react';
 import Page from '../components/Page';
 import { BhwCard, OfficialsCard } from '../sections/@dashboard/officials';
 
-// mock
-import BHWPOSTS from '../_mock/bhw';
+
 import { useOfficials } from '../hooks/useOfficials';
 
 

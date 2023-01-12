@@ -22,9 +22,6 @@ export default function FeedbackDialog() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
       <Dialog open={open} onClose={handleClose}>
         <Stack>
           <DialogTitle>How do you rate our service?</DialogTitle>

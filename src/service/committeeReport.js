@@ -36,7 +36,7 @@ export async function deleteCommitteeReport(uid) {
   });
 }
 
-export async function updateCommitteeReport(uid, { committeeReportNumber, subject, date, from }) {
-  console.log({ uid, committeeReportNumber, subject, date, from });
-  return updateDoc(doc(firestore, `committeeReport/${uid}`), { committeeReportNumber, subject, date, from });
+export async function updateCommitteeReport(uid, { committeeReportNumber, series, subject, date, submittedBy }) {
+  console.log({ uid, committeeReportNumber, series, subject, date, submittedBy });
+  return updateDoc(doc(firestore, `committeeReport/${uid}`), { committeeReportNumber, series, subject, date, submittedBy});
 }

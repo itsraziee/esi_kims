@@ -48,9 +48,10 @@ export default function CommitteeReport() {
               {committeeReports?.map((committeeReport) => (
                 <CommitteeReportList
                   committeeReportNumber={committeeReport?.committeeReportNumber}
+                  series={committeeReport.series}
                   subject={committeeReport.subject}
                   date={committeeReport.date}
-                  from={committeeReport?.from}
+                  submittedBy={committeeReport?.submittedBy}
                   url={`/dashboard/viewCommitteeReport/?uid=${committeeReport.id}`}
                   key={committeeReport.id}
                 />
