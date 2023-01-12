@@ -8,3 +8,4 @@ export { default as AppWidgetSummary } from './AppWidgetSummary';
 export { default as AppCurrentSubject } from './AppCurrentSubject';
 export { default as AppConversionRates } from './AppConversionRates';
 export { default as NewsUpdateCard } from './NewsUpdateCard';
+export { default as Feedback } from './Feedback';

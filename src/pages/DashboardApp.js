@@ -9,7 +9,7 @@ import Page from '../components/Page';
 // sections
 import { useAuth } from '../hooks/useAuth';
 import { useNews } from '../hooks/useNews';
-import { AppWidgetSummary, DocumentRequestStatus, NewsUpdateCard } from '../sections/@dashboard/app';
+import { AppWidgetSummary, DocumentRequestStatus, Feedback, NewsUpdateCard } from '../sections/@dashboard/app';
 
 // ----------------------------------------------------------------------
 
@@ -81,14 +81,7 @@ export default function DashboardApp() {
 
           <Grid item xs={12} md={6} lg={4}>
             <DocumentRequestStatus title="Reference Number" />
-
-            <AppWidgetSummary
-              title="Feedback"
-              total={0}
-              color="info"
-              url="/dashboard/FeedbackDialog"
-              icon={'icon-park-solid:image-files'}
-            />
+            <Feedback title="Send us your feedback" subheader="What could we do better?" />
           </Grid>
         </Grid>
       </Container>
