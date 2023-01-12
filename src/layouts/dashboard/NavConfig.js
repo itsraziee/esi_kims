@@ -22,6 +22,13 @@ const navConfig = [
     icon: getIcon('fa6-solid:building-columns'),
   },
   {
+    auth_required: true,
+    treasurer_not_allowed: true,
+    title: 'committee report',
+    path: '/dashboard/committeeReport',
+    icon: getIcon('mdi:file-report'),
+  },
+  {
     title: 'full disclosure board',
     path: '/dashboard/disclosureBoard',
     icon: getIcon('mdi:file-document-multiple'),

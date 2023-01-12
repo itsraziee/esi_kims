@@ -16,14 +16,16 @@ export default function EditCommitteeReportDialog({ open, handleClose, committee
   const formik = useFormik({
     initialValues: {
       committeeReportNumber: 0,
+      series: 0,
       date: '',
       subject: '',
-      from: '',
+      submittedBy: '',
     },
     validationSchema: Yup.object({
-      committeeReportNumber: Yup.string().required('Committee Report No. is required'),
+      committeeReportNumber: Yup.number().min(1).required('Committee Report No. is required'),
+      series: Yup.number().min(1).required('Series is required'),
       subject: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
-      from: Yup.string().required('Where the report from is required'),
+      submittedBy: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Submitted by is required'),
       date: Yup.date().required('Date of Committee Report is required'),
     }),
     onSubmit: (values) => {
@@ -44,8 +46,9 @@ export default function EditCommitteeReportDialog({ open, handleClose, committee
     formik.setValues(
       {
         committeeReportNumber: committeeReport.committeeReportNumber,
+        series: committeeReport.series,
         subject: committeeReport.subject,
-        from: committeeReport.from,
+        submittedBy: committeeReport.submittedBy,
         date: committeeReport.date,
       },
       true
@@ -70,6 +73,16 @@ export default function EditCommitteeReportDialog({ open, handleClose, committee
           />
 
           <TextField
+            label="Series"
+            fullWidth
+            variant="standard"
+            type="number"
+            {...formik.getFieldProps('series')}
+            error={formik.touched.series && formik.errors.series}
+            helperText={formik.touched.series && formik.errors.series}
+          />
+
+          <TextField
             label="Date*"
             fullWidth
             variant="standard"
@@ -90,13 +103,13 @@ export default function EditCommitteeReportDialog({ open, handleClose, committee
           />
 
           <TextField
-            label="From"
+            label="Submitted by"
             fullWidth
             variant="standard"
             type="text"
-            {...formik.getFieldProps('from')}
-            error={formik.touched.from && formik.errors.from}
-            helperText={formik.touched.from && formik.errors.from}
+            {...formik.getFieldProps('submittedBy')}
+            error={formik.touched.submittedBy && formik.errors.submittedBy}
+            helperText={formik.touched.submittedBy && formik.errors.submittedBy}
           />
         </DialogContent>
         <DialogActions>

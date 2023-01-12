@@ -4,8 +4,9 @@ import { useAuth } from '../../../hooks/useAuth';
 
 export default function CommitteeReportList({
   subject,
-  from,
+  submittedBy,
   date,
+  series,
   committeeReportNumber,
   color = 'primary',
   url,
@@ -30,14 +31,14 @@ export default function CommitteeReportList({
           primary={
             <>
               <Typography variant="subtitle4">
-                {`Committee Report No. ${committeeReportNumber}, Date: ${date}`}: {subject}
+                {`Committee Report No. ${committeeReportNumber}, Series of ${series}`}: {subject}
               </Typography>
             </>
           }
           secondary={
             <>
               <Typography sx={{ display: 'flex', opacity: 0.72 }} component="span" variant="subtitle8">
-                {from}
+                {submittedBy} : {`Date: ${date}`}
               </Typography>
             </>
           }
