@@ -225,7 +225,7 @@ export default function BillingTransaction() {
         <GridToolbarColumnsButton />
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
-        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && <GridToolbarExport />}
+        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && profile?.accountRole !== 'Captain' && <GridToolbarExport />}
         <Container sx={{ mt: 2 }}>
           {/* <Typography variant="body2" align="center">
             Republic of the Bukidnon
