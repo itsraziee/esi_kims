@@ -69,20 +69,12 @@ export default function Register() {
           <RootStyle>
             <HeaderStyle>
               <Logo />
-              {/* {smUp && (
-              <Typography variant="body2" sx={{ mt: { md: -2 } }}>
-                Already have an account? {''}
-                <Link variant="subtitle2" component={RouterLink} to="/login">
-                  Login
-                </Link>
-              </Typography>
-            )} */}
             </HeaderStyle>
 
             {mdUp && (
               <SectionStyle>
-                <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-                  Manage your job with us
+                <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }} align="left">
+                  Welcome to KIMS
                 </Typography>
                 <img alt="register" src="/static/illustrations/Sign-up.png" />
               </SectionStyle>
