@@ -43,7 +43,7 @@ export default function SummonFormCard() {
         return uploadSummonPdf(res.id, pdfFile).then((res) => {
           console.log({ res });
           return updatePdfURL(summonUid, res.ref).then((res) => {
-            navigate('/dashboard/app', { replace: true });
+            navigate('/dashboard/summon', { replace: true });
           });
         });
       });
