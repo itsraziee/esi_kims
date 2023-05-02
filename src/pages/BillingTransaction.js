@@ -233,7 +233,7 @@ export default function BillingTransaction() {
         <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && <GridToolbarExport />}
-        <Container sx={{ mt: 5, mb: 5 }}>
+        {/* <Container sx={{ mt: 5, mb: 5 }}>
           <Typography variant="body2" align="center">
             Republic of the Bukidnon
           </Typography>
@@ -249,8 +249,12 @@ export default function BillingTransaction() {
           <Typography variant="body2" align="center">
             OFFICE OF THE BARANGAY TREASURER
           </Typography>
-        </Container>
-        <Typography variant="body3">Overall Revenue: {totalRevenue}</Typography>
+        </Container> */}
+        <Stack alignItems="left" sx={{ display: { xs: 'block', sm: 'inline', md: 'block' } }}>
+          <Typography variant="body3" color="#2065D1">
+            Overall Revenue: {totalRevenue}
+          </Typography>
+        </Stack>
       </GridToolbarContainer>
     );
   }

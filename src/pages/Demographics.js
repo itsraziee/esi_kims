@@ -12,7 +12,7 @@ export default function Demographics() {
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
           <Typography variant="h4" gutterBottom>
             Demographics
           </Typography>

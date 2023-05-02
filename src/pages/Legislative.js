@@ -27,10 +27,8 @@ export default function Legislative() {
   return (
     <Page title="Legislative">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mb: 5 }}>
-            Ordinances
-          </Typography>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={0}>
+          <Typography variant="h4">Ordinances</Typography>
 
           <Stack direction="row" spacing={1}>
             {/* <IconButton

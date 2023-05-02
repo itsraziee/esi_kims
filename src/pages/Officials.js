@@ -17,8 +17,8 @@ export default function Officials() {
   return (
     <Page title="Officials">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mb: 5 }}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <Typography variant="h4" sx={{ mb: 2 }}>
             Officials
           </Typography>
           {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (

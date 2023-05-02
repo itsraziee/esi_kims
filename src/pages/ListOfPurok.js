@@ -17,8 +17,8 @@ export default function PurokList() {
     <NotTreasurer>
       <Page title="List Of Purok">
         <Container>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h4" sx={{ mb: 3 }}>
+          <Stack direction="row" alignItems="center" justifyContent="space-between">
+            <Typography variant="h4" sx={{ mb: 2 }}>
               List of Purok
             </Typography>
             {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (

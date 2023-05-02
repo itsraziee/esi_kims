@@ -48,7 +48,7 @@ export default function ViewDisclosureBoard() {
   return (
     <Page title="Disclosure Board">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
           <Typography variant="h4">{disclosureBoard?.title}</Typography>
 
           {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
@@ -75,7 +75,7 @@ export default function ViewDisclosureBoard() {
             title={disclosureBoard?.title}
             src={disclosureBoard?.pdfUrl}
             id="iframe"
-            style={{ width: '100%', height: '60vh' }}
+            style={{ width: '100%', height: '80vh' }}
           />
         )}
       </Container>

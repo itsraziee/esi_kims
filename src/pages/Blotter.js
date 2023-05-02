@@ -28,8 +28,8 @@ export default function Blotter() {
     <NotTreasurer>
       <Page title="Blotter">
         <Container>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h4" sx={{ mb: 5 }}>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" >
+            <Typography variant="h4" sx={{ mb: 2 }}>
               Blotter
             </Typography>
             <Grid container spacing={1} direction="row" justifyContent="flex-end" alignItems="center">

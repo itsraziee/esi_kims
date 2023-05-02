@@ -6,8 +6,8 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
-import EditSummonDialog from '../components/editDialog/EditSummonDialog';
 import Page from '../components/Page';
+import EditSummonDialog from '../components/editDialog/EditSummonDialog';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
 import { useProfile } from '../hooks/useProfile';
@@ -49,7 +49,7 @@ export default function ViewSummonPdf() {
   return (
     <Page title="Summon">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography variant="h4">Case number: {summon?.caseNumber}</Typography>
 
           {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
@@ -76,7 +76,7 @@ export default function ViewSummonPdf() {
             title={summon?.caseNumber}
             src={summon?.pdfURL}
             id="iframe"
-            style={{ width: '100%', height: '60vh' }}
+            style={{ width: '100%', height: '80vh' }}
           />
         )}
       </Container>

@@ -6,8 +6,8 @@ import { useSnackbar } from 'notistack';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DeleteConfirmationDialog from '../components/DeleteConfirmationDialog';
-import EditBlotterDialog from '../components/editDialog/EditBlotterDialog';
 import Page from '../components/Page';
+import EditBlotterDialog from '../components/editDialog/EditBlotterDialog';
 import { firestore } from '../firebase-init';
 import { useAuth } from '../hooks/useAuth';
 import { useProfile } from '../hooks/useProfile';
@@ -49,7 +49,7 @@ export default function ViewBlotterPdf() {
   return (
     <Page title="Blotter">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={2}>
           <Typography variant="h4">Case number: {blotter?.caseNumber}</Typography>
           {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (
             <Stack direction="row" spacing={1}>
@@ -76,7 +76,7 @@ export default function ViewBlotterPdf() {
             title={blotter?.caseNumber}
             src={blotter?.pdfURL}
             id="iframe"
-            style={{ width: '100%', height: '60vh' }}
+            style={{ width: '100%', height: '80vh' }}
           />
         )}
       </Container>

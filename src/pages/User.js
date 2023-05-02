@@ -627,7 +627,7 @@ export default function User() {
   // ];
   return (
     <AuthRequired>
-      <Typography variant="h4" sx={{ mb: 5 }}>
+      <Typography variant="h4" sx={{ mb: 2 }}>
         {purokList.includes(purok) ? `Purok ${purok.toUpperCase()}` : 'All Residents'}
       </Typography>
       <DataGrid
