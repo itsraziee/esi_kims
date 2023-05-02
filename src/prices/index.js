@@ -5,3 +5,4 @@ export const BARANGAY_CERTIFICATION_PRICE = 150; // TODO rename to barangay elec
 export const CERTIFICATE_OF_INDIGENCY_PRICE = 150;
 export const CERTIFICATE_OF_RESIDENCY_PRICE = 150;
 export const TREE_PLANTING_CERTIFICATE_PRICE = 150;
+export const CEDULA_PRICE = 50;

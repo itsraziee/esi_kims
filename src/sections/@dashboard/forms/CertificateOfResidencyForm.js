@@ -1,11 +1,45 @@
-import React from 'react';
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box } from '@mui/material';
+import { uuidv4 } from '@firebase/util';
+import Close from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
+import {
+  AppBar,
+  Box,
+  Button,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  FormHelperText,
+  Grid,
+  IconButton,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 import { PropTypes } from 'prop-types';
+import { useState } from 'react';
+import * as Yup from 'yup';
+import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 
-export default function CertificateOfResidencyForm({onSubmitForm}) {
+export default function CertificateOfResidencyForm({ onSubmitForm }) {
+  const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
+  const [previewSrc, setPreviewSrc] = useState();
+  const [requirementsFile, setRequirementsFile] = useState([]);
+  const [openReferenceNumber, setOpenReferenceNumber] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState();
+  const { enqueueSnackbar } = useSnackbar();
+  const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
+
   const RequestDocumentFormSchema = Yup.object().shape({
     name: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Full Name is required'),
     purok: Yup.string().required('Purok is required'),
@@ -21,11 +55,50 @@ export default function CertificateOfResidencyForm({onSubmitForm}) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      return onSubmitForm(data);
+      return onSubmitForm(data)
+        .then((res) => {
+          const requestUid = res.id;
+
+          return uploadRequirements(requirementsFile, requestUid).then((res) => {
+            const filenames = requirementsFile.map((requirement) => requirement.file.name);
+            return getRequirementsUrl(filenames, requestUid).then((res) => {
+              const requestUrls = res;
+              return updateRequestRequirements(requestUid, requestUrls).then((res) => {
+                enqueueSnackbar('Certificate or Residency Request Submitted Successfully.', {
+                  variant: 'success',
+                });
+
+                setReferenceNumber(requestUid);
+                setOpenReferenceNumber(true);
+                setTimeout(() => setReferenceNumberCloseLoading(false), 5000);
+              });
+            });
+          });
+        })
+        .catch((err) => {
+          console.log({ err });
+          enqueueSnackbar('Request Failed.', { variant: 'error' });
+        });
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
+
+  function handleDelete(id) {
+    console.log({ id });
+
+    setRequirementsFile(
+      requirementsFile.filter((file) => {
+        return id !== file.id;
+      })
+    );
+
+    setRequirementObjectURLs(
+      requirementObjectURLs.filter((reqUrl) => {
+        return id !== reqUrl.id;
+      })
+    );
+  }
 
   return (
     <FormikProvider value={formik}>
@@ -35,23 +108,52 @@ export default function CertificateOfResidencyForm({onSubmitForm}) {
             <TextField
               fullWidth
               name="name"
-              label="Full Name"
+              label="Full Name*"
+              placeholder='e.g. Juan Dela Cruz'
               {...getFieldProps('name')}
               error={Boolean(touched.name && errors.name)}
               helperText={touched.name && errors.name}
             />
-            <TextField
-              fullWidth
-              name="purok"
-              label="Purok"
-              {...getFieldProps('purok')}
-              error={Boolean(touched.purok && errors.purok)}
+           
+            <FormControl
               helperText={touched.purok && errors.purok}
-            />
+              fullWidth
+              error={Boolean(touched.purok && errors.purok)}
+            >
+              <InputLabel id="status-select-label">Purok*</InputLabel>
+              <Select
+                name="purok"
+                labelId="purok"
+                id="purok"
+                value={formik.values.purok}
+                label="Purok"
+                onChange={handleChange}
+                {...getFieldProps('purok')}
+                error={Boolean(touched.purok && errors.purok)}
+                helperText={touched.purok && errors.purok}
+              >
+                <MenuItem value="Purok 1 Brgy. Proper">Purok 1 Brgy. Proper</MenuItem>
+                <MenuItem value="Purok 2 Brgy. Proper">Purok 2 Brgy. Proper</MenuItem>
+                <MenuItem value="Purok 3A Brgy. Proper">Purok 3A Brgy. Proper</MenuItem>
+                <MenuItem value="Purok 3B Brgy. Proper">Purok 3B Brgy. Proper</MenuItem>
+                <MenuItem value="Purok 4 Brgy. Proper">Purok 4 Brgy. Proper</MenuItem>
+                <MenuItem value="Purok 5 Sitio Malapinggan">Purok 5 Sitio Malapinggan</MenuItem>
+                <MenuItem value="Purok 6 Sitio Balangcao">Purok 6 Sitio Balangcao</MenuItem>
+                <MenuItem value="Purok 7 Sitio Balangcao">Purok 7 Sitio Balangcao</MenuItem>
+                <MenuItem value="Purok 8 Sitio Balangcao">Purok 8 Sitio Balangcao</MenuItem>
+                <MenuItem value="Purok 9 Sitio Balangcao">Purok 9 Sitio Balangcao</MenuItem>
+                <MenuItem value="Purok 10 Sitio Palo">Purok 10 Sitio Palo</MenuItem>
+                <MenuItem value="Purok 11 Sitio Palo">Purok 11 Sitio Palo</MenuItem>
+                <MenuItem value="Purok 12 Siniloan">Purok 12 Siniloan</MenuItem>
+                <MenuItem value="Purok 13 Kiramong">Purok 13 Kiramong</MenuItem>
+              </Select>
+              {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+            </FormControl>
             <TextField
               fullWidth
               name="citizenship"
-              label="Citizenship"
+              label="Citizenship*"
+            placeholder="e.g. Filipino"
               {...getFieldProps('citizenship')}
               error={Boolean(touched.citizenship && errors.citizenship)}
               helperText={touched.citizenship && errors.citizenship}
@@ -66,12 +168,133 @@ export default function CertificateOfResidencyForm({onSubmitForm}) {
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
             Upload Requirements
-            <input type="file" hidden />
+            <input
+              type="file"
+              hidden
+              multiple
+              onChange={(e) => {
+                const files = [...e.target.files];
+                console.log({ e, files });
+                if (files) {
+                  setRequirementObjectURLs((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      const id = uuidv4();
+                      return {
+                        fileName: file.name,
+                        link: URL.createObjectURL(file),
+                        id,
+                      };
+                    });
+
+                    return [...prev, ...newFiles];
+                  });
+
+                  setRequirementsFile((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      const id = uuidv4();
+                      return { file, id };
+                    });
+
+                    return [...prev, ...newFiles];
+                  });
+                }
+              }}
+            />
           </Button>
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            disabled={requirementsFile?.length < 1}
+          >
             Submit
           </LoadingButton>
         </Stack>
+
+        {requirementObjectURLs.length > 0 && (
+          <Grid container spacing={1} sx={{ my: 1 }}>
+            {requirementObjectURLs.map((reqUrl) => {
+              console.log({ reqUrl });
+              return (
+                <Grid item key={reqUrl.id}>
+                  <Chip
+                    color="primary"
+                    label={reqUrl.fileName}
+                    component="a"
+                    onClick={() => {
+                      setPreviewSrc(reqUrl.link);
+                    }}
+                    target="_blank"
+                    onDelete={() => handleDelete(reqUrl.id)}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
+
+        <Dialog onClose={() => setPreviewSrc(null)} open={previewSrc} fullScreen>
+          <AppBar sx={{ position: 'fixed' }}>
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={() => setPreviewSrc(null)} aria-label="close">
+                <Close />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Preview
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
+        </Dialog>
+
+        <Dialog open={openReferenceNumber}>
+          <DialogTitle>Reference Number</DialogTitle>
+          <DialogContentText sx={{ p: 5 }}>
+            Your Reference Number is:{' '}
+            <Tooltip title="Copy to clipboard">
+              <Link
+                sx={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(referenceNumber)
+                    .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+                }}
+              >
+                {referenceNumber}
+              </Link>
+            </Tooltip>
+          </DialogContentText>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(referenceNumber)
+                  .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+              }}
+              sx={{ color: 'white' }}
+            >
+              Copy
+            </Button>
+            <LoadingButton
+              variant="contained"
+              color="error"
+              onClick={() => {
+                setOpenReferenceNumber(false);
+                setReferenceNumberCloseLoading(true);
+                window.location.reload();
+              }}
+              loading={referenceNumberCloseLoading}
+            >
+              Close
+            </LoadingButton>
+          </DialogActions>
+        </Dialog>
       </Form>
     </FormikProvider>
   );

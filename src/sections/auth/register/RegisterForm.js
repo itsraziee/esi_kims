@@ -1,13 +1,26 @@
-import * as Yup from 'yup';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useState } from 'react';
-import { useFormik, Form, FormikProvider } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
-import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import { FormControl, IconButton, InputAdornment, InputLabel, MenuItem, Select, Stack, TextField } from '@mui/material';
 // component
+import { doc, getDocs, limit, setDoc } from '@firebase/firestore';
+import { collection, query, where } from 'firebase/firestore';
+import { useSnackbar } from 'notistack';
 import Iconify from '../../../components/Iconify';
+import { firestore } from '../../../firebase-init';
+import { createAccount, setProfile } from '../../../service/auth';
 
+async function validateEmail(email) {
+  const citiesRef = collection(firestore, 'users');
+
+  // Create a query against the collection.
+  const q = query(citiesRef, where('email', '==', email), limit(1));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.size < 1;
+}
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
@@ -15,6 +28,8 @@ export default function RegisterForm() {
 
   const [showPassword, setShowPassword] = useState(false);
   const passwordRules = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+  const ROLES = ['Secretary', 'Treasurer'];
+  const { enqueueSnackbar } = useSnackbar();
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('First name required'),
@@ -24,6 +39,7 @@ export default function RegisterForm() {
       .min(8)
       .matches(passwordRules, { message: 'Please create a stronger password' })
       .required('Password is required'),
+    accountRole: Yup.string().oneOf(ROLES),
   });
 
   const formik = useFormik({
@@ -32,10 +48,40 @@ export default function RegisterForm() {
       lastName: '',
       email: '',
       password: '',
+      accountRole: ROLES[0],
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate('/dashboard/app', { replace: true });
+    onSubmit: async (values) => {
+      console.log({ values });
+      const { email, password, firstName, lastName, accountRole } = values;
+      return createAccount(email, password)
+        .then((accountRes) => {
+          const uid = accountRes.user.uid;
+          const email = accountRes.user.email;
+          setProfile(uid, firstName, lastName, accountRole);
+          // navigate('/dashboard/app', { replace: true });
+          const userRef = doc(firestore, 'users', values.accountRole);
+          setDoc(userRef, { email }).then((res) => {
+            enqueueSnackbar('Account has been created', { variant: 'success' });
+            formik.resetForm();
+          });
+        })
+        .catch(async (err) => {
+          if (err.code === 'auth/email-already-in-use') {
+            const userRef = doc(firestore, 'users', values.accountRole);
+            const emailValid = await validateEmail(values.email);
+            console.log({ emailValid });
+            if (emailValid) {
+              return setDoc(userRef, { email: values.email }).then(async (res) => {
+                enqueueSnackbar('Account already exist and has been set', { variant: 'success' });
+                formik.resetForm();
+              });
+            }
+            enqueueSnackbar('Account already have existing role', { variant: 'error' });
+          }
+          console.error({ err });
+          enqueueSnackbar('Account creation failed', { variant: 'error' });
+        });
     },
   });
 
@@ -45,6 +91,14 @@ export default function RegisterForm() {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
+          <FormControl fullWidth>
+            <InputLabel>Role</InputLabel>
+            <Select value={formik.values.accountRole} label="Role" {...getFieldProps('accountRole')}>
+              {ROLES.map((role) => (
+                <MenuItem value={role}>{role}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <TextField
               fullWidth

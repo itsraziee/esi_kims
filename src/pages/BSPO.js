@@ -1,9 +1,11 @@
 
 // material
 import { Grid, Button, Container, Stack, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { useOfficials } from '../hooks/useOfficials';
 // components
 import Page from '../components/Page';
-import { BspoCard } from '../sections/@dashboard/officials';
+import { BspoCard, OfficialsCard } from '../sections/@dashboard/officials';
 
 // mock
 import BSPOPOSTS from '../_mock/bspo';
@@ -13,6 +15,12 @@ import BSPOPOSTS from '../_mock/bspo';
 // ----------------------------------------------------------------------
 
 export default function BSPO() {
+  const officials = useOfficials('BSPO');
+
+  useEffect(() => {
+    console.log({ officials });
+  }, [officials]);
+
   return (
     <Page title="Barangay Service Point Officer">
       <Container>
@@ -23,9 +31,7 @@ export default function BSPO() {
         </Stack>
 
         <Grid container spacing={3}>
-          {BSPOPOSTS.map((post) => (
-            <BspoCard key={post.id} post={post} />
-          ))}
+          {officials && officials.map((official) => <OfficialsCard key={official.id} official={official} />)}
         </Grid>
         </Container>
     </Page>

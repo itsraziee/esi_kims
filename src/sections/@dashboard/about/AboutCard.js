@@ -1,4 +1,4 @@
-import { Card, Typography, CardContent, useTheme, useMediaQuery } from '@mui/material';
+import { Card, CardContent, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import CardMedia from '@mui/material/CardMedia';
 
@@ -16,10 +16,10 @@ export default function AboutCard() {
           <CardMedia
             component="img"
             sx={{ display: matches ? undefined : 'none' }}
-            image="/static/about/barangayhall.jpg"
-            alt="Live from space album cover"
+            image="/static/about/barangayHall2.jpg"
+            alt="Barangay Hall"
           />
-          <Typography component="div" variant="h5" sx={{ mb: 2 , mt: 3 }} >
+          <Typography component="div" variant="h5" sx={{ mb: 2, mt: 3 }}>
             The History of Barangay Kimanait
           </Typography>
           <Typography color="text.secondary" component="div" align="justify">
@@ -40,8 +40,8 @@ export default function AboutCard() {
       <CardMedia
         component="img"
         sx={{ width: 451, display: matches ? 'none' : undefined }}
-        image="/static/about/barangayhall.jpg"
-        alt="Live from space album cover"
+        image="/static/about/barangayHall2.jpg"
+        alt="Barangay Hall"
       />
     </Card>
     //     <Card sx={{ minWidth: 275 }}>

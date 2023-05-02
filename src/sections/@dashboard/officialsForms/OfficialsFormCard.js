@@ -1,47 +1,60 @@
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
 // material
+import { LoadingButton } from '@mui/lab';
 import {
+  Avatar,
   Button,
+  Card,
+  CardContent,
+  FormControl,
+  FormHelperText,
+  Grid,
+  InputAdornment,
   InputLabel,
   MenuItem,
-  FormControl,
   Select,
   Stack,
   TextField,
-  InputAdornment,
-  Card,
-  CardContent,
   Typography,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 
+import { getDownloadURL } from 'firebase/storage';
 import { useSnackbar } from 'notistack';
-import { createOfficial } from '../../../service/official';
+import { useState } from 'react';
+import { createOfficial, updateOfficialImage, uploadOfficialPhoto } from '../../../service/official';
 // ----------------------------------------------------------------------
 
 export default function OfficialsFormCard() {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const [imageObjectUrl, setImageObjectUrl] = useState();
+  const [officialPhoto, setOfficialPhoto] = useState();
+
   const OfficialsFormSchema = Yup.object().shape({
     firstName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('First name is required'),
-    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Middle name is required'),
+    middleName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!'),
     lastName: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Last name is required'),
     age: Yup.number().typeError('Age must be a number').integer('Age must be an integer').required('Age is required'),
+    suffix: Yup.string().max(3, 'Too Long!'),
     sex: Yup.string().oneOf(['male', 'female']).required(),
     dateOfBirth: Yup.date().required('Date of Birth is required'),
     civilStatus: Yup.string().required('Civil Status is required'),
     citizenship: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Citizenship is required'),
     religion: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Religion is required'),
-    height: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Height is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
-    phoneNumber: Yup.string().typeError('phoneNumber must be a number').required('Phone Number required'),
+    height: Yup.string().required('Height is required'),
+    weight: Yup.string().required('Weight is required'),
+    phoneNumber: Yup.string()
+      .matches(/^9\d{9}$/, 'Must match the format +639*********')
+      .typeError('Phone number must be a number')
+      .required('Phone number is required'),
     occupation: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Occupation is required'),
-    address: Yup.string().required('Address is required'),
+    officialAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     status: Yup.string().oneOf(['active', 'inactive']).required('Status is required'),
-    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW']).required('Position is required'),
+    position: Yup.string().oneOf(['official', 'CVO', 'BSPO', 'BNS', 'BHW', 'PL']).required('Position is required'),
     spouse: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Spouse is required'),
+    title: Yup.string().required('Title is required'),
     spouseAddress: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Address is required'),
     numberOfChildren: Yup.number()
       .typeError('Number of Children must be a number')
@@ -87,23 +100,25 @@ export default function OfficialsFormCard() {
       firstName: '',
       middleName: '',
       lastName: '',
-      officialAddress: '',
       age: '',
-      sex: 'male',
+      suffix: '',
+      sex: '',
+      title: '',
       dateOfBirth: '',
-      civilStatus: 'single',
+      civilStatus: '',
       citizenship: '',
       religion: '',
       height: '',
       weight: '',
       phoneNumber: '',
       occupation: '',
-      address: '',
-      status: 'active',
+
+      status: '',
       position: '',
       spouse: '',
       spouseAddress: '',
       numberOfChildren: '',
+      officialAddress: '',
       fathersName: '',
       fathersOccupation: '',
       fathersAddress: '',
@@ -126,18 +141,37 @@ export default function OfficialsFormCard() {
     validationSchema: OfficialsFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      createOfficial(data)
+      return createOfficial(data)
         .then((res) => {
           console.log({ res });
-          if (res) {
-            enqueueSnackbar('Added successfully.', {
-              variant: 'success',
-            });
-            navigate('/dashboard/app', { replace: true });
+          const uploadedOfficial = res;
+
+          if (officialPhoto) {
+            return uploadOfficialPhoto(officialPhoto, uploadedOfficial.id)
+              .then((res) => {
+                console.log({ res });
+                getDownloadURL(res.ref).then((url) => {
+                  updateOfficialImage(uploadedOfficial.id, url).then((res) => {
+                    enqueueSnackbar('Added successfully.', {
+                      variant: 'success',
+                    });
+                    navigate('/dashboard/official', { replace: true });
+                  });
+                });
+              })
+              .catch((err) => {
+                enqueueSnackbar('Invalid input.', { variant: 'error' });
+                console.log({ err });
+              });
           }
+
+          enqueueSnackbar('Added successfully.', {
+            variant: 'success',
+          });
+          navigate('/dashboard/official', { replace: true });
         })
         .catch((err) => {
-          console.log({ err });
+          console.log({ officialsError: err });
           enqueueSnackbar('Invalid input', { variant: 'error' });
         });
     },
@@ -152,151 +186,216 @@ export default function OfficialsFormCard() {
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
               <Typography variant="subtitle3" noWrap>
-                Personal Data
+                Officials Form
               </Typography>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  name="firstName"
-                  label="First name"
-                  {...getFieldProps('firstName')}
-                  error={Boolean(touched.firstName && errors.firstName)}
-                  helperText={touched.firstName && errors.firstName}
-                />
+              <Grid container spacing={1}>
+                <Grid item xs={12} sm={6}>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      name="firstName"
+                      label="First name*"
+                      placeholder="e.g. Juan"
+                      {...getFieldProps('firstName')}
+                      error={Boolean(touched.firstName && errors.firstName)}
+                      helperText={touched.firstName && errors.firstName}
+                    />
+                    <TextField
+                      fullWidth
+                      name="middleName"
+                      label="Middle name*"
+                      placeholder="e.g. Santos"
+                      {...getFieldProps('middleName')}
+                      error={Boolean(touched.middleName && errors.middleName)}
+                      helperText={touched.middleName && errors.middleName}
+                    />
+                    <TextField
+                      fullWidth
+                      name="lastName"
+                      label="Last name*"
+                      placeholder="e.g. Dela Cruz"
+                      {...getFieldProps('lastName')}
+                      error={Boolean(touched.lastName && errors.lastName)}
+                      helperText={touched.lastName && errors.lastName}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <TextField
+                      name="suffix"
+                      label="Suffix"
+                      placeholder="e.g. JR/SR/III"
+                      {...getFieldProps('suffix')}
+                      error={Boolean(touched.suffix && errors.suffix)}
+                      helperText={touched.suffix && errors.suffix}
+                    />
 
-                <TextField
-                  fullWidth
-                  name="middleName"
-                  label="Middle name"
-                  {...getFieldProps('middleName')}
-                  error={Boolean(touched.middleName && errors.middleName)}
-                  helperText={touched.middleName && errors.middleName}
-                />
+                    <TextField
+                      name="age"
+                      label="Age*"
+                      {...getFieldProps('age')}
+                      error={Boolean(touched.age && errors.age)}
+                      helperText={touched.age && errors.age}
+                    />
 
-                <TextField
-                  fullWidth
-                  name="lastName"
-                  label="Last name"
-                  {...getFieldProps('lastName')}
-                  error={Boolean(touched.lastName && errors.lastName)}
-                  helperText={touched.lastName && errors.lastName}
-                />
+                    <FormControl
+                      helperText={touched.sex && errors.sex}
+                      fullWidth
+                      error={Boolean(touched.sex && errors.sex)}
+                    >
+                      <InputLabel id="status-select-label">Sex*</InputLabel>
+                      <Select
+                        name="sex"
+                        labelId="sex"
+                        id="sex"
+                        value={formik.values.sex}
+                        label="Sex"
+                        onChange={handleChange}
+                        {...getFieldProps('sex')}
+                        error={Boolean(touched.sex && errors.sex)}
+                        helperText={touched.sex && errors.sex}
+                      >
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
+                      </Select>
+                      {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex.</FormHelperText>}
+                    </FormControl>
+                    <TextField
+                      fullWidth
+                      name="dateOfBirth"
+                      id="dateOfBirth"
+                      label="Date of Birth*"
+                      type="date"
+                      {...getFieldProps('dateOfBirth')}
+                      error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
+                      helperText={touched.dateOfBirth && errors.dateOfBirth}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <FormControl
+                      helperText={touched.civilStatus && errors.civilStatus}
+                      fullWidth
+                      error={Boolean(touched.civilStatus && errors.civilStatus)}
+                    >
+                      <InputLabel id="status-select-label">Civil Status*</InputLabel>
+                      <Select
+                        name="civilStatus"
+                        labelId="civilStatus"
+                        id="civilStatus"
+                        value={formik.values.civilStatus}
+                        label="Civil Status"
+                        onChange={handleChange}
+                        {...getFieldProps('civilStatus')}
+                        error={Boolean(touched.civilStatus && errors.civilStatus)}
+                      >
+                        <MenuItem value="single">Single</MenuItem>
+                        <MenuItem value="married">Married</MenuItem>
+                        <MenuItem value="separated">Separated</MenuItem>
+                        <MenuItem value="widowed">Widowed</MenuItem>
+                      </Select>
+                      {Boolean(touched.civilStatus && errors.civilStatus) && (
+                        <FormHelperText>Please select a Civil Status.</FormHelperText>
+                      )}
+                    </FormControl>
 
-                <TextField
-                  name="age"
-                  label="Age"
-                  {...getFieldProps('age')}
-                  error={Boolean(touched.age && errors.age)}
-                  helperText={touched.age && errors.age}
-                />
-              </Stack>
+                    <TextField
+                      fullWidth
+                      name="citizenship"
+                      label="Citizenship*"
+                      placeholder="e.g. Filipino"
+                      {...getFieldProps('citizenship')}
+                      error={Boolean(touched.citizenship && errors.citizenship)}
+                      helperText={touched.citizenship && errors.citizenship}
+                    />
 
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <FormControl fullWidth>
-                  <InputLabel id="sex-select-label">Sex</InputLabel>
-                  <Select
-                    labelId="sex-select-label"
-                    id="sex-select"
-                    value={formik.values.sex}
-                    label="sex"
-                    onChange={handleChange}
-                    name="sex"
-                  >
-                    <MenuItem value="male">Male</MenuItem>
-                    <MenuItem value="female">Female</MenuItem>
-                  </Select>
-                </FormControl>
+                    <TextField
+                      fullWidth
+                      name="religion"
+                      label="Religion*"
+                      placeholder="e.g. Roman Catholic"
+                      {...getFieldProps('religion')}
+                      error={Boolean(touched.religion && errors.religion)}
+                      helperText={touched.religion && errors.religion}
+                    />
+                  </Stack>
 
-                <TextField
-                  fullWidth
-                  name="dateOfBirth"
-                  id="dateOfBirth"
-                  label="Date of Birth"
-                  type="date"
-                  {...getFieldProps('dateOfBirth')}
-                  error={Boolean(touched.dateOfBirth && errors.dateOfBirth)}
-                  helperText={touched.dateOfBirth && errors.dateOfBirth}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 2 }}>
+                    <TextField
+                      fullWidth
+                      name="height"
+                      label="Height*"
+                      type="number"
+                      {...getFieldProps('height')}
+                      error={Boolean(touched.height && errors.height)}
+                      helperText={touched.height && errors.height}
+                      InputProps={{
+                        endAdornment: <InputAdornment position="start">in</InputAdornment>,
+                      }}
+                    />
+                    <TextField
+                      fullWidth
+                      name="weight"
+                      label="Weight*"
+                      type="number"
+                      {...getFieldProps('weight')}
+                      error={Boolean(touched.weight && errors.weight)}
+                      helperText={touched.weight && errors.weight}
+                      InputProps={{
+                        endAdornment: <InputAdornment position="start">kg</InputAdornment>,
+                      }}
+                    />
 
-                <FormControl helperText={touched.civilStatus && errors.civilStatus} fullWidth>
-                  <InputLabel id="status-select-label">Civil Status</InputLabel>
-                  <Select
-                    name="civilStatus"
-                    labelId="status-select-label"
-                    id="status-select"
-                    value={formik.values.civilStatus}
-                    label="civilStatus"
-                    onChange={handleChange}
-                    {...getFieldProps('civilStatus')}
-                    error={Boolean(touched.civilStatus && errors.civilStatus)}
-                  >
-                    <MenuItem value="single">Single</MenuItem>
-                    <MenuItem value="married">Married</MenuItem>
-                    <MenuItem value="separated">Separated</MenuItem>
-                    <MenuItem value="widowed">Widowed</MenuItem>
-                  </Select>
-                </FormControl>
+                    <TextField
+                      fullWidth
+                      name="phone_number"
+                      label="Phone Number*"
+                      type="number"
+                      id="outlined-start-adornment"
+                      {...getFieldProps('phoneNumber')}
+                      error={Boolean(touched.phoneNumber && errors.phoneNumber)}
+                      helperText={touched.phoneNumber && errors.phoneNumber}
+                      InputProps={{
+                        startAdornment: <InputAdornment position="start">+63</InputAdornment>,
+                      }}
+                    />
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Grid container spacing={1} direction="column" justifyContent="center" alignItems="center">
+                    <Grid item>
+                      <Avatar src={imageObjectUrl} alt="Upload preview" sx={{ height: 220, width: 220 }} />
+                    </Grid>
 
-                <TextField
-                  fullWidth
-                  name="citizenship"
-                  label="Citizenship"
-                  {...getFieldProps('citizenship')}
-                  error={Boolean(touched.citizenship && errors.citizenship)}
-                  helperText={touched.citizenship && errors.citizenship}
-                />
-              </Stack>
-
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <TextField
-                  fullWidth
-                  name="religion"
-                  label="Religion"
-                  {...getFieldProps('religion')}
-                  error={Boolean(touched.religion && errors.religion)}
-                  helperText={touched.religion && errors.religion}
-                />
-
-                <TextField
-                  fullWidth
-                  name="height"
-                  label="Height"
-                  {...getFieldProps('height')}
-                  error={Boolean(touched.height && errors.height)}
-                  helperText={touched.height && errors.height}
-                />
-
-                <TextField
-                  fullWidth
-                  name="weight"
-                  label="Weight"
-                  {...getFieldProps('weight')}
-                  error={Boolean(touched.weight && errors.weight)}
-                  helperText={touched.weight && errors.weight}
-                />
-
-                <TextField
-                  fullWidth
-                  name="phone_number"
-                  label="Phone Number"
-                  id="outlined-start-adornment"
-                  {...getFieldProps('phoneNumber')}
-                  error={Boolean(touched.phoneNumber && errors.phoneNumber)}
-                  helperText={touched.phoneNumber && errors.phoneNumber}
-                  InputProps={{
-                    startAdornment: <InputAdornment position="start">+63</InputAdornment>,
-                  }}
-                />
-              </Stack>
+                    <Grid item>
+                      <Button sx={{ width: 200, mt: 1 }} variant="contained" component="label" fullWidth>
+                        Upload Image
+                        <input
+                          type="file"
+                          hidden
+                          multiple={false}
+                          onChange={(e) => {
+                            console.log({ e });
+                            const imageFile = e.target.files[0];
+                            const objectUrl = URL.createObjectURL(imageFile);
+                            setOfficialPhoto(imageFile);
+                            console.log({ objectUrl });
+                            setImageObjectUrl(objectUrl);
+                          }}
+                        />
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="occupation"
-                  label="Occupation"
+                  label="Occupation*"
+                  placeholder="e.g. Public Servant"
                   {...getFieldProps('occupation')}
                   error={Boolean(touched.occupation && errors.occupation)}
                   helperText={touched.occupation && errors.occupation}
@@ -304,15 +403,20 @@ export default function OfficialsFormCard() {
 
                 <TextField
                   fullWidth
-                  name="address"
-                  label="Address"
-                  {...getFieldProps('address')}
-                  error={Boolean(touched.address && errors.address)}
-                  helperText={touched.address && errors.address}
+                  name="officialAddress"
+                  label="Address*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
+                  {...getFieldProps('officialAddress')}
+                  error={Boolean(touched.officialAddress && errors.officialAddress)}
+                  helperText={touched.officialAddress && errors.officialAddress}
                 />
 
-                <FormControl helperText={touched.status && errors.status} fullWidth>
-                  <InputLabel id="status-select-label">Status</InputLabel>
+                <FormControl
+                  helperText={touched.status && errors.status}
+                  fullWidth
+                  error={Boolean(touched.status && errors.status)}
+                >
+                  <InputLabel id="status-select-label">Status*</InputLabel>
                   <Select
                     name="status"
                     labelId="status-select-label"
@@ -326,12 +430,17 @@ export default function OfficialsFormCard() {
                     <MenuItem value="active">Active</MenuItem>
                     <MenuItem value="inactive">Inactive</MenuItem>
                   </Select>
+                  {Boolean(touched.status && errors.status) && <FormHelperText>Please select a Status</FormHelperText>}
                 </FormControl>
 
-                <FormControl helperText={touched.position && errors.position} fullWidth>
-                  <InputLabel id="position-select-label">Position</InputLabel>
+                <FormControl
+                  helperText={touched.position && errors.position}
+                  fullWidth
+                  error={Boolean(touched.position && errors.position)}
+                >
+                  <InputLabel id="position-select-label">Position*</InputLabel>
                   <Select
-                    name="postion"
+                    name="position"
                     labelId="position-select-label"
                     id="position-select"
                     value={formik.values.position}
@@ -345,15 +454,29 @@ export default function OfficialsFormCard() {
                     <MenuItem value="BSPO">BSPO</MenuItem>
                     <MenuItem value="BNS">BNS</MenuItem>
                     <MenuItem value="BHW">BHW</MenuItem>
+                    <MenuItem value="PL">Purok Leader</MenuItem>
                   </Select>
+                  {Boolean(touched.position && errors.position) && (
+                    <FormHelperText>Please select a position</FormHelperText>
+                  )}
                 </FormControl>
+                <TextField
+                  fullWidth
+                  name="title"
+                  label="Title*"
+                  placeholder="e.g. Barangay Captain"
+                  {...getFieldProps('title')}
+                  error={Boolean(touched.title && errors.title)}
+                  helperText={touched.title && errors.title}
+                />
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <TextField
                   fullWidth
                   name="spouse"
-                  label="Spouse"
+                  label="Spouse*"
+                  placeholder="e.g. Jessica Dela Cruz"
                   {...getFieldProps('spouse')}
                   error={Boolean(touched.spouse && errors.spouse)}
                   helperText={touched.spouse && errors.spouse}
@@ -362,7 +485,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="spouseAddress"
-                  label="Address"
+                  label="Address*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('spouseAddress')}
                   error={Boolean(touched.spouseAddress && errors.spouseAddress)}
                   helperText={touched.spouseAddress && errors.spouseAddress}
@@ -371,7 +495,7 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="numberOfChildren"
-                  label="Number of Children"
+                  label="Number of Children*"
                   {...getFieldProps('numberOfChildren')}
                   error={Boolean(touched.numberOfChildren && errors.numberOfChildren)}
                   helperText={touched.numberOfChildren && errors.numberOfChildren}
@@ -382,7 +506,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="fathersName"
-                  label="Father's Name"
+                  label="Father's Name*"
+                  placeholder="e.g. Juan Dela Cruz"
                   {...getFieldProps('fathersName')}
                   error={Boolean(touched.fathersName && errors.fathersName)}
                   helperText={touched.fathersName && errors.fathersName}
@@ -391,7 +516,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="fathersOccupation"
-                  label="Occupation"
+                  label="Occupation*"
+                  placeholder="e.g. Engineer"
                   {...getFieldProps('fathersOccupation')}
                   error={Boolean(touched.fathersOccupation && errors.fathersOccupation)}
                   helperText={touched.fathersOccupation && errors.fathersOccupation}
@@ -400,7 +526,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="fathersAddress"
-                  label="Address"
+                  label="Address*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('fathersAddress')}
                   error={Boolean(touched.fathersAddress && errors.fathersAddress)}
                   helperText={touched.fathersAddress && errors.fathersAddress}
@@ -411,7 +538,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="mothersName"
-                  label="Mother's Name"
+                  label="Mother's Name*"
+                  placeholder="e.g. Jessica Dela Cruz"
                   {...getFieldProps('mothersName')}
                   error={Boolean(touched.mothersName && errors.mothersName)}
                   helperText={touched.mothersName && errors.mothersName}
@@ -420,7 +548,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="mothersOccupation"
-                  label="Occupation"
+                  label="Occupation*"
+                  placeholder="e.g. Nurse"
                   {...getFieldProps('mothersOccupation')}
                   error={Boolean(touched.mothersOccupation && errors.mothersOccupation)}
                   helperText={touched.mothersOccupation && errors.mothersOccupation}
@@ -429,7 +558,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="mothersAddress"
-                  label="Address"
+                  label="Address*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('mothersAddress')}
                   error={Boolean(touched.mothersAddress && errors.mothersAddress)}
                   helperText={touched.mothersAddress && errors.mothersAddress}
@@ -438,6 +568,8 @@ export default function OfficialsFormCard() {
 
               <Typography variant="subtitle3" noWrap>
                 Educational Background
+                {/* <CardHeader subheader="Put N/A if not applicable " />
+                 */}
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -446,7 +578,7 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="elementarySchool"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('elementarySchool')}
                   error={Boolean(touched.elementarySchool && errors.elementarySchool)}
                   helperText={touched.elementarySchool && errors.elementarySchool}
@@ -455,7 +587,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="elementaryAddress"
-                  label="Address of School"
+                  label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('elementaryAddress')}
                   error={Boolean(touched.elementaryAddress && errors.elementaryAddress)}
                   helperText={touched.elementaryAddress && errors.elementaryAddress}
@@ -464,7 +597,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="elementaryYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('elementaryYearGrad')}
                   error={Boolean(touched.elementaryYearGrad && errors.elementaryYearGrad)}
                   helperText={touched.year && errors.year}
@@ -476,7 +610,7 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="highschoolName"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('highschoolName')}
                   error={Boolean(touched.highschoolName && errors.highschoolName)}
                   helperText={touched.highschoolName && errors.highschoolName}
@@ -485,7 +619,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="highschoolAddress"
-                  label="Address of School"
+                  label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('highschoolAddress')}
                   error={Boolean(touched.highschoolAddress && errors.highschoolAddress)}
                   helperText={touched.highschoolAddress && errors.highschoolAddress}
@@ -494,7 +629,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="highschoolYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('highschoolYearGrad')}
                   error={Boolean(touched.highschoolYearGrad && errors.highschoolYearGrad)}
                   helperText={touched.highschoolYearGrad && errors.highschoolYearGrad}
@@ -507,7 +643,7 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="collegeName"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('collegeSchool')}
                   error={Boolean(touched.collegeSchool && errors.collegeSchool)}
                   helperText={touched.collegeSchool && errors.collegeSchool}
@@ -516,7 +652,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="collegeAddress"
-                  label="Address of School"
+                  label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('collegeAddress')}
                   error={Boolean(touched.collegeAddress && errors.collegeAddress)}
                   helperText={touched.collegeAddress && errors.collegeAddress}
@@ -525,7 +662,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="collegeYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('collegeYearGrad')}
                   error={Boolean(touched.collegeYearGrad && errors.collegeYearGrad)}
                   helperText={touched.collegeYearGrad && errors.collegeYearGrad}
@@ -538,7 +676,7 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="vocationalName"
-                  label="Name of School"
+                  label="Name of School*"
                   {...getFieldProps('vocationalSchool')}
                   error={Boolean(touched.vocationalSchool && errors.vocationalSchool)}
                   helperText={touched.vocationalSchool && errors.vocationalSchool}
@@ -547,7 +685,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="vocationalAddress"
-                  label="Address of School"
+                  label="Address of School*"
+                  placeholder="PUROK,BRGY,MUNICIPALITY,PROVINCE"
                   {...getFieldProps('vocationalAddress')}
                   error={Boolean(touched.vocationalAddress && errors.vocationalAddress)}
                   helperText={touched.vocationalAddress && errors.vocationalAddress}
@@ -556,7 +695,8 @@ export default function OfficialsFormCard() {
                 <TextField
                   fullWidth
                   name="vocationalYearGrad"
-                  label="Year Graduated"
+                  label="Year Graduated*"
+                  placeholder="yyyy-yyyy"
                   {...getFieldProps('vocationalYearGrad')}
                   error={Boolean(touched.vocationalYearGrad && errors.vocationalYearGrad)}
                   helperText={touched.vocationalYearGrad && errors.vocationalYearGrad}
@@ -564,11 +704,6 @@ export default function OfficialsFormCard() {
               </Stack>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
-                  Upload Image
-                  <input type="file" hidden />
-                </Button>
-
                 <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                   Submit
                 </LoadingButton>

@@ -1,9 +1,36 @@
-import React from 'react';
-import * as Yup from 'yup';
-import { useFormik, Form, FormikProvider } from 'formik';
-import { Button, Stack, TextField, Typography, Box, FormControl, MenuItem, InputLabel, Select } from '@mui/material';
+import { uuidv4 } from '@firebase/util';
+import Close from '@mui/icons-material/Close';
 import { LoadingButton } from '@mui/lab';
+import {
+  AppBar,
+  Box,
+  Button,
+  Chip,
+  Dialog,
+  DialogActions,
+  DialogContentText,
+  DialogTitle,
+  FormControl,
+  FormHelperText,
+  Grid,
+  IconButton,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { useSnackbar } from 'notistack';
 import { PropTypes } from 'prop-types';
+import { useState } from 'react';
+import * as Yup from 'yup';
+import { getRequirementsUrl, updateRequestRequirements, uploadRequirements } from '../../../service/documentRequest';
 
 // TODO: Date of Birth error message is not working!
 // TODO: Time of Birth error message is not working!
@@ -11,15 +38,23 @@ import { PropTypes } from 'prop-types';
 // TODO: Fathers Occupation error message is not working (mag red ra sya peru dili ga show ang error message)!
 
 export default function BarangayBirthCertificateForm({ onSubmitForm }) {
+  // TODO duplicate on other document forms
+  const [requirementObjectURLs, setRequirementObjectURLs] = useState([]);
+  const [previewSrc, setPreviewSrc] = useState();
+  const [requirementsFile, setRequirementsFile] = useState([]);
+  const [openReferenceNumber, setOpenReferenceNumber] = useState(false);
+  const [referenceNumber, setReferenceNumber] = useState();
+  const { enqueueSnackbar } = useSnackbar();
+  const [referenceNumberCloseLoading, setReferenceNumberCloseLoading] = useState(true);
+  // end duplicate
+
   const RequestDocumentFormSchema = Yup.object().shape({
     nameofchild: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Child is required'),
     sex: Yup.string().oneOf(['male', 'female']).required('Sex is Required'),
-    dateofbirth: Yup.string().required('Date of Birth is required'),
+    dateAndTimeOfBirth: Yup.string().required('Date and Time of Birth is required'),
     purok: Yup.string().required('Purok is required'),
-    timeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Time of Birth is required'),
-    weight: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Weight is required'),
-    birthorder: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Birth Order is required'),
-    death: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Death is required'),
+    weight: Yup.string().required('Weight is required'),
+    birthorder: Yup.string().required('Birth Order is required'),
     placeofbirth: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Birth is required'),
     nameofmother: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of mother is required'),
     mothercitizenship: Yup.string()
@@ -39,8 +74,8 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
       .min(2, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Fathers Occupation is required'),
-    dateofmarriage: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Date of marriage is required'),
-    placeofmarriage: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Place of Marriage is required'),
+    dateofmarriage: Yup.string(),
+    placeofmarriage: Yup.string(),
     nameofattendant: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Name of Attendant is required'),
     addressofattendant: Yup.string()
       .min(2, 'Too Short!')
@@ -56,11 +91,9 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
       nameofchild: '',
       sex: '',
       purok: '',
-      dateofbirth: '',
-      timeofbirth: '',
+      dateAndTimeOfBirth: '',
       weight: '',
       birthorder: '',
-      death: '',
       placeofbirth: '',
       nameofmother: '',
       mothercitizenship: '',
@@ -77,11 +110,56 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
     validationSchema: RequestDocumentFormSchema,
     onSubmit: (data) => {
       console.log({ data });
-      return onSubmitForm(data);
+      return (
+        onSubmitForm(data)
+          // TODO duplicate on other forms
+          .then((res) => {
+            const requestUid = res.id;
+
+            return uploadRequirements(requirementsFile, requestUid).then((res) => {
+              const filenames = requirementsFile.map((requirement) => requirement.file.name);
+              return getRequirementsUrl(filenames, requestUid).then((res) => {
+                const requestUrls = res;
+                return updateRequestRequirements(requestUid, requestUrls).then((res) => {
+                  enqueueSnackbar('Barangay Birth Certificate Request Submitted Successfully.', {
+                    variant: 'success',
+                  });
+
+                  setReferenceNumber(requestUid);
+                  setOpenReferenceNumber(true);
+                  setTimeout(() => setReferenceNumberCloseLoading(false), 5000);
+                });
+              });
+            });
+          })
+          .catch((err) => {
+            console.log({ err });
+            enqueueSnackbar('Request Failed.', { variant: 'error' });
+          })
+        // End duplicate
+      );
     },
   });
 
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
+
+  // TODO duplicate on other document forms
+  function handleDelete(id) {
+    console.log({ id });
+
+    setRequirementsFile(
+      requirementsFile.filter((file) => {
+        return id !== file.id;
+      })
+    );
+
+    setRequirementObjectURLs(
+      requirementObjectURLs.filter((reqUrl) => {
+        return id !== reqUrl.id;
+      })
+    );
+  }
+  // end duplicate on other forms
 
   return (
     <FormikProvider value={formik}>
@@ -90,105 +168,143 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="nameofchild"
-            label="Name of Child"
+            label="Name of Child*"
+            placeholder="e.g. Juan Dela Cruz"
             {...getFieldProps('nameofchild')}
             error={Boolean(touched.nameofchild && errors.nameofchild)}
             helperText={touched.nameofchild && errors.nameofchild}
           />
-
-          <TextField
-            fullWidth
-            name="purok"
-            label="Purok"
-            {...getFieldProps('purok')}
-            error={Boolean(touched.purok && errors.purok)}
+          <FormControl
             helperText={touched.purok && errors.purok}
-          />
-          <FormControl helperText={touched.sex && errors.sex} fullWidth>
-            <InputLabel id="sex-select-label">Sex</InputLabel>
+            fullWidth
+            error={Boolean(touched.purok && errors.purok)}
+          >
+            <InputLabel id="status-select-label">Purok*</InputLabel>
+            <Select
+              name="purok"
+              labelId="purok"
+              id="purok"
+              value={formik.values.purok}
+              label="Select a purok*"
+              onChange={handleChange}
+              {...getFieldProps('purok')}
+              error={Boolean(touched.purok && errors.purok)}
+              helperText={touched.purok && errors.purok}
+            >
+              <MenuItem value="Purok 1 Brgy. Proper">Purok 1 Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 2 Brgy. Proper">Purok 2 Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 3A Brgy. Proper">Purok 3A Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 3B Brgy. Proper">Purok 3B Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 4 Brgy. Proper">Purok 4 Brgy. Proper</MenuItem>
+              <MenuItem value="Purok 5 Sitio Malapinggan">Purok 5 Sitio Malapinggan</MenuItem>
+              <MenuItem value="Purok 6 Sitio Balangcao">Purok 6 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 7 Sitio Balangcao">Purok 7 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 8 Sitio Balangcao">Purok 8 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 9 Sitio Balangcao">Purok 9 Sitio Balangcao</MenuItem>
+              <MenuItem value="Purok 10 Sitio Palo">Purok 10 Sitio Palo</MenuItem>
+              <MenuItem value="Purok 11 Sitio Palo">Purok 11 Sitio Palo</MenuItem>
+              <MenuItem value="Purok 12 Siniloan">Purok 12 Siniloan</MenuItem>
+              <MenuItem value="Purok 13 Kiramong">Purok 13 Kiramong</MenuItem>
+            </Select>
+            {Boolean(touched.purok && errors.purok) && <FormHelperText>Please select a Purok</FormHelperText>}
+          </FormControl>
+          <FormControl helperText={touched.sex && errors.sex} fullWidth error={Boolean(touched.sex && errors.sex)}>
+            <InputLabel id="status-select-label">Sex*</InputLabel>
             <Select
               name="sex"
-              labelId="sex-select-label"
-              id="sex-select"
+              labelId="sex"
+              id="sex"
               value={formik.values.sex}
-              label="Sex"
+              label="Sex*"
               onChange={handleChange}
               {...getFieldProps('sex')}
               error={Boolean(touched.sex && errors.sex)}
+              helperText={touched.sex && errors.sex}
             >
               <MenuItem value="male">Male</MenuItem>
               <MenuItem value="female">Female</MenuItem>
             </Select>
+            {Boolean(touched.sex && errors.sex) && <FormHelperText>Please select a Sex*</FormHelperText>}
           </FormControl>
-          <TextField
-            fullWidth
-            name="dateofbirth"
-            id="dateofbirth"
-            label="Date of Birth"
-            type="date"
-            {...getFieldProps('dateofbirth')}
-            error={Boolean(touched.dateofbirth && errors.dateofbirth)}
-            helperText={touched.dateofbirth && errors.dateofbirth}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-
-          <TextField
-            // sx={{ minWidth: 91, mt: 2 }}
-            fullWidth
-            name="timeofbirth"
-            label="Time of Birth"
-            {...getFieldProps('timeofbirth')}
-            error={Boolean(touched.timeofbirth && errors.timeofbirth)}
-            helperText={touched.timeofbirth && errors.timeofbirth}
-          />
         </Stack>
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <TextField
             fullWidth
             name="weight"
-            label="Weight"
+            label="Weight*"
+            type="number"
             {...getFieldProps('weight')}
             error={Boolean(touched.weight && errors.weight)}
             helperText={touched.weight && errors.weight}
+            InputProps={{
+              endAdornment: <InputAdornment position="start">kg</InputAdornment>,
+            }}
           />
           <TextField
             // sx={{ minWidth: 91, mt: 2 }}
             fullWidth
             name="birthorder"
-            label="Birth Order"
+            label="Birth Order*"
+            placeholder="e.g. First"
             {...getFieldProps('birthorder')}
             error={Boolean(touched.birthorder && errors.birthorder)}
             helperText={touched.birthorder && errors.birthorder}
-          />
-          <TextField
-            // sx={{ minWidth: 91, mt: 2 }}
-            fullWidth
-            name="death"
-            label="Death"
-            {...getFieldProps('death')}
-            error={Boolean(touched.death && errors.death)}
-            helperText={touched.death && errors.death}
           />
 
           <TextField
             sx={{ minWidth: 91, mt: 2 }}
             fullWidth
             name="placeofbirth"
-            label="Place of Birth"
+            label="Place of Birth*"
+            placeholder="Barangay,Municipality,Province"
             {...getFieldProps('placeofbirth')}
             error={Boolean(touched.placeofbirth && errors.placeofbirth)}
             helperText={touched.placeofbirth && errors.placeofbirth}
           />
         </Stack>
 
+
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
+        <TextField
+            fullWidth
+            name="dateAndTimeOfBirth"
+            id="dateAndTimeOfBirth"
+            label="Date and Time of Birth*"
+            type="datetime-local"
+            defaultValue="1997-10-23 / 10:23"
+            {...getFieldProps('dateAndTimeOfBirth')}
+            error={Boolean(touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth)}
+            helperText={touched.dateAndTimeOfBirth && errors.dateAndTimeOfBirth}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          <TextField
+            fullWidth
+            name="nameofattendant"
+            label="Name of Attendant*"
+          placeholder="e.g. Jessica Dela Cruz"
+            {...getFieldProps('nameofattendant')}
+            error={Boolean(touched.nameofattendant && errors.nameofattendant)}
+            helperText={touched.nameofattendant && errors.nameofattendant}
+          />
+          <TextField
+            fullWidth
+            name="addressofattendant"
+            label="Address Of Attendant*"
+            placeholder="Barangay,Municipality,Province"
+            {...getFieldProps('addressofattendant')}
+            error={Boolean(touched.addressofattendant && errors.addressofattendant)}
+            helperText={touched.addressofattendant && errors.addressofattendant}
+          />
+        </Stack>
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
           <TextField
             fullWidth
             name="nameofmother"
-            label="Name of Mother"
+            label="Name of Mother*"
+            placeholder="e.g. Jessica Dela Cruz"
             {...getFieldProps('nameofmother')}
             error={Boolean(touched.nameofmother && errors.nameofmother)}
             helperText={touched.nameofmother && errors.nameofmother}
@@ -196,7 +312,8 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="mothercitizenship"
-            label="Mothers Citizenship"
+            label="Mothers Citizenship*"
+          placeholder="e.g. Filipino"
             {...getFieldProps('mothercitizenship')}
             error={Boolean(touched.mothercitizenship && errors.mothercitizenship)}
             helperText={touched.mothercitizenship && errors.mothercitizenship}
@@ -204,7 +321,8 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="motheroccupation"
-            label="Mothers Occupation"
+            label="Mothers Occupation*"
+          placeholder="e.g. Nurse"
             {...getFieldProps('motheroccupation')}
             error={Boolean(touched.motheroccupation && errors.motheroccupation)}
             helperText={touched.motheroccupation && errors.motheroccupation}
@@ -215,7 +333,8 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="nameoffather"
-            label="Name of Father"
+            label="Name of Father*"
+            placeholder="e.g. Juan Dela Cruz"
             {...getFieldProps('nameoffather')}
             error={Boolean(touched.nameoffather && errors.nameoffather)}
             helperText={touched.nameoffather && errors.nameoffather}
@@ -223,16 +342,17 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="fathercitizenship"
-            label="Fathers Citizenship"
+            label="Fathers Citizenship*"
+          placeholder="e.g. Filipino"
             {...getFieldProps('fathercitizenship')}
             error={Boolean(touched.fathercitizenship && errors.fathercitizenship)}
             helperText={touched.fathercitizenship && errors.fathercitizenship}
           />
           <TextField
-            sx={{ minWidth: 91, mt: 2 }}
             fullWidth
             name="fatheroccupation"
-            label="Fathers Occupation"
+            label="Fathers Occupation*"
+          placeholder="e.g. Doctor"
             {...getFieldProps('fatheroccupation')}
             error={Boolean(touched.fatheroccupation && errors.fatheroccupation)}
             helperText={touched.fatheroccupation && errors.fatheroccupation}
@@ -243,42 +363,30 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
           <TextField
             fullWidth
             name="dateofmarriage"
+            id="dateofmarriage"
             label="Date of Marriage"
+            type="date"
             {...getFieldProps('dateofmarriage')}
             error={Boolean(touched.dateofmarriage && errors.dateofmarriage)}
             helperText={touched.dateofmarriage && errors.dateofmarriage}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
             fullWidth
             name="placeofmarriage"
             label="Place of Marriage"
+            placeholder="Barangay,Municipality,Province"
             {...getFieldProps('placeofmarriage')}
             error={Boolean(touched.placeofmarriage && errors.placeofmarriage)}
             helperText={touched.placeofmarriage && errors.placeofmarriage}
           />
           <TextField
             fullWidth
-            name="nameofattendant"
-            label="Name of Attendant"
-            {...getFieldProps('nameofattendant')}
-            error={Boolean(touched.nameofattendant && errors.nameofattendant)}
-            helperText={touched.nameofattendant && errors.nameofattendant}
-          />
-          <TextField
-            fullWidth
-            name="addressofattendant"
-            label="Address Of Attendant"
-            {...getFieldProps('addressofattendant')}
-            error={Boolean(touched.addressofattendant && errors.addressofattendant)}
-            helperText={touched.addressofattendant && errors.addressofattendant}
-          />
-        </Stack>
-
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mb: 1 }}>
-          <TextField
-            fullWidth
             name="yearofresidency"
-            label="Since when have you resided in this barangay?"
+            label="Year of Residency*"
+            placeholder="Year started residing in the barangay."
             {...getFieldProps('yearofresidency')}
             error={Boolean(touched.yearofresidency && errors.yearofresidency)}
             helperText={touched.yearofresidency && errors.yearofresidency}
@@ -293,12 +401,137 @@ export default function BarangayBirthCertificateForm({ onSubmitForm }) {
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <Button sx={{ minWidth: 275 }} variant="outlined" component="label">
             Upload Requirements
-            <input type="file" hidden />
+            <input
+              type="file"
+              hidden
+              multiple
+              // TODO duplicate on other document forms
+              onChange={(e) => {
+                const files = [...e.target.files];
+                console.log({ e, files });
+                if (files) {
+                  setRequirementObjectURLs((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      const id = uuidv4();
+                      return {
+                        fileName: file.name,
+                        link: URL.createObjectURL(file),
+                        id,
+                      };
+                    });
+
+                    return [...prev, ...newFiles];
+                  });
+
+                  setRequirementsFile((prev) => {
+                    const newFiles = files.map((file) => {
+                      console.log({ file });
+                      const id = uuidv4();
+                      return { file, id };
+                    });
+
+                    return [...prev, ...newFiles];
+                  });
+                }
+              }}
+              // end duplicate
+            />
           </Button>
-          <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+            disabled={requirementsFile?.length < 1}
+          >
             Submit
           </LoadingButton>
         </Stack>
+
+        {/* TODO duplicate on other document forms */}
+        {requirementObjectURLs.length > 0 && (
+          <Grid container spacing={1} sx={{ my: 1 }}>
+            {requirementObjectURLs.map((reqUrl) => {
+              console.log({ reqUrl });
+              return (
+                <Grid item key={reqUrl.id}>
+                  <Chip
+                    color="primary"
+                    label={reqUrl.fileName}
+                    component="a"
+                    onClick={() => {
+                      setPreviewSrc(reqUrl.link);
+                    }}
+                    target="_blank"
+                    onDelete={() => handleDelete(reqUrl.id)}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
+        )}
+
+        <Dialog onClose={() => setPreviewSrc(null)} open={previewSrc} fullScreen>
+          <AppBar sx={{ position: 'fixed' }}>
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={() => setPreviewSrc(null)} aria-label="close">
+                <Close />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Preview
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <iframe title="preview" src={previewSrc} style={{ height: '100vh' }} />
+        </Dialog>
+
+        <Dialog open={openReferenceNumber}>
+          <DialogTitle>Reference Number</DialogTitle>
+          <DialogContentText sx={{ p: 5 }}>
+            Your Reference Number is:{' '}
+            <Tooltip title="Copy to clipboard">
+              <Link
+                sx={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(referenceNumber)
+                    .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+                }}
+              >
+                {referenceNumber}
+              </Link>
+            </Tooltip>
+          </DialogContentText>
+          <DialogActions>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                navigator.clipboard
+                  .writeText(referenceNumber)
+                  .then((res) => enqueueSnackbar('Reference number copied to clipboard', { variant: 'success' }));
+              }}
+              sx={{ color: 'white' }}
+            >
+              Copy
+            </Button>
+            <LoadingButton
+              variant="contained"
+              color="error"
+              onClick={() => {
+                setOpenReferenceNumber(false);
+                setReferenceNumberCloseLoading(true);
+                window.location.reload();
+              }}
+              loading={referenceNumberCloseLoading}
+            >
+              Close
+            </LoadingButton>
+          </DialogActions>
+        </Dialog>
+        {/* end duplicate on other document forms */}
       </Form>
     </FormikProvider>
   );

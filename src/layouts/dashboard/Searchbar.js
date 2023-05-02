@@ -1,9 +1,8 @@
 import { useState } from 'react';
 // material
-import { styled, alpha } from '@mui/material/styles';
-import { Input, Slide, Button, IconButton, InputAdornment, ClickAwayListener } from '@mui/material';
+import { ClickAwayListener } from '@mui/material';
+import { alpha, styled } from '@mui/material/styles';
 // component
-import Iconify from '../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -46,13 +45,13 @@ export default function Searchbar() {
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div>
-        {!isOpen && (
+        {/* {!isOpen && (
           <IconButton onClick={handleOpen}>
             <Iconify icon="eva:search-fill" width={20} height={20} />
           </IconButton>
-        )}
+        )} */}
 
-        <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
+        {/* <Slide direction="down" in={isOpen} mountOnEnter unmountOnExit>
           <SearchbarStyle>
             <Input
               autoFocus
@@ -70,7 +69,7 @@ export default function Searchbar() {
               Search
             </Button>
           </SearchbarStyle>
-        </Slide>
+        </Slide> */}
       </div>
     </ClickAwayListener>
   );

@@ -1,23 +1,12 @@
 import { Box } from '@mui/material';
-import { fontWeight, style } from '@mui/system';
 import React from 'react';
 import styles from './BarangayTreePlantingCertificate.module.css';
 
-export default function BarangayTreePlantingCertificate({
-  name,
-  day,
-  month,
-  year,
-  age,
-  purok,
-  ctc,
-  date,
-  bearer,
-  secretary,
-  captain,
-}) {
+const BarangayTreePlantingCertificate = React.forwardRef((props, ref) => {
+  const { name, day, month, year, age, purok, citizenship, ctc, date, bearer, secretary, captain } = props;
+
   return (
-    <Box className={styles.c7}>
+    <Box className={styles.c7} ref={ref}>
       <p className={styles.c3}>
         <span className={styles.c0}>Republic of the Philippines</span>
         <span
@@ -134,7 +123,8 @@ export default function BarangayTreePlantingCertificate({
           </strong>
         </span>
         <span className={styles.c0}>
-          , Filipino citizen, single and bonafide resident of Purok{' '}
+            {' '}
+            <span className={styles.underline}>{citizenship}</span> citizen, single and bonafide resident of Purok{' '}
           <strong>
             <span className={styles.underline}>{purok}</span>
           </strong>
@@ -276,4 +266,6 @@ export default function BarangayTreePlantingCertificate({
       </table>
     </Box>
   );
-}
+});
+
+export default BarangayTreePlantingCertificate;

@@ -1,14 +1,12 @@
 import { Box } from '@mui/material';
-import { fontWeight, style } from '@mui/system';
-import React from 'react';
 import styles from './BuhatanSaLupongTagapamayapa.module.css';
 
 export default function BuhatanSaLupongTagapamayapa({
-  nagsumbong,
-  sinumbong,
-  casenumber,
+  complainant,
+  defendant,
+  consequence,
+  caseNumber,
   about,
-  ngadtokang,
   date,
   month,
   year,
@@ -111,7 +109,7 @@ export default function BuhatanSaLupongTagapamayapa({
           <th>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <strong>
-              <span className={styles.underline}>{nagsumbong}</span>
+              <span className={styles.underline}>{complainant}</span>
             </strong>{' '}
           </th>
           <th style={{ paddingLeft: '150px', textAlign: 'right' }}>
@@ -124,7 +122,7 @@ export default function BuhatanSaLupongTagapamayapa({
               </span>
             </strong>{' '}
             <strong>
-              <span className={styles.underline}>{casenumber}</span>
+              <span className={styles.underline}>{caseNumber}</span>
             </strong>{' '}
           </th>
         </tr>
@@ -165,7 +163,7 @@ export default function BuhatanSaLupongTagapamayapa({
       <tr>
         <th>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <span className={styles.underline}>{sinumbong}</span>
+          <span className={styles.underline}>{defendant}</span>
         </th>
       </tr>
       <tr>
@@ -196,10 +194,10 @@ export default function BuhatanSaLupongTagapamayapa({
           <span className={styles.c1}>Ngadto kang: </span>
         </strong>
         <strong>
-          <span className={styles.underline}>{ngadtokang} </span>
+          <span className={styles.underline}>{defendant} </span>
         </strong>
       </p>
-      
+
       <p className={styles.c2}>
         <span className={styles.c1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
       </p>
@@ -255,8 +253,11 @@ export default function BuhatanSaLupongTagapamayapa({
         <span className={styles.c1}></span>
       </p>
       <p className={styles.c10}>
-        <span className={styles.c4}>Tumana kini o kon dili, atubanga ang silot &ldquo;</span>
-        <span className={styles.c3}>as for contempt of court</span>
+        <span className={styles.c4}>Tumana kini o kon dili, atubanga ang silot &ldquo; </span>
+        <strong>
+          {' '}
+          <span className={styles.c3}>{consequence}</span>
+        </strong>
         <span className={styles.c1}>
           &rdquo; kon susama nga silot nga ipahamtang sa hukmanan alang niadtong mosupak sa kamanduan niini.
         </span>

@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom';
 // material
-import { Container, Typography, Stack, Grid, Button } from '@mui/material';
+import { Button, Container, Grid, Stack, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
 
@@ -8,10 +8,12 @@ import Iconify from '../components/Iconify';
 import { OfficialsWidget } from '../sections/@dashboard/officials';
 
 import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
 // ----------------------------------------------------------------------
 
 export default function Officials() {
   const user = useAuth();
+  const profile = useProfile(user?.uid);
   return (
     <Page title="Officials">
       <Container>
@@ -19,7 +21,7 @@ export default function Officials() {
           <Typography variant="h4" sx={{ mb: 5 }}>
             Officials
           </Typography>
-          {user && (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
             <Button
               variant="contained"
               component={RouterLink}

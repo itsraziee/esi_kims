@@ -1,9 +1,12 @@
+import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, Box, Typography } from '@mui/material';
+import { Link, Card, Grid, Avatar, CardContent, Box, IconButton, Tooltip, Typography } from '@mui/material';
 //
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import SvgIconStyle from '../../../components/SvgIconStyle';
 import Iconify from '../../../components/Iconify';
 // ----------------------------------------------------------------------
@@ -59,7 +62,7 @@ export default function PurokLeadersCard({ post, index }) {
   const latestPost = index;
 
   const DELETE = [{ icon: 'fluent:delete-16-filled' }];
-  
+
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
       <Card sx={{ position: 'relative' }}>
@@ -125,11 +128,9 @@ export default function PurokLeadersCard({ post, index }) {
           }}
         >
           <TitleStyle
-            to="#"
             color="inherit"
             variant="subtitle2"
-            underline="hover"
-            component={RouterLink}
+            underline="hidden"
             sx={{
               ...(latestPostLarge && { typography: 'h5', height: 60 }),
               ...((latestPostLarge || latestPost) && {
@@ -153,10 +154,16 @@ export default function PurokLeadersCard({ post, index }) {
                   }),
                 }}
               >
-                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Link underline="none" color="darkgray" variant="caption">
-                  Delete
-                </Link>
+                <Tooltip title="Edit">
+                  <IconButton to="/dashboard/app" component={RouterLink} sx={{ mb: -2, mt: -3 }}>
+                    <EditIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton sx={{ mb: -2, mt: -3 }}>
+                    <DeleteIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
               </Box>
             ))}
           </InfoStyle>

@@ -1,11 +1,10 @@
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebase-init';
 
 export async function createResident({
   firstName,
   middleName,
   lastName,
-  officialAddress,
   dateOfBirth,
   citizenship,
   civilStatus,
@@ -13,6 +12,7 @@ export async function createResident({
   mothersName,
   numberOfChildren,
   purok,
+  permanentAddress,
   occupation,
   phoneNumber,
   religion,
@@ -20,7 +20,6 @@ export async function createResident({
   spouse,
   status,
   tribe,
-  uploadImage = '',
   weight,
   height,
   collegeAddress,
@@ -45,7 +44,6 @@ export async function createResident({
     firstName,
     middleName,
     lastName,
-    officialAddress,
     dateOfBirth,
     citizenship,
     civilStatus,
@@ -53,6 +51,7 @@ export async function createResident({
     mothersName,
     numberOfChildren,
     occupation,
+    permanentAddress,
     phoneNumber,
     religion,
     sex,
@@ -60,7 +59,6 @@ export async function createResident({
     status,
     tribe,
     purok,
-    uploadImage,
     weight,
     height,
     collegeAddress,
@@ -85,13 +83,13 @@ export async function createResident({
     firstName,
     middleName,
     lastName,
-    officialAddress,
     dateOfBirth,
     citizenship,
     civilStatus,
     fathersName,
     mothersName,
     numberOfChildren,
+    permanentAddress,
     occupation,
     phoneNumber,
     religion,
@@ -100,7 +98,6 @@ export async function createResident({
     status,
     tribe,
     purok,
-    uploadImage,
     weight,
     height,
     collegeAddress,
@@ -124,4 +121,10 @@ export async function createResident({
     console.log({ res });
     return res;
   });
+}
+
+export function updateResident(uid, data) {
+  const residentRef = doc(firestore, `resident/${uid}`);
+
+  return updateDoc(residentRef, data);
 }

@@ -1,40 +1,36 @@
 import * as Yup from 'yup';
 // @mui
-import PropTypes from 'prop-types';
-import { useFormik, Form, FormikProvider } from 'formik';
 import {
   Box,
-  Card,
-  Paper,
-  Stack,
-  Typography,
-  TextField,
-  CardHeader,
-  CardContent,
-  Grid,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
   Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Stack,
+  TextField,
 } from '@mui/material';
+import { Form, FormikProvider, useFormik } from 'formik';
+import PropTypes from 'prop-types';
 
 import { LoadingButton } from '@mui/lab';
-import { useState } from 'react';
 import { useSnackbar } from 'notistack';
-import RequestStatus from '../request/status/RequestStatus';
+import { useState } from 'react';
 import { getDocumentRequest } from '../../../service/documentRequest';
+import RequestStatus from '../request/status/RequestStatus';
 // utils
 
 // ----------------------------------------------------------------------
 
-AppTrafficBySite.propTypes = {
+DocumentRequestStatus.propTypes = {
   title: PropTypes.string,
   subheader: PropTypes.string,
 };
 
-export default function AppTrafficBySite({ title, subheader, list, url = null, ...other }) {
+export default function DocumentRequestStatus({ title, subheader, list, url = null, ...other }) {
   const ReferenceNumber = Yup.object().shape({
     referenceNumber: Yup.string().min(2, 'Too Short!').required('Reference Number is required'),
   });
@@ -75,7 +71,7 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
   const { errors, touched, handleSubmit, isSubmitting, getFieldProps, handleChange } = formik;
   return (
     <>
-      <Card {...other}>
+      <Card sx={{ boxShadow: 4 }} {...other}>
         <CardHeader title={title} subheader={subheader} />
 
         <CardContent>
@@ -111,10 +107,12 @@ export default function AppTrafficBySite({ title, subheader, list, url = null, .
           <DialogContent>
             <RequestStatus
               referenceNumber={documentRequest.referenceNumber}
-              remarks={documentRequest?.remarks ?? 'N/A'}
+              secretaryRemarks={documentRequest?.secretaryRemarks ?? 'N/A'}
+              treasurerRemarks={documentRequest?.treasurerRemarks ?? 'N/A'}
               requestorName={documentRequest?.requestorName}
               status={documentRequest?.status}
               typeOfDocument={documentRequest?.type}
+              number={documentRequest?.number}
             />
           </DialogContent>
           <DialogActions>

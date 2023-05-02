@@ -1,7 +1,6 @@
-import React from 'react';
 import styles from './RequestStatus.module.css';
 
-export default function RequestStatus({ referenceNumber, status, remarks, requestorName, typeOfDocument }) {
+export default function RequestStatus({ referenceNumber, status, secretaryRemarks, treasurerRemarks, requestorName, number, typeOfDocument }) {
   return (
     <div>
       <p className={styles.c1}>
@@ -16,6 +15,11 @@ export default function RequestStatus({ referenceNumber, status, remarks, reques
       </p>
       <p className={styles.c1}>
         <span>
+          Phone Number: <strong>{number}</strong>
+        </span>
+      </p>
+      <p className={styles.c1}>
+        <span>
           Type Of Document: <strong>{typeOfDocument}</strong>
         </span>
       </p>
@@ -26,7 +30,12 @@ export default function RequestStatus({ referenceNumber, status, remarks, reques
       </p>
       <p className={styles.c1}>
         <span>
-          Remarks: <strong>{remarks}</strong>
+          Secretary Remarks: <strong>{secretaryRemarks}</strong>
+        </span>
+      </p>
+      <p className={styles.c1}>
+        <span>
+          Treasurer Remarks: <strong>{treasurerRemarks}</strong>
         </span>
       </p>
     </div>

@@ -1,24 +1,12 @@
 import { Box } from '@mui/material';
-import { fontWeight, style } from '@mui/system';
 import React from 'react';
 import styles from './BarangayElectrificationCertificate.module.css';
 
-export default function BarangayCertification({
-  applicant,
-  address,
-  day,
-  month,
-  year,
-  or,
-  ordateissued,
-  placeissued,
-  ctc,
-  ctcdateissued,
-  secretary,
-  captain,
-}) {
+const BarangayCertification = React.forwardRef((props, ref) => {
+  const { applicant, day, month, year, or, purok, ordateissued, placeissued, ctc, ctcdateissued, secretary, captain } =
+    props;
   return (
-    <Box className={styles.c13}>
+    <Box className={styles.c13} ref={ref}>
       <p className={styles.c6}>
         <span className={styles.c1}>Republic of the Philippines</span>
         <span
@@ -129,9 +117,9 @@ export default function BarangayCertification({
           {' '}
           house situated{' '}
           <span className={styles.underline}>
-            <strong>{address}</strong>
+            <strong>{purok}</strong>
           </span>{' '}
-          and the following materials are:
+          , Kimanait, Pangantucan, Bukidnon and the following materials are:
         </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
@@ -177,10 +165,8 @@ export default function BarangayCertification({
         <span className={styles.c7}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <span className={styles.c5}>
           Issued this <span className={styles.underline}>{day}</span> day{' '}
-          <span className={styles.underline}>
-            {month}, {year}
-          </span>{' '}
-          at {address}.
+          <span className={styles.underline}>{month},</span> <span className={styles.underline}>{year}</span> at
+          Kimanait, Pangantucan, Bukidnon, Mindanao, Philippines.
         </span>
       </p>
       <p className={(styles.c4, styles.c9)}>
@@ -289,4 +275,6 @@ export default function BarangayCertification({
       </table>
     </Box>
   );
-}
+});
+
+export default BarangayCertification;

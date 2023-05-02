@@ -1,14 +1,28 @@
-import * as Yup from 'yup';
+import { Form, FormikProvider, useFormik } from 'formik';
 import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
+import * as Yup from 'yup';
 // material
-import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Link,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+} from '@mui/material';
 import { useSnackbar } from 'notistack';
 // component
 import Iconify from '../../../components/Iconify';
+import { useUser } from '../../../hooks/useRole';
 import { login } from '../../../service/auth';
+import { updateProfile } from '../../../service/profile';
 import EmailDialog from '../../@dashboard/dialog/EmailDialog';
 
 // ----------------------------------------------------------------------
@@ -18,6 +32,9 @@ export default function LoginForm() {
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
+  const ROLES = ['Captain', 'Secretary', 'Treasurer'];
+  const [role, setRole] = useState(ROLES[0]);
+  const user = useUser(role);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -32,10 +49,15 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: async (values) => {
+      if (values.email !== user.email) {
+        enqueueSnackbar('Invalid credential', { variant: 'error' });
+        return;
+      }
       return login(values.email, values.password)
         .then((res) => {
-          console.log({ res })
+          console.log({ res });
           if (res) {
+            updateProfile(res.user.uid, { accountRole: role });
             enqueueSnackbar('Logged in successfully.', {
               variant: 'success',
             });
@@ -61,6 +83,23 @@ export default function LoginForm() {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
+          <FormControl fullWidth>
+            <InputLabel>Role</InputLabel>
+            <Select
+              value={role}
+              label="Role"
+              onChange={(e) => {
+                const value = e.target.value;
+
+                setRole(value);
+              }}
+            >
+              {ROLES.map((role) => (
+                <MenuItem value={role}>{role}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
           <TextField
             fullWidth
             autoComplete="username"

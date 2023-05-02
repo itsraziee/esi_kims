@@ -1,8 +1,10 @@
 // material
 import { Grid,  Container, Stack, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import { useOfficials } from '../hooks/useOfficials';
 // components
 import Page from '../components/Page';
-import { PurokLeadersCard } from '../sections/@dashboard/officials';
+import { OfficialsCard, PurokLeadersCard } from '../sections/@dashboard/officials';
 
 // mock
 import PLPOSTS from '../_mock/pl';
@@ -12,6 +14,12 @@ import PLPOSTS from '../_mock/pl';
 // ----------------------------------------------------------------------
 
 export default function PL() {
+  const officials = useOfficials('PL');
+
+  useEffect(() => {
+    console.log({ officials });
+  }, [officials]);
+
   return (
     <Page title="Purok Leaders">
       <Container>
@@ -23,9 +31,7 @@ export default function PL() {
         </Stack>
 
         <Grid container spacing={3}>
-          {PLPOSTS.map((post) => (
-            <PurokLeadersCard key={post.id} post={post} />
-          ))}
+          {officials && officials.map((official) => <OfficialsCard key={official.id} official={official} />)}
         </Grid>
       </Container>
     </Page>

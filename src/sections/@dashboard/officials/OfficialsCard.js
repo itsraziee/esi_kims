@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
 // material
+import { Avatar, Box, Card, CardContent, Grid, IconButton, Link, Tooltip, Typography } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
-import { Link, Card, Grid, Avatar, CardContent, Box, Typography } from '@mui/material';
 //
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 import SvgIconStyle from '../../../components/SvgIconStyle';
-import Iconify from '../../../components/Iconify';
+import { useAuth } from '../../../hooks/useAuth';
+import { useProfile } from '../../../hooks/useProfile';
+import { deleteOfficial } from '../../../service/official';
 
 // ----------------------------------------------------------------------
 
@@ -50,14 +54,17 @@ const CoverImgStyle = styled('img')({
 // ----------------------------------------------------------------------
 
 OfficialsCard.propTypes = {
-  post: PropTypes.object.isRequired,
+  official: PropTypes.object.isRequired,
   index: PropTypes.number,
 };
 
-export default function OfficialsCard({ post, index }) {
-  const { cover, name, position, author } = post;
+export default function OfficialsCard({ official, index }) {
+  const { uploadImage, name, title } = official;
   const latestPostLarge = index;
   const latestPost = index;
+  const navigate = useNavigate();
+  const user = useAuth();
+  const profile = useProfile(user?.uid);
 
   const DELETE = [{ icon: 'fluent:delete-16-filled' }];
   return (
@@ -86,7 +93,7 @@ export default function OfficialsCard({ post, index }) {
         >
           <SvgIconStyle
             color="paper"
-            src="/static/icons/shape-avatar.svg"
+            src="/static/icons/shapeAvatar.svg"
             sx={{
               width: 80,
               height: 36,
@@ -98,8 +105,8 @@ export default function OfficialsCard({ post, index }) {
             }}
           />
           <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
+            alt={name}
+            src={uploadImage}
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
@@ -110,8 +117,7 @@ export default function OfficialsCard({ post, index }) {
               }),
             }}
           />
-
-          <CoverImgStyle alt={name} src={cover} />
+          <CoverImgStyle alt={name} src={uploadImage} />
         </CardMediaStyle>
 
         <CardContent
@@ -125,11 +131,9 @@ export default function OfficialsCard({ post, index }) {
           }}
         >
           <TitleStyle
-            to="#"
             color="inherit"
             variant="subtitle2"
-            underline="hover"
-            component={RouterLink}
+            underline="hidden"
             sx={{
               ...(latestPostLarge && { typography: 'h5', height: 60 }),
               ...((latestPostLarge || latestPost) && {
@@ -140,11 +144,11 @@ export default function OfficialsCard({ post, index }) {
             {name}
           </TitleStyle>
           <Typography gutterBottom variant="caption" sx={{ color: 'text.disabled', display: 'block' }}>
-            {position}
+            {title}
           </Typography>
 
-          <InfoStyle>
-            {DELETE.map((info, index) => (
+          {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
+            <InfoStyle>
               <Box
                 key={index}
                 sx={{
@@ -156,13 +160,30 @@ export default function OfficialsCard({ post, index }) {
                   }),
                 }}
               >
-                <Iconify icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Link underline="none" color="darkgray" variant="caption">
-                  Delete
-                </Link>
+                <Tooltip title="Edit">
+                  <IconButton
+                    sx={{ mb: -2 }}
+                    onClick={() => {
+                      console.log('Edit clicked:', official.id);
+                      navigate(`/dashboard/editOfficialsProfile?uid=${official.id}`);
+                    }}
+                  >
+                    <EditIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton
+                    sx={{ mb: -2 }}
+                    onClick={() => {
+                      deleteOfficial(official.id);
+                    }}
+                  >
+                    <DeleteIcon sx={{ width: 20, height: 22 }} />
+                  </IconButton>
+                </Tooltip>
               </Box>
-            ))}
-          </InfoStyle>
+            </InfoStyle>
+          )}
         </CardContent>
       </Card>
     </Grid>
