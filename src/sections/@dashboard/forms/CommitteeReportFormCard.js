@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 // material
 import { LoadingButton } from '@mui/lab';
-import { Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Autocomplete, Button, Card, CardContent, Grid, Stack, TextField, Typography } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import { useState } from 'react';
 import {
@@ -26,6 +26,7 @@ export default function CommitteeReportFormCard() {
     subject: Yup.string().min(2, 'Too Short!').max(100, 'Too Long!').required('Title is required'),
     submittedBy: Yup.string().required('Submitted by is required'),
     date: Yup.date().required('Date of Committee Report is required'),
+    type: Yup.string().required('Type of Committee Report is required'),
   });
 
   const formik = useFormik({
@@ -35,6 +36,7 @@ export default function CommitteeReportFormCard() {
       subject: '',
       submittedBy: '',
       date: '',
+      type: '',
     },
     validationSchema: CommitteeReportFormSchema,
     onSubmit: (data) => {
@@ -68,7 +70,7 @@ export default function CommitteeReportFormCard() {
         <Card sx={{ width: '100%' }}>
           <CardContent>
             <FormikProvider value={formik}>
-              <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+              <Form noValidate onSubmit={handleSubmit}>
                 <Stack spacing={3}>
                   <Typography variant="subtitle3" noWrap>
                     Upload Committee Report
@@ -83,7 +85,7 @@ export default function CommitteeReportFormCard() {
                       helperText={touched.committeeReportNumber && errors.committeeReportNumber}
                     />
 
-<TextField
+                    <TextField
                       fullWidth
                       name="series"
                       label="Series*"
@@ -115,6 +117,16 @@ export default function CommitteeReportFormCard() {
                       {...getFieldProps('subject')}
                       error={Boolean(touched.subject && errors.subject)}
                       helperText={touched.subject && errors.subject}
+                    />
+                  </Stack>
+                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                    <TextField
+                      fullWidth
+                      name="type"
+                      label="Type*"
+                      {...getFieldProps('type')}
+                      error={Boolean(touched.type && errors.type)}
+                      helperText={touched.type && errors.type}
                     />
                   </Stack>
                   <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

@@ -9,7 +9,7 @@ import Iconify from '../components/Iconify';
 
 import { useAuth } from '../hooks/useAuth';
 import { useCommitteeReports } from '../hooks/useCommitteeReports';
-import CommitteeReportList from '../sections/@dashboard/committeeReports/CommitteeReportList';
+import { CommitteeReportList } from '../sections/@dashboard/committeeReports';
 // ----------------------------------------------------------------------
 
 export default function CommitteeReport() {
@@ -47,6 +47,7 @@ export default function CommitteeReport() {
             <List dense>
               {committeeReports?.map((committeeReport) => (
                 <CommitteeReportList
+                  type={committeeReport?.type}
                   committeeReportNumber={committeeReport?.committeeReportNumber}
                   series={committeeReport.series}
                   subject={committeeReport.subject}
