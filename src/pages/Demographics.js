@@ -4,6 +4,7 @@ import PopulationLineGraph from '../components/demographics/PopulationLineGraph'
 import PopulationPieChart from '../components/demographics/PopulationPieChart';
 // components
 import Page from '../components/Page';
+import PopulationTable from '../components/population/PopulationTable';
 // sections
 
 // ----------------------------------------------------------------------
@@ -25,6 +26,9 @@ export default function Demographics() {
 
           <Grid item xs={12} md={6} lg={4}>
             <PopulationPieChart />
+          </Grid>
+          <Grid item xs={12}>
+            <PopulationTable />
           </Grid>
         </Grid>
       </Container>
