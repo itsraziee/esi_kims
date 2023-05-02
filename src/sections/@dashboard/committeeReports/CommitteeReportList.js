@@ -10,6 +10,7 @@ export default function CommitteeReportList({
   committeeReportNumber,
   color = 'primary',
   url,
+  type = 'N/A',
   ...props
 }) {
   const user = useAuth();
@@ -31,7 +32,7 @@ export default function CommitteeReportList({
           primary={
             <>
               <Typography variant="subtitle4">
-                {`Committee Report No. ${committeeReportNumber}, Series of ${series}`}: {subject}
+                {`Committee Report No. ${committeeReportNumber}, Series of ${series}`}: {subject} | {type}
               </Typography>
             </>
           }

@@ -29,7 +29,7 @@ import moment from 'moment';
 import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import Page from '../components/Page';
 import { useAuth } from '../hooks/useAuth';
@@ -170,7 +170,8 @@ export default function BillingTransaction() {
   // const apiRef = useGridApiContext();
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [filteredRows, setFilteredRows] = useState([]);
-  const rows = useDocumentRequests() ?? [];
+  const [keyword, setKeyword] = useState();
+  const rows = useDocumentRequests({ keyword }) ?? [];
   const [printOpen, setPrintOpen] = React.useState(false);
   const [documentType, setDocumentType] = React.useState();
   const [currentRow, setCurrentRow] = React.useState();
@@ -229,10 +230,16 @@ export default function BillingTransaction() {
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && profile?.accountRole !== 'Captain' && <GridToolbarExport />}
+        <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
+          <Box>
+            <GridToolbarColumnsButton />
+            <GridToolbarFilterButton />
+            <GridToolbarDensitySelector />
+          </Box>
+        </Stack>
+        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && profile?.accountRole !== 'Captain' && (
+          <GridToolbarExport />
+        )}
         <Container sx={{ mt: 2 }}>
           {/* <Typography variant="body2" align="center">
             Republic of the Bukidnon
@@ -464,15 +471,25 @@ export default function BillingTransaction() {
   return (
     <AuthRequired>
       <Page title="Billing Transaction">
-        <Typography variant="h4" sx={{ mb: 5, ml: 4 }}>
-          Billing Transaction
-        </Typography>
+        <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{ mb: 2, ml: 4 }}>
+          <Typography variant="h4">Billing Transaction</Typography>{' '}
+          <TextField
+            size="small"
+            label="Search"
+            value={keyword}
+            onChange={(e) => {
+              console.log({ searchValue: e?.target?.value });
+              setKeyword(e?.target?.value);
+            }}
+          />
+        </Stack>
         <Container sx={{ mt: 5, mb: 5 }}>
           {/* <Typography>Overall Revenue: {totalRevenue}</Typography> */}
+
           <DataGrid
             experimentalFeatures={{ newEditingApi: true }}
             components={{
-              Toolbar: CustomToolbar,
+              Toolbar: () => <CustomToolbar />,
             }}
             rows={rows}
             columns={columns}
