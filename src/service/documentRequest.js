@@ -3,6 +3,14 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { firestore, storage } from '../firebase-init';
 
 export async function createRequest(type, data, requestorName, number, amount) {
+  const keywords = [
+    type,
+    requestorName,
+    number,
+    amount,
+    ...Object.values(data).map((value) => value.toString().toLowerCase()),
+  ].map((value) => value.toString().toLowerCase());
+
   return addDoc(collection(firestore, 'documentRequest'), {
     type,
     data,
@@ -11,6 +19,7 @@ export async function createRequest(type, data, requestorName, number, amount) {
     number,
     datetime: new Date(),
     amount,
+    keywords,
   }).then(async (res) => {
     await addDoc(collection(firestore, 'requestNotifications'), {
       description: `${requestorName} requests for ${type}`,
