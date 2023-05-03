@@ -29,7 +29,7 @@ import moment from 'moment';
 import { useSnackbar } from 'notistack';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import Page from '../components/Page';
 import { useAuth } from '../hooks/useAuth';
