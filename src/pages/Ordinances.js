@@ -26,20 +26,9 @@ export default function Ordinances() {
     <Page title="Ordinances">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mb: 5 }}>
+          <Typography variant="h4" sx={{ mb: -3 }}>
             Ordinances
           </Typography>
-
-          <Stack direction="row" spacing={1}>
-            {/* <IconButton
-              onClick={() => {
-                setTileViewMode(!tileViewMode);
-              }}
-            >
-              {tileViewMode && <GridViewIcon />}
-
-              {!tileViewMode && <ListIcon />}
-            </IconButton> */}
             {user && (
               <Button
                 variant="contained"
@@ -51,22 +40,7 @@ export default function Ordinances() {
               </Button>
             )}
           </Stack>
-        </Stack>
-        <Grid container spacing={3}>
-          {/* {tileViewMode &&
-            legislatives?.map((legislative) => (
-              <Grid item xs={12} sm={8} md={3} key={legislative.id}>
-                <LegislativeCard
-                  title={legislative.title}
-                  url={`/dashboard/viewlegislative/?uid=${legislative.id}`}
-                  icon={'clarity:document-solid'}
-                  ordinanceNumber={legislative?.ordinanceNumber}
-                  authors={legislative?.authors}
-                  series={legislative?.series}
-                />
-              </Grid>
-            ))} */}
-          {/* {!tileViewMode && ( */}
+        <Grid container spacing={-3}>
           <Grid item xs={12}>
             <List dense>
               {legislatives?.map((legislative) => (

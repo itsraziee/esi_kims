@@ -18,7 +18,7 @@ export default function PurokList() {
       <Page title="List Of Purok">
         <Container>
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h4" sx={{ mb: 3 }}>
+            <Typography variant="h4" sx={{ mb: -1 }}>
               List of Purok
             </Typography>
             {user && profile?.accountRole && profile?.accountRole !== 'Captain' && (

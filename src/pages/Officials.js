@@ -18,7 +18,7 @@ export default function Officials() {
     <Page title="Officials">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mb: 5 }}>
+          <Typography variant="h4" sx={{ mb: -3 }}>
             Officials
           </Typography>
           {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
@@ -33,7 +33,7 @@ export default function Officials() {
           )}
         </Stack>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={8} md={3}>
+          <Grid item xs={12} sm={6} md={3}>
             <OfficialsWidget
               title="Barangay Officials"
               total={0}

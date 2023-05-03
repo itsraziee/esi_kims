@@ -29,7 +29,7 @@ export default function Summon() {
       <Page title="Summon">
         <Container>
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h4" sx={{ mb: 5 }}>
+            <Typography variant="h4" sx={{ mb: 2 }}>
               Summon
             </Typography>
             <Grid container spacing={1} direction="row" justifyContent="flex-end" alignItems="center">

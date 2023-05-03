@@ -27,7 +27,7 @@ export default function DisclosureBoard() {
     <Page title="Disclosure Board">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" sx={{ mb: 5 }}>
+          <Typography variant="h4" sx={{ mb: -3 }}>
             Disclosure Board
           </Typography>
           {user && profile?.accountRole && profile?.accountRole !== 'Captain' && profile?.accountRole !== 'Treasurer' && (
@@ -41,7 +41,7 @@ export default function DisclosureBoard() {
             </Button>
           )}
         </Stack>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <List dense>
               {disclosureBoards?.map((disclosureBoard) => (
