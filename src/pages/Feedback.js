@@ -23,7 +23,7 @@ export default function Feedback() {
       <Page title="Received Feedback ">
         <Container>
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h4" sx={{ mb: 5 }}>
+            <Typography variant="h4" sx={{ mb: -1 }}>
               Received Feedback
             </Typography>
           </Stack>

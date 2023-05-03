@@ -10,8 +10,8 @@ import { AboutCard } from '../sections/@dashboard/about';
 export default function About() {
   return (
     <Page title="About">
-      <Container sx={{ mt: 5, mb: 5 }}>
-        <Typography variant="h4" sx={{ mb: 5, mt: 4 }}>
+      <Container>
+        <Typography variant="h4" sx={{ mb: 5 }}>
           About
         </Typography>
         <AboutCard />
