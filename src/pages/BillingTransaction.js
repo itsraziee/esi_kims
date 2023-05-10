@@ -22,7 +22,6 @@ import {
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarDensitySelector,
-  GridToolbarExport,
   GridToolbarFilterButton,
 } from '@mui/x-data-grid';
 import moment from 'moment';
@@ -31,6 +30,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import ExportBillingTransaction from '../components/ExportBillingTransaction';
 import Page from '../components/Page';
 import { useAuth } from '../hooks/useAuth';
 import { useDocumentRequests } from '../hooks/useDocumentRequests';
@@ -75,8 +75,8 @@ const authToken = '666cbf3cb2cf781ef40849ba3b41cdc3';
 
 function RatingInputValue(props) {
   const { item, applyValue, focusElementRef } = props;
-  const [from, setFrom] = useState(typeof item.value?.from === 'object' ? item.value.from : Date.now());
-  const [to, setTo] = useState(typeof item.value?.to === 'object' ? item.value.to : from);
+  const [from, setFrom] = useState(item?.value?.from ?? Date.now());
+  const [to, setTo] = useState(item?.value?.to ?? from);
   // const [from, setFrom] = useState(Date.now());
   // const [to, setTo] = useState(from);
 
@@ -230,32 +230,18 @@ export default function BillingTransaction() {
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
-        <Stack direction="row" justifyContent="space-between" sx={{ width: '100%' }}>
-          <Box>
-            <GridToolbarColumnsButton />
-            <GridToolbarFilterButton />
-            <GridToolbarDensitySelector />
-          </Box>
+        <Stack direction="row" justifyContent="space-between" sx={{ width: '35%' }}>
+          <GridToolbarColumnsButton />
+          <GridToolbarFilterButton />
+          <GridToolbarDensitySelector />
+          {user &&
+            profile?.accountRole &&
+            profile?.accountRole !== 'Secretary' &&
+            profile?.accountRole !== 'Captain' &&
+            rows && <ExportBillingTransaction rows={rows} grandTotal={totalRevenue} />}
         </Stack>
-        {user && profile?.accountRole && profile?.accountRole !== 'Secretary' && profile?.accountRole !== 'Captain' && (
-          <GridToolbarExport />
-        )}
+
         <Container sx={{ mt: 2 }}>
-          {/* <Typography variant="body2" align="center">
-            Republic of the Bukidnon
-          </Typography>
-          <Typography variant="body2" align="center">
-            Province of Bukidnon
-          </Typography>
-          <Typography variant="body2" align="center">
-            Municipality of Pangantucan
-          </Typography>
-          <Typography variant="body2" align="center">
-            BARANGAY KIMANAIT
-          </Typography>
-          <Typography variant="body2" align="center">
-            OFFICE OF THE BARANGAY TREASURER
-          </Typography> */}
           <Typography variant="body3">Overall Revenue: {totalRevenue}</Typography>
         </Container>
       </GridToolbarContainer>
@@ -285,10 +271,13 @@ export default function BillingTransaction() {
             if (!filterItem.value) {
               return null;
             }
-            return (params) =>
-              // return Number(params.value) >= Number(filterItem.value);
-              moment(new Date(params.value)).isSameOrAfter(filterItem.value.from, 'day') &&
-              moment(new Date(params.value)).isSameOrBefore(filterItem.value.to, 'day');
+            return (params) => {
+              const show =
+                moment(new Date(params.value)).isSameOrAfter(filterItem.value.from, 'day') &&
+                moment(new Date(params.value)).isSameOrBefore(filterItem.value.to, 'day');
+
+              return show;
+            };
           },
           InputComponent: RatingInputValue,
           InputComponentProps: { type: 'date' },
