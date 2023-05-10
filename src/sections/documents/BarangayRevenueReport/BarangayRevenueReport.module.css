@@ -192,7 +192,7 @@ table th {
 
 .c2 {
   border-right-style: solid;
-  padding: 0pt 5.4pt 0pt 5.4pt;
+  padding: 2pt 9pt 4pt 5.4pt;
   border-bottom-color: #000000;
   border-top-width: 1pt;
   border-right-width: 1pt;
@@ -203,7 +203,7 @@ table th {
   border-top-style: solid;
   border-left-style: solid;
   border-bottom-width: 1pt;
-  width: 160.5pt;
+  width: 250pt;
   border-top-color: #000000;
   border-bottom-style: solid;
 }
@@ -521,7 +521,7 @@ table th {
 
 .c50 {
   border-right-style: solid;
-  padding: 0pt 5.4pt 0pt 5.4pt;
+  padding: 5.4pt 5.4pt 5.4pt 5.4pt;
   border-bottom-color: #000000;
   border-top-width: 0pt;
   border-right-width: 0pt;

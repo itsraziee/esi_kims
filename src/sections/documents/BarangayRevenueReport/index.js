@@ -126,19 +126,19 @@ const BarangayRevenueReport = React.forwardRef((props, ref) => {
           </td>
         </tr>
         <tr className={styles.c3}>
-          <td className={styles.c2}>
+          {/* <td className={styles.c2}>
             <p className={styles.c12}>
               <span className={styles.c0}>Name</span>
+            </p>
+          </td> */}
+          <td className={styles.c14}>
+            <p className={styles.c12}>
+              <span className={styles.c0}>Type of Document</span>
             </p>
           </td>
           <td className={styles.c18}>
             <p className={styles.c12}>
               <span className={styles.c0}>Date</span>
-            </p>
-          </td>
-          <td className={styles.c14}>
-            <p className={styles.c12}>
-              <span className={styles.c0}>Type of Document</span>
             </p>
           </td>
           <td className={styles.c15}>
@@ -156,14 +156,15 @@ const BarangayRevenueReport = React.forwardRef((props, ref) => {
           console.log({ row });
           return (
             <tr className={styles.c3} key={row.id}>
-              <td className={styles.c2}>
+              {/* REQUESTOR NAME */}
+              {/* <td className={styles.c2}>
                 <p className={styles.c11}>{row?.requestorName}</p>
+              </td> */}
+              <td className={styles.c2}>
+                <p className={styles.c11}>{row?.type}</p>
               </td>
               <td className={styles.c18}>
                 <p className={styles.c11}>{moment(row?.datetime).format('l')}</p>
-              </td>
-              <td className={styles.c2}>
-                <p className={styles.c11}>{row?.type}</p>
               </td>
               <td className={styles.c15}>
                 <p className={styles.c11}>{row?.amount}</p>
@@ -282,8 +283,9 @@ const BarangayRevenueReport = React.forwardRef((props, ref) => {
       </p>
       <p className={styles.c49}>
         <span className={styles.c0}>
-          Prepared
-          by:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepared
+          by:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
           by:
         </span>
       </p>
