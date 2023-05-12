@@ -282,19 +282,79 @@ const BarangayRevenueReport = React.forwardRef((props, ref) => {
         <span className={styles.c0} />
       </p>
       <p className={styles.c49}>
-        <span className={styles.c0}>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prepared
-          by:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
-          by:
-        </span>
-      </p>
-      <p className={styles.c49}>
         <span className={styles.c0} />
       </p>
       {/* <a id="t.e7688dbde837987064ba067343c119c8de98d309"></a>
       <a id="t.2"></a> */}
       <table className={styles.c46}>
+        <tr className={styles.c3}>
+          <td className={styles.c36} colSpan="1" rowSpan="1">
+            <p className={styles.c12}>
+              <span className={styles.c0}>Prepared by:</span>
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c36} colSpan="1" rowSpan="1">
+            <p className={styles.c12}>
+              <span className={styles.c0}>Approved by:</span>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+          <td className={styles.c17} colSpan="1" rowSpan="1">
+            <p className={styles.c9}>
+              <span className={styles.c0} />
+            </p>
+          </td>
+        </tr>
         <tr className={styles.c3}>
           <td className={styles.c36} colSpan="1" rowSpan="1">
             <p className={styles.c12}>

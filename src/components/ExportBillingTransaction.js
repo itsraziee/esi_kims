@@ -5,11 +5,16 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import * as React from 'react';
 
+import { useReactToPrint } from 'react-to-print';
 import BarangayRevenueReport from '../sections/documents/BarangayRevenueReport';
 import Iconify from './Iconify';
 
 export default function ExportBillingTransaction({ grandTotal, reportDate, rows }) {
   const [open, setOpen] = React.useState(false);
+  const componentRef = React.useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,11 +42,16 @@ export default function ExportBillingTransaction({ grandTotal, reportDate, rows 
           {'Print'}
         </DialogTitle>
         <DialogContent>
-          <BarangayRevenueReport rows={rows} grandTotal={grandTotal} reportDate={reportDate} />
+          <BarangayRevenueReport rows={rows} grandTotal={grandTotal} reportDate={reportDate} ref={componentRef} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button
+            onClick={() => {
+              handlePrint();
+            }}
+            autoFocus
+          >
             Print
           </Button>
         </DialogActions>

@@ -230,7 +230,7 @@ export default function BillingTransaction() {
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
-        <Stack direction="row" justifyContent="space-between" sx={{ width: '35%' }}>
+        <Stack direction="row" justifyContent="space-between" sx={{ width: '30%' }}>
           <GridToolbarColumnsButton />
           <GridToolbarFilterButton />
           <GridToolbarDensitySelector />
@@ -238,7 +238,12 @@ export default function BillingTransaction() {
             profile?.accountRole &&
             profile?.accountRole !== 'Secretary' &&
             profile?.accountRole !== 'Captain' &&
-            rows && <ExportBillingTransaction rows={rows} grandTotal={totalRevenue} />}
+            rows && (
+              <ExportBillingTransaction
+                rows={filteredRows.length > 0 ? filteredRows : rows}
+                grandTotal={totalRevenue}
+              />
+            )}
         </Stack>
 
         <Container sx={{ mt: 2 }}>
