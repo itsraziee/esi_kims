@@ -5,11 +5,13 @@ import PopulationPieChart from '../components/demographics/PopulationPieChart';
 // components
 import Page from '../components/Page';
 import PopulationTable from '../components/population/PopulationTable';
+import { useAuth } from '../hooks/useAuth';
 // sections
 
 // ----------------------------------------------------------------------
 
 export default function Demographics() {
+  const user = useAuth();
   return (
     <Page title="Dashboard">
       <Container maxWidth="xl">
@@ -28,7 +30,7 @@ export default function Demographics() {
             <PopulationPieChart />
           </Grid>
           <Grid item xs={12}>
-            <PopulationTable />
+            {user && <PopulationTable />}
           </Grid>
         </Grid>
       </Container>
